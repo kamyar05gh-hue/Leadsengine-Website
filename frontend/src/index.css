@@ -1,0 +1,317 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --pm-bg: #05050a;
+        --pm-bg-alt: #0a0b12;
+        --pm-surface: #12131a;
+        --pm-raised: #1a1c26;
+        --pm-ink: #f8f9fa;
+        --pm-ink-2: #a0a4b8;
+        --pm-ink-3: #6e7287;
+        --pm-line: rgba(255, 255, 255, 0.08);
+        --pm-line-strong: rgba(255, 255, 255, 0.16);
+        --pm-accent: #0047ff;
+        --pm-accent-hover: #002b99;
+        --pm-accent-soft: rgba(0, 71, 255, 0.14);
+        --pm-glow: rgba(0, 71, 255, 0.4);
+        --pm-success: #00e676;
+        --pm-warning: #ffea00;
+        --pm-danger: #ff3b30;
+        --pm-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+        --background: 240 33% 3%;
+        --foreground: 210 17% 98%;
+        --card: 232 18% 9%;
+        --card-foreground: 210 17% 98%;
+        --popover: 232 18% 9%;
+        --popover-foreground: 210 17% 98%;
+        --primary: 224 100% 50%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 233 17% 13%;
+        --secondary-foreground: 210 17% 98%;
+        --muted: 233 17% 13%;
+        --muted-foreground: 230 12% 65%;
+        --accent: 224 100% 50%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 3 100% 59%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 233 15% 18%;
+        --input: 233 15% 18%;
+        --ring: 224 100% 50%;
+        --radius: 0.5rem;
+    }
+
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        margin: 0;
+        overflow-x: clip;
+        background: var(--pm-bg);
+        color: var(--pm-ink);
+        font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+        background: var(--pm-accent);
+        color: #fff;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--pm-accent);
+        outline-offset: 3px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .pm-display {
+        font-family: "Cabinet Grotesk", "IBM Plex Sans", sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .pm-mono,
+    .tabular {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+@layer components {
+    .pm-container {
+        width: 100%;
+        max-width: 1240px;
+        margin-inline: auto;
+        padding-inline: 20px;
+    }
+    @media (min-width: 1024px) {
+        .pm-container {
+            padding-inline: 40px;
+        }
+    }
+
+    /* CTA — darker fill slides in from the left */
+    .pm-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        overflow: hidden;
+        isolation: isolate;
+        border-radius: 999px;
+        background: var(--pm-accent);
+        color: #fff;
+        font-weight: 600;
+        transition:
+            transform 240ms var(--pm-ease),
+            box-shadow 240ms var(--pm-ease);
+    }
+    .pm-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: var(--pm-accent-hover);
+        transform: translateX(-101%);
+        transition: transform 380ms var(--pm-ease);
+    }
+    .pm-btn:hover::before {
+        transform: translateX(0);
+    }
+    .pm-btn:hover {
+        box-shadow: 0 12px 40px -12px var(--pm-glow);
+        transform: translateY(-1px);
+    }
+
+    .pm-btn-ghost {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        border: 1px solid var(--pm-line-strong);
+        color: var(--pm-ink);
+        transition:
+            border-color 240ms var(--pm-ease),
+            background-color 240ms var(--pm-ease),
+            transform 240ms var(--pm-ease);
+    }
+    .pm-btn-ghost:hover {
+        border-color: var(--pm-accent);
+        background: var(--pm-accent-soft);
+        transform: translateY(-1px);
+    }
+
+    /* Link underline grow */
+    .pm-link {
+        position: relative;
+        color: var(--pm-ink-2);
+        transition: color 200ms var(--pm-ease);
+    }
+    .pm-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        height: 1px;
+        width: 100%;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 300ms var(--pm-ease);
+    }
+    .pm-link:hover {
+        color: var(--pm-ink);
+    }
+    .pm-link:hover::after {
+        transform: scaleX(1);
+    }
+
+    .pm-card {
+        border: 1px solid var(--pm-line);
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.035),
+            rgba(255, 255, 255, 0.012)
+        );
+        border-radius: 18px;
+        transition:
+            transform 320ms var(--pm-ease),
+            border-color 320ms var(--pm-ease),
+            background-color 320ms var(--pm-ease);
+    }
+    .pm-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--pm-line-strong);
+    }
+
+    .pm-grid-bg {
+        background-image:
+            linear-gradient(var(--pm-line) 1px, transparent 1px),
+            linear-gradient(90deg, var(--pm-line) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(
+            ellipse 80% 60% at 50% 0%,
+            #000 40%,
+            transparent 100%
+        );
+    }
+
+    .pm-noise::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Reveal system */
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+            opacity 620ms var(--pm-ease),
+            transform 620ms var(--pm-ease);
+    }
+    .reveal.is-in {
+        opacity: 1;
+        transform: none;
+    }
+
+    .reveal-line {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 0.12em;
+        margin-bottom: -0.12em;
+    }
+    .reveal-line > span {
+        display: block;
+        transform: translateY(110%);
+        transition: transform 780ms var(--pm-ease);
+    }
+    .reveal-lines.is-in .reveal-line > span {
+        transform: none;
+    }
+
+    /* FAQ accordion — grid rows trick */
+    .pm-acc-body {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 380ms var(--pm-ease);
+    }
+    .pm-acc-body[data-open="true"] {
+        grid-template-rows: 1fr;
+    }
+    .pm-acc-body > div {
+        overflow: hidden;
+    }
+
+    .pm-marquee {
+        display: flex;
+        width: max-content;
+        animation: pm-slide 32s linear infinite;
+    }
+}
+
+@keyframes pm-slide {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@keyframes pm-spin-slow {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pm-pulse-ring {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+    70% {
+        opacity: 0;
+        transform: scale(1.35);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.35);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+    .reveal-line > span {
+        transform: none;
+    }
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+}

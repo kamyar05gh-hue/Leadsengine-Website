@@ -1,0 +1,9 @@
+{
+  "short_name": "Leadsengine",
+  "name": "Leadsengine — AEO & GEO System",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#05050A",
+  "background_color": "#05050A",
+  "icons": []
+}

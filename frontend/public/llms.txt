@@ -1,0 +1,34 @@
+# Leadsengine
+
+> Leadsengine is a Swiss AEO (Answer Engine Optimization) and GEO (Generative
+> Engine Optimization) system that makes B2B brands the cited answer inside AI
+> assistants such as ChatGPT, Perplexity, Google AI Overviews, Gemini, Copilot
+> and Claude.
+
+## What it does
+- Monitors prompt-level brand visibility across six AI engines, daily.
+- Reports share of voice, citation sources, sentiment and competitors named alongside you.
+- Engineers the entity graph, structured data and citable proof that models retrieve.
+- Delivers a live visibility dashboard plus monthly engineering sprints.
+
+## Who it is for
+Swiss and DACH B2B companies (SaaS, fintech, industrial, professional services)
+whose buyers research with AI assistants before they ever open a search page.
+
+## Key facts
+- Founded in Zurich, Switzerland. Serves Switzerland, Germany and Austria.
+- Languages: English, German (de-CH).
+- Engines covered: ChatGPT, Perplexity, Google AI Overviews, Gemini, Microsoft Copilot, Claude.
+- Typical first new citations: 21–40 days. Measurable share-of-voice lift: month 2.
+- Pricing: from CHF 2,400 per month, one brand and one market.
+- Data processing: EU/Swiss infrastructure, cookieless analytics, revFADP and GDPR aligned.
+- Average client AI share of voice after 90 days: 34% (from 6% at onboarding), across 40+ tracked brands.
+
+## Definitions
+- AEO: structuring content, entities and proof so answer engines quote a brand directly.
+- GEO: making a brand retrievable, trustworthy and citable when a generative model composes an answer.
+
+## Contact
+- Website: https://leadsengine.ch/
+- Book a demo: https://calendly.com/leadsengine/30min
+- Email: hello@leadsengine.ch

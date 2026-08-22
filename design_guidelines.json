@@ -1,0 +1,147 @@
+{
+  "theme": "Dark Theme Default (Futuristic & Swiss Precision)",
+  "typography": {
+    "primary_font": "Cabinet Grotesk",
+    "secondary_font": "IBM Plex Sans",
+    "font_strategy": "Cabinet Grotesk for strong, architectural headings. IBM Plex Sans for technical, tabular, and highly readable body text, especially critical for the Dashboard.",
+    "type_scale": {
+      "text-xs": "12px",
+      "text-sm": "13px",
+      "text-base": "14px",
+      "text-md": "16px",
+      "text-lg": "18px",
+      "text-xl": "20px",
+      "text-2xl": "24px",
+      "text-3xl": "30px",
+      "text-4xl": "38px",
+      "text-5xl": "48px",
+      "text-6xl": "60px",
+      "text-7xl": "72px"
+    },
+    "features": [
+      "Use 'tabular-nums' class on all figures, metrics, and KPI tiles.",
+      "No Inter, Roboto, or Space Grotesk."
+    ]
+  },
+  "colors": {
+    "strategy": "True Grey base (not pure black) to reduce eye strain, combined with a single strong 'Electric Deep Blue' accent. Minimal gradients. NO purple gradients on white.",
+    "tokens": {
+      "--pm-bg-marketing": "#05050A",
+      "--pm-surface-dashboard": "#12131A",
+      "--pm-surface-raised": "#1A1C26",
+      "--pm-surface-overlay": "rgba(255, 255, 255, 0.03)",
+      "--pm-accent-primary": "#0047FF",
+      "--pm-accent-hover": "#002B99",
+      "--pm-accent-glow": "rgba(0, 71, 255, 0.4)",
+      "--pm-text-primary": "#F8F9FA",
+      "--pm-text-secondary": "#A0A4B8",
+      "--pm-text-muted": "#6E7287",
+      "--pm-border-subtle": "rgba(255, 255, 255, 0.08)",
+      "--pm-border-focus": "#0047FF",
+      "--pm-success": "#00E676",
+      "--pm-warning": "#FFEA00",
+      "--pm-danger": "#FF3B30"
+    }
+  },
+  "spacing_rhythm": {
+    "scale": [4, 8, 12, 16, 24, 32, 48, 64, 96],
+    "strategy": "Apply these directly to Tailwind configuration extensions. Generous padding. Minimal container crowding."
+  },
+  "layouts": {
+    "marketing_page": [
+      { "section": "Header", "layout": "Glassmorphism nav, backdrop-blur-xl bg-black/60. Logo left, Nav center, Lang Switcher + CTA right." },
+      { "section": "Hero", "layout": "grid-cols-1 lg:grid-cols-12 gap-8. Left (col-span-5): Promise + Proof + CTA. Right (col-span-7): Animated Engine Centerpiece." },
+      { "section": "TrustBar", "layout": "Full width seamless marquee using 'react-fast-marquee' with transparent geometric logos." },
+      { "section": "Problems", "layout": "grid-cols-1 md:grid-cols-2. Left sticky text (Audience pain), right scrolling checkbox-list style." },
+      { "section": "Solution/How-it-works", "layout": "Vertical timeline or 3-column layout. Massive numbers." },
+      { "section": "Features", "layout": "Bento Grid, 3 cards per row. Subtle hover lift." },
+      { "section": "Metrics / Before-After", "layout": "Split view comparison panels. Left side standard SEO, Right side AEO/GEO visibility." },
+      { "section": "Testimonials", "layout": "Masonry or horizontal scrolling cards. Faces + Rating Block." },
+      { "section": "FAQ", "layout": "Accordion via CSS grid-template-rows 0fr->1fr. Answer-first logic." },
+      { "section": "Team/About", "layout": "Minimalist grid of professional portraits on dark background." },
+      { "section": "FinalCTA", "layout": "Massive typography, Electric Blue background container." },
+      { "section": "Footer", "layout": "Strict columns, high contrast. Huge brand mark at the bottom." }
+    ],
+    "dashboard": {
+      "sidebar": "Fixed left sidebar. Contains Logo, Live Clock component, Language Dropdown (EN/DE), Nav Links (Overview, Traffic, Engagement, Conversions, Performance, Audience).",
+      "main_content": "True grey background. Layered elevation cards with --pm-surface-raised and --pm-border-subtle.",
+      "kpi_tiles": "Grid of 3-4 tiles. Large tabular-nums, subtle sparklines.",
+      "charts": "Recharts wrapper. Use dark-mode safe colors. Lines stroke='#0047FF'. Add custom tooltip with glassmorphism."
+    }
+  },
+  "visual_enhancers": {
+    "engine_centerpiece": {
+      "description": "Animated futuristic engine / core visualization.",
+      "tech": "HTML5 <canvas> with requestAnimationFrame or Three.js (React Three Fiber).",
+      "visuals": "A central glowing blue sphere representing the User's Brand. Surrounding orbiting rings and particles representing Answer Engines (ChatGPT, Perplexity). Data streams flowing into the center, lighting it up. Represents processing AEO/GEO data."
+    },
+    "surface_styles": {
+      "cards": "Borderless or 1px subtle border (rgba(255,255,255,0.08)), minimal box-shadow, reliance on background color shift for elevation."
+    }
+  },
+  "motion": {
+    "curve": "cubic-bezier(0.22,1,0.36,1)",
+    "duration": "200ms to 450ms",
+    "animations": {
+      "reveal": "IntersectionObserver based fade up.",
+      "revealText": "Masked lines sliding up. Ensure overflow is hidden on text wrapper to avoid clipped descenders.",
+      "cta_hover": "Darker fill sliding in from left via ::before transform.",
+      "links": "Underline grow effect on hover.",
+      "cards": "Subtle transform translate-y-[-4px] on hover.",
+      "dashboard_transitions": "AnimatePresence with 180ms fade.",
+      "accordion": "grid-template-rows: 0fr -> 1fr transition for smooth height animation."
+    }
+  },
+  "accessibility": {
+    "standards": "WCAG 2.2 AA",
+    "motion_preference": "Must respect prefers-reduced-motion media query by disabling continuous animations (like the canvas engine) or reducing to simple fades.",
+    "testing": "All interactive elements must include 'data-testid' attribute (e.g., data-testid='cta-book-demo')."
+  },
+  "media": {
+    "image_strategy": "Use dark, professional, high-contrast imagery to match the sleek Swiss/futuristic aesthetic."
+  },
+  "image_urls": {
+    "team_portraits": [
+      { "url": "https://images.unsplash.com/photo-1769636929231-3cd7f853d038?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdCUyMGJ1c2luZXNzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzg3MzU1NTI1fDA&ixlib=rb-4.1.0&q=85", "category": "Team / Testimonials" },
+      { "url": "https://images.unsplash.com/photo-1770894807442-108cc33c0a7a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdCUyMGJ1c2luZXNzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzg3MzU1NTI1fDA&ixlib=rb-4.1.0&q=85", "category": "Team / Testimonials" },
+      { "url": "https://images.unsplash.com/photo-1765776830139-72b2184dae5a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdCUyMGJ1c2luZXNzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzg3MzU1NTI1fDA&ixlib=rb-4.1.0&q=85", "category": "Team / Testimonials" }
+    ],
+    "trust_logos": [
+      { "url": "https://images.unsplash.com/photo-1742942965475-25d3b7bf2bfa?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMHRlY2glMjBnZW9tZXRyaWMlMjBsb2dvJTIwaXNvbGF0ZWQlMjBvbiUyMGJsYWNrfGVufDB8fHx8MTc4NzM1NTUzMXww&ixlib=rb-4.1.0&q=85", "category": "TrustBar Marquee Logos" },
+      { "url": "https://images.unsplash.com/photo-1775633998776-6061bf12d490?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHw0fHxhYnN0cmFjdCUyMHRlY2glMjBnZW9tZXRyaWMlMjBsb2dvJTIwaXNvbGF0ZWQlMjBvbiUyMGJsYWNrfGVufDB8fHx8MTc4NzM1NTUzMXww&ixlib=rb-4.1.0&q=85", "category": "TrustBar Marquee Logos" },
+      { "url": "https://images.pexels.com/photos/13129478/pexels-photo-13129478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "category": "TrustBar Marquee Logos" }
+    ],
+    "backgrounds": [
+      { "url": "https://images.pexels.com/photos/38115442/pexels-photo-38115442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "category": "Hero or Footer Background Overlay (Moody Swiss Alps)" }
+    ]
+  },
+  "components_path": {
+    "ui": "/app/frontend/src/components/ui",
+    "pages": "/app/frontend/src/pages",
+    "dashboard": "/app/frontend/src/dashboard",
+    "marketing": "/app/frontend/src/marketing"
+  },
+  "instructions_to_main_agent": [
+    "Build a dual-app structure: a marketing one-page site and a dashboard inside the same React app, separated by react-router.",
+    "Implement the animated engine using <canvas> or React Three Fiber directly. It must visually convey AI Answer Engine data processing.",
+    "Ensure 'mobile-first 360px' logic. The hero must be fully visible above-the-fold without scrolling.",
+    "Use Lucide icons for standard UI, but maintain a sharp, thin line weight.",
+    "Set up Tailwind variables linked to --pm-* custom properties.",
+    "Do NOT use pure black or pure white gradients. Rely on true grey and solid dark blue.",
+    "Integrate recharts for the 6 dashboard pages. Implement loading states (skeleton) and empty states.",
+    "Implement language switching state (EN/DE) across both Marketing and Dashboard using a simple Context or i18n library.",
+    "Use Javascript (.js/.jsx) as standard. If the repo is explicitly set up for TypeScript, use .tsx, but default to standard React ES6 conventions.",
+    "Do not use generic font names like Inter, Roboto, Space Grotesk. Embed Google Fonts for Cabinet Grotesk and IBM Plex Sans."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid the 'AI slop' aesthetic. Create depth with z-index hierarchy and glassmorphism.",
+    "DO NOT apply 'transition: all'. Explicitly state transition properties to prevent breaking transforms.",
+    "DO NOT center align the app container (.App { text-align: center; }).",
+    "Always use modern interactive button styles with specific :hover states.",
+    "Never use AI assistant Emojis for icons.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Never use placeholder URLs. Use the provided image URLs strictly.",
+    "Toasts must use 'sonner' if applicable.",
+    "CRITICAL: Do NOT use transparent backgrounds for Headers or dropdown menus over content. Always use solid or blurred backdrops."
+  ]
+}
