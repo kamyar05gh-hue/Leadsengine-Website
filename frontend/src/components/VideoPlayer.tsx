@@ -467,9 +467,20 @@ export default function VideoPlayer({
             if (isCoarse.current) revealControls();
           }}
           aria-label={ended ? v.replay : v.play}
-          className="absolute inset-0 grid place-items-center bg-black/25 transition-colors duration-300 hover:bg-black/15 focus-visible:outline-none"
+          /* CENTRED IN THE PICTURE, NOT IN THE ELEMENT.
+             `inset-0` + `place-items-center` puts the circle in the middle of
+             the whole frame — which on a phone is the middle of the CONTROL
+             BAR. Measured at 390px: the video is 196px tall and the bar
+             occupies its bottom ~122px, so a 64px circle centred at y=98 sat
+             directly on the timeline and the buttons. The bottom padding
+             lifts it clear of the bar, so it centres in the visible picture;
+             from `sm` up the frame is tall enough that no correction is
+             needed and there is none. */
+          className="absolute inset-0 grid place-items-center bg-black/25 pb-[86px] transition-colors duration-300 hover:bg-black/15 focus-visible:outline-none sm:pb-0"
         >
-          <span className="grid h-16 w-16 place-items-center rounded-full border border-accent-bright/40 bg-bg/70 backdrop-blur-sm transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20">
+          {/* Smaller on a phone too: at 64px it filled more than a third of
+              a 196px-tall frame. */}
+          <span className="grid h-14 w-14 place-items-center rounded-full border border-accent-bright/40 bg-bg/70 transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20">
             {ended ? (
               <RotateCcw className="h-6 w-6 text-ink sm:h-7 sm:w-7" />
             ) : (

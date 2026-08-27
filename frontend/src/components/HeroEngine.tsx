@@ -125,6 +125,25 @@ export default function HeroEngine({ className = "" }: { className?: string }) {
      crowding. */
   const [lite, setLite] = useState(false);
 
+  /* STILL MODE — and thinning was not enough.
+     PROFILED AGAIN on the LIVE site at 390px / 6x CPU: 53 animations running
+     at once, 27 of them `le-comet` on <path> and 16 `le-twinkle` on <circle>.
+     `stroke-dashoffset` cannot be composited, so each of those 27 paths is
+     re-rasterised on the CPU every frame — for as long as the tab is open.
+     The main-thread JS in the same profile was 24ms in four seconds; the
+     cost was almost entirely browser style/paint, which is exactly the shape
+     of "fine on a laptop, heavy on a phone".
+
+     So on a coarse pointer the line field STOPS MOVING. The lines are still
+     drawn, with the same geometry, colours and glow — only the light no
+     longer travels along them, and the specks no longer twinkle. What is
+     left animating is `le-bloom`, `le-breathe`, `le-ring`, `le-blades` and
+     `le-float`: nine animations, all `transform`/`opacity`, all composited,
+     none of which touch the CPU per frame.
+
+     Desktop is untouched and keeps the full scene. */
+  const still = lite;
+
   const running = reduced ? false : inView;
   const state = running ? ("running" as const) : ("paused" as const);
 
@@ -193,10 +212,14 @@ export default function HeroEngine({ className = "" }: { className?: string }) {
   const frontLines = lite ? STREAMS_FRONT.filter((_, i) => i % 3 === 0) : STREAMS_FRONT;
   const specks = lite ? STREAM_DOTS.filter((_, i) => i % 2 === 0) : STREAM_DOTS;
 
+  /* `still` short-circuits exactly like `reduced` does, except the element
+     stays fully visible — the line is drawn, it simply does not travel. */
   const anim = (name: string, dur: number, delay: number) =>
     reduced
       ? ({ opacity: 0 } as const)
-      : ({
+      : still
+        ? ({ opacity: 0 } as const)
+        : ({
           animationName: name,
           animationTimingFunction: "linear",
           animationIterationCount: "infinite",
@@ -300,7 +323,11 @@ export default function HeroEngine({ className = "" }: { className?: string }) {
             r={p.r}
             fill={`rgb(${tone})`}
             style={
-              reduced
+              /* Still on a phone, for the same reason as the comets — sixteen
+                 of these were animating opacity on <circle> elements inside
+                 an SVG that is already re-rasterising. They keep their light,
+                 they just hold it. */
+              reduced || still
                 ? { opacity: 0.55 }
                 : {
                     animationName: "le-twinkle",

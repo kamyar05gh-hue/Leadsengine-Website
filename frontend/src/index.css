@@ -328,11 +328,17 @@
        reads as "this is live" instead of as a light switch. The press state
        below is untouched — that one is a direct answer to a finger, and on
        touch there is no hover to have felt first. */
+    /* Quieter again, on review. The bloom now barely widens on hover — it
+       brightens by about a sixth rather than by half — and the hairline ring
+       is almost gone. What still says "live" is the EDGE going to full
+       strength; the glow is deliberately not the thing that changes.
+       `.le-gold-pill`, the fixed widget bottom-right, is a separate class and
+       keeps its own stronger hover. */
     .le-cta-pill:hover {
         border-color: rgb(var(--le-gold-bright-rgb));
         box-shadow:
-            0 0 0 1px rgb(var(--le-gold-bright-rgb) / 0.22),
-            0 0 38px -2px rgb(var(--le-gold-rgb) / 0.85),
+            0 0 0 1px rgb(var(--le-gold-bright-rgb) / 0.12),
+            0 0 32px -4px rgb(var(--le-gold-rgb) / 0.68),
             0 10px 30px -14px rgba(0, 0, 0, 0.9);
     }
     .le-cta-pill:active {

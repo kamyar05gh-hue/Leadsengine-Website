@@ -194,21 +194,31 @@ function buildSitemap() {
     { path: "impressum/", priority: "0.3", changefreq: "yearly" },
     { path: "datenschutz/", priority: "0.3", changefreq: "yearly" },
     { path: "agb/", priority: "0.3", changefreq: "yearly" },
+    /* llms.txt, at the client's request. It is not an HTML page, so it needs
+       the `file` override below — there is no index.html to stat. Listing it
+       is unusual and deliberate: the sitemap is the one file every crawler
+       fetches without being told to, which makes it the most reliable way to
+       point an answer engine at the plain-text summary written for it. */
+    { path: "llms.txt", priority: "0.5", changefreq: "monthly", file: "llms.txt", noAlt: true },
   ];
 
   const body = urls
-    .map(({ path, priority, changefreq }) => {
-      const file = join(BUILD, path, "index.html");
+    .map(({ path, priority, changefreq, file, noAlt }) => {
+      const onDisk = join(BUILD, file ?? join(path, "index.html"));
       /* The file's own mtime, not today's date: rebuilding without changing a
          page must not claim the page changed. */
-      const lastmod = statSync(file).mtime.toISOString().slice(0, 10);
+      const lastmod = statSync(onDisk).mtime.toISOString().slice(0, 10);
       const loc = ORIGIN + "/" + path;
       return [
         "    <url>",
         `        <loc>${loc}</loc>`,
-        `        <xhtml:link rel="alternate" hreflang="de-CH" href="${loc}?lang=de" />`,
-        `        <xhtml:link rel="alternate" hreflang="en" href="${loc}?lang=en" />`,
-        `        <xhtml:link rel="alternate" hreflang="x-default" href="${loc}" />`,
+        ...(noAlt
+          ? /* A plain-text resource has no language variants to declare. */ []
+          : [
+              `        <xhtml:link rel="alternate" hreflang="de-CH" href="${loc}?lang=de" />`,
+              `        <xhtml:link rel="alternate" hreflang="en" href="${loc}?lang=en" />`,
+              `        <xhtml:link rel="alternate" hreflang="x-default" href="${loc}" />`,
+            ]),
         `        <lastmod>${lastmod}</lastmod>`,
         `        <changefreq>${changefreq}</changefreq>`,
         `        <priority>${priority}</priority>`,
