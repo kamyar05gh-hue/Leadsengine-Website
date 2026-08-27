@@ -25,7 +25,7 @@ export const de = {
   },
 
   hero: {
-    eyebrow: "Das erste Schweizer Unternehmen für KI-Sichtbarkeit",
+    eyebrow: "Regionale Sichtbarkeit für Deine Zielgruppe",
     h1: ["Deine Kunden", "googeln nicht mehr."],
     h1Accent: "Sie fragen KI.",
     sub: "Wir machen Dein Unternehmen in ChatGPT & Co. sichtbar.",
@@ -153,7 +153,7 @@ export const de = {
        itself rather than suppressed in the component — with a single
        sentence `splitHeadline` returns an empty intro and renders nothing
        above the headline, which is exactly the intended result. */
-    title: "Wir zeigen Dir, warum die KI andere empfiehlt, und ändern das.",
+    title: "Wir zeigen Dir, warum KI andere empfiehlt, und ändern das.",
     body: "Die Analyse läuft auf unserer eigens entwickelten Plattform. Sie liest Dein Geschäft, Deine Leistungen und Deine Märkte aus, ermittelt reale Suchfragen potenzieller Kunden und prüft sie bei ChatGPT, Perplexity, Google AI, Claude und Grok. Danach wissen wir, welche Wettbewerber bevorzugt werden, warum sie sichtbar sind und wo Deine Lücken liegen. Diese Lücken schliessen wir für Dich: Wir setzen die nötigen Massnahmen laufend um und optimieren kontinuierlich weiter. Dafür lesen wir nur, was öffentlich zugänglich ist.",
     lead: "Die Analyse läuft auf unserer eigens entwickelten Plattform und zeigt Dir genau, was die KI über Dich sagt.",
     checksTitle: "Die Plattform zeigt Dir",

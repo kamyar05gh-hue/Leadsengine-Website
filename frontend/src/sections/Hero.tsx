@@ -146,7 +146,10 @@ export default function Hero() {
                 The badge is what makes it read as a credential rather than as
                 a caption — it is the same gold-ringed treatment the site uses
                 for its other marks, at the size of the line it sits on. */}
-            <p className="mt-6 flex items-center gap-3">
+            {/* More air above than a normal stacked element gets: this is a
+                separate claim, not a caption on the button, and at mt-6 the
+                two read as one block. */}
+            <p className="mt-8 flex items-center gap-3">
               <span
                 aria-hidden="true"
                 className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold-vivid/35 bg-gold-vivid/[0.10] text-gold-vivid"

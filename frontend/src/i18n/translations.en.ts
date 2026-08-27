@@ -22,7 +22,7 @@ export const en: Dict = {
   },
 
   hero: {
-    eyebrow: "Switzerland's first company for AI visibility",
+    eyebrow: "Regional visibility for your audience",
     h1: ["Your customers", "stopped googling."],
     h1Accent: "They ask AI.",
     sub: "We make your company visible in ChatGPT & Co.",

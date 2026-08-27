@@ -1,3 +1,26 @@
+/**
+ * WHY THIS FILE HAS A PHONE BRANCH AT ALL — the measurement, so nobody
+ * "simplifies" it back.
+ *
+ * The loop is one very wide track translated by -50%. MEASURED at a 390px
+ * viewport, that track is 12,788 CSS px wide for the logo band and 2,742 for
+ * the platform strip. An iPhone renders at devicePixelRatio 3, so the layer
+ * the compositor is asked to allocate is 38,364 and 8,226 DEVICE pixels wide.
+ *
+ * iOS Safari's maximum texture dimension is between 4,096 and 16,384px
+ * depending on the chip. 38,364 is beyond every one of them. When a layer
+ * cannot be allocated, Safari does not fail loudly — it drops the layer out
+ * of hardware compositing and repaints a 12,788px-wide element on the CPU on
+ * every animation frame, forever. That is why the site was "very slow and
+ * almost without animations" on iOS specifically and merely heavy elsewhere:
+ * Chromium tiles large layers, WebKit gives up.
+ *
+ * Below `md` the marquee is therefore not a marquee. One copy of the row,
+ * wrapped, centred, static: no oversized layer, no animation, nothing for the
+ * compositor to refuse. Every logo is still visible — arguably more of them
+ * than a phone-width loop ever showed at once. Desktop keeps the loop, where
+ * the track is well inside the limits at devicePixelRatio 1-2.
+ */
 import { useEffect, useState } from "react";
 import { useLang } from "@/i18n/LanguageContext";
 import { useInView } from "@/hooks/useInView";
@@ -191,9 +214,39 @@ export default function TrustedBy() {
         </p>
       </div>
 
+      {/* PHONE: static, wrapped, one copy. See the note at the top of this
+          file — the animated track is far too wide for an iOS compositor. */}
+      <div className="le-container md:hidden">
+        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6">
+          {items.map(({ name, slug, url }) => (
+            <li key={slug} className="flex items-center">
+              {url ? (
+                <img
+                  src={url}
+                  alt={name || t.trusted.clientLogo}
+                  title={name || undefined}
+                  loading="lazy"
+                  decoding="async"
+                  className="block object-contain opacity-80"
+                  style={{
+                    height: `${Math.round(box(slug).height * 0.8)}px`,
+                    width: `${Math.round(box(slug).width * 0.8)}px`,
+                  }}
+                />
+              ) : (
+                <span className="whitespace-nowrap text-[16px] font-semibold tracking-[-0.01em] text-hi opacity-75">
+                  {name}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* md AND UP: the loop, unchanged. */}
       <div
         ref={ref}
-        className="relative w-full overflow-hidden"
+        className="relative hidden w-full overflow-hidden md:block"
         style={{ maskImage: EDGE_MASK, WebkitMaskImage: EDGE_MASK }}
       >
         <div
@@ -213,7 +266,12 @@ export default function TrustedBy() {
                 }
           }
         >
-          {[0, 1, 2, 3].map((i) => row(i !== 0, i))}
+          {/* TWO COPIES, NOT FOUR. The track travels exactly -50%, so it only
+              has to be twice the viewport for the loop to be seamless. One
+              copy of nineteen logos is already ~3,200px, so two is ample even
+              on an ultrawide screen — and four was needlessly doubling the
+              size of the composited layer. */}
+          {[0, 1].map((i) => row(i !== 0, i))}
         </div>
       </div>
 

@@ -82,9 +82,25 @@ export default function PlatformStrip() {
       <div ref={ref}>
         <p className="le-kicker le-container mb-7 text-center">{t.features.marqueeLabel}</p>
 
-        {/* Full-bleed: deliberately outside `le-container`. */}
+        {/* PHONE: static and wrapped. Same reason as the logo band — see the
+            note at the top of TrustedBy.tsx. Five platforms fit in two rows
+            at this width and read better standing still than sliding past. */}
+        <div className="le-container md:hidden">
+          <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4">
+            {platforms.map((name) => (
+              <li key={name} className="flex items-center gap-2.5">
+                <PlatformMark name={name} className="h-5 w-5 shrink-0 text-hi" />
+                <span className="whitespace-nowrap text-[15px] font-medium tracking-[-0.01em] text-ink-2">
+                  {name}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* md AND UP: full-bleed, deliberately outside `le-container`. */}
         <div
-          className="relative overflow-hidden"
+          className="relative hidden overflow-hidden md:block"
           style={{ maskImage: EDGE_MASK, WebkitMaskImage: EDGE_MASK }}
         >
           <div
@@ -101,6 +117,10 @@ export default function PlatformStrip() {
                   }
             }
           >
+            {/* Four copies here, unlike the logo band: five short items make a
+                copy only ~690px wide, so the track needs more of them to
+                outrun a wide viewport. Even at four it is a fraction of the
+                logo band's width. */}
             {[0, 1, 2, 3].map((i) => row(i > 0, i))}
           </div>
         </div>

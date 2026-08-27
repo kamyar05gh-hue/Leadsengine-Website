@@ -8,6 +8,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import Reveal from "@/components/Reveal";
 import RevealText from "@/components/RevealText";
 import PrimaryCta from "@/components/PrimaryCta";
+import TeamCards from "@/components/TeamCards";
 import { toLines } from "@/lib/toLines";
 
 /**
@@ -31,33 +32,33 @@ import { toLines } from "@/lib/toLines";
  * hairline rules and the staggered reveals, not from more boxes.
  *
  * Language is client-side (`?lang=en`), as everywhere on this site.
- * NO TEAM SECTION HERE, BY INSTRUCTION: the roster lives on the home page.
+ *
+ * THE PAGE IS NOW THE TEAM, BY INSTRUCTION. The client asked for it to follow
+ * the structure of future-media.ch/team: portrait cards, name, role — and
+ * explicitly "without explanations", so no bios and no article beneath them.
+ * The long-form sections that used to fill this page (who we are, why Leads
+ * Engine exists, how we work, what we do not promise) are no longer rendered.
+ *
+ * THEIR COPY IS DELIBERATELY LEFT IN THE DICTIONARY. `about.page.sections`,
+ * `about.page.commitments` and `about.pillars` are all still there, unused
+ * and still translated in both languages, so restoring any of it is one JSX
+ * block rather than a rewrite. Deleting the entries would have thrown away
+ * work the client had already reviewed line by line.
+ *
+ * What remains besides the roster is the part a background page must carry
+ * regardless: who the legal entity is, where it sits, and one way to get in
+ * touch.
  */
 
-/** The one measure every block on the page is set to. */
+/* The masthead's measure. The article this page used to carry is gone (see
+   the note above), so this now sets only the title block — the card grid
+   below runs wider, because a three-column grid needs the room and there is
+   no prose left whose line length it could hurt.
+
+   `Heading`, `Paragraph` and `LabelledLine` were removed with the article;
+   they rendered nothing once the blocks list went, and TypeScript flagged
+   them. The dictionary entries they read are still there. */
 const COLUMN = "mx-auto w-full max-w-[46rem]";
-
-/** A section heading in the article. Left-aligned, like everything else. */
-function Heading({ children }: { children: string }) {
-  return (
-    <h2 className="text-[clamp(1.35rem,2.2vw,1.75rem)] font-semibold leading-[1.2] tracking-[-0.022em] text-ink">
-      {children}
-    </h2>
-  );
-}
-
-function Paragraph({ children }: { children: string }) {
-  return <p className="mt-4 text-[15px] leading-[1.75] text-ink-2">{children}</p>;
-}
-
-/** A "Label: sentence" line — used by the two list-shaped blocks. */
-function LabelledLine({ label, text }: { label: string; text: string }) {
-  return (
-    <p className="mt-4 text-[15px] leading-[1.75] text-ink-2 first:mt-0">
-      <strong className="font-semibold text-ink">{label}:</strong> {text}
-    </p>
-  );
-}
 
 export default function About() {
   const { t } = useLang();
@@ -68,65 +69,6 @@ export default function About() {
      line of a one-sentence title would colour the whole thing. */
   const titleLines = toLines(page.heroTitle);
   const goldLine = titleLines.length > 1 ? titleLines.length - 1 : undefined;
-
-  /* The article, in reading order. A flat list so the gap between blocks is
-     set in ONE place by position, rather than inside each block — nesting it
-     is what silently collapsed every heading's margin in an earlier version
-     (each heading was the first child of its own wrapper, so `first:mt-0`
-     matched all of them). */
-  const blocks: Array<{ key: string; node: React.ReactNode }> = [
-    ...page.sections.slice(0, 3).map((s) => ({
-      key: s.title,
-      node: (
-        <>
-          <Heading>{s.title}</Heading>
-          {s.body.map((p) => (
-            <Paragraph key={p}>{p}</Paragraph>
-          ))}
-        </>
-      ),
-    })),
-    {
-      key: page.commitments.title,
-      node: (
-        <>
-          <Heading>{page.commitments.title}</Heading>
-          <Paragraph>{page.commitments.lead}</Paragraph>
-          <div className="mt-5">
-            {page.commitments.items.map((it) => (
-              <LabelledLine key={it.label} label={it.label} text={it.text} />
-            ))}
-          </div>
-        </>
-      ),
-    },
-    ...page.sections.slice(3).map((s) => ({
-      key: s.title,
-      node: (
-        <>
-          <Heading>{s.title}</Heading>
-          {s.body.map((p) => (
-            <Paragraph key={p}>{p}</Paragraph>
-          ))}
-        </>
-      ),
-    })),
-    {
-      /* `about.pillars` already existed in both dictionaries, written for
-         exactly this, and had never been rendered anywhere. */
-      key: page.valuesTitle,
-      node: (
-        <>
-          <Heading>{page.valuesTitle}</Heading>
-          <div className="mt-5">
-            {t.about.pillars.map((p) => (
-              <LabelledLine key={p.title} label={p.title} text={p.body} />
-            ))}
-          </div>
-        </>
-      ),
-    },
-  ];
 
   return (
     <>
@@ -184,7 +126,7 @@ export default function About() {
         </section>
 
         {/* ---------------------------------------------------------------
-            THE ARTICLE
+            THE TEAM — the page's content, in the reference structure.
             --------------------------------------------------------------- */}
         <section className="le-noise relative overflow-clip bg-bg-alt pb-[clamp(4rem,7vw,6rem)] pt-[clamp(3rem,5vw,4.5rem)]">
           <div
@@ -197,19 +139,29 @@ export default function About() {
           />
 
           <div className="le-container relative">
-            <div className={COLUMN}>
-              {blocks.map((block, i) => (
-                <Reveal
-                  key={block.key}
-                  dir="up"
-                  className={i === 0 ? undefined : "mt-12 lg:mt-14"}
-                >
-                  {block.node}
-                </Reveal>
-              ))}
+            {/* Wider than the article measure this page used to run at: a
+                three-column card grid needs the room, and there is no prose
+                here that a long line length could hurt. */}
+            <div className="mx-auto w-full max-w-5xl">
+              <Reveal dir="up">
+                <div className="flex items-center gap-3">
+                  <span aria-hidden="true" className="h-px w-7 bg-accent-bright" />
+                  <p className="le-kicker">{t.about.teamKicker}</p>
+                </div>
+                <h2 className="mt-5 text-[clamp(1.6rem,2.6vw,2.15rem)] font-semibold leading-[1.16] tracking-[-0.025em] text-ink">
+                  {t.about.teamTitle}
+                </h2>
+                <p className="mt-5 max-w-[52ch] text-[15px] leading-[1.7] text-ink-2">
+                  {t.about.teamLead}
+                </p>
+              </Reveal>
+
+              <div className="mt-12 lg:mt-14">
+                <TeamCards />
+              </div>
 
               {/* Where we are, and who runs it — plain lines, no card. */}
-              <Reveal dir="up" className="mt-12 lg:mt-14">
+              <Reveal dir="up" className="mt-16 lg:mt-20">
                 <div className="border-t border-line pt-8">
                   <p className="text-[13px] font-semibold tracking-[-0.005em] text-ink">
                     {SITE.company}

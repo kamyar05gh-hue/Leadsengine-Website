@@ -67,7 +67,8 @@ async function loadContent() {
     entry,
     `export { de } from "@/i18n/translations.de";
      export { en } from "@/i18n/translations.en";
-     export { SITE } from "@/constants/site";`,
+     export { SITE } from "@/constants/site";
+     export { TEAM } from "@/constants/team";`,
     "utf8",
   );
 
@@ -98,20 +99,34 @@ const legalParagraphs = (body) =>
     .map((p) => `<p>${escapeHtml(p.trim()).replace(/\n/g, "<br />")}</p>`)
     .join("\n");
 
-function aboutFallback(t) {
+/**
+ * THE FALLBACK MUST DESCRIBE THE PAGE THAT IS ACTUALLY RENDERED.
+ *
+ * This used to emit the whole long-form article — four prose sections, the
+ * commitments block and the values list. That copy is still in the dictionary
+ * but the page no longer renders any of it: "Uber uns" is now the team, in
+ * portrait cards. Continuing to serve the article to anything that does not
+ * run JavaScript would mean crawlers and AI systems reading a page no visitor
+ * sees, which is the definition of cloaking — and a genuinely bad look for a
+ * product whose whole pitch is what machines read about you.
+ *
+ * So it mirrors the rendered page instead: masthead, team lead line, and the
+ * roster as a real list of names and roles. TEAM is imported rather than
+ * retyped, so a member added to the site appears here on the next build.
+ */
+function aboutFallback(t, TEAM) {
   const page = t.about.page;
-  const parts = [
+  const roles = t.about.roles || {};
+  const people = TEAM.map(
+    (m) => `<li>${escapeHtml(m.name)} \u2014 ${escapeHtml(roles[m.name] ?? m.role)}</li>`,
+  ).join("\n");
+  return [
     `<h1>${escapeHtml(page.heroTitle)}</h1>`,
     `<p>${escapeHtml(page.heroLead)}</p>`,
-    ...page.sections.slice(0, 3).map((s) => block(s.title, s.body)),
-    block(
-      page.commitments.title,
-      [page.commitments.lead, ...page.commitments.items.map((i) => `${i.label}: ${i.text}`)],
-    ),
-    ...page.sections.slice(3).map((s) => block(s.title, s.body)),
-    block(page.valuesTitle, t.about.pillars.map((p) => `${p.title}: ${p.body}`)),
-  ];
-  return parts.join("\n");
+    `<h2>${escapeHtml(t.about.teamTitle)}</h2>`,
+    `<p>${escapeHtml(t.about.teamLead)}</p>`,
+    `<ul>\n${people}\n</ul>`,
+  ].join("\n");
 }
 
 function legalFallback(t, doc) {
@@ -128,7 +143,7 @@ const ROUTES = [
     path: "ueber-uns",
     type: "AboutPage",
     crumb: (t) => t.nav.about,
-    fallback: aboutFallback,
+    fallback: (t) => aboutFallback(t, content.TEAM),
     name: (t) => t.about.page.title,
     description: (t) => t.about.page.metaDescription,
   },
