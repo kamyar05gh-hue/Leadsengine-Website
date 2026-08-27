@@ -85,3 +85,8 @@ memory/test_credentials.md
 
 # Mobile development
 android-sdk/
+# Lead-list exports (Snov.io imports and similar).
+# These are business data, not website code — they were sitting in the repo
+# root at ~1.2 MB and have been moved to ../leadsengine-leads-data/.
+# Ignored so a future export dropped here never lands in the codebase again.
+*.csv

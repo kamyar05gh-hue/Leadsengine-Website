@@ -1,9 +1,13 @@
 {
-  "short_name": "Leadsengine",
-  "name": "Leadsengine — AEO & GEO System",
+  "short_name": "Leads Engine",
+  "name": "Leads Engine — AI Buyer Visibility",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#05050A",
-  "background_color": "#05050A",
-  "icons": []
+  "theme_color": "#05070D",
+  "background_color": "#05070D",
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192", "purpose": "any" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ]
 }

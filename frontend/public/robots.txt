@@ -1,15 +1,58 @@
+# Leads Engine — https://leadsengine.ch
+#
+# AI ANSWER ENGINES ARE EXPLICITLY WELCOME. This site sells visibility inside
+# ChatGPT, Perplexity, Claude, Google AI and Grok; blocking the crawlers that
+# feed them — or leaving them to a default that a future tool might tighten —
+# would be the one own goal this product cannot afford. Each is named and
+# allowed on purpose, so the intent survives anyone later editing this file.
+#
+# The distinction that matters: a TRAINING crawler and an ANSWER-TIME fetcher
+# are different agents. OAI-SearchBot, PerplexityBot and Claude-SearchBot
+# retrieve pages to cite in a live answer, which is exactly the surface this
+# business is measured on. They are allowed unconditionally.
+
 User-agent: *
 Allow: /
 Disallow: /dashboard
 Disallow: /dashboard/
 
+# --- OpenAI ---
 User-agent: GPTBot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# --- Perplexity ---
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
+# --- Anthropic ---
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# --- Google (AI Overviews / Gemini grounding) ---
 User-agent: Google-Extended
+Allow: /
+
+# --- Microsoft / Copilot ---
+User-agent: BingBot
+Allow: /
+
+# --- Common Crawl, which several models train from ---
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://leadsengine.ch/sitemap.xml

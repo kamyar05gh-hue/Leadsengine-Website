@@ -1,0 +1,12 @@
+# Netlify / Cloudflare Pages redirects.
+#
+# The /en/* subpages were real, separately-generated pages for a while, so
+# those URLs may have been shared or indexed. They no longer exist: language
+# is a query param on this site (?lang=en), and the legal pages and "Über uns"
+# are single pages that switch language client-side. 301 the old paths at
+# their German equivalents rather than letting them 404.
+/en/about/     /ueber-uns/?lang=en     301
+/en/imprint/   /impressum/?lang=en     301
+/en/privacy/   /datenschutz/?lang=en   301
+/en/terms/     /agb/?lang=en           301
+/en/*          /?lang=en               301

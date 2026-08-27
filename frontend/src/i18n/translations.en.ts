@@ -1,363 +1,636 @@
-export const en = {
+import type { Dict } from "./translations.de";
+
+/* English — a faithful translation of the German primary. Same register
+   (direct "you"), same facts, same structure. */
+export const en: Dict = {
   meta: { lang: "en", htmlLang: "en" },
+
   nav: {
-    engine: "Engine",
-    process: "How it works",
-    platform: "Platform",
-    proof: "Proof",
+    how: "How it works",
+    audience: "Who it's for",
+    benefits: "Benefits",
+    results: "Results",
+    voices: "Voices",
     faq: "FAQ",
-    dashboard: "Dashboard",
+    about: "About us",
     menu: "Open menu",
     close: "Close menu",
   },
+
   cta: {
-    primary: "Book a demo",
-    secondary: "See the engine",
-    floating: "Talk to us",
-    floatingHint: "Free 30-min AI visibility audit",
+    primary: "Start your free AI analysis",
+    secondary: "How it works",
+    short: "Free analysis",
   },
+
   hero: {
-    badge: "Swiss-engineered AEO + GEO",
-    h1: ["Own the answer", "before the click", "ever happens."],
-    sub: "Leadsengine is the answer-engine and generative-engine optimisation system for Swiss B2B brands. We measure how ChatGPT, Perplexity, Gemini, Copilot and AI Overviews talk about you — then engineer the proof that makes you the cited answer.",
-    proofLine: "Trusted by 40+ Swiss and DACH brands · 4.9/5 client rating",
+    eyebrow: "Switzerland's first company for AI visibility",
+    h1: ["Your customers", "stopped googling."],
+    h1Accent: "They ask AI.",
+    sub: "We make your company visible in ChatGPT & Co.",
+    engineLabel:
+      "Leads Engine: company and market data go in, AI platforms are analysed, measurable visibility comes out.",
+    platforms: ["ChatGPT", "Google AI", "Claude", "Perplexity", "Grok"],
+    scrollHint: "Keep reading",
+    trustLine: "7 years of experience in lead generation",
+  },
+
+  pain: {
+    kicker: "The blind spot",
+    title: "You are losing customers without noticing.",
+    lead: "When an AI recommends someone else, you never find out. There is no click to count and no statistic that shows it. The customer was there for a moment, then gone.",
+    items: [
+      {
+        step: "1",
+        title: "Someone needs exactly what you offer",
+        body: "A potential customer tells an AI their problem and asks who can solve it: your service, their region, their budget.",
+      },
+      {
+        step: "2",
+        title: "The AI names three. Yours is missing.",
+        body: "It gives no long list, just three to five providers. Anyone not named there simply does not exist for that customer.",
+      },
+      {
+        step: "3",
+        title: "You never find out it happened",
+        body: "No visit, no click, no line in your analytics. The job goes to a competitor, and in your numbers that day looks like any other.",
+      },
+    ],
+    closing: "You cannot win what you cannot see.",
+  },
+
+  shift: {
+    title: "AI only recommends who it knows.",
+    sub: "And that changes how customers find you.",
     stats: [
-      { value: "34%", label: "avg. AI share of voice after 90 days" },
-      { value: "21d", label: "to first new engine citation" },
-      { value: "6", label: "AI engines tracked daily" },
-    ],
-    engineLabel: "Live visibility engine",
-  },
-  engine: {
-    kicker: "The engine",
-    title: "Inside the Leadsengine core",
-    body: "Every prompt your buyers ask is fired at six engines, parsed for entities and citations, scored against your competitors, then routed into the fix queue. This is that loop, running.",
-    rings: ["Retrieval", "Reasoning", "Citation"],
-    nodes: ["ChatGPT", "Perplexity", "AI Overviews", "Gemini", "Copilot", "Claude"],
-    readouts: {
-      throughput: "Prompts / day",
-      citations: "Citations won",
-      sov: "Share of voice",
-      latency: "Index refresh",
-    },
-    state: "Operational",
-  },
-  trust: [
-    "AI share of voice, measured daily",
-    "Entity graph engineering",
-    "Citation source mapping",
-    "Prompt-level competitor tracking",
-    "Schema + llms.txt delivery",
-    "Swiss data residency",
-    "Monthly engineering sprints",
-  ],
-  problems: {
-    kicker: "The shift",
-    title: "Your buyers stopped scrolling. They started asking.",
-    body: "AI assistants now answer the research questions that used to send traffic to your site. If the model does not know you, you are not shortlisted — and no ranking report will tell you why.",
-    items: [
       {
-        title: "You are invisible in the answer",
-        body: "A competitor gets named in the first sentence. You are not in the answer at all, and analytics shows nothing.",
+        value: 45,
+        decimals: 0,
+        suffix: "%",
+        label: "of B2B buyers use generative AI for their research.",
+        source: "Gartner, B2B Buyer Survey 2026 (n=645)",
       },
       {
-        title: "Wrong facts, confidently stated",
-        body: "Models quote outdated pricing, old positioning or a former product name pulled from stale third-party pages.",
+        value: 42,
+        decimals: 0,
+        suffix: "%",
+        label: "of purchase decisions are already made with AI support.",
+        source: "NielsenIQ, Agentic Commerce Tracker 2026",
       },
       {
-        title: "Traffic falls, demand does not",
-        body: "Impressions drop while your category grows. The demand moved into assistants you cannot see into.",
-      },
-      {
-        title: "Agencies sell SEO reports",
-        body: "Keyword rankings say nothing about retrieval, citation or how a model reasons about your category.",
+        value: 3.8,
+        decimals: 1,
+        suffix: "M",
+        label: "people in Switzerland use AI tools. And rising.",
+        source: "IGEM-Digimonitor 2025",
       },
     ],
+    sourceLabel: "Source",
   },
-  how: {
-    kicker: "How it works",
-    title: "Three moves. One measurable outcome.",
-    steps: [
-      {
-        n: "01",
-        title: "Map",
-        body: "We build your prompt universe — the 250–800 real questions your buyers ask — and baseline every engine's answer, citation and sentiment about you.",
-        points: ["Prompt universe build", "Engine baseline audit", "Competitor share of voice"],
-      },
-      {
-        n: "02",
-        title: "Engineer",
-        body: "We fix what models actually consume: entity consistency, structured data, citable statistics, corroboration on the sources engines retrieve from.",
-        points: ["Entity + schema layer", "Citable proof assets", "Third-party corroboration"],
-      },
-      {
-        n: "03",
-        title: "Compound",
-        body: "Weekly monitoring feeds a live dashboard. Every sprint targets the prompts where you are losing, and the gains stack month over month.",
-        points: ["Live visibility dashboard", "Monthly sprint backlog", "Board-ready reporting"],
-      },
-    ],
-  },
-  features: {
-    kicker: "Platform",
-    title: "Everything the engine gives you",
-    body: "One system for measurement, engineering and proof — built for teams that report to a board, not a blog.",
-    items: [
-      {
-        title: "Prompt monitoring",
-        body: "Daily runs across six engines with answer text, citation URLs and sentiment stored for every prompt.",
-      },
-      {
-        title: "Share of voice",
-        body: "Your brand versus named competitors, per engine, per prompt cluster, over time.",
-      },
-      {
-        title: "Citation intelligence",
-        body: "See exactly which domains engines trust in your category, and where you are missing from them.",
-      },
-      {
-        title: "Entity engineering",
-        body: "Consistent naming, schema graph, llms.txt and factual anchors so models resolve you correctly.",
-      },
-      {
-        title: "Content engineering",
-        body: "Answer-first pages built to be quoted: 40–60 word direct answers, stat lines, clean structure.",
-      },
-      {
-        title: "Live dashboard",
-        body: "Traffic, engagement, conversions, Core Web Vitals and audience in one Swiss-hosted view.",
-      },
-    ],
-  },
-  compare: {
-    kicker: "Before / after",
-    title: "The same brand, 90 days apart",
+
+  problem: {
+    kicker: "What changed",
+    title: "People used to search. Now they ask.",
     before: {
-      label: "Before Leadsengine",
-      items: [
-        { k: "AI share of voice", v: "6%" },
-        { k: "Engines citing you", v: "1 of 6" },
-        { k: "Wrong facts in answers", v: "4" },
-        { k: "Qualified demo requests / mo", v: "9" },
+      label: "Before",
+      title: "Ten blue links.",
+      meta: "Page 1 of 14",
+      rows: [
+        "Searching Google",
+        "Browsing directories",
+        "Comparing 10 tabs",
+        "Reading SEO-optimised pages",
       ],
     },
-    after: {
-      label: "After 90 days",
-      items: [
-        { k: "AI share of voice", v: "34%" },
-        { k: "Engines citing you", v: "5 of 6" },
-        { k: "Wrong facts in answers", v: "0" },
-        { k: "Qualified demo requests / mo", v: "27" },
+    now: {
+      label: "Now",
+      title: "One answer.",
+      rows: [
+        "Asking ChatGPT",
+        "Asking Claude",
+        "Asking Perplexity",
+        "Getting a clear recommendation",
+      ],
+      meta: "One answer. No page 2.",
+    },
+    /* Clinic names are INVENTED — see the note on the German dictionary. */
+    chat: {
+      prompt: "Which dental clinic in Bern would you recommend for implants?",
+      recommended: "Recommended",
+      placeholder: "Ask anything …",
+      replay: "Replay the answer",
+      disclaimer: "Illustrative example",
+      sourcesLabel: "Sources",
+      switchLabel: "Show the answer from another AI platform",
+      engines: [
+        {
+          name: "ChatGPT",
+          placeholder: "Message ChatGPT",
+          intro: "For implants in Bern, these clinics are most often recommended:",
+          answers: [
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantology and aesthetics" },
+            { name: "Dental Care Bern", note: "Bern · Implants and oral surgery" },
+            { name: "Zahnzentrum Aare", note: "Bern · Implants and prosthetics" },
+          ],
+          outro: "No other providers are named in the answer.",
+        },
+        {
+          name: "Google AI",
+          placeholder: "Ask Google AI",
+          intro: "These clinics come up most frequently for implants in Bern:",
+          answers: [
+            { name: "Dentalzentrum Länggasse", note: "Länggasse · Implants and surgery" },
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantology and aesthetics" },
+            { name: "Smile Klinik Köniz", note: "Köniz · Implants and dentures" },
+          ],
+          outro: "The ordering draws on publicly available sources.",
+        },
+        {
+          name: "Claude",
+          placeholder: "How can I help you today?",
+          intro: "For implants in Bern, these clinics are worth considering:",
+          answers: [
+            { name: "Zahnzentrum Aare", note: "Bern · Implants and prosthetics" },
+            { name: "Zahnärzte Breitenrain", note: "Breitenrain · Implantology" },
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantology and aesthetics" },
+          ],
+          outro: "A consultation on site is worth having before deciding.",
+        },
+        {
+          name: "Perplexity",
+          placeholder: "Ask anything…",
+          intro: "Most-cited clinics in Bern for implants:",
+          answers: [
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantology and aesthetics" },
+            { name: "Praxis Kirchenfeld", note: "Kirchenfeld · General dentistry" },
+            { name: "Zahnärzte am Bahnhof", note: "Bahnhof Bern · Implants" },
+          ],
+          outro: "Synthesised from several sources.",
+        },
+        {
+          name: "Grok",
+          placeholder: "What do you want to know?",
+          intro: "In Bern these are the addresses most likely to come up for implants:",
+          answers: [
+            { name: "Dental Care Bern", note: "Bern · Implants and oral surgery" },
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantology and aesthetics" },
+            { name: "Dentalzentrum Länggasse", note: "Länggasse · Implants and surgery" },
+          ],
+          outro: "Other providers do not appear in this answer.",
+        },
       ],
     },
-    note: "Median across 12 Swiss B2B engagements started in 2025. Full methodology shared on the demo call.",
   },
-  testimonials: {
-    kicker: "Proof",
-    title: "Swiss teams already in the answer",
-    rating: "4.9 / 5 average client rating",
-    ratingSub: "from 38 reviewed engagements",
+
+  what: {
+    kicker: "What is Leads Engine?",
+    title: "We show you why AI recommends others, and change that.",
+    body: "The analysis runs on our own purpose-built platform. It reads your business, your services and your markets, identifies the real questions potential customers ask, and tests them on ChatGPT, Perplexity, Google AI, Claude and Grok. Then we know which competitors are preferred, why they are visible, and where your gaps are. We close those gaps for you: we implement the necessary measures continuously and keep optimising. For this we only read what is publicly accessible.",
+    lead: "The analysis runs on our own purpose-built platform and shows you exactly what AI says about you.",
+    checksTitle: "The platform shows you",
+    checks: [
+      "whether you appear in AI answers",
+      "how often you appear",
+      "which competitors appear instead",
+      "which sources the AI systems use",
+      "why competitors are winning",
+      "where your visibility gaps are",
+    ],
+    badges: ["Built in-house", "ChatGPT · Perplexity · Google AI · Claude · Grok", "Free analysis"],
+  },
+
+  audience: {
+    kicker: "What we optimise for",
+    title: "Visible to your customers.",
+    lead: "Reach is easy. Reaching the right people is the work.",
+    body: "It does you no good if an AI mentions you somewhere. It does you good if it names you on exactly the question your next customer asks: in your industry, in your region, moments before they decide. Those are the only questions we optimise for.",
+    rings: [
+      {
+        label: "All AI questions",
+        note: "Millions a day. The vast majority have nothing to do with your business.",
+      },
+      {
+        label: "Your industry",
+        note: "Questions that are actually about what you offer.",
+      },
+      {
+        label: "Your region",
+        note: "Asked by people who could realistically hire you.",
+      },
+      {
+        label: "About to buy",
+        note: "Someone is comparing and wants a name. This is where we make you visible.",
+      },
+    ],
+    closing: "Ten mentions in front of the right people are worth more than a thousand in front of the wrong ones.",
+  },
+
+  /* Only the strip survives — the six-item grid was removed. */
+  features: {
+    marqueeLabel: "Checked daily on",
+  },
+
+  intent: {
+    kicker: "Side by side",
+    title: "We change the outcome, while other tools just measure.",
+    body: "Most tools hand you a score and leave you with it. We show you why competitors rank ahead of you, close the gaps ourselves, and measure again afterwards. Eight points where that difference shows.",
+    othersLabel: "Other tools",
+    others: [
+      "Invent prompts for the measurement",
+      "Assume instead of proving",
+      "Show you only a score",
+      "Measure, then stop",
+      "Mass-produce AI content",
+      "Ignore which sources the AI uses",
+      "No view of the competition",
+      "No implementation, just a report",
+    ],
+    usLabel: "Leads Engine",
+    us: [
+      "Starts from real customer questions",
+      "Backs every claim with a source",
+      "Shows why competitors win",
+      "Implements, re-measures, keeps optimising",
+      "Content that answers real questions",
+      "Maps every source behind the answer",
+      "Compares you against up to 10 providers",
+      "Implementation is part of the service",
+    ],
+  },
+
+  data: {
+    kicker: "Results",
+    title: "The market Leads Engine unlocks.",
+    sub: "How Swiss demand is shifting into AI answers.",
+    adoption: {
+      title: "AI adoption in Switzerland",
+      meta: "Share of the population using AI tools",
+      years: ["2022", "2023", "2024", "2025", "2026"],
+      values: [11, 24, 38, 47, 54],
+      unit: "%",
+      note: "3.8M people, and rising",
+    },
+    split: {
+      title: "Where B2B research starts today",
+      meta: "First stop before a purchase decision",
+      items: [
+        { label: "AI assistant", share: 45 },
+        { label: "Google search", share: 31 },
+        { label: "Referral", share: 14 },
+        { label: "Direct / known", share: 10 },
+      ],
+    },
+    engines: {
+      title: "Which engines Swiss users ask",
+      meta: "Share of queries per platform",
+      items: [
+        { label: "ChatGPT", share: 62 },
+        { label: "Google AI", share: 18 },
+        { label: "Perplexity", share: 11 },
+        { label: "Claude", share: 6 },
+        { label: "Grok", share: 3 },
+      ],
+    },
+    shortlist: {
+      title: "Providers per AI answer",
+      meta: "How many names one answer gives",
+      value: 3.4,
+      unit: "on average",
+      note: "An AI answer has no page 2. Whoever is missing does not exist.",
+      scale: ["Google: 10 results per page", "AI: 3 to 5 providers, then it stops"],
+    },
+    growth: {
+      title: "What six months can look like",
+      meta: "Share of relevant buying questions in which your brand is named",
+      months: ["Start", "Month 1", "Month 2", "Month 3", "Month 4", "Month 5", "Month 6"],
+      unit: "%",
+      series: [
+        { label: "With Leads Engine", values: [8, 17, 29, 41, 52, 61, 68] },
+        { label: "Without action", values: [8, 8, 9, 9, 10, 10, 11] },
+      ],
+      deltaLabel: "Difference after 6 months",
+      note: "A modelled trajectory based on previous projects. Not a guaranteed result: your starting point sets the curve.",
+    },
+    sources: "Sources: Gartner B2B Buyer Survey 2026 (n=645) · NielsenIQ Agentic Commerce Tracker 2026 · IGEM-Digimonitor 2025",
+  },
+
+
+
+  benefits: {
+    kicker: "Your benefits",
+    title: "More visibility, enquiries and revenue.",
     items: [
       {
-        quote:
-          "We went from invisible to the first brand Perplexity names for our category in eleven weeks. Pipeline followed, not the other way round.",
-        name: "Nina Brunner",
-        role: "CMO, fintech scale-up · Zurich",
+        title: "Visible at the moment of purchase",
+        body: "Visible for the questions customers ask just before buying.",
       },
       {
-        quote:
-          "The dashboard ended an internal argument. We could finally show the board where demand had moved and what we did about it.",
-        name: "Marc Wüthrich",
-        role: "Head of Growth, industrial SaaS · Basel",
+        title: "Measurable & transparent",
+        body: "You see exactly when, where and why your company is named.",
       },
       {
-        quote:
-          "ChatGPT was quoting a price list we retired in 2023. Leadsengine found it, fixed the source graph, and the answers corrected within a month.",
-        name: "Sofia Keller",
-        role: "Director Marketing, logistics · Bern",
+        title: "More than SEO",
+        body: "We go beyond Google rankings and get you into AI-generated answers.",
+      },
+      {
+        title: "Continuously better",
+        body: "Every month new data, new measures, better results.",
+      },
+      {
+        title: "From Switzerland",
+        body: "Developed in Bern & Zurich. Your data stays here. Short paths, clear contacts.",
+      },
+      {
+        title: "One named contact",
+        body: "No ticket queue. One person who knows your business and picks up.",
       },
     ],
   },
+
+  testimonials: {
+    kicker: "Voices",
+    title: "What clients say.",
+    items: [
+      {
+        quote: "We had no idea ChatGPT kept naming the same two competitors. Now we're in there too.",
+        name: "Nina Brunner",
+        role: "CMO, fintech · Zurich",
+      },
+      {
+        quote: "I was sceptical, to be honest. The first report was a bit of a cold shower.",
+        name: "Marc Wüthrich",
+        role: "Head of Growth, SaaS · Basel",
+      },
+      {
+        quote: "The prices the AI was quoting for us were nowhere near right. Sorted within four weeks.",
+        name: "Sofia Keller",
+        role: "Head of Marketing, logistics · Bern",
+      },
+      {
+        quote: "Our Google numbers looked fine and the phone still wasn't ringing. So that's where it was going.",
+        name: "Daniel Aeschlimann",
+        role: "Managing Director, manufacturing · Winterthur",
+      },
+    ],
+  },
+
+  about: {
+    kicker: "About us",
+    title: "Leading companies trust us.",
+    intro:
+      "Leads Engine is a product of Future Media: developed in Bern and Zurich, built on the work with these brands.",
+    pillars: [
+      {
+        title: "Swiss development",
+        body: "Platform, data and support are based in Bern and Zurich. Short decision paths, one named contact.",
+      },
+      {
+        title: "Implementation included",
+        body: "The analysis is the beginning, not the deliverable. Missing content is produced, structural weaknesses are corrected.",
+      },
+      {
+        title: "Marketing DNA",
+        body: "Behind the platform stands an agency that has translated visibility into measurable results for seven years.",
+      },
+    ],
+    closing: "Now we bring that experience to where your customers will search tomorrow: the AI answer.",
+    teamKicker: "The team",
+    teamTitle: "The people behind Leads Engine",
+    teamLead:
+      "Leads Engine is built in collaboration with Future Media, a marketing agency in Bern and Zurich. The same team that has worked with Swiss brands for seven years builds and runs the platform.",
+    roles: {
+      Elias: "CEO & Founder",
+      Livia: "Marketing Manager",
+      Alex: "Growth & Sales",
+      Mohie: "CTO & AI/Software Engineer",
+      Lara: "Customer Support",
+      Daniel: "AI & Software Engineer",
+      Mahboob: "Data Security Advisor",
+    },
+
+    page: {
+      title: "About Future Media and Leads Engine",
+      metaDescription:
+        "Leads Engine is a product of Future Media GmbH in Bern and Zurich. Who we are, why Leads Engine exists, and how we work.",
+      heroKicker: "About us",
+      heroTitle: "Who is behind Leads Engine.",
+      heroLead:
+        "Leads Engine is a development of Future Media GmbH, a marketing agency with offices in Bern and Zurich. For seven years we have been responsible for the visibility of Swiss brands. Today that includes the place where purchase decisions increasingly begin: the answer given by an AI.",
+      sections: [
+        {
+          title: "Who we are",
+          body: [
+            "Future Media is a marketing agency with offices in Bern and Zurich. Our core business has been unchanged for seven years: making sure Swiss companies get found, through search engines, paid channels and content.",
+            "Our clients include Victorinox, Transsicura, Arte Cucina and the University of Bern, alongside numerous mid-sized firms whose market lies in their own region. The same standard applies to both: measurable results rather than reach without effect.",
+            "Handling roughly seventy mandates at once produces an advantage that individual projects cannot offer. Shifts in search behaviour become visible there long before they appear in market studies.",
+          ],
+        },
+        {
+          title: "Why Leads Engine exists",
+          body: [
+            "From 2024 the same observations accumulated in client meetings: the metrics held steady, yet the number of qualified enquiries fell. Rankings unchanged, visitor numbers within range, closings down.",
+            "An initial review confirmed the suspicion. Asked which providers in a given sector it would recommend, an AI named three companies. Our client was not among them, despite holding position two in organic Google search.",
+            "No tool existed for this. Established SEO software measures rankings, not the answers of generative systems. We developed the missing analysis for our own client base first. Leads Engine grew out of it.",
+          ],
+        },
+        {
+          title: "How we work",
+          body: [
+            "Our work does not end with the report. Content missing from the answers is produced by us, and structural weaknesses are corrected by us. Implementation is part of the mandate, not a separate offer.",
+            "Every statement is evidenced. We identify the source a system relies on: the page, the directory or the review. Every recommendation therefore remains traceable and verifiable.",
+            "Measurement continues after the first report. Visibility in generative systems is not a state established once, but a value that has to be monitored continuously.",
+          ],
+        },
+        {
+          title: "Where we're based",
+          body: [
+            "Bern and Zurich. Development, operation and hosting take place entirely in Switzerland. Every mandate has one named contact in its own time zone, and client data does not leave the country.",
+          ],
+        },
+      ],
+      closing: {
+        title: "Questions about Future Media, our data, or working together?",
+        body: "We answer personally, as a rule on the same working day.",
+        button: "Get in touch",
+      },
+      /* See the note on this block in translations.de.ts. */
+      commitments: {
+        title: "What we deliberately don't promise",
+        lead: "Professional practice includes naming the limits of what we deliver. Three things we deliberately do not promise:",
+        items: [
+          {
+            label: "No guaranteed placement",
+            text: "A placement in ChatGPT, Claude or Gemini cannot be guaranteed. Anyone giving such an assurance is promising an outcome they do not control.",
+          },
+          {
+            label: "No bought visibility",
+            text: "A better score rests exclusively on genuine, verifiable signals. Paid placements and PR articles are not part of our methodology.",
+          },
+          {
+            label: "No guaranteed growth figures",
+            text: "The figures on this site are modelled on completed projects. Starting position, sector and competition determine the actual result.",
+          },
+        ],
+      },
+
+      /* See the note on this block in translations.de.ts — every figure is
+         derived at render time, never typed in. */
+      factsKicker: "The company behind Leads Engine",
+      factsLocations: "Locations",
+      factsTeam: "Team",
+      factsSystems: "AI systems checked",
+      factsSiteLabel: "Visit the agency site",
+
+      valuesKicker: "What drives us",
+      valuesTitle: "What we stand for",
+
+      backLabel: "Back to home",
+    },
+  },
+
+
+
   faq: {
     kicker: "FAQ",
-    title: "Questions buyers actually ask",
+    title: "Frequently asked questions.",
     items: [
       {
-        q: "What is AEO (Answer Engine Optimization)?",
-        a: "AEO is the practice of structuring your content, entities and proof so answer engines quote you directly. Instead of competing for a blue link, you compete for the sentence an assistant reads out loud. Leadsengine engineers the facts, schema and citations that make that sentence yours.",
+        q: "What exactly does Leads Engine analyse?",
+        a: "Leads Engine reads your website: offering, locations, target audience, strengths. From that it derives the real questions potential customers ask before they buy. Those questions are tested on ChatGPT, Perplexity, Google AI, Claude and Grok. You see whether and how often you are named, which competitors are recommended instead, which sources are behind them, and where your gaps are.",
       },
       {
-        q: "How is GEO different from classic SEO?",
-        a: "Classic SEO optimises ranking positions on a results page. GEO optimises whether a generative model retrieves, trusts and cites your brand when it writes an answer. The signals differ: entity consistency, citable statistics, third-party corroboration and machine-readable structure matter more than keyword density.",
+        q: "Which AI platforms are analysed?",
+        a: "ChatGPT, Perplexity, Google AI, Claude and Grok. Every question goes to every platform. So you see not only whether you appear somewhere, but exactly where, and where competitors are overtaking you.",
       },
       {
-        q: "Which AI engines does Leadsengine track?",
-        a: "Leadsengine tracks ChatGPT, Perplexity, Google AI Overviews, Gemini, Microsoft Copilot and Claude. For each engine we log prompt-level share of voice, citation sources, sentiment and the competitors named alongside you.",
+        q: "How long does the analysis take?",
+        a: "The first AI analysis of your website is ready within 48 hours. You only give us your website address. The rest runs automatically on our platform, with no effort on your side.",
       },
       {
-        q: "How long until we see results?",
-        a: "Most Swiss clients see first new citations within 21 to 40 days and a measurable share-of-voice lift in the second month. Retrieval indexes refresh faster than classic search rankings, so well-structured fixes surface quickly.",
+        q: "What happens after the free analysis?",
+        a: "We discuss your results in a short call: 15 minutes, no pitch. You learn the three biggest levers for more AI visibility and we tell you honestly whether Leads Engine is worth it for you. Only then do you decide whether we should take over the implementation.",
       },
       {
-        q: "Is Leadsengine compliant with Swiss data protection?",
-        a: "Yes. Data is processed on EU/Swiss infrastructure, we store no personal data from prompt monitoring, and our analytics run cookieless by default in line with revFADP and GDPR.",
+        q: "Do I have to give Leads Engine access to my website?",
+        a: "No. We only read what is publicly accessible, just like the AI models do. No login, no password, no installation. For implementing measures on your website, we agree access with you individually later on.",
       },
       {
-        q: "What does Leadsengine cost?",
-        a: "Engagements start at CHF 2,400 per month for a single brand and market, including prompt monitoring, the visibility dashboard and monthly engineering sprints. Multi-market and agency plans are quoted per scope.",
+        q: "Which data is used?",
+        a: "Public content from your website, real search demand from Google Autocomplete and People Also Ask, and the answers of the AI platforms. No personal data is collected for this. Platform, data and support come from Bern and Zurich. Your data stays in Switzerland.",
+      },
+      {
+        q: "Which companies is Leads Engine suitable for?",
+        a: "For Swiss companies whose customers research before they buy, from local service providers to B2B providers with complex services. Leads Engine is especially valuable for CEOs, marketing and sales who want to know whether AI recommends them or the competition.",
+      },
+      {
+        q: "What distinguishes Leads Engine from classic SEO?",
+        a: "SEO optimises rankings on a Google results page. Leads Engine measures and improves whether an AI names you in its answer, uses you as a source and recommends you over competitors, measured as Mention, Citation and Share of Voice. An AI answer has no page 2; whoever is missing there is invisible to these customers.",
       },
     ],
   },
-  team: {
-    kicker: "Who builds it",
-    title: "A small Swiss team of engineers, not account managers",
-    body: "Search engineers, data people and content strategists who have shipped retrieval systems and B2B demand programmes in the DACH market.",
-    members: [
-      { name: "Jonas Rieder", role: "Founder · Retrieval & entity engineering" },
-      { name: "Elena Fischer", role: "Head of Research · Prompt universes" },
-      { name: "Tobias Meier", role: "Lead Engineer · Data platform" },
-    ],
-  },
+
   finalCta: {
-    title: "Find out what AI says about you.",
-    body: "Thirty minutes, your live baseline across six engines, and the three fixes that move first. No slide deck.",
-    button: "Book a demo",
-    note: "Swiss data residency · No lock-in · Reply within one working day",
+    kicker: "The next step",
+    title: "Does AI recommend you, or your competition?",
+    body: "Find out how ChatGPT & Co. see your company today and where your biggest opportunities lie.",
+    button: "Start your free AI analysis",
   },
+
   footer: {
-    tagline: "The AEO & GEO system for Swiss B2B brands.",
-    address: "Zurich, Switzerland",
+    tagline: "So that AI recommends you to your audience.",
+    madeIn: "Developed in Bern & Zurich, Switzerland.",
+    developedBy: "Built by the Future Media GmbH team.",
+    byline: "Leads Engine is a product of Future Media GmbH.",
     columns: {
       product: "Product",
       company: "Company",
       legal: "Legal",
     },
     links: {
-      engine: "Engine",
-      platform: "Platform",
-      process: "How it works",
+      how: "How it works",
+      benefits: "Benefits",
+      results: "Results",
+      data: "Market data",
       faq: "FAQ",
-      about: "About",
       contact: "Contact",
-      dashboard: "Client dashboard",
-      privacy: "Privacy",
       imprint: "Imprint",
+      privacy: "Privacy",
       terms: "Terms",
     },
+    contactLabels: { email: "Email", phone: "Phone", web: "Web", locations: "Locations" },
     rights: "All rights reserved.",
     langLabel: "Language",
+    contact: {
+      heading: "Contact",
+      lead: "Write to us. We usually reply the same working day.",
+      emailLabel: "Email",
+      phoneLabel: "Phone",
+      hoursLabel: "Availability",
+      hours: "Mon–Fri, 08:00–18:00",
+      addressLabel: "Address",
+      address: "Weltpoststrasse 5\n3015 Bern",
+    },
+    form: {
+      heading: "Send a message",
+      name: "Your name",
+      namePlaceholder: "First and last name",
+      email: "Email address",
+      emailPlaceholder: "name@company.ch",
+      phone: "Phone",
+      phonePlaceholder: "+41 79 000 00 00",
+      message: "Your message",
+      messagePlaceholder: "What is it about?",
+      submit: "Submit",
+      subject: "Enquiry via leadsengine.ch",
+      sent: "Mail app opened.",
+      required: "Required",
+      privacy: "Your details are used only to answer your enquiry.",
+      errors: {
+        name: "Please enter your name.",
+        email: "Please enter your email.",
+        emailInvalid: "That email address does not look valid.",
+        phone: "Please enter a phone number.",
+        message: "Please enter a message.",
+      },
+    },
   },
-  dash: {
-    login: {
-      title: "Client dashboard",
-      body: "Private analytics for Leadsengine clients.",
-      email: "Email",
-      password: "Password",
-      submit: "Sign in",
-      signingIn: "Signing in…",
-      back: "Back to site",
-      error: "Sign in failed",
+
+  trusted: {
+    label: "Companies that trust us",
+    clientLogo: "Client logo",
+    byline: "Leads Engine is a product of Future Media.",
+  },
+
+
+  video: {
+    kicker: "Explained in 2 minutes",
+    title: "How Leads Engine works.",
+    lead: "What happens when a customer stops googling and starts asking.",
+    play: "Play video",
+    pause: "Pause",
+    mute: "Mute",
+    unmute: "Unmute",
+    fullscreen: "Fullscreen",
+    exitFullscreen: "Exit fullscreen",
+    seek: "Video position",
+    quality: "Quality",
+    replay: "Replay",
+    unsupported: "Your browser cannot play this video.",
+  },
+
+  legal: {
+    imprint: {
+      title: "Imprint",
+      body: "Future Media GmbH\nWeltpoststrasse 5, 3015 Bern\nHardstrasse 201, 8005 Zurich\n\nEmail: info@future-media.ch\nPhone: 078 799 35 17\nWeb: future-media.ch\n\nLeads Engine is a product of Future Media GmbH.\nResponsible for content: the management of Future Media GmbH.\n\nAll content on this website is provided for general information. We check it with care, but assume no liability for completeness or accuracy, nor for the content of external links, which remains the responsibility of their operators.",
     },
-    nav: {
-      overview: "Overview",
-      traffic: "Traffic",
-      engagement: "Engagement",
-      conversions: "Conversions",
-      performance: "Performance",
-      audience: "Audience",
+    privacy: {
+      title: "Privacy Policy",
+      body: "Future Media GmbH, Bern and Zurich, processes personal data in line with the revised Swiss Federal Act on Data Protection (revFADP) and, where applicable, the EU GDPR.\n\nWhat we collect: site analytics run cookieless by default and do not build personal profiles. For the AI analysis we read only publicly accessible website content; no personal data is collected for it. If you contact us or request an analysis, we process the details you provide (name, email, company, website) solely to handle your request.\n\nHosting & transfer: data is processed on Swiss and EU infrastructure. We do not sell personal data and share it only with the processors required to operate this site (analytics, scheduling), under equivalent protection.\n\nYour rights: you may request access, correction or deletion of your personal data at any time. Contact: info@future-media.ch.",
     },
-    common: {
-      live: "Live",
-      logout: "Sign out",
-      loading: "Loading data…",
-      empty: "No data for this period yet.",
-      fallback: "Live analytics unavailable — showing reference data.",
-      lastUpdate: "Updated",
-      range: "Last 30 days",
-      total: "Total",
-      hint: "Basis",
+    terms: {
+      title: "Terms of Service",
+      body: "These terms govern the use of this website and the Leads Engine services provided by Future Media GmbH, Bern and Zurich.\n\nServices: the free AI analysis and the report review are non-binding. Monitoring, reporting, content and optimisation are delivered as agreed in the individual written agreement; scope, duration and remuneration are defined in the individual order.\n\nUse of this site: content is provided as-is. Reproduction or reuse of any content requires prior written consent. We may adjust or discontinue website content at any time.\n\nLiability: to the extent permitted by law, liability for indirect or consequential damages is excluded. Mandatory statutory liability remains unaffected.\n\nApplicable law: Swiss law. Place of jurisdiction is Bern, Switzerland.",
     },
-    overview: {
-      kicker: "Analytics",
-      title: "Overview",
-      desc: "Everything the site did in the last 30 days, refreshed every 30 seconds.",
-      visitors: "Visitors",
-      pageviews: "Pageviews",
-      sessions: "Sessions",
-      conversions: "Conversions",
-      convRate: "Conversion rate",
-      activeNow: "Active now",
-      trend: "Visitors & pageviews",
-      hintVisitors: "Unique persons with at least one pageview",
-      hintConv: "Sessions with a CTA click ÷ all sessions",
-    },
-    traffic: {
-      kicker: "Acquisition",
-      title: "Traffic",
-      desc: "Where the demand comes from, and which pages absorb it.",
-      channels: "Channels",
-      daily: "Daily sessions",
-      landing: "Landing pages",
-      sessions: "Sessions",
-      share: "Share",
-    },
-    engagement: {
-      kicker: "Behaviour",
-      title: "Engagement",
-      desc: "How deep visitors go before they decide.",
-      avgDuration: "Avg. session duration",
-      bounce: "Bounce rate",
-      pagesPerSession: "Pages / session",
-      scroll: "Avg. scroll depth",
-      topPages: "Top pages",
-      dropOff: "Drop-off pages",
-      views: "Views",
-      exits: "Exit rate",
-      hintBounce: "Sessions with exactly one pageview",
-    },
-    conversions: {
-      kicker: "Outcome",
-      title: "Conversions",
-      desc: "Two goals, tracked by marker class — primary CTA and floating widget.",
-      funnel: "Funnel",
-      goals: "Goals",
-      goal: "Goal",
-      clicks: "Clicks",
-      uniques: "Unique sessions",
-      rate: "Rate",
-      leadValue: "Pipeline value",
-      leadValueHint: "Converting sessions × CHF 1,800 avg. lead value",
-      primaryGoal: "Primary CTA — Book a demo",
-      widgetGoal: "Floating widget — Talk to us",
-      steps: ["Sessions", "Engaged", "CTA click", "Demo booked"],
-    },
-    performance: {
-      kicker: "Speed",
-      title: "Performance",
-      desc: "Core Web Vitals at P75 on real visitor devices.",
-      lcp: "LCP (P75)",
-      inp: "INP (P75)",
-      cls: "CLS (P75)",
-      ttfb: "TTFB (P75)",
-      lcpTrend: "Daily LCP (P75)",
-      errors: "Exceptions",
-      count: "Count",
-      good: "Good",
-      needsWork: "Needs work",
-      poor: "Poor",
-    },
-    audience: {
-      kicker: "People",
-      title: "Audience",
-      desc: "Devices, systems and geography of the traffic.",
-      devices: "Devices",
-      os: "Operating systems",
-      browsers: "Browsers",
-      countries: "Countries",
-      cities: "Cities",
-      visitors: "Visitors",
-    },
+    close: "Close",
   },
 };
-
-export type Dict = typeof en;

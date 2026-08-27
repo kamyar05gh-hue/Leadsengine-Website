@@ -1,13 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  One URL per page, with language as a QUERY PARAM — never a path prefix.
+
+  This file used to also list /en/imprint/, /en/privacy/ and /en/terms/ as
+  their own <url> entries. Those paths no longer exist: the legal pages and
+  "Über uns" are now real pages of the app that switch language client-side,
+  exactly like the home page always has (see LanguageContext). Leaving them
+  here would have pointed crawlers at three 404s and advertised an hreflang
+  pair the site does not serve.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://leadsengine.ch/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://leadsengine.ch/?lang=en"/>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://leadsengine.ch/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://leadsengine.ch/?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://leadsengine.ch/"/>
+  </url>
+
+  <url>
+    <loc>https://leadsengine.ch/ueber-uns/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://leadsengine.ch/ueber-uns/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://leadsengine.ch/ueber-uns/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://leadsengine.ch/ueber-uns/"/>
+  </url>
+
+  <url>
+    <loc>https://leadsengine.ch/impressum/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://leadsengine.ch/impressum/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://leadsengine.ch/impressum/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://leadsengine.ch/impressum/"/>
+  </url>
+
+  <url>
+    <loc>https://leadsengine.ch/datenschutz/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://leadsengine.ch/datenschutz/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://leadsengine.ch/datenschutz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://leadsengine.ch/datenschutz/"/>
+  </url>
+
+  <url>
+    <loc>https://leadsengine.ch/agb/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://leadsengine.ch/agb/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://leadsengine.ch/agb/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://leadsengine.ch/agb/"/>
   </url>
 </urlset>

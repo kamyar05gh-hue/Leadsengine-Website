@@ -4,102 +4,240 @@
 
 @layer base {
     :root {
-        --pm-bg: #05050a;
-        --pm-bg-alt: #0a0b12;
-        --pm-surface: #12131a;
-        --pm-raised: #1a1c26;
-        --pm-ink: #f8f9fa;
-        --pm-ink-2: #a0a4b8;
-        --pm-ink-3: #6e7287;
-        --pm-line: rgba(255, 255, 255, 0.08);
-        --pm-line-strong: rgba(255, 255, 255, 0.16);
-        --pm-accent: #0047ff;
-        --pm-accent-hover: #002b99;
-        --pm-accent-soft: rgba(0, 71, 255, 0.14);
-        --pm-glow: rgba(0, 71, 255, 0.4);
-        --pm-success: #00e676;
-        --pm-warning: #ffea00;
-        --pm-danger: #ff3b30;
-        --pm-ease: cubic-bezier(0.22, 1, 0.36, 1);
+        /* Palette is declared as raw "R G B" channel triplets so the Tailwind
+           config can compose them as `rgb(var(--x-rgb) / <alpha-value>)`.
+           Without the channel form, opacity modifiers like `bg-accent/15`
+           fail to parse and Tailwind drops the utility silently. Each token
+           also gets a ready-to-use colour var for plain CSS below. */
 
-        --background: 240 33% 3%;
-        --foreground: 210 17% 98%;
-        --card: 232 18% 9%;
-        --card-foreground: 210 17% 98%;
-        --popover: 232 18% 9%;
-        --popover-foreground: 210 17% 98%;
-        --primary: 224 100% 50%;
-        --primary-foreground: 0 0% 100%;
-        --secondary: 233 17% 13%;
-        --secondary-foreground: 210 17% 98%;
-        --muted: 233 17% 13%;
-        --muted-foreground: 230 12% 65%;
-        --accent: 224 100% 50%;
-        --accent-foreground: 0 0% 100%;
-        --destructive: 3 100% 59%;
-        --destructive-foreground: 0 0% 100%;
-        --border: 233 15% 18%;
-        --input: 233 15% 18%;
-        --ring: 224 100% 50%;
-        --radius: 0.5rem;
+        /* Ground — neutral near-black, the World Class Edge register.
+           Deliberately NOT navy: a blue-tinted ground plus a blue accent is
+           what makes a page read as generic-AI. The ground stays neutral so
+           the single blue accent does the talking. */
+        --le-bg-rgb: 8 9 12;
+        --le-bg-alt-rgb: 12 14 19;
+        --le-surface-rgb: 17 20 27;
+        --le-raised-rgb: 24 28 37;
+
+        --le-ink-rgb: 244 244 245;
+        --le-ink-2-rgb: 186 190 199;
+        --le-ink-3-rgb: 140 145 156;
+
+        /* Accent — muted steel blue. Desaturated on purpose: electric
+           #3b82f6 shouts "AI product", this reads as instrumentation. */
+        --le-accent-rgb: 27 74 128; /* deep steel, structural */
+        --le-accent-hover-rgb: 20 56 98;
+        --le-accent-bright-rgb: 62 151 240; /* readable steel blue */
+
+        --le-hi-rgb: 116 182 255;
+        --le-hi-strong-rgb: 168 208 255;
+
+        /* Electric cyan — the hero streaks ONLY, never UI. The client's
+           reference clip charges its light trails with cyan and violet;
+           violet is out, so cyan carries that energy on its own and the
+           field still reads as hot rather than as a flat blue diagram. */
+        --le-cyan-rgb: 94 214 255;
+
+        /* Call to action — the one filled surface on the page. */
+        --le-cta-rgb: 45 133 224;
+        --le-cta-hover-rgb: 30 104 186;
+
+        /* Second accent — dark gold. Carries warmth against the blue so
+           the page does not read as one cold hue: numerals, key figures,
+           the engine's fan, awards/ratings, and one accent per section. */
+        --le-gold-rgb: 176 138 58;
+        --le-gold-bright-rgb: 201 163 84;
+        --le-gold-deep-rgb: 112 84 28;
+
+        /* True gold, for the two places that should read unmistakably as
+           gold rather than as warm metal: the rating stars and the headline's
+           accent line. `gold-bright` above is deliberately desaturated and
+           lands closer to tan (#C9A354) — right for the engine's warmth and
+           the widget's border, too muted for a five-star rating. Kept as its
+           own token so brightening these does not touch either of those. */
+        --le-gold-vivid-rgb: 233 182 84;
+
+        --le-success-rgb: 62 197 128;
+        --le-warning-rgb: 214 168 92;
+        --le-danger-rgb: 214 82 74;
+        --le-danger-deep-rgb: 118 40 36;
+
+        --le-bg: rgb(var(--le-bg-rgb));
+        --le-bg-alt: rgb(var(--le-bg-alt-rgb));
+        --le-surface: rgb(var(--le-surface-rgb));
+        --le-raised: rgb(var(--le-raised-rgb));
+
+        --le-ink: rgb(var(--le-ink-rgb));
+        --le-ink-2: rgb(var(--le-ink-2-rgb));
+        --le-ink-3: rgb(var(--le-ink-3-rgb));
+
+        /* Translucent by definition — these stay literal, so `border-line`
+           works but `border-line/50` intentionally does not. */
+        --le-line: rgba(255, 255, 255, 0.08);
+        --le-line-strong: rgba(255, 255, 255, 0.14);
+
+        --le-accent: rgb(var(--le-accent-rgb));
+        --le-accent-hover: rgb(var(--le-accent-hover-rgb));
+        --le-accent-bright: rgb(var(--le-accent-bright-rgb));
+        --le-accent-soft: rgb(var(--le-accent-bright-rgb) / 0.16);
+        --le-accent-glow: rgb(var(--le-accent-bright-rgb) / 0.45);
+
+        --le-hi: rgb(var(--le-hi-rgb));
+        --le-hi-strong: rgb(var(--le-hi-strong-rgb));
+        --le-hi-soft: rgb(var(--le-hi-rgb) / 0.12);
+        --le-hi-glow: rgb(var(--le-hi-rgb) / 0.5);
+
+        --le-cta: rgb(var(--le-cta-rgb));
+        --le-cta-hover: rgb(var(--le-cta-hover-rgb));
+        --le-cta-glow: rgb(var(--le-cta-rgb) / 0.4);
+
+        --le-gold: rgb(var(--le-gold-rgb));
+        --le-gold-bright: rgb(var(--le-gold-bright-rgb));
+        --le-gold-deep: rgb(var(--le-gold-deep-rgb));
+        --le-gold-soft: rgb(var(--le-gold-rgb) / 0.14);
+        --le-gold-glow: rgb(var(--le-gold-rgb) / 0.4);
+
+        --le-success: rgb(var(--le-success-rgb));
+        --le-success-deep: rgb(var(--le-success-rgb) / 0.16);
+        --le-warning: rgb(var(--le-warning-rgb));
+        --le-danger: rgb(var(--le-danger-rgb));
+        --le-danger-deep: rgb(var(--le-danger-deep-rgb));
+        --le-danger-soft: rgb(var(--le-danger-rgb) / 0.12);
+
+
+        --le-ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --le-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     html {
         -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        scroll-behavior: smooth;
     }
 
     body {
         margin: 0;
         overflow-x: clip;
-        background: var(--pm-bg);
-        color: var(--pm-ink);
-        font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+        background: var(--le-bg);
+        color: var(--le-ink);
+        font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+        font-variant-numeric: tabular-nums;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
     ::selection {
-        background: var(--pm-accent);
+        background: var(--le-hi);
         color: #fff;
     }
 
     :focus-visible {
-        outline: 2px solid var(--pm-accent);
+        outline: 2px solid var(--le-hi);
         outline-offset: 3px;
     }
 
+    /* Headings default to 600, not 800. A relentless heavy setting at every
+       size is what reads as a template; weight is earned per element. */
     h1,
     h2,
     h3,
-    h4,
-    .pm-display {
-        font-family: "Cabinet Grotesk", "IBM Plex Sans", sans-serif;
-        font-weight: 800;
-        letter-spacing: -0.02em;
+    h4 {
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
     }
 
-    .pm-mono,
-    .tabular {
-        font-family: "IBM Plex Mono", ui-monospace, monospace;
+    .le-mono {
         font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+        letter-spacing: -0.01em;
     }
 }
 
 @layer components {
-    .pm-container {
+    .le-container {
         width: 100%;
-        max-width: 1240px;
+        max-width: 1180px;
         margin-inline: auto;
         padding-inline: 20px;
     }
     @media (min-width: 1024px) {
-        .pm-container {
+        .le-container {
             padding-inline: 40px;
         }
     }
 
-    /* CTA — darker fill slides in from the left */
-    .pm-btn {
+    /* Thin illuminated border: a 1px gradient edge on a dark panel. */
+    .le-glass {
+        position: relative;
+        background: rgb(var(--le-surface-rgb) / 0.62);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgb(var(--le-accent-bright-rgb) / 0.2);
+        border-radius: 14px;
+    }
+
+    /* Kicker / eyebrow */
+    /* One vertical rhythm for the whole page.
+       Sections used to carry their own `py-20 lg:py-28`, which drifted as
+       sections were added and removed and left visibly uneven seams. This is
+       the single source of that spacing: fluid between 4.5rem and 7rem, so it
+       also scales down properly on a phone instead of stepping at `lg`. */
+    .le-section {
+        padding-top: clamp(4.5rem, 7.5vw, 7rem);
+        padding-bottom: clamp(4.5rem, 7.5vw, 7rem);
+        /* Skip layout, paint and style work for sections that are nowhere
+           near the viewport. `auto` on the intrinsic size means the browser
+           remembers each section's real height after it has been rendered
+           once, so the scrollbar does not jump and in-page anchors still land
+           correctly. This is the single largest rendering win on a page this
+           long — verified after the change that the document height, the
+           anchor jumps and the active-nav observer all still behave. */
+        content-visibility: auto;
+        contain-intrinsic-size: auto 800px;
+    }
+    /* For a section whose own content already ends in a lot of air. */
+    .le-section-tight-b {
+        padding-bottom: clamp(2.5rem, 4vw, 3.75rem);
+    }
+
+
+    /* The hero scene sits slightly left on small screens. The engine's mass
+       runs to the RIGHT of its hub (the compressor barrel), so anchoring the
+       hub at the optical centre leaves the object looking right-shifted on a
+       narrow column. Shifting the whole scene — engine, filaments and marks
+       together — keeps the filaments emanating from the hub, which shifting
+       the engine alone would break. */
+    /* Centre the whole hero group on small screens.
+       The engine sits left of centre inside its own box and the platform
+       pills hang off to the right, so the group's visual centre is not the
+       box's centre. Measured at 360px the group spans 29..382 in a 360
+       viewport — it FITS, it was just off-centre — and -7% lands it with an
+       even margin either side. -12% was too far and pushed the left-hand
+       pill off instead. */
+    .le-hero-scene {
+        transform: translateX(-7%);
+    }
+    @media (min-width: 1024px) {
+        .le-hero-scene {
+            transform: none;
+        }
+    }
+
+    .le-kicker {
+        font-size: 10.5px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--le-accent-bright);
+    }
+
+    /* ---------------------------------------------------------------
+       Buttons — primary is the solid CTA blue, ghost is outlined.
+       The primary hover is ONLY the darker fill sliding in from the left:
+       no lift, no glow, no shadow — the button never changes position.
+       --------------------------------------------------------------- */
+    .le-btn {
         position: relative;
         display: inline-flex;
         align-items: center;
@@ -108,162 +246,533 @@
         overflow: hidden;
         isolation: isolate;
         border-radius: 999px;
-        background: var(--pm-accent);
+        background: var(--le-cta);
         color: #fff;
         font-weight: 600;
-        transition:
-            transform 240ms var(--pm-ease),
-            box-shadow 240ms var(--pm-ease);
     }
-    .pm-btn::before {
+    .le-btn::before {
         content: "";
         position: absolute;
         inset: 0;
         z-index: -1;
-        background: var(--pm-accent-hover);
+        background: var(--le-cta-hover);
         transform: translateX(-101%);
-        transition: transform 380ms var(--pm-ease);
+        transition: transform 900ms var(--le-ease);
     }
-    .pm-btn:hover::before {
+    .le-btn:hover::before {
         transform: translateX(0);
     }
-    .pm-btn:hover {
-        box-shadow: 0 12px 40px -12px var(--pm-glow);
-        transform: translateY(-1px);
-    }
 
-    .pm-btn-ghost {
+    .le-btn-ghost {
         position: relative;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
         border-radius: 999px;
-        border: 1px solid var(--pm-line-strong);
-        color: var(--pm-ink);
+        border: 1px solid var(--le-line-strong);
+        color: var(--le-ink);
+        background: transparent;
         transition:
-            border-color 240ms var(--pm-ease),
-            background-color 240ms var(--pm-ease),
-            transform 240ms var(--pm-ease);
+            border-color 240ms var(--le-ease),
+            background-color 240ms var(--le-ease),
+            transform 240ms var(--le-ease);
     }
-    .pm-btn-ghost:hover {
-        border-color: var(--pm-accent);
-        background: var(--pm-accent-soft);
-        transform: translateY(-1px);
+    .le-btn-ghost:hover {
+        border-color: var(--le-accent-bright);
+        background: var(--le-accent-soft);
+        transform: translateY(-2px);
     }
 
     /* Link underline grow */
-    .pm-link {
+    .le-link {
         position: relative;
-        color: var(--pm-ink-2);
-        transition: color 200ms var(--pm-ease);
+        color: var(--le-ink-2);
+        transition: color 200ms var(--le-ease);
     }
-    .pm-link::after {
+    .le-link::after {
         content: "";
         position: absolute;
         left: 0;
         bottom: -3px;
         height: 1px;
         width: 100%;
-        background: currentColor;
+        /* Blue, not `currentColor`. The rule is the accent; the label is
+           just text that brightens. */
+        background: var(--le-accent-bright);
         transform: scaleX(0);
         transform-origin: left;
-        transition: transform 300ms var(--pm-ease);
+        transition: transform 300ms var(--le-ease);
     }
-    .pm-link:hover {
-        color: var(--pm-ink);
+    .le-link:hover {
+        color: var(--le-ink);
     }
-    .pm-link:hover::after {
+    .le-link:hover::after {
         transform: scaleX(1);
     }
 
-    .pm-card {
-        border: 1px solid var(--pm-line);
-        background: linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.035),
-            rgba(255, 255, 255, 0.012)
-        );
-        border-radius: 18px;
+    /* ---------------------------------------------------------------
+       Cards — surface never shifts on hover; only border, lift, shadow.
+       --------------------------------------------------------------- */
+    .le-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgb(var(--le-accent-bright-rgb) / 0.22);
+        background: var(--le-bg-alt);
+        border-radius: 14px;
         transition:
-            transform 320ms var(--pm-ease),
-            border-color 320ms var(--pm-ease),
-            background-color 320ms var(--pm-ease);
+            transform 420ms var(--le-ease),
+            border-color 420ms var(--le-ease),
+            box-shadow 420ms var(--le-ease);
     }
-    .pm-card:hover {
-        transform: translateY(-4px);
-        border-color: var(--pm-line-strong);
+    .le-card:hover {
+        transform: translateY(-2px);
+        border-color: rgb(var(--le-accent-bright-rgb) / 0.6);
+        box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.8);
     }
 
-    .pm-grid-bg {
-        background-image:
-            linear-gradient(var(--pm-line) 1px, transparent 1px),
-            linear-gradient(90deg, var(--pm-line) 1px, transparent 1px);
-        background-size: 64px 64px;
-        mask-image: radial-gradient(
-            ellipse 80% 60% at 50% 0%,
-            #000 40%,
-            transparent 100%
+    /* Top hairline that brightens on hover */
+    .le-card-line::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: rgb(var(--le-accent-bright-rgb) / 0.55);
+        opacity: 0.75;
+        transition: opacity 420ms var(--le-ease);
+    }
+    .le-card-line:hover::before {
+        opacity: 1;
+    }
+
+    /* Corner glow that fades in on hover */
+    .le-card-glow::after {
+        content: "";
+        position: absolute;
+        right: -40px;
+        bottom: -40px;
+        width: 180px;
+        height: 180px;
+        pointer-events: none;
+        background: radial-gradient(
+            circle,
+            rgb(var(--le-accent-bright-rgb) / 0.22),
+            transparent 65%
         );
+        opacity: 0;
+        transition: opacity 420ms var(--le-ease);
+    }
+    .le-card-glow:hover::after {
+        opacity: 1;
     }
 
-    .pm-noise::after {
+    /* ---------------------------------------------------------------
+       Ambient light — replaces the old grid background. Soft drifting
+       radial washes, filmic rather than technical.
+       --------------------------------------------------------------- */
+    .le-aurora {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    .le-aurora span {
+        position: absolute;
+        display: block;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.85;
+        will-change: transform;
+    }
+    .le-aurora span:nth-child(1) {
+        width: 46vw;
+        height: 46vw;
+        top: -14vw;
+        left: -6vw;
+        background: radial-gradient(
+            circle,
+            rgb(var(--le-accent-bright-rgb) / 0.45),
+            transparent 65%
+        );
+        animation: le-drift-a 24s var(--le-ease) infinite alternate;
+    }
+    .le-aurora span:nth-child(2) {
+        width: 34vw;
+        height: 34vw;
+        top: 6vw;
+        right: -8vw;
+        background: radial-gradient(
+            circle,
+            rgb(var(--le-accent-bright-rgb) / 0.3),
+            transparent 65%
+        );
+        animation: le-drift-b 30s var(--le-ease) infinite alternate;
+    }
+    .le-aurora span:nth-child(3) {
+        width: 40vw;
+        height: 40vw;
+        bottom: -18vw;
+        left: 28vw;
+        background: radial-gradient(
+            circle,
+            rgb(var(--le-accent-bright-rgb) / 0.22),
+            transparent 65%
+        );
+        animation: le-drift-c 34s var(--le-ease) infinite alternate;
+    }
+
+    .le-noise::after {
         content: "";
         position: absolute;
         inset: 0;
         pointer-events: none;
-        opacity: 0.035;
+        opacity: 0.03;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Reveal system */
+    /* AUTOFILL. Chrome paints its own near-white background and near-black
+       text over any autofilled field, which on this dark form turns the input
+       into a white bar the moment a suggestion is picked. The background
+       cannot be overridden directly — but an inset box-shadow paints over it,
+       and `-webkit-text-fill-color` beats the forced text colour.
+
+       The absurd transition-delay is the standard trick for Chrome's own
+       fade: the autofill background is animated in, so delaying that
+       animation effectively far past any session keeps it from ever
+       appearing. */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:focus {
+        -webkit-text-fill-color: rgb(var(--le-ink-rgb));
+        -webkit-box-shadow: 0 0 0 1000px rgb(var(--le-surface-rgb)) inset;
+        box-shadow: 0 0 0 1000px rgb(var(--le-surface-rgb)) inset;
+        caret-color: rgb(var(--le-ink-rgb));
+        transition:
+            background-color 10000s ease-in-out 0s,
+            color 10000s ease-in-out 0s;
+    }
+
+    /* Hairline section divider — a soft light seam, not a hard rule */
+    .le-seam {
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgb(var(--le-accent-bright-rgb) / 0.45),
+            transparent
+        );
+    }
+
+    /* ---------------------------------------------------------------
+       Reveal system
+       --------------------------------------------------------------- */
     .reveal {
         opacity: 0;
-        transform: translateY(24px);
         transition:
-            opacity 620ms var(--pm-ease),
-            transform 620ms var(--pm-ease);
+            opacity 720ms var(--le-ease-out),
+            transform 720ms var(--le-ease-out);
+    }
+    .reveal[data-dir="up"] {
+        transform: translateY(28px);
+    }
+    .reveal[data-dir="down"] {
+        transform: translateY(-28px);
+    }
+    .reveal[data-dir="left"] {
+        transform: translateX(32px);
+    }
+    .reveal[data-dir="right"] {
+        transform: translateX(-32px);
+    }
+    .reveal[data-dir="scale"] {
+        transform: scale(0.94);
+    }
+    .reveal[data-dir="blur"] {
+        transform: translateY(20px);
+        filter: blur(8px);
     }
     .reveal.is-in {
         opacity: 1;
         transform: none;
+        filter: none;
     }
 
+    /* Masked line reveal — padded so descenders never clip */
     .reveal-line {
         display: block;
         overflow: hidden;
-        padding-bottom: 0.12em;
-        margin-bottom: -0.12em;
+        padding-bottom: 0.14em;
+        margin-bottom: -0.14em;
     }
     .reveal-line > span {
         display: block;
         transform: translateY(110%);
-        transition: transform 780ms var(--pm-ease);
+        transition: transform 900ms var(--le-ease-out);
     }
     .reveal-lines.is-in .reveal-line > span {
         transform: none;
     }
 
-    /* FAQ accordion — grid rows trick */
-    .pm-acc-body {
+    /* ---------------------------------------------------------------
+       Cursor spotlight — a soft ring that trails the pointer plus a
+       wide light wash. Pointer-events none, hidden on touch.
+       --------------------------------------------------------------- */
+    .le-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        pointer-events: none;
+        will-change: transform;
+    }
+    /* The ring keeps a constant size — it never grows on hover or click.
+       Only its border brightens over an interactive target. */
+    .le-cursor-ring {
+        width: 22px;
+        height: 22px;
+        margin: -11px 0 0 -11px;
+        border-radius: 50%;
+        border: 1px solid rgb(var(--le-hi-rgb) / 0.5);
+        background: rgb(var(--le-hi-rgb) / 0.05);
+        transition:
+            border-color 240ms var(--le-ease),
+            background-color 240ms var(--le-ease),
+            opacity 240ms var(--le-ease);
+    }
+    .le-cursor-ring[data-active="true"] {
+        border-color: rgb(var(--le-hi-rgb) / 0.85);
+        background: rgb(var(--le-hi-rgb) / 0.1);
+    }
+    .le-cursor-dot {
+        width: 4px;
+        height: 4px;
+        margin: -2px 0 0 -2px;
+        border-radius: 50%;
+        background: var(--le-hi);
+    }
+    /* Tightened three times at the client's request: 460 → 260 → 170 → 110.
+       At this radius it is a pointer light, not a page-wide brightness
+       change. */
+    .le-cursor-light {
+        width: 110px;
+        height: 110px;
+        margin: -55px 0 0 -55px;
+        border-radius: 50%;
+        background: radial-gradient(
+            circle,
+            rgb(var(--le-hi-rgb) / 0.08),
+            rgb(var(--le-accent-rgb) / 0.055) 42%,
+            transparent 68%
+        );
+    }
+    @media (hover: none), (pointer: coarse) {
+        .le-cursor {
+            display: none;
+        }
+    }
+
+    /* Scroll progress rail */
+    .le-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        z-index: 90;
+        transform-origin: 0 50%;
+        background: linear-gradient(
+            90deg,
+            var(--le-accent-bright),
+            var(--le-hi)
+        );
+    }
+
+    /* Typing caret */
+    .le-caret {
+        display: inline-block;
+        width: 2px;
+        height: 1em;
+        margin-left: 2px;
+        vertical-align: -0.12em;
+        background: var(--le-hi);
+        animation: le-blink 1s steps(2, start) infinite;
+    }
+
+    /* FAQ accordion — grid rows trick, no JS measurement */
+    .le-acc-body {
         display: grid;
         grid-template-rows: 0fr;
-        transition: grid-template-rows 380ms var(--pm-ease);
+        transition: grid-template-rows 300ms var(--le-ease);
     }
-    .pm-acc-body[data-open="true"] {
+    .le-acc-body[data-open="true"] {
         grid-template-rows: 1fr;
     }
-    .pm-acc-body > div {
+    .le-acc-body > div {
         overflow: hidden;
     }
 
-    .pm-marquee {
+    /* ---------------------------------------------------------------
+       Video timeline — a real <input type="range">, themed.
+
+       It is a range input rather than a div so it is keyboard-operable and
+       exposes a value to assistive tech for free. The cost is that the track
+       and thumb can only be reached through vendor pseudo-elements, which
+       Tailwind cannot express — hence this block.
+
+       `--le-progress` is set inline by the player as a percentage; the track
+       paints the played portion in the accent blue up to that point and the
+       remainder as a faint rule. Both vendor prefixes are needed and CANNOT
+       be merged into one selector list: an unknown pseudo-element makes the
+       whole rule invalid, so combining them would silently drop the styling
+       in whichever engine parses it second.
+       --------------------------------------------------------------- */
+    .le-video-range {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 16px; /* a comfortable pointer target around a 3px track */
+        background: transparent;
+        cursor: pointer;
+        /* Claim the horizontal drag from the browser's own scroll/gesture
+           handling. Without this a drag along the timeline on a phone is
+           interpreted as a page swipe and the slider never moves — the
+           control looks present but cannot be adjusted. */
+        touch-action: none;
+    }
+    /* THE COARSE-POINTER OVERRIDES USED TO LIVE HERE, AND SILENTLY DID
+       NOTHING. `.le-video-range::-webkit-slider-thumb` inside a media query
+       has exactly the same specificity as the same selector outside one, so
+       the cascade is decided by ORDER — and the base 11px thumb was declared
+       BELOW this block, which meant it won every time. The touch thumb was
+       therefore never 16px on any phone; only the input's own height changed.
+       The block now sits after the base rules, at the foot of this group. */
+    .le-video-range:focus-visible {
+        outline: 2px solid var(--le-accent-bright);
+        outline-offset: 4px;
+        border-radius: 2px;
+    }
+
+    .le-video-range::-webkit-slider-runnable-track {
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(
+            to right,
+            var(--le-accent-bright) 0%,
+            var(--le-accent-bright) var(--le-progress, 0%),
+            rgb(255 255 255 / 0.22) var(--le-progress, 0%),
+            rgb(255 255 255 / 0.22) 100%
+        );
+    }
+    .le-video-range::-moz-range-track {
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(
+            to right,
+            var(--le-accent-bright) 0%,
+            var(--le-accent-bright) var(--le-progress, 0%),
+            rgb(255 255 255 / 0.22) var(--le-progress, 0%),
+            rgb(255 255 255 / 0.22) 100%
+        );
+    }
+
+    /* The thumb is small at rest and grows on hover/focus — the one place a
+       control on this site is allowed to change size, because a timeline
+       handle has to be findable mid-drag. `margin-top` centres it on the
+       track manually, which WebKit requires. */
+    .le-video-range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 11px;
+        height: 11px;
+        margin-top: -4px;
+        border-radius: 50%;
+        background: var(--le-ink);
+        border: 0;
+        transition: transform 200ms var(--le-ease);
+    }
+    .le-video-range::-moz-range-thumb {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--le-ink);
+        border: 0;
+        transition: transform 200ms var(--le-ease);
+    }
+    .le-video-range:hover::-webkit-slider-thumb,
+    .le-video-range:focus-visible::-webkit-slider-thumb {
+        transform: scale(1.25);
+    }
+    .le-video-range:hover::-moz-range-thumb,
+    .le-video-range:focus-visible::-moz-range-thumb {
+        transform: scale(1.25);
+    }
+
+    /* ------------------------------------------------------------------
+       TOUCH SIZING. Must stay LAST in this group — see the note above.
+       A thumb sized for a mouse is not sized for a thumb: the control grows
+       to a 34px row, the handle to 18px, and the painted track to 5px so the
+       progress line is still findable while a finger covers part of it.
+       ------------------------------------------------------------------ */
+    @media (pointer: coarse) {
+        .le-video-range {
+            height: 34px;
+        }
+        .le-video-range::-webkit-slider-runnable-track,
+        .le-video-range::-moz-range-track {
+            height: 5px;
+        }
+        .le-video-range::-webkit-slider-thumb {
+            width: 18px;
+            height: 18px;
+            margin-top: -6.5px;
+        }
+        .le-video-range::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+        }
+        /* No grow-on-hover on touch: a phone has no hover, and iOS Safari
+           latches :hover after a tap, which would leave the handle stuck
+           large until something else is tapped. */
+        .le-video-range:hover::-webkit-slider-thumb {
+            transform: none;
+        }
+        .le-video-range:hover::-moz-range-thumb {
+            transform: none;
+        }
+    }
+
+    /* Kills Safari's 300ms double-tap-to-zoom delay inside the player. With
+       it, the first of two quick taps on the picture was sometimes swallowed
+       while the browser waited to see whether a zoom gesture was coming —
+       which on a phone reads as the controls simply not responding. */
+    .le-video-frame {
+        touch-action: manipulation;
+    }
+
+    /* Seamless marquee (duplicated track) */
+    .le-marquee {
         display: flex;
         width: max-content;
-        animation: pm-slide 32s linear infinite;
+        animation: le-slide 34s linear infinite;
+    }
+    .le-marquee-slow {
+        animation-duration: 52s;
+    }
+    .le-marquee-rev {
+        animation-direction: reverse;
+    }
+    .le-marquee-wrap:hover .le-marquee {
+        animation-play-state: paused;
     }
 }
 
-@keyframes pm-slide {
+/* ------------------------------------------------------------------
+   Keyframes
+   ------------------------------------------------------------------ */
+@keyframes le-slide {
     from {
         transform: translate3d(0, 0, 0);
     }
@@ -272,46 +781,279 @@
     }
 }
 
-@keyframes pm-spin-slow {
+@keyframes le-blink {
+    0%,
+    50% {
+        opacity: 1;
+    }
+    50.01%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes le-spin-slow {
     to {
         transform: rotate(360deg);
     }
 }
 
-@keyframes pm-pulse-ring {
+@keyframes le-pulse-ring {
     0% {
-        opacity: 0.5;
+        opacity: 0.55;
         transform: scale(0.9);
     }
     70% {
         opacity: 0;
-        transform: scale(1.35);
+        transform: scale(1.4);
     }
     100% {
         opacity: 0;
-        transform: scale(1.35);
+        transform: scale(1.4);
     }
 }
 
+@keyframes le-float {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+/* The hero engine's output lines. The dash period is 14 user units, so an
+   offset of -28 is exactly two periods and the loop is seamless. */
+@keyframes le-flow {
+    to {
+        stroke-dashoffset: -28;
+    }
+}
+
+/* The platform marquee. The track holds the set TWICE, so travelling exactly
+   -50% lands on an identical frame and the loop has no seam. */
+@keyframes le-marquee {
+    to {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+/* A single bright segment travelling a filament. The paths carry
+   `pathLength="1"`, so the dash pattern is in fractions of the path and one
+   pulse crosses it exactly once per cycle no matter how long it really is.
+   This is what reads as light moving; a repeating dash reads as a dotted
+   line. */
+@keyframes le-pulse-travel {
+    from {
+        stroke-dashoffset: 1;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* A COMET, not a lit path with a dot on it.
+   Paired with a dash pattern of PERIOD 1.6 on a path of pathLength 1 (e.g.
+   "0.14 1.46"). The offset runs 0.5 → -1.1 — exactly one period, so the loop
+   is seamless — and over that run the single dash starts entirely before the
+   path, crosses it, and is entirely past the end before it restarts. Born,
+   travels, dies, waits.
+
+   The period MUST exceed 1 + dash, or a second dash follows the first onto
+   the path and the comet jumps back mid-flight. An earlier version used a
+   period-1 pattern here and did exactly that. */
+@keyframes le-comet {
+    from {
+        stroke-dashoffset: 0.5;
+    }
+    to {
+        stroke-dashoffset: -1.1;
+    }
+}
+
+/* THE BLADES, TURNING CONTINUOUSLY.
+   Not a frame sequence. A pre-rendered sequence has to pick between two
+   failures: sharp blades with a large per-frame step alias against the blade
+   pitch and the fan seems to stutter or crawl backwards, while blurring
+   across a whole pitch removes the aliasing but makes consecutive frames
+   nearly identical, so only the shading appears to move. A continuous
+   rotation has neither problem — there is no frame step to alias against, so
+   the blades stay sharp AND move smoothly at any speed.
+
+   The disc is a circle seen in perspective, so it is an ellipse with
+   rx/ry = 218/305 = 0.7148. The only transform that maps that ellipse onto
+   itself is unsquash, rotate, resquash — read right to left, which is the
+   order CSS applies them. transform-origin is the disc's own centre
+   (322, 475 of 948), which is NOT the hub's centre; they differ because the
+   plate is a perspective projection. */
+@keyframes le-blades {
+    from {
+        transform: scaleX(0.7148) rotate(0deg) scaleX(1.39899);
+    }
+    to {
+        transform: scaleX(0.7148) rotate(360deg) scaleX(1.39899);
+    }
+}
+
+/* The hub's ring, breathing. Opacity only — any scale would lift it off the
+   rim it sits on. */
+@keyframes le-ring {
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* The engine is animated AS ONE OBJECT.
+   Cutting parts out of a photograph and spinning them leaves a visible seam
+   where the cut was — which is exactly what the client saw. These two act on
+   the whole plate instead: a highlight travelling across the engine's own
+   silhouette, and a slow breathe. */
+@keyframes le-sheen {
+    from {
+        transform: translate3d(-140%, 0, 0);
+    }
+    to {
+        transform: translate3d(140%, 0, 0);
+    }
+}
+
+@keyframes le-breathe {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.014);
+    }
+}
+
+/* The specks along the filaments. Opacity only. */
+@keyframes le-twinkle {
+    from {
+        opacity: 0.25;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* The hub's bloom, breathing. Opacity and scale only. */
+@keyframes le-bloom {
+    from {
+        opacity: 0.72;
+        transform: translate(-50%, -50%) translateZ(-120px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateZ(-120px) scale(1.05);
+    }
+}
+
+/* The hero engine's idle yaw. This is what sells the depth: parts at
+   different translateZ slide across one another by real parallax as the
+   scene swings. Deliberately NOT tied to the pointer — the client ruled
+   mouse-driven 3D out explicitly. */
+@keyframes le-engine-yaw {
+    from {
+        transform: rotateX(9deg) rotateY(-27deg);
+    }
+    to {
+        transform: rotateX(5deg) rotateY(-13deg);
+    }
+}
+
+@keyframes le-drift-a {
+    to {
+        transform: translate3d(6vw, 4vw, 0) scale(1.12);
+    }
+}
+@keyframes le-drift-b {
+    to {
+        transform: translate3d(-5vw, 6vw, 0) scale(1.18);
+    }
+}
+@keyframes le-drift-c {
+    to {
+        transform: translate3d(4vw, -5vw, 0) scale(1.1);
+    }
+}
+
+@keyframes le-travel {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    12% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* Engine visual helpers */
+.le-orbit {
+    animation: le-spin-slow linear infinite;
+}
+.le-float {
+    animation: le-float 4s var(--le-ease) infinite alternate;
+}
+.le-particle {
+    overflow: hidden;
+}
+.le-particle > span {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle 3px at 50% 4px,
+        var(--le-accent-bright) 96%,
+        transparent 100%
+    );
+    animation: le-travel 2.8s linear infinite;
+}
+
+/* The shimmer sweep was removed: the client asked for no light-sweep
+   effects on the mock-ups. `.le-sweep` is intentionally gone — if a scanning
+   state is needed, use opacity or a moving dot, not a specular pass. */
+
+/* ------------------------------------------------------------------
+   Reduced motion — everything settles instantly.
+   ------------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
     *,
     *::before,
     *::after {
         animation-duration: 0.001ms !important;
         animation-iteration-count: 1 !important;
+        animation-delay: 0ms !important;
         transition-duration: 0.001ms !important;
+        /* Delays must be zeroed too. Sections stagger reveals with inline
+           `transition-delay`, so without this a "no motion" visitor still
+           waits out the full stagger before the content settles. */
+        transition-delay: 0ms !important;
+        scroll-behavior: auto !important;
     }
     .reveal {
         opacity: 1;
         transform: none;
+        filter: none;
     }
     .reveal-line > span {
         transform: none;
     }
-}
-
-@layer base {
-    [data-debug-wrapper="true"] {
-        display: contents !important;
+    .le-cursor {
+        display: none;
+    }
+    .le-aurora span {
+        animation: none;
     }
 }

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Never indexable. The same rule is set as an X-Robots-Tag header by
+         scripts/security-headers.mjs, because a meta tag only reaches a
+         crawler that already fetched and parsed the page. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Leads Engine — Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <!-- Painted black before any CSS or JS lands, so a slow load is a black
+       frame rather than a white flash on a dark dashboard. -->
+  <body style="background: #000000; color: #ffffff; margin: 0">
+    <div id="root" style="background: #000000; min-height: 100vh"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -7,8 +7,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { en, type Dict } from "@/i18n/translations.en";
-import { de } from "@/i18n/translations.de";
+import { de, type Dict } from "@/i18n/translations.de";
+import { en } from "@/i18n/translations.en";
 
 export type Lang = "en" | "de";
 
@@ -24,7 +24,13 @@ function initialLang(): Lang {
   if (url === "de" || url === "en") return url;
   const stored = window.localStorage.getItem(STORAGE_KEY);
   if (stored === "de" || stored === "en") return stored;
-  return navigator.language.toLowerCase().startsWith("de") ? "de" : "en";
+  /* GERMAN ALWAYS, BY INSTRUCTION. The browser language is deliberately NOT
+     consulted any more: this is a Swiss site whose primary market is German
+     speaking, and an English-locale browser — which plenty of Swiss users
+     run — was landing on the English site by default. A visitor who wants
+     English still gets it from `?lang=en` or the switcher, and that choice
+     is remembered above. */
+  return "de";
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {

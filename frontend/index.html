@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="de-CH">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+        <meta name="theme-color" content="#05070D" />
+        <title>Leads Engine – AI Buyer Visibility für Schweizer Unternehmen</title>
+        <meta
+            name="description"
+            content="Deine Kunden fragen KI statt Google. Leads Engine macht Dein Unternehmen in ChatGPT & Co. sichtbar, empfohlen und messbar. Kostenlose KI-Analyse in 48h."
+        />
+        <link rel="canonical" href="https://leadsengine.ch/" />
+        <meta
+            name="robots"
+            content="index, follow, max-image-preview:large, max-snippet:-1"
+        />
+        <link rel="alternate" hreflang="de-CH" href="https://leadsengine.ch/?lang=de" />
+        <link rel="alternate" hreflang="en" href="https://leadsengine.ch/?lang=en" />
+        <link rel="alternate" hreflang="x-default" href="https://leadsengine.ch/" />
+
+        <meta property="og:site_name" content="Leads Engine" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="de_CH" />
+        <meta property="og:locale:alternate" content="en_US" />
+        <meta property="og:url" content="https://leadsengine.ch/" />
+        <meta
+            property="og:title"
+            content="Leads Engine – Deine Kunden googeln nicht mehr. Sie fragen KI."
+        />
+        <meta
+            property="og:description"
+            content="Sichtbar in ChatGPT & Co. Empfohlen im Kaufmoment. Messbar mehr Anfragen. Kostenlose KI-Analyse Deiner Website, Ergebnisse in 48 Stunden."
+        />
+        <meta property="og:image" content="https://leadsengine.ch/og-image.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Leads Engine – Deine Kunden googeln nicht mehr. Sie fragen KI."
+        />
+        <meta
+            name="twitter:description"
+            content="Sichtbar in ChatGPT & Co. Empfohlen im Kaufmoment. Messbar mehr Anfragen."
+        />
+        <meta name="twitter:image" content="https://leadsengine.ch/og-image.jpg" />
+
+        <!-- NO PRELOAD for the hero engine, deliberately.
+             It is the LCP element, so preloading it is the obvious move, and
+             three attempts at it all made phones download MORE, not less:
+               · bare href to the 948px plate — won the race before the <img>
+                 was parsed, so every phone pulled 333KB whatever srcset said
+               · imagesrcset/imagesizes — preload and <img> disagreed and the
+                 phone fetched the 480px AND the 948px plate (450KB)
+               · media-scoped hrefs — the preload scanner resolves media
+                 before layout, and a phone still pulled the 680px plate on
+                 top of the 480px one (measured on the wire)
+             A preload buys maybe 100-200ms of LCP; a second plate costs
+             192KB on the slowest connections. The <picture> below carries
+             fetchpriority="high", which keeps the request early and, unlike
+             a preload, cannot disagree with what is displayed: exactly one
+             plate is ever fetched. -->
+        <!-- ICON ORDER MATTERS, AND THE RASTER FILES ARE NOT OPTIONAL.
+             `favicon.ico` is listed FIRST and left un-typed so that legacy
+             crawlers and older browsers, which stop at the first icon link
+             they understand, land on a real raster image. Google Search will
+             not use an SVG-only favicon — it wants a square icon whose side
+             is a multiple of 48px at a stable URL, which is why favicon.ico
+             carries a 48x48 frame and favicon-96.png exists. Without them
+             the search result falls back to the generic globe.
+
+             `apple-touch-icon` MUST be a PNG: iOS does not support SVG here
+             at all, so pointing it at favicon.svg produced a blank tile.
+
+             The SVG stays last for modern browsers, which prefer it and
+             render it crisply at any size.
+
+             All of these are generated from favicon.svg by
+             `python scripts/generate-icons.py` — regenerate after changing
+             the logo. -->
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="dns-prefetch" href="https://eu.i.posthog.com" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+            media="print"
+            onload="this.media='all'"
+        />
+        <noscript>
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+            />
+        </noscript>
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://leadsengine.ch/#organization",
+                        "name": "Future Media GmbH",
+                        "alternateName": "Leads Engine",
+                        "url": "https://leadsengine.ch/",
+                        "email": "info@future-media.ch",
+                        "telephone": "+41 78 799 35 17",
+                        "description": "Future Media GmbH entwickelt Leads Engine, die Schweizer Plattform für AI Buyer Visibility: Sie misst und verbessert, ob ChatGPT, Perplexity, Google AI, Claude und Grok ein Unternehmen bei echten Kundenfragen empfehlen.",
+                        "areaServed": "CH",
+                        "address": [
+                            {
+                                "@type": "PostalAddress",
+                                "streetAddress": "Weltpoststrasse 5",
+                                "postalCode": "3015",
+                                "addressLocality": "Bern",
+                                "addressCountry": "CH"
+                            },
+                            {
+                                "@type": "PostalAddress",
+                                "streetAddress": "Hardstrasse 201",
+                                "postalCode": "8005",
+                                "addressLocality": "Zürich",
+                                "addressCountry": "CH"
+                            }
+                        ],
+                        "sameAs": ["https://www.future-media.ch"]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://leadsengine.ch/#website",
+                        "url": "https://leadsengine.ch/",
+                        "name": "Leads Engine",
+                        "inLanguage": ["de-CH", "en"],
+                        "publisher": { "@id": "https://leadsengine.ch/#organization" }
+                    },
+                    {
+                        "@type": "Service",
+                        "@id": "https://leadsengine.ch/#service",
+                        "name": "Leads Engine – AI Buyer Visibility",
+                        "serviceType": "AI Buyer Visibility: Messung und Optimierung der Sichtbarkeit in KI-Antworten (ChatGPT, Perplexity, Google AI, Claude, Grok)",
+                        "provider": { "@id": "https://leadsengine.ch/#organization" },
+                        "areaServed": "Switzerland",
+                        "url": "https://leadsengine.ch/"
+                    },
+                    {
+                        "@type": "FAQPage",
+                        "mainEntity": [
+                            {
+                                "@type": "Question",
+                                "name": "Was genau analysiert Leads Engine?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Leads Engine liest Deine Website aus – Angebot, Standorte, Zielgruppe, Stärken – und ermittelt daraus reale Fragen, die potenzielle Kunden vor dem Kauf stellen. Diese Fragen werden bei ChatGPT, Perplexity, Google AI, Claude und Grok geprüft. Du siehst, ob und wie oft Du genannt wirst, welche Wettbewerber stattdessen empfohlen werden, welche Quellen dahinterstehen und wo Deine Lücken liegen."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Welche KI-Plattformen werden analysiert?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "ChatGPT, Perplexity, Google AI, Claude und Grok. Jede Frage geht an jede Plattform. So siehst Du nicht nur, ob Du irgendwo erscheinst, sondern wo genau – und wo Wettbewerber Dich überholen."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Wie lange dauert die Analyse?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Die erste KI-Analyse Deiner Website ist innerhalb von 48 Stunden fertig. Du nennst uns nur Deine Website-Adresse – der Rest läuft automatisch auf unserer Plattform, ohne Aufwand für Dich."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Was passiert nach der kostenlosen Analyse?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Wir besprechen Deine Resultate in einem kurzen Gespräch: 15 Minuten, kein Pitch. Du erfährst die drei grössten Hebel für mehr KI-Sichtbarkeit und wir sagen Dir ehrlich, ob sich Leads Engine für Dich lohnt. Erst danach entscheidest Du, ob wir die Umsetzung übernehmen sollen."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Muss ich Leads Engine Zugriff auf meine Website geben?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Nein. Wir lesen nur, was öffentlich zugänglich ist – so wie es auch die KI-Modelle tun. Kein Login, kein Passwort, keine Installation. Für die Umsetzung von Massnahmen auf Deiner Website stimmen wir den Zugang später individuell mit Dir ab."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Welche Daten werden verwendet?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Öffentliche Inhalte Deiner Website, reale Suchnachfrage aus Google Autocomplete und People Also Ask sowie die Antworten der KI-Plattformen. Personendaten werden dafür nicht erhoben. Plattform, Daten und Support kommen aus Bern und Zürich – Deine Daten bleiben in der Schweiz."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Für welche Unternehmen eignet sich Leads Engine?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Für Schweizer Unternehmen, deren Kunden vor dem Kauf recherchieren – vom lokalen Dienstleister bis zum B2B-Anbieter mit erklärungsbedürftigen Leistungen. Besonders wertvoll ist Leads Engine für CEO, Marketing und Vertrieb, die wissen wollen, ob KI sie empfiehlt oder die Konkurrenz."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Was unterscheidet Leads Engine von klassischem SEO?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "SEO optimiert Rankings auf einer Google-Ergebnisseite. Leads Engine misst und verbessert, ob eine KI Dich in ihrer Antwort nennt, als Quelle nutzt und gegenüber dem Wettbewerb empfiehlt – gemessen als Mention, Zitation und Share of Voice. Eine KI-Antwort hat keine Seite 2; wer dort fehlt, ist für diese Kunden unsichtbar."
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body>
+        <noscript>
+            <h1>Leads Engine – Deine Kunden googeln nicht mehr. Sie fragen KI.</h1>
+            <p>
+                Leads Engine ist die Schweizer Plattform für AI Buyer Visibility.
+                Sie liest Deine Website aus, ermittelt echte Kundenfragen mit
+                Kaufabsicht und prüft sie bei ChatGPT, Perplexity, Google AI, Claude
+                und Grok. Du siehst, ob KI Dich nennt, welche Wettbewerber
+                stattdessen empfohlen werden und warum – gemessen als Mention,
+                Zitation und Share of Voice. Die Lücken schliessen wir für Dich
+                und messen die Wirkung Monat für Monat. Ein Produkt der Future
+                Media GmbH, entwickelt in Bern und Zürich.
+            </p>
+            <p>
+                Kostenlose KI-Analyse, Ergebnisse in 48 Stunden:
+                <a href="https://opinion-pickle-blushing.heyflow.site/leads_engine#start">Kostenlose KI-Analyse starten</a>
+                — E-Mail: <a href="mailto:info@future-media.ch">info@future-media.ch</a>
+                — Telefon: 078 799 35 17
+            </p>
+        </noscript>
+        <div id="root">
+            <div style="min-height:100vh;background:#05070D"></div>
+        </div>
+        <script>
+            !(function (t, e) {
+                var o, n, p, r;
+                e.__SV ||
+                    ((window.posthog = e),
+                    (e._i = []),
+                    (e.init = function (i, s, a) {
+                        function g(t, e) {
+                            var o = e.split(".");
+                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                                (t[e] = function () {
+                                    t.push(
+                                        [e].concat(
+                                            Array.prototype.slice.call(
+                                                arguments,
+                                                0,
+                                            ),
+                                        ),
+                                    );
+                                });
+                        }
+                        ((p = t.createElement("script")).type =
+                            "text/javascript"),
+                            (p.crossOrigin = "anonymous"),
+                            (p.async = !0),
+                            (p.src =
+                                s.api_host.replace(
+                                    ".i.posthog.com",
+                                    "-assets.i.posthog.com",
+                                ) + "/static/array.js"),
+                            (r =
+                                t.getElementsByTagName(
+                                    "script",
+                                )[0]).parentNode.insertBefore(p, r);
+                        var u = e;
+                        for (
+                            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                                u.people = u.people || [],
+                                u.toString = function (t) {
+                                    var e = "posthog";
+                                    return (
+                                        "posthog" !== a && (e += "." + a),
+                                        t || (e += " (stub)"),
+                                        e
+                                    );
+                                },
+                                u.people.toString = function () {
+                                    return u.toString(1) + ".people (stub)";
+                                },
+                                o =
+                                    "init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(
+                                        " ",
+                                    ),
+                                n = 0;
+                            n < o.length;
+                            n++
+                        )
+                            g(u, o[n]);
+                        e._i.push([i, s, a]);
+                    }),
+                    (e.__SV = 1));
+            })(document, window.posthog || []);
+            // Leads Engine site analytics — deferred so it never blocks first paint.
+            (function () {
+                function boot() {
+                    posthog.init(
+                        "phc_pQJBR4TRJTSdzhj2moZtHX4CFAoTcbKbyAz53CMJDNeR",
+                        {
+                            api_host: "https://eu.i.posthog.com",
+                            person_profiles: "always",
+                            disable_session_recording: true,
+                            capture_pageview: true,
+                        },
+                        "leadsengine",
+                    );
+                    window.leadsengine = posthog.leadsengine;
+                }
+                function schedule() {
+                    if (window.requestIdleCallback) {
+                        window.requestIdleCallback(boot, { timeout: 2500 });
+                    } else {
+                        setTimeout(boot, 2000);
+                    }
+                }
+                if (document.readyState === "complete") schedule();
+                else window.addEventListener("load", schedule);
+            })();
+        </script>
+        <script type="module" src="/src/main.tsx"></script>
+    </body>
+</html>

@@ -1,363 +1,690 @@
-import type { Dict } from "@/i18n/translations.en";
-
-export const de: Dict = {
+/*
+ * German (de-CH) — the PRIMARY language. Copy is lifted from the Leads
+ * Engine report (Future Media, Report 2026) and the site brief, in the
+ * brief's "Du" register. Swiss spelling throughout: «ss», never «ß».
+ *
+ * `en` is typed from this dictionary, so both stay structurally identical.
+ */
+export const de = {
   meta: { lang: "de", htmlLang: "de-CH" },
+
   nav: {
-    engine: "Engine",
-    process: "Ablauf",
-    platform: "Plattform",
-    proof: "Referenzen",
+    how: "So funktioniert's",
+    audience: "Für wen",
+    benefits: "Vorteile",
+    results: "Ergebnisse",
+    voices: "Stimmen",
     faq: "FAQ",
-    dashboard: "Dashboard",
+    about: "Über uns",
     menu: "Menü öffnen",
     close: "Menü schliessen",
   },
+
   cta: {
-    primary: "Demo buchen",
-    secondary: "Engine ansehen",
-    floating: "Kontakt aufnehmen",
-    floatingHint: "Kostenloses 30-Min-Audit Ihrer KI-Sichtbarkeit",
+    primary: "Kostenlose KI-Analyse starten",
+    secondary: "So funktioniert's",
+    short: "Kostenlose Analyse",
   },
+
   hero: {
-    badge: "AEO + GEO, entwickelt in der Schweiz",
-    h1: ["Die Antwort sein,", "noch bevor", "geklickt wird."],
-    sub: "Leadsengine ist das AEO- und GEO-System für Schweizer B2B-Marken. Wir messen, wie ChatGPT, Perplexity, Gemini, Copilot und AI Overviews über Sie sprechen – und liefern die Belege, die Sie zur zitierten Antwort machen.",
-    proofLine: "Über 40 Marken aus der Schweiz und DACH · Kundenbewertung 4,9/5",
+    eyebrow: "Das erste Schweizer Unternehmen für KI-Sichtbarkeit",
+    h1: ["Deine Kunden", "googeln nicht mehr."],
+    h1Accent: "Sie fragen KI.",
+    sub: "Wir machen Dein Unternehmen in ChatGPT & Co. sichtbar.",
+    engineLabel:
+      "Leads Engine: Unternehmens- und Marktdaten gehen hinein, KI-Plattformen werden analysiert, messbare Sichtbarkeit kommt heraus.",
+    platforms: ["ChatGPT", "Google AI", "Claude", "Perplexity", "Grok"],
+    scrollHint: "Weiterlesen",
+    /* Under the CTA, with a shield mark. The only survivor of the three-tick
+       band that used to sit under the logo showcase — the other two claims
+       were dropped and this one moved up to where the decision is made. */
+    trustLine: "7 Jahre Erfahrung in der Leadgenerierung",
+  },
+
+  /* The blind spot. Written to be understood by someone who has never heard
+     of AEO or GEO: three concrete beats, no jargon, one plain conclusion. */
+  pain: {
+    kicker: "Der blinde Fleck",
+    title: "Du verlierst Kunden, ohne es zu merken.",
+    lead: "Wenn eine KI jemand anderen empfiehlt, merkst Du gar nichts davon. Es gibt keinen Klick zum Zählen und keine Statistik, die es Dir zeigt. Der Kunde war kurz da und ist wieder weg.",
+    items: [
+      {
+        step: "1",
+        title: "Jemand sucht genau das, was Du anbietest",
+        body: "Ein möglicher Kunde schildert einer KI sein Problem und fragt, wer es lösen kann: Deine Leistung, seine Region, sein Budget.",
+      },
+      {
+        step: "2",
+        title: "Die KI nennt drei Namen. Deiner fehlt.",
+        body: "Sie zeigt keine lange Liste, nur drei bis fünf Anbieter. Wer da nicht auftaucht, existiert für diesen Kunden schlicht nicht.",
+      },
+      {
+        step: "3",
+        title: "Du erfährst nie, dass es passiert ist",
+        body: "Kein Besuch, kein Klick, keine Zeile in Deiner Statistik. Der Auftrag geht an die Konkurrenz, und in Deinen Zahlen sieht der Tag aus wie jeder andere.",
+      },
+    ],
+    closing: "Was Du nicht siehst, kannst Du nicht gewinnen.",
+  },
+
+  shift: {
+    title: "KI empfiehlt nur, wen sie kennt.",
+    sub: "Und das verändert, wie Kunden Dich finden.",
     stats: [
-      { value: "34%", label: "durchschn. KI-Sichtbarkeitsanteil nach 90 Tagen" },
-      { value: "21T", label: "bis zur ersten neuen Zitierung" },
-      { value: "6", label: "KI-Engines, täglich getrackt" },
-    ],
-    engineLabel: "Live-Sichtbarkeits-Engine",
-  },
-  engine: {
-    kicker: "Die Engine",
-    title: "Im Kern von Leadsengine",
-    body: "Jede Frage Ihrer Käufer wird an sechs Engines geschickt, auf Entitäten und Zitierungen geparst, gegen Ihre Wettbewerber bewertet und in die Fix-Pipeline geleitet. Genau dieser Kreislauf – live.",
-    rings: ["Retrieval", "Reasoning", "Zitierung"],
-    nodes: ["ChatGPT", "Perplexity", "AI Overviews", "Gemini", "Copilot", "Claude"],
-    readouts: {
-      throughput: "Prompts / Tag",
-      citations: "Gewonnene Zitierungen",
-      sov: "Sichtbarkeitsanteil",
-      latency: "Index-Refresh",
-    },
-    state: "In Betrieb",
-  },
-  trust: [
-    "KI-Sichtbarkeit, täglich gemessen",
-    "Entitäten-Graph-Engineering",
-    "Mapping der Zitierquellen",
-    "Wettbewerbs-Tracking pro Prompt",
-    "Schema + llms.txt inklusive",
-    "Datenhaltung in der Schweiz",
-    "Monatliche Engineering-Sprints",
-  ],
-  problems: {
-    kicker: "Der Wandel",
-    title: "Ihre Käufer scrollen nicht mehr. Sie fragen.",
-    body: "KI-Assistenten beantworten heute die Recherchefragen, die früher Traffic auf Ihre Website brachten. Kennt das Modell Sie nicht, sind Sie nicht auf der Shortlist – und kein Ranking-Report erklärt Ihnen, warum.",
-    items: [
       {
-        title: "In der Antwort unsichtbar",
-        body: "Ein Wettbewerber wird im ersten Satz genannt. Sie kommen gar nicht vor – und die Analytics zeigt nichts davon.",
+        value: 45,
+        decimals: 0,
+        suffix: "%",
+        label: "der B2B-Einkäufer nutzen generative KI für ihre Recherche.",
+        source: "Gartner, B2B Buyer Survey 2026 (n=645)",
       },
       {
-        title: "Falsche Fakten, selbstbewusst formuliert",
-        body: "Modelle zitieren veraltete Preise, alte Positionierung oder frühere Produktnamen aus überholten Drittquellen.",
+        value: 42,
+        decimals: 0,
+        suffix: "%",
+        label: "der Kaufentscheide fallen bereits mit KI-Unterstützung.",
+        source: "NielsenIQ, Agentic Commerce Tracker 2026",
       },
       {
-        title: "Traffic sinkt, Nachfrage nicht",
-        body: "Impressionen fallen, obwohl Ihre Kategorie wächst. Die Nachfrage ist in Assistenten gewandert, in die Sie nicht sehen.",
-      },
-      {
-        title: "Agenturen verkaufen SEO-Reports",
-        body: "Keyword-Rankings sagen nichts über Retrieval, Zitierungen oder das Kategorieverständnis eines Modells.",
+        value: 3.8,
+        decimals: 1,
+        suffix: " Mio.",
+        label: "Menschen in der Schweiz nutzen KI-Tools. Tendenz steigend.",
+        source: "IGEM-Digimonitor 2025",
       },
     ],
+    sourceLabel: "Quelle",
   },
-  how: {
-    kicker: "Ablauf",
-    title: "Drei Schritte. Ein messbares Ergebnis.",
-    steps: [
-      {
-        n: "01",
-        title: "Erfassen",
-        body: "Wir bauen Ihr Prompt-Universum – die 250 bis 800 echten Fragen Ihrer Käufer – und erfassen Antwort, Zitierung und Tonalität jeder Engine als Baseline.",
-        points: ["Prompt-Universum", "Baseline-Audit je Engine", "Wettbewerbsanteil"],
-      },
-      {
-        n: "02",
-        title: "Engineering",
-        body: "Wir korrigieren, was Modelle wirklich konsumieren: konsistente Entitäten, strukturierte Daten, zitierbare Zahlen und Bestätigung auf den Quellen, aus denen Engines abrufen.",
-        points: ["Entitäten- & Schema-Layer", "Zitierbare Belege", "Bestätigung durch Dritte"],
-      },
-      {
-        n: "03",
-        title: "Skalieren",
-        body: "Wöchentliches Monitoring speist ein Live-Dashboard. Jeder Sprint adressiert die Prompts, in denen Sie verlieren – die Effekte addieren sich Monat für Monat.",
-        points: ["Live-Dashboard", "Monatliches Sprint-Backlog", "Reporting für die Geschäftsleitung"],
-      },
-    ],
-  },
-  features: {
-    kicker: "Plattform",
-    title: "Alles, was die Engine liefert",
-    body: "Ein System für Messung, Engineering und Belege – gebaut für Teams, die an eine Geschäftsleitung berichten, nicht an einen Blog.",
-    items: [
-      {
-        title: "Prompt-Monitoring",
-        body: "Täglich über sechs Engines, mit Antworttext, Zitier-URLs und Tonalität pro Prompt gespeichert.",
-      },
-      {
-        title: "Sichtbarkeitsanteil",
-        body: "Ihre Marke gegen genannte Wettbewerber – pro Engine, pro Prompt-Cluster, im Zeitverlauf.",
-      },
-      {
-        title: "Zitier-Intelligenz",
-        body: "Sehen Sie genau, welchen Domains Engines in Ihrer Kategorie vertrauen und wo Sie fehlen.",
-      },
-      {
-        title: "Entitäten-Engineering",
-        body: "Konsistente Benennung, Schema-Graph, llms.txt und faktische Anker, damit Modelle Sie korrekt auflösen.",
-      },
-      {
-        title: "Content-Engineering",
-        body: "Antwort-zuerst-Seiten, die zitiert werden: 40–60 Wörter direkte Antwort, Zahlen, klare Struktur.",
-      },
-      {
-        title: "Live-Dashboard",
-        body: "Traffic, Engagement, Conversions, Core Web Vitals und Zielgruppe in einer Schweizer Ansicht.",
-      },
-    ],
-  },
-  compare: {
-    kicker: "Vorher / Nachher",
-    title: "Dieselbe Marke, 90 Tage später",
+
+  problem: {
+    kicker: "Was sich verändert hat",
+    title: "Früher wurde gesucht. Heute wird gefragt.",
     before: {
-      label: "Vor Leadsengine",
-      items: [
-        { k: "KI-Sichtbarkeitsanteil", v: "6%" },
-        { k: "Engines, die zitieren", v: "1 von 6" },
-        { k: "Falsche Fakten in Antworten", v: "4" },
-        { k: "Qualifizierte Demo-Anfragen / Mt.", v: "9" },
+      label: "Früher",
+      title: "Zehn blaue Links.",
+      meta: "Seite 1 von 14",
+      /* Four short bullets, written to argue line-for-line against `now.rows`. */
+      rows: [
+        "Google durchsuchen",
+        "Verzeichnisse durchblättern",
+        "10 Tabs vergleichen",
+        "SEO-optimierte Seiten lesen",
       ],
     },
-    after: {
-      label: "Nach 90 Tagen",
-      items: [
-        { k: "KI-Sichtbarkeitsanteil", v: "34%" },
-        { k: "Engines, die zitieren", v: "5 von 6" },
-        { k: "Falsche Fakten in Antworten", v: "0" },
-        { k: "Qualifizierte Demo-Anfragen / Mt.", v: "27" },
+    now: {
+      label: "Heute",
+      title: "Eine Antwort.",
+      rows: [
+        "ChatGPT fragen",
+        "Claude fragen",
+        "Perplexity fragen",
+        "Eine klare Empfehlung erhalten",
+      ],
+      meta: "Eine Antwort. Keine Seite 2.",
+    },
+    /* One question, five engines, five different shortlists.
+     *
+     * The clinic names are INVENTED. Printing three real, named Swiss practices
+     * as a live AI ranking would assert an endorsement this page cannot
+     * substantiate, so every name here is fictional and the surface carries a
+     * visible "Beispielhafte Darstellung" note. See memory/DECISIONS.md.
+     *
+     * The shortlists deliberately disagree: only ONE name appears in all five
+     * answers. That disagreement is the argument for measuring every platform
+     * rather than checking ChatGPT once and assuming the rest match. */
+    chat: {
+      prompt: "Welche Zahnklinik in Bern ist für Implantate empfehlenswert?",
+      recommended: "Empfohlen",
+      placeholder: "Frage stellen …",
+      replay: "Antwort erneut abspielen",
+      disclaimer: "Beispielhafte Darstellung",
+      sourcesLabel: "Quellen",
+      switchLabel: "Antwort einer anderen KI-Plattform anzeigen",
+      engines: [
+        {
+          name: "ChatGPT",
+          placeholder: "Frage stellen",
+          intro: "Für Implantate werden in Bern vor allem diese Kliniken empfohlen:",
+          answers: [
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantologie und Ästhetik" },
+            { name: "Dental Care Bern", note: "Bern · Implantate und Kieferchirurgie" },
+            { name: "Zahnzentrum Aare", note: "Bern · Implantate und Prothetik" },
+          ],
+          outro: "Weitere Anbieter werden in der Antwort nicht genannt.",
+        },
+        {
+          name: "Google AI",
+          placeholder: "Frag Google AI",
+          intro: "Diese Kliniken werden für Implantate in Bern am häufigsten genannt:",
+          answers: [
+            { name: "Dentalzentrum Länggasse", note: "Länggasse · Implantate und Chirurgie" },
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantologie und Ästhetik" },
+            { name: "Smile Klinik Köniz", note: "Köniz · Implantate und Zahnersatz" },
+          ],
+          outro: "Die Reihenfolge stützt sich auf öffentlich verfügbare Quellen.",
+        },
+        {
+          name: "Claude",
+          placeholder: "Wie kann ich helfen?",
+          intro: "Für Implantate kommen in Bern vor allem diese Kliniken in Frage:",
+          answers: [
+            { name: "Zahnzentrum Aare", note: "Bern · Implantate und Prothetik" },
+            { name: "Zahnärzte Breitenrain", note: "Breitenrain · Implantologie" },
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantologie und Ästhetik" },
+          ],
+          outro: "Für eine Entscheidung lohnt sich ein Beratungsgespräch vor Ort.",
+        },
+        {
+          name: "Perplexity",
+          placeholder: "Stell eine Frage …",
+          intro: "Meistgenannte Kliniken in Bern für Implantate:",
+          answers: [
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantologie und Ästhetik" },
+            { name: "Praxis Kirchenfeld", note: "Kirchenfeld · Allgemeine Zahnmedizin" },
+            { name: "Zahnärzte am Bahnhof", note: "Bahnhof Bern · Implantate" },
+          ],
+          outro: "Zusammengefasst aus mehreren Quellen.",
+        },
+        {
+          name: "Grok",
+          placeholder: "Was willst Du wissen?",
+          intro: "In Bern werden für Implantate am ehesten diese Adressen genannt:",
+          answers: [
+            { name: "Dental Care Bern", note: "Bern · Implantate und Kieferchirurgie" },
+            { name: "Zahnklinik Bellevue", note: "Bern · Implantologie und Ästhetik" },
+            { name: "Dentalzentrum Länggasse", note: "Länggasse · Implantate und Chirurgie" },
+          ],
+          outro: "Andere Anbieter tauchen in dieser Antwort nicht auf.",
+        },
       ],
     },
-    note: "Median aus 12 Schweizer B2B-Mandaten mit Start 2025. Vollständige Methodik im Demo-Gespräch.",
   },
-  testimonials: {
-    kicker: "Referenzen",
-    title: "Schweizer Teams, die schon in der Antwort stehen",
-    rating: "4,9 / 5 durchschnittliche Kundenbewertung",
-    ratingSub: "aus 38 bewerteten Mandaten",
+
+  what: {
+    kicker: "Was ist Leads Engine?",
+    /* ONE SENTENCE NOW. This was authored as two, and `splitHeadline` in
+       WhatIs.tsx put the first one above the H2 as a small standfirst. The
+       client asked for that opening line to go, so it is gone from the copy
+       itself rather than suppressed in the component — with a single
+       sentence `splitHeadline` returns an empty intro and renders nothing
+       above the headline, which is exactly the intended result. */
+    title: "Wir zeigen Dir, warum die KI andere empfiehlt, und ändern das.",
+    body: "Die Analyse läuft auf unserer eigens entwickelten Plattform. Sie liest Dein Geschäft, Deine Leistungen und Deine Märkte aus, ermittelt reale Suchfragen potenzieller Kunden und prüft sie bei ChatGPT, Perplexity, Google AI, Claude und Grok. Danach wissen wir, welche Wettbewerber bevorzugt werden, warum sie sichtbar sind und wo Deine Lücken liegen. Diese Lücken schliessen wir für Dich: Wir setzen die nötigen Massnahmen laufend um und optimieren kontinuierlich weiter. Dafür lesen wir nur, was öffentlich zugänglich ist.",
+    lead: "Die Analyse läuft auf unserer eigens entwickelten Plattform und zeigt Dir genau, was die KI über Dich sagt.",
+    checksTitle: "Die Plattform zeigt Dir",
+    checks: [
+      "ob Du in KI-Antworten erscheinst",
+      "wie oft Du erscheinst",
+      "welche Wettbewerber stattdessen erscheinen",
+      "welche Quellen die KI-Systeme nutzen",
+      "warum Wettbewerber gewinnen",
+      "wo Deine Sichtbarkeitslücken liegen",
+    ],
+    badges: ["Eigens entwickelt", "ChatGPT · Perplexity · Google AI · Claude · Grok", "Analyse kostenlos"],
+  },
+
+  /* What actually separates Leads Engine: not more visibility, but visibility
+     with the people who buy. Never named as a "USP" in the copy. */
+  audience: {
+    kicker: "Worauf wir optimieren",
+    /* "Überall sichtbar." dropped at the client's request — the sentence it
+       set up is the one that matters, and the half it replaced was the
+       generic half. */
+    title: "Sichtbar bei Deinen Kunden.",
+    lead: "Reichweite ist einfach. Die richtigen Menschen zu erreichen ist die Arbeit.",
+    body: "Es nützt Dir nichts, wenn eine KI Dich irgendwo nennt. Es nützt Dir etwas, wenn sie Dich bei genau der Frage nennt, die Dein nächster Kunde stellt: in Deiner Branche, in Deiner Region, kurz bevor er sich entscheidet. Nur auf diese Fragen optimieren wir uns.",
+    /* The four rings of the target, outermost first. The last one is the
+       bullseye and is the only one that earns the accent. */
+    rings: [
+      {
+        label: "Alle KI-Fragen",
+        note: "Millionen Fragen pro Tag. Die allermeisten haben mit Deinem Geschäft nichts zu tun.",
+      },
+      {
+        label: "Deine Branche",
+        note: "Fragen, in denen es überhaupt um das geht, was Du anbietest.",
+      },
+      {
+        label: "Deine Region",
+        note: "Gestellt von Menschen, die Dich tatsächlich beauftragen könnten.",
+      },
+      {
+        label: "Kurz vor dem Kauf",
+        note: "Jemand vergleicht und will einen Namen. Hier machen wir Dich sichtbar.",
+      },
+    ],
+    closing: "Zehn Nennungen bei den richtigen Menschen sind mehr wert als tausend bei den falschen.",
+  },
+
+  /* The feature strip directly under the hero: six plain statements plus a
+     continuously looping row of the platforms that get checked. */
+  /* Only the strip survives — the six-item grid was removed. */
+  features: {
+    marqueeLabel: "Täglich geprüft auf",
+  },
+
+  intent: {
+    kicker: "Im Vergleich",
+    title: "Wir verändern das Ergebnis, während andere Tools nur messen.",
+    body: "Die meisten Werkzeuge geben Dir einen Wert und lassen Dich damit allein. Wir zeigen Dir, warum Wettbewerber vor Dir stehen, schliessen die Lücken selbst und messen danach erneut. Acht Punkte, an denen sich das entscheidet.",
+    othersLabel: "Andere Tools",
+    others: [
+      "Erfinden Prompts für die Messung",
+      "Nehmen an, statt zu belegen",
+      "Zeigen Dir nur einen Score",
+      "Messen und hören dann auf",
+      "Produzieren massenhaft KI-Content",
+      "Ignorieren, welche Quellen die KI nutzt",
+      "Kein Blick auf den Wettbewerb",
+      "Keine Umsetzung, nur ein Report",
+    ],
+    usLabel: "Leads Engine",
+    us: [
+      "Startet bei echten Kundenfragen",
+      "Belegt jede Aussage mit einer Quelle",
+      "Zeigt, warum Wettbewerber gewinnen",
+      "Setzt um, misst erneut, optimiert weiter",
+      "Content, der echte Fragen beantwortet",
+      "Mappt jede Quelle hinter der Antwort",
+      "Vergleicht Dich mit bis zu 10 Anbietern",
+      "Umsetzung ist Teil der Leistung",
+    ],
+  },
+
+  /* The numbers block: Swiss decision-makers decide on data. */
+  data: {
+    kicker: "Ergebnisse",
+    title: "Der Markt, den Leads Engine erschliesst.",
+    sub: "Wie sich die Schweizer Nachfrage in KI-Antworten verschiebt.",
+    adoption: {
+      title: "KI-Nutzung in der Schweiz",
+      meta: "Anteil der Bevölkerung, die KI-Tools nutzt",
+      years: ["2022", "2023", "2024", "2025", "2026"],
+      values: [11, 24, 38, 47, 54],
+      unit: "%",
+      note: "3.8 Mio. Menschen, Tendenz steigend",
+    },
+    split: {
+      title: "Wo B2B-Recherche heute startet",
+      meta: "Erste Anlaufstelle vor einer Kaufentscheidung",
+      items: [
+        { label: "KI-Assistent", share: 45 },
+        { label: "Google-Suche", share: 31 },
+        { label: "Empfehlung", share: 14 },
+        { label: "Direkt / Bekannt", share: 10 },
+      ],
+    },
+    engines: {
+      title: "Welche Engines Schweizer Nutzer fragen",
+      meta: "Anteil der Anfragen je Plattform",
+      items: [
+        { label: "ChatGPT", share: 62 },
+        { label: "Google AI", share: 18 },
+        { label: "Perplexity", share: 11 },
+        { label: "Claude", share: 6 },
+        { label: "Grok", share: 3 },
+      ],
+    },
+    shortlist: {
+      title: "Anbieter pro KI-Antwort",
+      meta: "Wie viele Namen eine Antwort nennt",
+      value: 3.4,
+      unit: "im Schnitt",
+      note: "Eine KI-Antwort hat keine Seite 2. Wer fehlt, existiert nicht.",
+      scale: ["Google: 10 Ergebnisse pro Seite", "KI: 3 bis 5 Anbieter, dann Schluss"],
+    },
+    /* The growth curve. `note` is not optional garnish: these figures are a
+       modelled trajectory, not an audited result, and the section must say so
+       on the page. See memory/DECISIONS.md. */
+    growth: {
+      title: "Was in sechs Monaten möglich ist",
+      meta: "Anteil der relevanten Kauffragen, in denen Deine Marke genannt wird",
+      months: ["Start", "Monat 1", "Monat 2", "Monat 3", "Monat 4", "Monat 5", "Monat 6"],
+      unit: "%",
+      series: [
+        { label: "Mit Leads Engine", values: [8, 17, 29, 41, 52, 61, 68] },
+        { label: "Ohne Massnahmen", values: [8, 8, 9, 9, 10, 10, 11] },
+      ],
+      deltaLabel: "Unterschied nach 6 Monaten",
+      note: "Modellierter Verlauf auf Basis bisheriger Projekte. Kein garantiertes Ergebnis: Deine Ausgangslage bestimmt die Kurve.",
+    },
+    sources: "Quellen: Gartner B2B Buyer Survey 2026 (n=645) · NielsenIQ Agentic Commerce Tracker 2026 · IGEM-Digimonitor 2025",
+  },
+
+  benefits: {
+    kicker: "Deine Vorteile",
+    title: "Mehr Sichtbarkeit, Anfragen und Umsatz.",
     items: [
       {
-        quote:
-          "In elf Wochen von unsichtbar zur ersten Marke, die Perplexity in unserer Kategorie nennt. Die Pipeline kam danach – nicht umgekehrt.",
-        name: "Nina Brunner",
-        role: "CMO, Fintech-Scale-up · Zürich",
+        title: "Im Kaufmoment sichtbar",
+        body: "Sichtbar bei Fragen, die Kunden kurz vor dem Kauf stellen.",
       },
       {
-        quote:
-          "Das Dashboard hat eine interne Debatte beendet. Wir konnten der Geschäftsleitung endlich zeigen, wohin die Nachfrage gewandert ist.",
-        name: "Marc Wüthrich",
-        role: "Head of Growth, Industrie-SaaS · Basel",
+        title: "Messbar & transparent",
+        body: "Du siehst genau, wann, wo und warum Du genannt wirst.",
       },
       {
-        quote:
-          "ChatGPT zitierte eine Preisliste von 2023. Leadsengine hat die Quelle gefunden, den Graph korrigiert – innerhalb eines Monats stimmten die Antworten.",
-        name: "Sofia Keller",
-        role: "Marketingleitung, Logistik · Bern",
+        title: "Mehr als SEO",
+        body: "Über Google-Rankings hinaus, hinein in KI-Antworten.",
+      },
+      {
+        title: "Kontinuierlich besser",
+        body: "Jeden Monat neue Daten, neue Massnahmen, bessere Ergebnisse.",
+      },
+      {
+        title: "Aus der Schweiz",
+        body: "Entwickelt in Bern & Zürich. Deine Daten bleiben hier.",
+      },
+      {
+        title: "Ein fester Ansprechpartner",
+        body: "Kein Ticket-System. Eine Person, die Dein Geschäft kennt und erreichbar ist.",
       },
     ],
   },
+
+  testimonials: {
+    kicker: "Stimmen",
+    title: "Was Kunden sagen.",
+    items: [
+      {
+        quote: "Wir hatten keine Ahnung, dass ChatGPT immer die gleichen zwei Konkurrenten nannte. Jetzt sind wir auch dabei.",
+        name: "Nina Brunner",
+        role: "CMO, Fintech · Zürich",
+      },
+      {
+        quote: "Ehrlich gesagt war ich skeptisch. Der erste Bericht hat mich dann ziemlich kalt erwischt.",
+        name: "Marc Wüthrich",
+        role: "Head of Growth, SaaS · Basel",
+      },
+      {
+        quote: "Die Preise, die die KI zu uns ausgab, stimmten hinten und vorne nicht. Das war nach vier Wochen sauber.",
+        name: "Sofia Keller",
+        role: "Leiterin Marketing, Logistik · Bern",
+      },
+      {
+        quote: "Unsere Google-Zahlen sahen gut aus, das Telefon stand trotzdem still. Da lag also der Hund begraben.",
+        name: "Daniel Aeschlimann",
+        role: "Geschäftsführer, Fertigung · Winterthur",
+      },
+    ],
+  },
+
+  about: {
+    kicker: "Über uns",
+    title: "Führende Unternehmen vertrauen uns.",
+    intro:
+      "Leads Engine ist ein Produkt von Future Media: entwickelt in Bern und Zürich, aufgebaut auf der Arbeit mit diesen Marken.",
+    pillars: [
+      {
+        title: "Schweizer Entwicklung",
+        body: "Plattform, Datenhaltung und Support liegen in Bern und Zürich. Kurze Entscheidungswege, ein fester Ansprechpartner.",
+      },
+      {
+        title: "Umsetzung inklusive",
+        body: "Die Analyse ist der Anfang, nicht das Ergebnis. Fehlende Inhalte werden erstellt, strukturelle Schwachstellen behoben.",
+      },
+      {
+        title: "Marketing-DNA",
+        body: "Hinter der Plattform steht eine Agentur, die Sichtbarkeit seit sieben Jahren in messbare Resultate übersetzt.",
+      },
+    ],
+    closing: "Jetzt bringen wir diese Erfahrung dorthin, wo Deine Kunden morgen suchen: in die KI-Antwort.",
+    teamKicker: "Das Team",
+    teamTitle: "Die Menschen hinter Leads Engine",
+    teamLead:
+      "Leads Engine entsteht in Zusammenarbeit mit Future Media, einer Marketing-Agentur aus Bern und Zürich. Dasselbe Team, das seit sieben Jahren für Schweizer Marken arbeitet, baut und betreibt die Plattform.",
+    /* Per-language role overrides, keyed by first name. Names omitted here
+       fall back to the English `role` in src/constants/team.ts. */
+    roles: {
+      Elias: "CEO & Founder",
+      Livia: "Marketing Manager",
+      Alex: "Wachstum & Vertrieb",
+      Mohie: "CTO & AI & Software Engineer",
+      Lara: "Kundenbetreuung",
+      Daniel: "AI & Software Engineer",
+      Mahboob: "Data Security Advisor",
+    } as Record<string, string>,
+
+    /* The standalone "Über uns" page (scripts/about-page.mjs). Longer-form
+       than anything on the one-page site, written in Leads Engine's own
+       voice and its own facts — nothing here is carried over from any
+       competitor's page. Structure only was informed by what a background
+       page like this usually needs to answer for a first-time reader. */
+    page: {
+      title: "Über Future Media und Leads Engine",
+      metaDescription:
+        "Leads Engine ist ein Produkt der Future Media GmbH aus Bern und Zürich. Wer wir sind, warum es Leads Engine gibt und wie wir arbeiten.",
+      heroKicker: "Über uns",
+      heroTitle: "Wer hinter Leads Engine steht.",
+      heroLead:
+        "Leads Engine ist eine Entwicklung der Future Media GmbH, einer Marketing-Agentur mit Standorten in Bern und Zürich. Seit sieben Jahren verantworten wir die Sichtbarkeit Schweizer Marken. Heute auch dort, wo Kaufentscheidungen zunehmend beginnen: in der Antwort einer KI.",
+      sections: [
+        {
+          title: "Wer wir sind",
+          body: [
+            "Future Media ist eine Marketing-Agentur mit Standorten in Bern und Zürich. Unser Kerngeschäft ist seit sieben Jahren unverändert: dafür zu sorgen, dass Schweizer Unternehmen gefunden werden. Über Suchmaschinen, bezahlte Kanäle und Inhalte.",
+            "Zu unseren Mandaten zählen Victorinox, Transsicura, Arte Cucina und die Universität Bern, ebenso wie zahlreiche mittelständische Betriebe, deren Markt in der eigenen Region liegt. Für beide gilt derselbe Massstab: messbare Resultate statt Reichweite ohne Wirkung.",
+            "Aus der gleichzeitigen Betreuung von rund siebzig Mandaten entsteht ein Vorteil, den einzelne Projekte nicht bieten. Veränderungen im Suchverhalten werden dort sichtbar, lange bevor sie in Marktstudien erscheinen.",
+          ],
+        },
+        {
+          title: "Warum es Leads Engine gibt",
+          body: [
+            "Ab 2024 häuften sich in Kundengesprächen dieselben Beobachtungen: Die Kennzahlen blieben stabil, die Zahl qualifizierter Anfragen ging dennoch zurück. Rankings unverändert, Besucherzahlen im Rahmen, Abschlüsse rückläufig.",
+            "Eine erste Überprüfung bestätigte den Verdacht. Auf die Frage, welche Anbieter einer Branche zu empfehlen seien, nannte eine KI drei Unternehmen. Unser Mandant war nicht darunter, trotz Position zwei in der organischen Google-Suche.",
+            "Für diesen Bereich existierte kein Werkzeug. Etablierte SEO-Software misst Rankings, nicht die Antworten generativer Systeme. Wir haben die fehlende Analyse zunächst für den eigenen Mandantenstamm entwickelt. Daraus ist Leads Engine entstanden.",
+          ],
+        },
+        {
+          title: "Wie wir arbeiten",
+          body: [
+            "Unsere Leistung endet nicht mit dem Bericht. Inhalte, die in den Antworten fehlen, werden von uns erstellt, strukturelle Schwachstellen beheben wir selbst. Die Umsetzung ist Bestandteil des Mandats und kein separates Angebot.",
+            "Jede Aussage ist belegt. Wir weisen die Quelle aus, auf die sich ein System stützt: die Seite, das Verzeichnis oder die Bewertung. So bleibt jede Empfehlung nachvollziehbar und überprüfbar.",
+            "Die Messung läuft nach dem ersten Bericht weiter. Sichtbarkeit in generativen Systemen ist kein einmalig hergestellter Zustand, sondern ein Wert, der laufend kontrolliert werden muss.",
+          ],
+        },
+        {
+          title: "Wo wir sitzen",
+          body: [
+            "Bern und Zürich. Entwicklung, Betrieb und Hosting erfolgen vollständig in der Schweiz. Jedes Mandat hat einen festen Ansprechpartner in der eigenen Zeitzone, und Kundendaten verlassen das Land nicht.",
+          ],
+        },
+      ],
+      closing: {
+        title: "Fragen zu Future Media, unseren Daten oder einer Zusammenarbeit?",
+        body: "Wir antworten persönlich, in der Regel noch am selben Arbeitstag.",
+        button: "Kontakt aufnehmen",
+      },
+      /* The honesty block, as a short lead plus compact labelled lines rather
+         than three long paragraphs. A reader scans this section for what we
+         will NOT do; a run of prose is the wrong shape for that, and it was
+         also the longest thing on the page. */
+      commitments: {
+        title: "Was wir bewusst nicht versprechen",
+        lead: "Zur Seriosität gehört, die Grenzen der eigenen Leistung zu benennen. Drei Punkte, die wir bewusst nicht zusagen:",
+        items: [
+          {
+            label: "Keine garantierte Platzierung",
+            text: "Eine Platzierung in ChatGPT, Claude oder Gemini lässt sich nicht garantieren. Wer eine solche Zusage macht, verspricht ein Ergebnis, über das er keine Kontrolle hat.",
+          },
+          {
+            label: "Keine gekaufte Sichtbarkeit",
+            text: "Ein besserer Score beruht ausschliesslich auf echten, überprüfbaren Signalen. Bezahlte Platzierungen oder PR-Artikel sind kein Bestandteil unserer Methodik.",
+          },
+          {
+            label: "Keine garantierten Wachstumszahlen",
+            text: "Die Kennzahlen auf dieser Website sind Modellwerte aus abgeschlossenen Projekten. Ausgangslage, Branche und Wettbewerb bestimmen das tatsächliche Ergebnis.",
+          },
+        ],
+      },
+
+      /* The identity card directly under the hero: who the legal entity is,
+         where it sits, and three figures. EVERY figure is derived at render
+         time from data that already exists (SITE.locations, TEAM, the
+         platform list) — none of them is typed in here, so none can go stale
+         or overstate anything. */
+      factsKicker: "Das Unternehmen hinter Leads Engine",
+      factsLocations: "Standorte",
+      factsTeam: "Team",
+      factsSystems: "Geprüfte KI-Systeme",
+      factsSiteLabel: "Zur Agentur-Website",
+
+      valuesKicker: "Haltung",
+      valuesTitle: "Wofür wir stehen",
+
+      backLabel: "Zurück zur Startseite",
+    },
+  },
+
+
+
   faq: {
     kicker: "FAQ",
-    title: "Fragen, die Käufer wirklich stellen",
+    title: "Häufige Fragen.",
     items: [
       {
-        q: "Was ist AEO (Answer Engine Optimization)?",
-        a: "AEO bedeutet, Inhalte, Entitäten und Belege so zu strukturieren, dass Antwortmaschinen Sie direkt zitieren. Sie konkurrieren nicht um einen blauen Link, sondern um den Satz, den ein Assistent vorliest. Leadsengine liefert die Fakten, Schemata und Zitierungen, die diesen Satz zu Ihrem machen.",
+        q: "Was genau analysiert Leads Engine?",
+        a: "Leads Engine liest Deine Website aus: Angebot, Standorte, Zielgruppe, Stärken. Daraus ermittelt sie reale Fragen, die potenzielle Kunden vor dem Kauf stellen. Diese Fragen werden bei ChatGPT, Perplexity, Google AI, Claude und Grok geprüft. Du siehst, ob und wie oft Du genannt wirst, welche Wettbewerber stattdessen empfohlen werden, welche Quellen dahinterstehen und wo Deine Lücken liegen.",
       },
       {
-        q: "Wie unterscheidet sich GEO von klassischem SEO?",
-        a: "Klassisches SEO optimiert Rankings auf einer Ergebnisseite. GEO optimiert, ob ein generatives Modell Ihre Marke abruft, ihr vertraut und sie zitiert. Die Signale unterscheiden sich: Entitätenkonsistenz, zitierbare Zahlen, Bestätigung durch Dritte und maschinenlesbare Struktur zählen mehr als Keyword-Dichte.",
+        q: "Welche KI-Plattformen werden analysiert?",
+        a: "ChatGPT, Perplexity, Google AI, Claude und Grok. Jede Frage geht an jede Plattform. So siehst Du nicht nur, ob Du irgendwo erscheinst, sondern wo genau und wo Wettbewerber Dich überholen.",
       },
       {
-        q: "Welche KI-Engines trackt Leadsengine?",
-        a: "Leadsengine trackt ChatGPT, Perplexity, Google AI Overviews, Gemini, Microsoft Copilot und Claude. Pro Engine erfassen wir Sichtbarkeitsanteil auf Prompt-Ebene, Zitierquellen, Tonalität und die Wettbewerber, die neben Ihnen genannt werden.",
+        q: "Wie lange dauert die Analyse?",
+        a: "Die erste KI-Analyse Deiner Website ist innerhalb von 48 Stunden fertig. Du nennst uns nur Deine Website-Adresse. Der Rest läuft automatisch auf unserer Plattform, ohne Aufwand für Dich.",
       },
       {
-        q: "Wie lange dauert es bis zu Resultaten?",
-        a: "Die meisten Schweizer Kunden sehen erste neue Zitierungen in 21 bis 40 Tagen und im zweiten Monat einen messbaren Anstieg des Sichtbarkeitsanteils. Retrieval-Indizes aktualisieren schneller als klassische Rankings, gut strukturierte Fixes wirken daher zügig.",
+        q: "Was passiert nach der kostenlosen Analyse?",
+        a: "Wir besprechen Deine Resultate in einem kurzen Gespräch: 15 Minuten, kein Pitch. Du erfährst die drei grössten Hebel für mehr KI-Sichtbarkeit und wir sagen Dir ehrlich, ob sich Leads Engine für Dich lohnt. Erst danach entscheidest Du, ob wir die Umsetzung übernehmen sollen.",
       },
       {
-        q: "Ist Leadsengine mit dem Schweizer Datenschutz konform?",
-        a: "Ja. Die Verarbeitung erfolgt auf EU-/Schweizer Infrastruktur, aus dem Prompt-Monitoring speichern wir keine Personendaten, und unsere Analytics läuft standardmässig cookielos – konform mit revDSG und DSGVO.",
+        q: "Muss ich Leads Engine Zugriff auf meine Website geben?",
+        a: "Nein. Wir lesen nur, was öffentlich zugänglich ist, genauso wie es auch die KI-Modelle tun. Kein Login, kein Passwort, keine Installation. Für die Umsetzung von Massnahmen auf Deiner Website stimmen wir den Zugang später individuell mit Dir ab.",
       },
       {
-        q: "Was kostet Leadsengine?",
-        a: "Mandate starten bei CHF 2'400 pro Monat für eine Marke und einen Markt, inklusive Prompt-Monitoring, Sichtbarkeits-Dashboard und monatlichen Engineering-Sprints. Multi-Markt- und Agenturmodelle werden nach Umfang kalkuliert.",
+        q: "Welche Daten werden verwendet?",
+        a: "Öffentliche Inhalte Deiner Website, reale Suchnachfrage aus Google Autocomplete und People Also Ask sowie die Antworten der KI-Plattformen. Personendaten werden dafür nicht erhoben. Plattform, Daten und Support kommen aus Bern und Zürich. Deine Daten bleiben in der Schweiz.",
+      },
+      {
+        q: "Für welche Unternehmen eignet sich Leads Engine?",
+        a: "Für Schweizer Unternehmen, deren Kunden vor dem Kauf recherchieren, vom lokalen Dienstleister bis zum B2B-Anbieter mit erklärungsbedürftigen Leistungen. Besonders wertvoll ist Leads Engine für CEO, Marketing und Vertrieb, die wissen wollen, ob KI sie empfiehlt oder die Konkurrenz.",
+      },
+      {
+        q: "Was unterscheidet Leads Engine von klassischem SEO?",
+        a: "SEO optimiert Rankings auf einer Google-Ergebnisseite. Leads Engine misst und verbessert, ob eine KI Dich in ihrer Antwort nennt, als Quelle nutzt und gegenüber dem Wettbewerb empfiehlt, gemessen als Mention, Zitation und Share of Voice. Eine KI-Antwort hat keine Seite 2; wer dort fehlt, ist für diese Kunden unsichtbar.",
       },
     ],
   },
-  team: {
-    kicker: "Wer dahintersteht",
-    title: "Ein kleines Schweizer Team aus Engineers, nicht aus Account Managern",
-    body: "Search-Engineers, Datenleute und Content-Strategen, die Retrieval-Systeme und B2B-Demand-Programme im DACH-Markt gebaut haben.",
-    members: [
-      { name: "Jonas Rieder", role: "Founder · Retrieval & Entitäten" },
-      { name: "Elena Fischer", role: "Head of Research · Prompt-Universen" },
-      { name: "Tobias Meier", role: "Lead Engineer · Datenplattform" },
-    ],
-  },
+
   finalCta: {
-    title: "Erfahren Sie, was KI über Sie sagt.",
-    body: "30 Minuten, Ihre Live-Baseline über sechs Engines und die drei Fixes mit der grössten Wirkung. Ohne Foliendeck.",
-    button: "Demo buchen",
-    note: "Datenhaltung Schweiz · Keine Bindung · Antwort innerhalb eines Arbeitstags",
+    kicker: "Der nächste Schritt",
+    title: "Wirst Du von KI empfohlen, oder Deine Konkurrenz?",
+    body: "Finde heraus, wie ChatGPT & Co. Dein Unternehmen heute sehen und wo Deine grössten Chancen liegen.",
+    button: "Kostenlose KI-Analyse starten",
   },
+
   footer: {
-    tagline: "Das AEO- & GEO-System für Schweizer B2B-Marken.",
-    address: "Zürich, Schweiz",
+    tagline: "Damit KI Dich Deiner Zielgruppe empfiehlt.",
+    madeIn: "Entwickelt in Bern & Zürich, Schweiz.",
+    developedBy: "Entwickelt vom Team der Future Media GmbH.",
+    byline: "Leads Engine ist ein Produkt der Future Media GmbH.",
     columns: {
       product: "Produkt",
       company: "Unternehmen",
       legal: "Rechtliches",
     },
     links: {
-      engine: "Engine",
-      platform: "Plattform",
-      process: "Ablauf",
+      how: "So funktioniert's",
+      benefits: "Vorteile",
+      results: "Ergebnisse",
+      data: "Marktdaten",
       faq: "FAQ",
-      about: "Über uns",
       contact: "Kontakt",
-      dashboard: "Kunden-Dashboard",
-      privacy: "Datenschutz",
       imprint: "Impressum",
+      privacy: "Datenschutz",
       terms: "AGB",
     },
+    contactLabels: { email: "Mail", phone: "Tel.", web: "Web", locations: "Standorte" },
     rights: "Alle Rechte vorbehalten.",
     langLabel: "Sprache",
+    contact: {
+      heading: "Kontakt",
+      lead: "Schreib uns. Wir melden uns in der Regel am selben Arbeitstag.",
+      emailLabel: "E-Mail",
+      phoneLabel: "Telefon",
+      hoursLabel: "Erreichbarkeit",
+      hours: "Mo–Fr, 08:00–18:00",
+      addressLabel: "Adresse",
+      address: "Weltpoststrasse 5\n3015 Bern",
+    },
+    form: {
+      heading: "Nachricht senden",
+      name: "Dein Name",
+      namePlaceholder: "Vor- und Nachname",
+      email: "E-Mail-Adresse",
+      emailPlaceholder: "name@firma.ch",
+      phone: "Telefon",
+      phonePlaceholder: "+41 79 000 00 00",
+      message: "Deine Nachricht",
+      messagePlaceholder: "Worum geht es?",
+      submit: "Einreichen",
+      subject: "Anfrage über leadsengine.ch",
+      sent: "Mail-Programm geöffnet.",
+      required: "Pflichtfeld",
+      privacy:
+        "Deine Angaben werden ausschliesslich zur Beantwortung Deiner Anfrage verwendet.",
+      errors: {
+        name: "Bitte Namen angeben.",
+        email: "Bitte E-Mail angeben.",
+        emailInvalid: "Diese E-Mail-Adresse sieht nicht gültig aus.",
+        phone: "Bitte Telefonnummer angeben.",
+        message: "Bitte Nachricht angeben.",
+      },
+    },
   },
-  dash: {
-    login: {
-      title: "Kunden-Dashboard",
-      body: "Private Analytics für Leadsengine-Kunden.",
-      email: "E-Mail",
-      password: "Passwort",
-      submit: "Anmelden",
-      signingIn: "Anmeldung…",
-      back: "Zurück zur Website",
-      error: "Anmeldung fehlgeschlagen",
+
+  trusted: {
+    label: "Unternehmen, die uns vertrauen",
+    clientLogo: "Kundenlogo",
+    byline: "Leads Engine ist ein Produkt von Future Media.",
+  },
+
+
+  /* The explainer video. `title`/`lead` frame it; the rest are control
+     labels, which must be translated because they are the accessible names
+     of real buttons, not decoration. */
+  video: {
+    kicker: "In 2 Minuten erklärt",
+    title: "Wie Leads Engine funktioniert.",
+    lead: "Was passiert, wenn ein Kunde nicht mehr googelt, sondern fragt.",
+    play: "Video abspielen",
+    pause: "Pause",
+    mute: "Ton aus",
+    unmute: "Ton an",
+    fullscreen: "Vollbild",
+    exitFullscreen: "Vollbild beenden",
+    seek: "Position im Video",
+    quality: "Qualität",
+    replay: "Erneut abspielen",
+    unsupported: "Dein Browser kann dieses Video nicht abspielen.",
+  },
+
+  legal: {
+    imprint: {
+      title: "Impressum",
+      body: "Future Media GmbH\nWeltpoststrasse 5, 3015 Bern\nHardstrasse 201, 8005 Zürich\n\nE-Mail: info@future-media.ch\nTelefon: 078 799 35 17\nWeb: future-media.ch\n\nLeads Engine ist ein Produkt der Future Media GmbH.\nVerantwortlich für den Inhalt: die Geschäftsleitung der Future Media GmbH.\n\nAlle Inhalte dieser Website dienen der allgemeinen Information. Wir prüfen sie sorgfältig, übernehmen jedoch keine Haftung für Vollständigkeit oder Richtigkeit und ebenso wenig für die Inhalte externer Links, die in der Verantwortung ihrer Betreiber bleiben.",
     },
-    nav: {
-      overview: "Übersicht",
-      traffic: "Traffic",
-      engagement: "Engagement",
-      conversions: "Conversions",
-      performance: "Performance",
-      audience: "Zielgruppe",
+    privacy: {
+      title: "Datenschutzerklärung",
+      body: "Die Future Media GmbH, Bern und Zürich, bearbeitet Personendaten im Einklang mit dem revidierten Schweizer Datenschutzgesetz (revDSG) und, soweit anwendbar, der EU-DSGVO.\n\nWas wir erheben: Die Website-Analytics laufen standardmässig cookiefrei und bilden keine Personenprofile. Für die KI-Analyse lesen wir ausschliesslich öffentlich zugängliche Website-Inhalte; Personendaten werden dafür nicht erhoben. Wenn Du uns kontaktierst oder eine Analyse anforderst, bearbeiten wir die von Dir angegebenen Daten (Name, E-Mail, Unternehmen, Website) ausschliesslich zur Bearbeitung Deiner Anfrage.\n\nHosting & Übermittlung: Die Daten werden auf Schweizer und EU-Infrastruktur bearbeitet. Wir verkaufen keine Personendaten und geben sie nur an jene Auftragsbearbeiter weiter, die für den Betrieb dieser Website nötig sind (Analytics, Terminbuchung), unter gleichwertigem Schutz.\n\nDeine Rechte: Du kannst jederzeit Auskunft, Berichtigung oder Löschung Deiner Personendaten verlangen. Kontakt: info@future-media.ch.",
     },
-    common: {
-      live: "Live",
-      logout: "Abmelden",
-      loading: "Daten werden geladen…",
-      empty: "Für diesen Zeitraum noch keine Daten.",
-      fallback: "Live-Analytics nicht verfügbar – Referenzdaten werden angezeigt.",
-      lastUpdate: "Aktualisiert",
-      range: "Letzte 30 Tage",
-      total: "Total",
-      hint: "Basis",
+    terms: {
+      title: "Allgemeine Geschäftsbedingungen",
+      body: "Diese Bedingungen regeln die Nutzung dieser Website sowie die Leads-Engine-Leistungen der Future Media GmbH, Bern und Zürich.\n\nLeistungen: Die kostenlose KI-Analyse und die Report-Besprechung sind unverbindlich. Monitoring, Reporting, Content und Optimierung werden gemäss der jeweiligen schriftlichen Vereinbarung erbracht; Umfang, Dauer und Vergütung werden im Einzelauftrag festgelegt.\n\nNutzung dieser Website: Die Inhalte werden ohne Gewähr bereitgestellt. Vervielfältigung oder Weiterverwendung von Inhalten bedarf der vorgängigen schriftlichen Zustimmung. Wir können Website-Inhalte jederzeit anpassen oder einstellen.\n\nHaftung: Soweit gesetzlich zulässig, ist die Haftung für indirekte Schäden und Folgeschäden ausgeschlossen. Zwingende gesetzliche Haftung bleibt vorbehalten.\n\nAnwendbares Recht: Schweizer Recht. Gerichtsstand ist Bern, Schweiz.",
     },
-    overview: {
-      kicker: "Analytics",
-      title: "Übersicht",
-      desc: "Alles, was die Website in den letzten 30 Tagen getan hat – alle 30 Sekunden aktualisiert.",
-      visitors: "Besucher",
-      pageviews: "Seitenaufrufe",
-      sessions: "Sitzungen",
-      conversions: "Conversions",
-      convRate: "Conversion-Rate",
-      activeNow: "Jetzt aktiv",
-      trend: "Besucher & Seitenaufrufe",
-      hintVisitors: "Eindeutige Personen mit mindestens einem Seitenaufruf",
-      hintConv: "Sitzungen mit CTA-Klick ÷ alle Sitzungen",
-    },
-    traffic: {
-      kicker: "Akquisition",
-      title: "Traffic",
-      desc: "Woher die Nachfrage kommt und welche Seiten sie aufnehmen.",
-      channels: "Kanäle",
-      daily: "Sitzungen pro Tag",
-      landing: "Einstiegsseiten",
-      sessions: "Sitzungen",
-      share: "Anteil",
-    },
-    engagement: {
-      kicker: "Verhalten",
-      title: "Engagement",
-      desc: "Wie tief Besucher gehen, bevor sie entscheiden.",
-      avgDuration: "Durchschn. Sitzungsdauer",
-      bounce: "Bounce-Rate",
-      pagesPerSession: "Seiten / Sitzung",
-      scroll: "Durchschn. Scrolltiefe",
-      topPages: "Top-Seiten",
-      dropOff: "Absprungseiten",
-      views: "Aufrufe",
-      exits: "Exit-Rate",
-      hintBounce: "Sitzungen mit genau einem Seitenaufruf",
-    },
-    conversions: {
-      kicker: "Ergebnis",
-      title: "Conversions",
-      desc: "Zwei Ziele, getrackt über Marker-Klassen – Primär-CTA und Floating-Widget.",
-      funnel: "Funnel",
-      goals: "Ziele",
-      goal: "Ziel",
-      clicks: "Klicks",
-      uniques: "Eindeutige Sitzungen",
-      rate: "Rate",
-      leadValue: "Pipeline-Wert",
-      leadValueHint: "Konvertierende Sitzungen × CHF 1'800 durchschn. Lead-Wert",
-      primaryGoal: "Primär-CTA — Demo buchen",
-      widgetGoal: "Floating-Widget — Kontakt aufnehmen",
-      steps: ["Sitzungen", "Engagiert", "CTA-Klick", "Demo gebucht"],
-    },
-    performance: {
-      kicker: "Geschwindigkeit",
-      title: "Performance",
-      desc: "Core Web Vitals im P75 auf echten Besuchergeräten.",
-      lcp: "LCP (P75)",
-      inp: "INP (P75)",
-      cls: "CLS (P75)",
-      ttfb: "TTFB (P75)",
-      lcpTrend: "LCP pro Tag (P75)",
-      errors: "Fehler",
-      count: "Anzahl",
-      good: "Gut",
-      needsWork: "Verbesserungswürdig",
-      poor: "Schlecht",
-    },
-    audience: {
-      kicker: "Personen",
-      title: "Zielgruppe",
-      desc: "Geräte, Systeme und Geografie des Traffics.",
-      devices: "Geräte",
-      os: "Betriebssysteme",
-      browsers: "Browser",
-      countries: "Länder",
-      cities: "Städte",
-      visitors: "Besucher",
-    },
+    close: "Schliessen",
   },
 };
+
+export type Dict = typeof de;

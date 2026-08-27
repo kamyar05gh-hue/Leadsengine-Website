@@ -1,34 +1,44 @@
-# Leadsengine
+# Leads Engine
 
-> Leadsengine is a Swiss AEO (Answer Engine Optimization) and GEO (Generative
-> Engine Optimization) system that makes B2B brands the cited answer inside AI
-> assistants such as ChatGPT, Perplexity, Google AI Overviews, Gemini, Copilot
-> and Claude.
+> Leads Engine ist die Schweizer Plattform für AI Buyer Visibility: Sie misst,
+> ob ChatGPT, Perplexity, Google AI, Claude und Grok ein Unternehmen bei echten
+> Kundenfragen empfehlen – und schliesst die Lücken, wenn nicht. Ein Produkt
+> der Future Media GmbH, entwickelt in Bern und Zürich.
 
-## What it does
-- Monitors prompt-level brand visibility across six AI engines, daily.
-- Reports share of voice, citation sources, sentiment and competitors named alongside you.
-- Engineers the entity graph, structured data and citable proof that models retrieve.
-- Delivers a live visibility dashboard plus monthly engineering sprints.
+## Was Leads Engine macht
+- Liest die Website eines Unternehmens aus (Angebot, Standorte, Zielgruppe, Stärken), jeder Fakt mit Quelle belegt.
+- Ermittelt echte Kundenfragen mit Kaufabsicht aus Google Autocomplete, People Also Ask und den Website-Fakten.
+- Befragt damit fünf KI-Plattformen: ChatGPT, Perplexity, Google AI, Claude, Grok.
+- Misst drei Kennzahlen: Mention (wie oft KI das Unternehmen nennt), Zitation (wie oft die Website als Quelle dient), Share of Voice (Anteil an den KI-Antworten im Vergleich zum Wettbewerb).
+- Analysiert, warum Wettbewerber empfohlen werden (Inhalte, Quellen), setzt die nötigen Massnahmen um, misst erneut und optimiert monatlich weiter.
 
-## Who it is for
-Swiss and DACH B2B companies (SaaS, fintech, industrial, professional services)
-whose buyers research with AI assistants before they ever open a search page.
+## Für wen
+Schweizer Unternehmen – CEO, Marketing, Vertrieb – deren Kunden vor dem Kauf
+recherchieren: vom lokalen Dienstleister bis zum B2B-Anbieter.
 
-## Key facts
-- Founded in Zurich, Switzerland. Serves Switzerland, Germany and Austria.
-- Languages: English, German (de-CH).
-- Engines covered: ChatGPT, Perplexity, Google AI Overviews, Gemini, Microsoft Copilot, Claude.
-- Typical first new citations: 21–40 days. Measurable share-of-voice lift: month 2.
-- Pricing: from CHF 2,400 per month, one brand and one market.
-- Data processing: EU/Swiss infrastructure, cookieless analytics, revFADP and GDPR aligned.
-- Average client AI share of voice after 90 days: 34% (from 6% at onboarding), across 40+ tracked brands.
+## Warum es das gibt
+- 45% der B2B-Einkäufer nutzen generative KI für ihre Recherche (Gartner, B2B Buyer Survey 2026, n=645).
+- 42% der Kaufentscheide fallen bereits mit KI-Unterstützung (NielsenIQ, Agentic Commerce Tracker 2026).
+- 3.8 Mio. Menschen in der Schweiz nutzen KI-Tools (IGEM-Digimonitor 2025).
+- Eine KI-Antwort nennt drei bis fünf Anbieter und hat keine Seite 2. Wer dort fehlt, existiert für diese Kunden nicht.
 
-## Definitions
-- AEO: structuring content, entities and proof so answer engines quote a brand directly.
-- GEO: making a brand retrievable, trustworthy and citable when a generative model composes an answer.
+## Ablauf
+1. Unverbindliche KI-Analyse der Website – kostenlos, Ergebnisse innerhalb von 48 Stunden, kein Zugriff nötig (es wird nur Öffentliches gelesen).
+2. Report-Besprechung – 15 Minuten, kein Pitch, die drei grössten Hebel.
+3. Optimieren, veröffentlichen, Wirkung messen – Monat für Monat.
 
-## Contact
+## Definitionen
+- AI Buyer Visibility: Sichtbarkeit bei den Fragen, die echte Kunden kurz vor dem Kauf an KI-Assistenten stellen.
+- Mention / Zitation / Share of Voice: die drei Kennzahlen, mit denen Leads Engine KI-Sichtbarkeit misst.
+
+## Unternehmen
+- Leads Engine ist ein Produkt der Future Media GmbH, Bern & Zürich.
+- Referenzen von Future Media: Victorinox, Mazda, Spitex, Transsicura, Nau.ch, WESCO (Kunden von Future Media, nicht von Leads Engine).
+
+## Kontakt
 - Website: https://leadsengine.ch/
-- Book a demo: https://calendly.com/leadsengine/30min
-- Email: hello@leadsengine.ch
+- Kostenlose KI-Analyse / Erstberatung: https://opinion-pickle-blushing.heyflow.site/leads_engine#start
+- E-Mail: info@future-media.ch
+- Telefon: 078 799 35 17
+- Standorte: Weltpoststrasse 5, 3015 Bern · Hardstrasse 201, 8005 Zürich
+- Sprachen: Deutsch (de-CH), Englisch
