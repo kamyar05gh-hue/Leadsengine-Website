@@ -295,19 +295,26 @@
         justify-content: center;
         gap: 10px;
         border-radius: 999px;
-        border: 1px solid rgb(var(--le-accent-bright-rgb) / 0.7);
+        /* GOLD, NOT BLUE — the in-page CTAs now carry the same light as the
+           floating widget, at the client's direction. The blue values that
+           were here had been tuned to MATCH the gold's perceived strength
+           against this near-black ground, so switching back to gold means
+           reverting to the numbers that tuning was aiming at: 0.6 alpha of
+           the base gold for the wide bloom, with the brighter tone reserved
+           for the edge.
+
+           This leaves gold doing three jobs on the site — the headline
+           accent, the rating stars and now every CTA. That is a deliberate
+           consolidation rather than a leak: the CTA is the one thing the page
+           wants pressed, and it now reads as the same object wherever it
+           appears, fixed or in flow. */
+        border: 1px solid rgb(var(--le-gold-bright-rgb) / 0.7);
         background: var(--le-bg);
         color: #fff;
         font-weight: 600;
-        /* Matched to the presence the gold version had, not to its numbers.
-           Gold sat at 0.6 alpha of rgb(176 138 58) — a warm colour that is
-           already bright against this near-black ground. The same alpha of a
-           mid blue reads noticeably dimmer, so the glow uses the BRIGHT
-           accent rather than the CTA fill colour, and spreads a little
-           further, to land at the same perceived strength. */
         box-shadow:
-            0 0 32px -4px rgb(var(--le-accent-bright-rgb) / 0.45),
-            0 0 12px -6px rgb(var(--le-accent-bright-rgb) / 0.4),
+            0 0 30px -4px rgb(var(--le-gold-rgb) / 0.6),
+            0 0 12px -6px rgb(var(--le-gold-rgb) / 0.45),
             0 10px 30px -14px rgba(0, 0, 0, 0.9);
         transition:
             border-color 260ms var(--le-ease),
@@ -322,18 +329,18 @@
        below is untouched — that one is a direct answer to a finger, and on
        touch there is no hover to have felt first. */
     .le-cta-pill:hover {
-        border-color: rgb(var(--le-accent-bright-rgb) / 0.9);
+        border-color: rgb(var(--le-gold-bright-rgb));
         box-shadow:
-            0 0 0 1px rgb(var(--le-accent-bright-rgb) / 0.22),
-            0 0 34px -4px rgb(var(--le-accent-bright-rgb) / 0.5),
+            0 0 0 1px rgb(var(--le-gold-bright-rgb) / 0.22),
+            0 0 38px -2px rgb(var(--le-gold-rgb) / 0.85),
             0 10px 30px -14px rgba(0, 0, 0, 0.9);
     }
     .le-cta-pill:active {
         transform: translateY(0) scale(0.97);
         transition-duration: 90ms;
         box-shadow:
-            0 0 0 1px rgb(var(--le-accent-bright-rgb) / 0.5),
-            0 0 28px -6px rgb(var(--le-accent-bright-rgb) / 0.6),
+            0 0 0 1px rgb(var(--le-gold-bright-rgb) / 0.5),
+            0 0 26px -6px rgb(var(--le-gold-rgb) / 0.7),
             0 6px 16px -12px rgba(0, 0, 0, 0.95);
     }
     /* ------------------------------------------------------------------
@@ -369,16 +376,16 @@
     /* The second CTA in a pair. Same object, dimmer light, so the primary
        still reads as the primary when the two sit side by side. */
     .le-cta-pill--quiet {
-        border-color: rgb(var(--le-accent-bright-rgb) / 0.4);
+        border-color: rgb(var(--le-gold-bright-rgb) / 0.4);
         box-shadow:
-            0 0 20px -8px rgb(var(--le-accent-bright-rgb) / 0.3),
+            0 0 20px -8px rgb(var(--le-gold-rgb) / 0.35),
             0 8px 22px -16px rgba(0, 0, 0, 0.9);
         color: var(--le-ink);
         font-weight: 500;
     }
 
     .le-cta-pill:focus-visible {
-        outline: 2px solid var(--le-accent-bright);
+        outline: 2px solid rgb(var(--le-gold-bright-rgb));
         outline-offset: 3px;
     }
     @media (prefers-reduced-motion: reduce) {
