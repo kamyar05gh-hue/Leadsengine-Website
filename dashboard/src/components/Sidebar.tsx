@@ -36,10 +36,10 @@ export default function Sidebar({
     <aside
       className="shrink-0 border-[#1C1C21] bg-black
         max-md:w-full max-md:border-b max-md:px-4 max-md:py-4
-        md:flex md:h-screen md:w-[250px] md:flex-col md:overflow-y-auto md:border-r md:px-4 md:py-6"
+        md:flex md:h-screen md:w-[228px] md:flex-col md:overflow-y-auto md:border-r md:px-4 md:py-5"
     >
       <div className="px-2">
-        <div className="text-[15px] font-semibold text-white">Leads Engine</div>
+        <div className="text-[14px] font-semibold text-white">Leads Engine</div>
         <div className="mt-0.5 text-[11px] text-[#5C5C66]">leadsengine.ch · Website analytics</div>
       </div>
 

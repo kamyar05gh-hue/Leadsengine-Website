@@ -136,7 +136,7 @@ export default function Traffic({ tick }: { tick: number }) {
         ]}
       />
 
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2.5 md:grid-cols-5">
         <StatBox
           label={t.traffic.sessions}
           value={fmtInt(vm.summary.sessions)}
@@ -156,7 +156,7 @@ export default function Traffic({ tick }: { tick: number }) {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-5">
         <Card
           title={t.traffic.daily}
           className="lg:col-span-3"
@@ -172,7 +172,7 @@ export default function Traffic({ tick }: { tick: number }) {
           {chartData.length === 0 ? (
             <EmptyState message={t.common.noData} />
           ) : (
-            <div className="h-[280px]">
+            <div className="h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData} margin={{ top: 4, right: 16, bottom: 0, left: -14 }}>
                   <defs>
@@ -218,7 +218,7 @@ export default function Traffic({ tick }: { tick: number }) {
             <EmptyState message={t.common.noData} />
           ) : (
             <>
-              <div className="h-[200px]">
+              <div className="h-[180px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     data={channelData}
@@ -268,7 +268,7 @@ export default function Traffic({ tick }: { tick: number }) {
           <EmptyState message={t.common.noData} />
         ) : (
           <>
-            <div className="grid grid-cols-[1fr_90px_100px_110px] gap-3 px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
+            <div className="grid grid-cols-[1fr_90px_100px_110px] gap-3 px-3 pb-2 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
               <span>{t.common.page}</span>
               <span className="text-right">{t.traffic.sessions}</span>
               <span className="text-right">{t.traffic.share}</span>
@@ -277,7 +277,7 @@ export default function Traffic({ tick }: { tick: number }) {
             {vm.landing.map((r) => (
               <div
                 key={r.path}
-                className="row grid grid-cols-[1fr_90px_100px_110px] items-center gap-3 px-3 py-2.5 text-[13px]"
+                className="row grid grid-cols-[1fr_90px_100px_110px] items-center gap-3 px-3 py-2 text-[12.5px]"
               >
                 <span className="truncate text-[#C9C9D1]" title={r.path}>
                   {r.path}

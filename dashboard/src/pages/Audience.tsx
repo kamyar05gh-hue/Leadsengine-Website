@@ -115,7 +115,7 @@ export default function Audience({ tick }: { tick: number }) {
       {rows.slice(0, 6).map((r) => (
         <div
           key={r.name}
-          className="row flex items-baseline justify-between gap-3 px-2 py-1.5 text-[13px]"
+          className="row flex items-baseline justify-between gap-3 px-2 py-1.5 text-[12.5px]"
         >
           <span className="min-w-0 truncate text-[#C9C9D1]" title={r.name}>
             {r.name}
@@ -148,7 +148,7 @@ export default function Audience({ tick }: { tick: number }) {
         ]}
       />
 
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2.5 md:grid-cols-5">
         <StatBox label={t.audience.visitors} value={fmtInt(totalVisitors)} />
         <StatBox
           label={t.overview.activeNow}
@@ -168,7 +168,7 @@ export default function Audience({ tick }: { tick: number }) {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-5">
         <Card title={t.audience.cities} meta={t.audience.hintGeo} className="lg:col-span-3">
           {geoData.length === 0 ? (
             <EmptyState message={t.common.noData} />
@@ -202,14 +202,14 @@ export default function Audience({ tick }: { tick: number }) {
         <div className="flex flex-col gap-4 lg:col-span-2">
           <Card title={t.audience.os} meta={t.audience.share}>
             {vm.os.length === 0 ? (
-              <span className="text-[13px] text-[#5C5C66]">{t.common.noData}</span>
+              <span className="text-[12.5px] text-[#5C5C66]">{t.common.noData}</span>
             ) : (
               shareList(vm.os)
             )}
           </Card>
           <Card title={t.audience.browsers} meta={t.audience.share}>
             {vm.browsers.length === 0 ? (
-              <span className="text-[13px] text-[#5C5C66]">{t.common.noData}</span>
+              <span className="text-[12.5px] text-[#5C5C66]">{t.common.noData}</span>
             ) : (
               shareList(vm.browsers)
             )}
@@ -222,7 +222,7 @@ export default function Audience({ tick }: { tick: number }) {
           <EmptyState message={t.common.noData} />
         ) : (
           <>
-            <div className="grid grid-cols-[1fr_90px_90px_120px] gap-3 px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
+            <div className="grid grid-cols-[1fr_90px_90px_120px] gap-3 px-3 pb-2 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
               <span>{t.audience.region}</span>
               <span className="text-right">{t.audience.visitors}</span>
               <span className="text-right">{t.audience.share}</span>
@@ -233,7 +233,7 @@ export default function Audience({ tick }: { tick: number }) {
               return (
                 <div
                   key={r.name}
-                  className="row grid grid-cols-[1fr_90px_90px_120px] items-center gap-3 px-3 py-2.5 text-[13px]"
+                  className="row grid grid-cols-[1fr_90px_90px_120px] items-center gap-3 px-3 py-2 text-[12.5px]"
                 >
                   <span className="truncate text-[#C9C9D1]" title={r.name}>
                     {r.name}

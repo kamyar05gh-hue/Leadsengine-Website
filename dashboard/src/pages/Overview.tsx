@@ -195,7 +195,7 @@ export default function Overview({
         ]}
       />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 xl:grid-cols-4">
         {tiles.map((tile) => (
           <SummaryTile
             key={tile.label}
@@ -208,12 +208,12 @@ export default function Overview({
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-5">
         <Card title={t.overview.trend} meta={t.common.period} className="lg:col-span-3">
           {chartData.length === 0 ? (
             <EmptyState message={t.common.noData} />
           ) : (
-            <div className="h-[280px]">
+            <div className="h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData} margin={{ top: 4, right: 16, bottom: 0, left: -14 }}>
                   <defs>
@@ -266,7 +266,7 @@ export default function Overview({
               {vm.channels.map((c) => (
                 <div key={c.key} className="row px-2 py-1.5">
                   <div className="flex items-baseline justify-between gap-3">
-                    <span className="flex min-w-0 items-center gap-2 text-[13px] text-[#C9C9D1]">
+                    <span className="flex min-w-0 items-center gap-2 text-[12.5px] text-[#C9C9D1]">
                       <span
                         aria-hidden="true"
                         className="inline-block h-[7px] w-[7px] shrink-0 rounded-full"
@@ -274,7 +274,7 @@ export default function Overview({
                       />
                       <span className="truncate">{channelLabel[c.key]}</span>
                     </span>
-                    <span className="shrink-0 text-[13px] tabular-nums text-white">
+                    <span className="shrink-0 text-[12.5px] tabular-nums text-white">
                       {fmtInt(c.sessions)}
                     </span>
                   </div>
@@ -299,7 +299,7 @@ export default function Overview({
           <EmptyState message={t.common.noData} />
         ) : (
           <>
-            <div className="grid grid-cols-[1fr_90px_100px] gap-3 px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
+            <div className="grid grid-cols-[1fr_90px_100px] gap-3 px-3 pb-2 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
               <span>{t.common.page}</span>
               <span className="text-right">{t.engagement.views}</span>
               <span className="text-right">{t.audience.visitors}</span>
@@ -307,7 +307,7 @@ export default function Overview({
             {vm.pages.map((p) => (
               <div
                 key={p.path}
-                className="row grid grid-cols-[1fr_90px_100px] items-center gap-3 px-3 py-2.5 text-[13px]"
+                className="row grid grid-cols-[1fr_90px_100px] items-center gap-3 px-3 py-2 text-[12.5px]"
               >
                 <span className="truncate text-[#C9C9D1]" title={p.path}>
                   {p.path}

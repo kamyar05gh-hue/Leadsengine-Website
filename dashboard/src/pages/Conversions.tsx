@@ -67,7 +67,7 @@ export default function Conversions({ tick }: { tick: number }) {
         ]}
       />
 
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2.5 md:grid-cols-5">
         <StatBox label={t.traffic.sessions} value={fmtInt(vm.totalSessions)} />
         <StatBox
           label={t.overview.conversions}
@@ -87,7 +87,7 @@ export default function Conversions({ tick }: { tick: number }) {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-5">
         <Card title={t.conversions.funnel} meta={t.conversions.hintFunnel} className="lg:col-span-3">
           {top === 0 ? (
             <EmptyState message={t.common.noData} />
@@ -98,8 +98,8 @@ export default function Conversions({ tick }: { tick: number }) {
                 return (
                   <div key={s.label}>
                     <div className="flex items-baseline justify-between gap-3">
-                      <span className="text-[13px] text-[#C9C9D1]">{s.label}</span>
-                      <span className="text-[13px] tabular-nums text-white">
+                      <span className="text-[12.5px] text-[#C9C9D1]">{s.label}</span>
+                      <span className="text-[12.5px] tabular-nums text-white">
                         {fmtInt(s.value)}
                         <span className="ml-2 text-[#5C5C66]">{fmtPct(pctOfTop)}</span>
                       </span>
@@ -107,7 +107,7 @@ export default function Conversions({ tick }: { tick: number }) {
                     {/* One hue, fading down the funnel. Four different colours
                         would imply four unrelated categories; this is one
                         population getting smaller. */}
-                    <div className="mt-2 h-[26px] overflow-hidden rounded-[6px] bg-[#0E0E11]">
+                    <div className="mt-2 h-[22px] overflow-hidden rounded-[6px] bg-[#0E0E11]">
                       <div
                         className="h-full rounded-[6px]"
                         style={{
@@ -144,12 +144,12 @@ export default function Conversions({ tick }: { tick: number }) {
             ].map((row) => (
               <div
                 key={row.label}
-                className="rounded-[10px] border border-[#16161A] bg-[#0E0E11] px-4 py-3.5"
+                className="rounded-[10px] border border-[#16161A] bg-[#0E0E11] px-3.5 py-3"
               >
-                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
+                <div className="text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
                   {row.label}
                 </div>
-                <div className="mt-2 text-[22px] font-medium tabular-nums text-white">
+                <div className="mt-2 text-[19px] font-medium tabular-nums text-white">
                   {row.value}
                 </div>
                 <div className="mt-1 text-[11px] leading-relaxed text-[#5C5C66]">{row.sub}</div>
@@ -160,7 +160,7 @@ export default function Conversions({ tick }: { tick: number }) {
       </div>
 
       <Card title={t.conversions.goals} meta={t.conversions.hintGoals}>
-        <div className="grid grid-cols-[1fr_120px_1fr] gap-3 px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
+        <div className="grid grid-cols-[1fr_120px_1fr] gap-3 px-3 pb-2 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
           <span>{t.conversions.goal}</span>
           <span className="text-right">{t.conversions.clicks}</span>
           <span className="text-right">{t.conversions.uniques}</span>
@@ -168,7 +168,7 @@ export default function Conversions({ tick }: { tick: number }) {
         {goals.map((g) => (
           <div
             key={g.name}
-            className="row grid grid-cols-[1fr_120px_1fr] items-center gap-3 px-3 py-2.5 text-[13px]"
+            className="row grid grid-cols-[1fr_120px_1fr] items-center gap-3 px-3 py-2 text-[12.5px]"
           >
             <span className="truncate text-[#C9C9D1]" title={g.name}>
               {g.name}

@@ -49,8 +49,8 @@ export default function App() {
   return (
     <div className="app-scope flex min-h-screen max-md:flex-col">
       <Sidebar page={page} onNavigate={go} lastUpdated={lastUpdated} />
-      <main className="min-w-0 flex-1 px-8 py-6 max-md:px-4">
-        <div className="mx-auto max-w-[1280px]">
+      <main className="min-w-0 flex-1 px-7 py-5 max-md:px-4">
+        <div className="mx-auto max-w-[1440px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={page}
@@ -58,7 +58,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.18 }}
-              className="flex flex-col gap-5"
+              className="flex flex-col gap-4"
             >
               {page === 'overview' && <Overview onNavigate={go} tick={tick} />}
               {page === 'traffic' && <Traffic tick={tick} />}

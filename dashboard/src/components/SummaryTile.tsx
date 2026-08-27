@@ -28,7 +28,7 @@ export default function SummaryTile({
   const gid = `spark-${label.replace(/[^a-zA-Z0-9]/g, '')}`;
 
   return (
-    <button type="button" className="tile group w-full p-5 text-left" onClick={onClick}>
+    <button type="button" className="tile group w-full p-4 text-left" onClick={onClick}>
       <div className="flex items-start justify-between gap-2">
         <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76] transition-colors duration-[140ms] group-hover:text-[#A6A6AF]">
           {label}
@@ -39,9 +39,9 @@ export default function SummaryTile({
           className="shrink-0 text-[#5C5C66] transition-all duration-[140ms] group-hover:-translate-y-px group-hover:translate-x-px group-hover:text-[#8FB4F2]"
         />
       </div>
-      <div className="mt-3 text-[26px] font-medium tabular-nums text-white">{value}</div>
+      <div className="mt-2.5 text-[22px] font-medium tabular-nums text-white">{value}</div>
       {spark && spark.length > 1 && (
-        <div className="mt-3 h-[44px]" aria-hidden="true">
+        <div className="mt-2.5 h-[38px]" aria-hidden="true">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               data={spark.map((v, i) => ({ i, v }))}
@@ -65,7 +65,7 @@ export default function SummaryTile({
           </ResponsiveContainer>
         </div>
       )}
-      <div className="mt-3 truncate text-[12px] text-[#5C5C66]" title={takeaway}>
+      <div className="mt-2.5 truncate text-[11.5px] text-[#5C5C66]" title={takeaway}>
         {takeaway}
       </div>
     </button>

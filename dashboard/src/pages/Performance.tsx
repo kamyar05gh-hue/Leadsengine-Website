@@ -122,7 +122,7 @@ export default function Performance({ tick }: { tick: number }) {
         ]}
       />
 
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2.5 md:grid-cols-5">
         {vitalRows.map((v) => {
           const s = rate(v.key);
           return <StatBox key={v.key} label={v.name} value={s.display} delta={s.label} />;
@@ -134,12 +134,12 @@ export default function Performance({ tick }: { tick: number }) {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-5">
         <Card title={t.performance.lcpTrend} meta={t.performance.hintP75} className="lg:col-span-3">
           {chartData.length === 0 ? (
             <EmptyState message={t.common.noData} />
           ) : (
-            <div className="h-[280px]">
+            <div className="h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData} margin={{ top: 4, right: 16, bottom: 0, left: -8 }}>
                   <CartesianGrid vertical={false} stroke={CHART.grid} />
@@ -195,7 +195,7 @@ export default function Performance({ tick }: { tick: number }) {
           <EmptyState message={t.common.noData} />
         ) : (
           <>
-            <div className="grid grid-cols-[150px_1fr_80px_150px] gap-3 px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
+            <div className="grid grid-cols-[150px_1fr_80px_150px] gap-3 px-3 pb-2 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
               <span>{t.performance.day}</span>
               <span>{t.performance.message}</span>
               <span className="text-right">{t.performance.count}</span>
@@ -204,7 +204,7 @@ export default function Performance({ tick }: { tick: number }) {
             {vm.errors.recent.map((e) => (
               <div
                 key={e.message}
-                className="row grid grid-cols-[150px_1fr_80px_150px] items-center gap-3 px-3 py-2.5 text-[13px]"
+                className="row grid grid-cols-[150px_1fr_80px_150px] items-center gap-3 px-3 py-2 text-[12.5px]"
               >
                 <span className="tabular-nums text-[#8A8A93]">{fmtDay(e.lastSeen)}</span>
                 <span className="truncate text-[#C9C9D1]" title={e.message}>

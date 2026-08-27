@@ -9,12 +9,12 @@ export default function StatBox({
   delta?: string;
 }) {
   return (
-    <div className="rounded-[12px] border border-[#1C1C21] bg-[#0B0B0D] px-5 py-4">
-      <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
+    <div className="rounded-[12px] border border-[#1C1C21] bg-[#0B0B0D] px-4 py-3.5">
+      <div className="text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#6B6B76]">
         {label}
       </div>
-      <div className="mt-2.5 text-[24px] font-medium tabular-nums text-white">{value}</div>
-      {delta && <div className="mt-1.5 text-[12px] tabular-nums text-[#8A8A93]">{delta}</div>}
+      <div className="mt-2 text-[21px] font-medium tabular-nums text-white">{value}</div>
+      {delta && <div className="mt-1 text-[11.5px] tabular-nums text-[#8A8A93]">{delta}</div>}
     </div>
   );
 }

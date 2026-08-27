@@ -19,15 +19,15 @@ export default function Card({
   className?: string;
 }) {
   return (
-    <section className={`rounded-[14px] border border-[#1C1C21] bg-[#0B0B0D] p-6 ${className}`}>
+    <section className={`rounded-[14px] border border-[#1C1C21] bg-[#0B0B0D] p-5 ${className}`}>
       <div className="flex items-baseline justify-between gap-4">
         <div className="flex min-w-0 items-baseline gap-3">
-          <h2 className="truncate text-[20px] font-medium text-white">{title}</h2>
-          {meta && <span className="shrink-0 text-[12px] text-[#5C5C66]">{meta}</span>}
+          <h2 className="truncate text-[17px] font-medium text-white">{title}</h2>
+          {meta && <span className="shrink-0 text-[11.5px] text-[#5C5C66]">{meta}</span>}
         </div>
         {right}
       </div>
-      <div className="mt-5">{children}</div>
+      <div className="mt-4">{children}</div>
     </section>
   );
 }
