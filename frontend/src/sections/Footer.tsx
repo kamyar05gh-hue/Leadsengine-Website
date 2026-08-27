@@ -175,15 +175,17 @@ export default function Footer(_props: { onSubpage?: boolean } = {}) {
                     },
                   ].map(({ Icon, label, body }) => (
                     <li key={label} className="flex items-start gap-3">
-                      {/* Blue, by instruction — the same icon-badge pattern as
-                          the trust ticks, so the two now agree. Gold stays for
-                          the rating stars only. */}
-                      <span
+                      {/* GOLD, AND NO RING — both by instruction. The circular
+                          plate was doing the work of a bullet and adding a
+                          third box to a column that is already a list; the
+                          mark alone reads faster. Gold rather than blue ties
+                          this block to the CTAs, which is the only other gold
+                          on the page now. */}
+                      <Icon
                         aria-hidden="true"
-                        className="mt-px grid h-7 w-7 shrink-0 place-items-center rounded-full border border-accent-bright/30 bg-accent-bright/[0.07]"
-                      >
-                        <Icon className="h-3.5 w-3.5 text-accent-bright" />
-                      </span>
+                        strokeWidth={1.9}
+                        className="mt-[3px] h-[17px] w-[17px] shrink-0 text-gold-vivid"
+                      />
                       <span className="min-w-0">
                         <span className="block text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-3">
                           {label}

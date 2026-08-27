@@ -292,6 +292,20 @@ ${apacheHeaders}
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
     RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
+    # ONE HOSTNAME. www.leadsengine.ch was serving the entire site at 200 —
+    # byte-identical to the apex, verified by hashing both responses. That is
+    # the same content on two hostnames: every page competing with itself for
+    # ranking, link equity split across two origins, and analytics counting
+    # one visitor as two. The canonical tag pointed at the apex, which limits
+    # the damage, but a canonical is a hint and a 301 is an instruction.
+    #
+    # It also matters for the HSTS preload above: that header carries
+    # includeSubDomains, so the www host is already bound by it and ought
+    # to resolve to the same place rather than to a second copy.
+    # (No backticks anywhere in this template literal — one would end it.)
+    RewriteCond %{HTTP_HOST} ^www\\.(.+)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
     # Old language-prefixed URLs. These were real pages for a while, so they
     # may be linked or indexed; language is a query param now.
     RewriteRule ^en/about/?$        /ueber-uns/?lang=en   [R=301,L]
@@ -306,6 +320,17 @@ Options -Indexes
 ServerSignature Off
 
 <FilesMatch "^\\.">
+    Require all denied
+</FilesMatch>
+
+# BUILD ARTEFACTS THAT ARE NOT FOR THE PUBLIC. _headers (Netlify/Cloudflare)
+# and the nginx conf are written into the build so they can be picked up by
+# whichever host is used; on Apache they are dead weight that was being served
+# at 200. They publish the whole security configuration in one fetch —
+# directive by directive, including which paths are behind auth — which is
+# free reconnaissance for anyone looking for a gap. They stay in the build
+# because another host may need them; they are simply not readable over HTTP.
+<FilesMatch "^(_headers|_redirects)$|\\.(nginx\\.conf|conf|map|log|bak|orig|tmp)$">
     Require all denied
 </FilesMatch>
 `;

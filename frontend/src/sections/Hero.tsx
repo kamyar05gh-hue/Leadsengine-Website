@@ -155,14 +155,18 @@ export default function Hero() {
             {/* More air above than a normal stacked element gets: this is a
                 separate claim, not a caption on the button, and at mt-6 the
                 two read as one block. */}
-            <p className="mt-8 flex items-center gap-3">
-              <span
+            {/* NO BADGE ROUND THE MARK, by instruction — the ringed circle
+                made a one-line credential look like a feature tile. The mark
+                now sits directly beside the words in the accent blue, at the
+                cap height of the line it belongs to, which is what a mark
+                paired with text is supposed to do. */}
+            <p className="mt-8 flex items-center gap-2.5">
+              <ShieldCheck
                 aria-hidden="true"
-                className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold-vivid/35 bg-gold-vivid/[0.10] text-gold-vivid"
-              >
-                <ShieldCheck strokeWidth={1.8} className="h-[18px] w-[18px]" />
-              </span>
-              <span className="text-[15px] font-semibold leading-[1.35] tracking-[-0.01em] text-ink">
+                strokeWidth={1.9}
+                className="h-[17px] w-[17px] shrink-0 text-accent-bright"
+              />
+              <span className="text-[14px] font-semibold leading-[1.35] tracking-[-0.01em] text-ink">
                 {t.hero.trustLine}
               </span>
             </p>

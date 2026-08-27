@@ -195,10 +195,42 @@ type Chrome = {
   sendFg: string;
   /** Send button shape — Claude and Perplexity use a square-ish button. */
   sendSquare?: boolean;
+  /**
+   * THE PLATFORM'S TYPEFACE, or the closest thing we may legally ship.
+   *
+   * Colour and chrome alone were not enough to tell the five apart at a
+   * glance — every one of them was rendering in Inter, which is the site's
+   * font, not theirs. Type is most of what makes a product's interface
+   * recognisable, so each tab now sets its own.
+   *
+   * THESE ARE SUBSTITUTES, AND DELIBERATELY SO. The real faces — Söhne and
+   * OpenAI Sans, Styrene and Tiempos, Google Sans, FK Grotesk Neue, Chirp —
+   * are all licensed and none of them may be redistributed from this domain.
+   * Each stack below is the nearest widely-available relative of the real
+   * thing, chosen for family resemblance rather than for novelty:
+   *
+   *   ChatGPT     Söhne is Helvetica-derived, so Helvetica/Arial.
+   *   Claude      Tiempos is a Times-derived serif, and the serif IS what
+   *               makes Claude look like Claude. Georgia is its closest
+   *               universally-installed relative.
+   *   Google AI   Google Sans is Roboto's geometric cousin; Roboto ships on
+   *               every Android device and falls back to Segoe UI elsewhere.
+   *   Perplexity  FK Grotesk Neue is a quirky neo-grotesque; Space Grotesk
+   *               is the closest free equivalent and is the ONE webfont this
+   *               adds, at a single weight.
+   *   Grok        xAI's identity is terminal-technical, and a mono is both
+   *               true to that and the clearest possible contrast with the
+   *               other four.
+   *
+   * Everything inside the surface inherits this, EXCEPT the elements that
+   * carry `le-mono` — timecodes and counters, which must stay tabular.
+   */
+  font: string;
 };
 
 const CHROME: Record<string, Chrome> = {
   ChatGPT: {
+    font: '"Helvetica Neue", Helvetica, Arial, sans-serif',
     accent: "#10a37f",
     surface: "rgb(33 33 33)",
     head: "rgb(33 33 33)",
@@ -211,6 +243,7 @@ const CHROME: Record<string, Chrome> = {
     sendFg: "#0d0d0d",
   },
   "Google AI": {
+    font: 'Roboto, "Segoe UI", system-ui, sans-serif',
     accent: "#4285f4",
     surface: "rgb(27 28 31)",
     head: "rgb(27 28 31)",
@@ -225,6 +258,7 @@ const CHROME: Record<string, Chrome> = {
     sendFg: "#ffffff",
   },
   Claude: {
+    font: 'Georgia, "Times New Roman", Times, serif',
     accent: "#c96442",
     surface: "rgb(38 35 32)",
     head: "rgb(30 28 26)",
@@ -238,6 +272,7 @@ const CHROME: Record<string, Chrome> = {
     sendSquare: true,
   },
   Perplexity: {
+    font: '"Space Grotesk", "Segoe UI", system-ui, sans-serif',
     accent: "#20a2b4",
     surface: "rgb(24 30 32)",
     head: "rgb(20 26 28)",
@@ -251,6 +286,7 @@ const CHROME: Record<string, Chrome> = {
     sendSquare: true,
   },
   Grok: {
+    font: 'ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace',
     accent: "#ffffff",
     surface: "rgb(0 0 0)",
     head: "rgb(0 0 0)",
@@ -266,6 +302,9 @@ const CHROME: Record<string, Chrome> = {
 };
 
 const FALLBACK_CHROME: Chrome = {
+  /* The site's own face, for any engine the dictionary names that has no
+     chrome entry — it should look like us, not like a guess at them. */
+  font: 'Inter, ui-sans-serif, system-ui, sans-serif',
   accent: "rgb(62 151 240)",
   surface: "rgb(17 20 27)",
   head: "rgb(17 20 27)",
@@ -437,7 +476,11 @@ export default function ChatMockup() {
             the difference and keeps the frame identical for all five. */}
         <div
           className="flex min-h-[500px] flex-col overflow-hidden rounded-2xl border border-line transition-colors duration-500 sm:min-h-[564px]"
-          style={{ backgroundColor: chrome.surface }}
+          /* `fontFamily` on the surface, so every label, bubble and chip
+             inside inherits the platform's face in one place rather than
+             each needing to remember. `.le-mono` still wins where it is set,
+             which is what keeps counters tabular. */
+          style={{ backgroundColor: chrome.surface, fontFamily: chrome.font }}
         >
           {/* Header. The `model` products put a model selector top-left with a
               chevron; the `wordmark` products put their name and mark. Both

@@ -14,7 +14,7 @@ export const SITE = {
      It is a Heyflow funnel rather than a calendar booking: the previous
      Calendly link asked for a slot before it asked anything about the
      visitor, which is a large commitment for a first click. */
-  ctaUrl: "https://opinion-pickle-blushing.heyflow.site/leads_engine#start",
+  ctaUrl: "https://opinion-pickle-blushing.heyflow.site/leads_engine#kundengewinnung",
   /* FUTURE MEDIA's own details. The Impressum is Future Media GmbH's legal
      notice, so these are the ones that belong there and in the JSON-LD. */
   email: "info@future-media.ch",

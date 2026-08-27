@@ -32,7 +32,7 @@
  * RUNS AFTER the frontend build and BEFORE `security-headers.mjs`, because it
  * adds `<script type="application/ld+json">` blocks that the CSP must hash.
  */
-import { readFileSync, writeFileSync, mkdtempSync, rmSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdtempSync, rmSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { tmpdir } from "node:os";
@@ -166,6 +166,69 @@ const ROUTES = [
 const content = await loadContent();
 const t = content.de; // German is the primary language and the default render.
 const { SITE } = content;
+
+/* ---------------------------------------------------------------------------
+ * SITEMAP
+ *
+ * WHY IT IS GENERATED AND NOT A FILE IN public/.
+ * It was a static file whose lastmod said 2026-08-24 for every URL, and it
+ * kept saying that through a fortnight of daily changes. A stale lastmod is
+ * worse than none: crawlers use it to decide what to re-fetch, so a site that
+ * changes constantly was telling every engine it had not changed at all. On a
+ * product whose entire proposition is being current inside AI answers, that
+ * is the one signal that must not lie.
+ *
+ * Now it is written on every build from the BUILD TIME of the file each URL
+ * actually serves, so a page that did not change keeps its old date and a
+ * page that did gets a new one.
+ *
+ * The hreflang alternates are here as well as in each page's <head>. Search
+ * engines accept either; having both means a crawler that reads the sitemap
+ * first learns about the English variant without fetching the German page,
+ * which is the case that matters for an answer engine assembling context.
+ * ------------------------------------------------------------------------ */
+function buildSitemap() {
+  const urls = [
+    { path: "", priority: "1.0", changefreq: "weekly" },
+    { path: "ueber-uns/", priority: "0.8", changefreq: "monthly" },
+    { path: "impressum/", priority: "0.3", changefreq: "yearly" },
+    { path: "datenschutz/", priority: "0.3", changefreq: "yearly" },
+    { path: "agb/", priority: "0.3", changefreq: "yearly" },
+  ];
+
+  const body = urls
+    .map(({ path, priority, changefreq }) => {
+      const file = join(BUILD, path, "index.html");
+      /* The file's own mtime, not today's date: rebuilding without changing a
+         page must not claim the page changed. */
+      const lastmod = statSync(file).mtime.toISOString().slice(0, 10);
+      const loc = ORIGIN + "/" + path;
+      return [
+        "    <url>",
+        `        <loc>${loc}</loc>`,
+        `        <xhtml:link rel="alternate" hreflang="de-CH" href="${loc}?lang=de" />`,
+        `        <xhtml:link rel="alternate" hreflang="en" href="${loc}?lang=en" />`,
+        `        <xhtml:link rel="alternate" hreflang="x-default" href="${loc}" />`,
+        `        <lastmod>${lastmod}</lastmod>`,
+        `        <changefreq>${changefreq}</changefreq>`,
+        `        <priority>${priority}</priority>`,
+        "    </url>",
+      ].join("\n");
+    })
+    .join("\n");
+
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+    '        xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    body,
+    "</urlset>",
+    "",
+  ].join("\n");
+}
+
+writeFileSync(join(BUILD, "sitemap.xml"), buildSitemap(), "utf8");
+console.log("  sitemap.xml               regenerated with real lastmod");
 
 const written = [];
 

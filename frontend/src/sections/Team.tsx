@@ -21,7 +21,7 @@ export default function Team() {
     <section
       id="team"
       aria-labelledby="team-kicker"
-      className="le-noise le-section relative scroll-mt-24 overflow-hidden bg-bg"
+      className="le-noise relative scroll-mt-24 overflow-hidden bg-bg pb-[clamp(3.5rem,6vw,5.5rem)] pt-[clamp(2rem,3.5vw,3rem)]"
     >
       {/* One cool light source, mirrored from Benefits' warm one so the two
           sections balance rather than repeat. Static: it sets temperature,
