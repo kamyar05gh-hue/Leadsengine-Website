@@ -314,14 +314,19 @@
             box-shadow 260ms var(--le-ease),
             transform 180ms var(--le-ease-out);
     }
+    /* NO MOVEMENT ON HOVER, AND A QUIETER BLOOM — both at the client's
+       request after seeing it. The 1px lift is gone entirely: it read as
+       restless on a page where nothing else shifts under the cursor. The
+       glow now brightens by about a third rather than doubling, so hover
+       reads as "this is live" instead of as a light switch. The press state
+       below is untouched — that one is a direct answer to a finger, and on
+       touch there is no hover to have felt first. */
     .le-cta-pill:hover {
-        border-color: rgb(var(--le-accent-bright-rgb));
+        border-color: rgb(var(--le-accent-bright-rgb) / 0.9);
         box-shadow:
-            0 0 0 1px rgb(var(--le-accent-bright-rgb) / 0.4),
-            0 0 48px -2px rgb(var(--le-accent-bright-rgb) / 0.7),
-            0 0 16px -4px rgb(var(--le-accent-bright-rgb) / 0.5),
-            0 14px 34px -16px rgba(0, 0, 0, 0.95);
-        transform: translateY(-1px);
+            0 0 0 1px rgb(var(--le-accent-bright-rgb) / 0.22),
+            0 0 34px -4px rgb(var(--le-accent-bright-rgb) / 0.5),
+            0 10px 30px -14px rgba(0, 0, 0, 0.9);
     }
     .le-cta-pill:active {
         transform: translateY(0) scale(0.97);
@@ -331,6 +336,36 @@
             0 0 28px -6px rgb(var(--le-accent-bright-rgb) / 0.6),
             0 6px 16px -12px rgba(0, 0, 0, 0.95);
     }
+    /* ------------------------------------------------------------------
+       THE FLOATING WIDGET — gold, not blue, and on purpose.
+
+       Every CTA inside the page is `.le-cta-pill` in brand blue. This one is
+       fixed above the page rather than part of it, and the client asked for
+       its original gold treatment back to keep that distinction. Hover
+       brightens the edge and the bloom; nothing moves, because a fixed
+       element that shifts under the cursor pulls attention off whatever is
+       being read behind it.
+       ------------------------------------------------------------------ */
+    .le-gold-pill {
+        border-color: rgb(var(--le-gold-bright-rgb) / 0.7);
+        box-shadow:
+            0 0 30px -4px rgb(var(--le-gold-rgb) / 0.6),
+            0 10px 30px -14px rgba(0, 0, 0, 0.9);
+        transition:
+            border-color 500ms var(--le-ease),
+            box-shadow 500ms var(--le-ease);
+    }
+    .le-gold-pill:hover {
+        border-color: rgb(var(--le-gold-bright-rgb));
+        box-shadow:
+            0 0 38px -2px rgb(var(--le-gold-rgb) / 0.85),
+            0 10px 30px -14px rgba(0, 0, 0, 0.9);
+    }
+    .le-gold-pill:focus-visible {
+        outline: 2px solid rgb(var(--le-gold-bright-rgb));
+        outline-offset: 3px;
+    }
+
     /* The second CTA in a pair. Same object, dimmer light, so the primary
        still reads as the primary when the two sit side by side. */
     .le-cta-pill--quiet {

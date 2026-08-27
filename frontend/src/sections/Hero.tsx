@@ -105,7 +105,13 @@ export default function Hero() {
                 and blue type from first paint. The Swiss flag sits immediately
                 before the label — provenance stated in the first line of the
                 page, not buried in the footer. */}
-            <p className="le-kicker flex items-center gap-2.5">
+            {/* A size below the `le-kicker` default, and only here. The
+                eyebrow sets up the headline; at the shared 10.5px it was
+                competing with it, and on a phone the new wording wrapped to
+                two full-width lines of tracked-out caps directly above the
+                H1. Tightening the tracking with the size keeps it legible
+                rather than merely smaller. */}
+            <p className="le-kicker flex items-center gap-2.5 text-[9.5px] tracking-[0.16em] sm:text-[10px]">
               <span aria-hidden="true" className="block h-px w-6 bg-accent-bright" />
               <SwissFlag />
               {t.hero.eyebrow}
