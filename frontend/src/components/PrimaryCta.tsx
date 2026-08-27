@@ -10,14 +10,16 @@ import { useLang } from "@/i18n/LanguageContext";
  *   `pm-cta` alone      — the secondary goal (outline variant, header only).
  * `le-magnetic` tells CursorGlow to brighten its ring over the button.
  *
- * Motion contract (explicit client request): on hover the ONLY thing that
- * happens is the darker fill sliding in from the left — that lives in
- * `.le-btn` in index.css. No glow, no shadow, no lift, no specular sweep, no
- * scale; the button never changes position. The arrow nudging 2px is inside
- * the shape and is deliberately kept.
+ * ONE APPEARANCE FOR EVERY CTA, INCLUDING THE FIXED ONE.
+ * The client chose the floating widget's treatment as the house style: a dark
+ * pill on a lit blue edge. `.le-cta-pill` in index.css carries the whole
+ * thing — see the note there for the hover/press behaviour, which replaces
+ * the earlier "nothing may move" contract at the client's request.
  *
- * The ghost variant carries `hover:translate-y-0` because `.le-btn-ghost`
- * ships a -2px lift that would break the same contract.
+ * `variant` is kept because callers still pass it and the two variants still
+ * differ in weight, but both are now the same pill: `outline` simply sits at
+ * a lower glow, for the places where a second CTA appears beside a first and
+ * two identical pills would compete.
  *
  * Sizes are deliberately small. A restrained button is what separates a
  * premium product surface from a landing-page template.
@@ -46,14 +48,13 @@ export default function PrimaryCta({
 }) {
   const { t } = useLang();
 
-  /* The outline variant carries its accent AT REST — a blue edge and blue type
-     from first paint. Hover only intensifies what is already there; it never
-     introduces the colour. `hover:translate-y-0` cancels the -2px lift that
-     `.le-btn-ghost` ships, because the button must never move. */
+  /* THE MARKER CLASSES ARE THE ANALYTICS CONTRACT and must not move:
+     `pm-cta pm-cta-btn` is the primary goal in the dashboard, `pm-cta` alone
+     the secondary. Only the appearance changed. */
   const skin =
     variant === "outline"
-      ? "pm-cta le-btn-ghost border-accent-bright/45 bg-accent-bright/[0.06] text-hi hover:translate-y-0 hover:border-accent-bright hover:text-hi-strong"
-      : "pm-cta pm-cta-btn le-btn text-white";
+      ? "pm-cta le-cta-pill le-cta-pill--quiet"
+      : "pm-cta pm-cta-btn le-cta-pill";
 
   return (
     <a

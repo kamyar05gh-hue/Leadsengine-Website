@@ -14,14 +14,11 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
    for the active-link highlight but had no link, and the testimonials had
    neither. Both are now linked, so the bar reflects what the page actually
    contains and every observed section is reachable from it. */
-const SECTION_IDS = [
-  "so-funktionierts",
-  "zielgruppe",
-  "markt-daten",
-  "vorteile",
-  "stimmen",
-  "faq",
-] as const;
+/* Only ids that still exist on the page. `zielgruppe` and `vorteile` were
+   removed along with their sections; observing a missing id costs nothing but
+   quietly hides the fact that the nav and the page have drifted apart, which
+   is exactly the bug the note above records. */
+const SECTION_IDS = ["so-funktionierts", "markt-daten", "stimmen", "faq"] as const;
 type SectionId = (typeof SECTION_IDS)[number];
 
 /** The one About URL. Language is a query param on this site, never a path. */
@@ -74,12 +71,12 @@ export default function Header({
      subpages cannot end up with different navs. */
   const links: { id?: SectionId; href?: string; label: string }[] = [
     { id: "so-funktionierts", label: t.nav.how },
-    { id: "zielgruppe", label: t.nav.audience },
     { id: "markt-daten", label: t.nav.results },
-    { id: "vorteile", label: t.nav.benefits },
     /* "Stimmen" removed at the client's request. The section itself stays on
        the page and keeps its id, so the anchor still resolves for anything
-       that links to it — it simply is not advertised in the nav any more. */
+       that links to it — it simply is not advertised in the nav any more.
+       "Für wen" and "Vorteile" are gone for a different reason: the sections
+       they pointed at were deleted. */
     { id: "faq", label: t.nav.faq },
     { href: ABOUT_HREF, label: t.nav.about },
   ];

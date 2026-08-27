@@ -7,8 +7,6 @@ export const en: Dict = {
 
   nav: {
     how: "How it works",
-    audience: "Who it's for",
-    benefits: "Benefits",
     results: "Results",
     voices: "Voices",
     faq: "FAQ",
@@ -35,58 +33,7 @@ export const en: Dict = {
     trustLine: "7 years of experience in lead generation",
   },
 
-  pain: {
-    kicker: "The blind spot",
-    title: "You are losing customers without noticing.",
-    lead: "When an AI recommends someone else, you never find out. There is no click to count and no statistic that shows it. The customer was there for a moment, then gone.",
-    items: [
-      {
-        step: "1",
-        title: "Someone needs exactly what you offer",
-        body: "A potential customer tells an AI their problem and asks who can solve it: your service, their region, their budget.",
-      },
-      {
-        step: "2",
-        title: "The AI names three. Yours is missing.",
-        body: "It gives no long list, just three to five providers. Anyone not named there simply does not exist for that customer.",
-      },
-      {
-        step: "3",
-        title: "You never find out it happened",
-        body: "No visit, no click, no line in your analytics. The job goes to a competitor, and in your numbers that day looks like any other.",
-      },
-    ],
-    closing: "You cannot win what you cannot see.",
-  },
 
-  shift: {
-    title: "AI only recommends who it knows.",
-    sub: "And that changes how customers find you.",
-    stats: [
-      {
-        value: 45,
-        decimals: 0,
-        suffix: "%",
-        label: "of B2B buyers use generative AI for their research.",
-        source: "Gartner, B2B Buyer Survey 2026 (n=645)",
-      },
-      {
-        value: 42,
-        decimals: 0,
-        suffix: "%",
-        label: "of purchase decisions are already made with AI support.",
-        source: "NielsenIQ, Agentic Commerce Tracker 2026",
-      },
-      {
-        value: 3.8,
-        decimals: 1,
-        suffix: "M",
-        label: "people in Switzerland use AI tools. And rising.",
-        source: "IGEM-Digimonitor 2025",
-      },
-    ],
-    sourceLabel: "Source",
-  },
 
   problem: {
     kicker: "What changed",
@@ -199,31 +146,6 @@ export const en: Dict = {
     badges: ["Built in-house", "ChatGPT · Perplexity · Google AI · Claude · Grok", "Free analysis"],
   },
 
-  audience: {
-    kicker: "What we optimise for",
-    title: "Visible to your customers.",
-    lead: "Reach is easy. Reaching the right people is the work.",
-    body: "It does you no good if an AI mentions you somewhere. It does you good if it names you on exactly the question your next customer asks: in your industry, in your region, moments before they decide. Those are the only questions we optimise for.",
-    rings: [
-      {
-        label: "All AI questions",
-        note: "Millions a day. The vast majority have nothing to do with your business.",
-      },
-      {
-        label: "Your industry",
-        note: "Questions that are actually about what you offer.",
-      },
-      {
-        label: "Your region",
-        note: "Asked by people who could realistically hire you.",
-      },
-      {
-        label: "About to buy",
-        note: "Someone is comparing and wants a name. This is where we make you visible.",
-      },
-    ],
-    closing: "Ten mentions in front of the right people are worth more than a thousand in front of the wrong ones.",
-  },
 
   /* Only the strip survives — the six-item grid was removed. */
   features: {
@@ -316,36 +238,6 @@ export const en: Dict = {
 
 
 
-  benefits: {
-    kicker: "Your benefits",
-    title: "More visibility, enquiries and revenue.",
-    items: [
-      {
-        title: "Visible at the moment of purchase",
-        body: "Visible for the questions customers ask just before buying.",
-      },
-      {
-        title: "Measurable & transparent",
-        body: "You see exactly when, where and why your company is named.",
-      },
-      {
-        title: "More than SEO",
-        body: "We go beyond Google rankings and get you into AI-generated answers.",
-      },
-      {
-        title: "Continuously better",
-        body: "Every month new data, new measures, better results.",
-      },
-      {
-        title: "From Switzerland",
-        body: "Developed in Bern & Zurich. Your data stays here. Short paths, clear contacts.",
-      },
-      {
-        title: "One named contact",
-        body: "No ticket queue. One person who knows your business and picks up.",
-      },
-    ],
-  },
 
   testimonials: {
     kicker: "Voices",

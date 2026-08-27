@@ -140,13 +140,22 @@ export default function Hero() {
               than after it. Small, quiet, and never competing with the CTA —
               it is a footnote to the button, not a second call to action. */}
           <Reveal delay={520}>
-            <p className="mt-5 flex items-center gap-2.5 text-[13px] leading-[1.45] text-ink-3">
-              <ShieldCheck
+            {/* Given real weight at the client's request: white rather than
+                the muted grey, a step up in size, semibold, and the mark set
+                in a ringed badge instead of floating loose beside the text.
+                The badge is what makes it read as a credential rather than as
+                a caption — it is the same gold-ringed treatment the site uses
+                for its other marks, at the size of the line it sits on. */}
+            <p className="mt-6 flex items-center gap-3">
+              <span
                 aria-hidden="true"
-                strokeWidth={1.7}
-                className="h-[17px] w-[17px] shrink-0 text-gold-vivid"
-              />
-              {t.hero.trustLine}
+                className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold-vivid/35 bg-gold-vivid/[0.10] text-gold-vivid"
+              >
+                <ShieldCheck strokeWidth={1.8} className="h-[18px] w-[18px]" />
+              </span>
+              <span className="text-[15px] font-semibold leading-[1.35] tracking-[-0.01em] text-ink">
+                {t.hero.trustLine}
+              </span>
             </p>
           </Reveal>
         </div>

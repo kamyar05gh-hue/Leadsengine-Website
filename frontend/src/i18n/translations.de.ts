@@ -10,8 +10,6 @@ export const de = {
 
   nav: {
     how: "So funktioniert's",
-    audience: "Für wen",
-    benefits: "Vorteile",
     results: "Ergebnisse",
     voices: "Stimmen",
     faq: "FAQ",
@@ -41,60 +39,7 @@ export const de = {
     trustLine: "7 Jahre Erfahrung in der Leadgenerierung",
   },
 
-  /* The blind spot. Written to be understood by someone who has never heard
-     of AEO or GEO: three concrete beats, no jargon, one plain conclusion. */
-  pain: {
-    kicker: "Der blinde Fleck",
-    title: "Du verlierst Kunden, ohne es zu merken.",
-    lead: "Wenn eine KI jemand anderen empfiehlt, merkst Du gar nichts davon. Es gibt keinen Klick zum Zählen und keine Statistik, die es Dir zeigt. Der Kunde war kurz da und ist wieder weg.",
-    items: [
-      {
-        step: "1",
-        title: "Jemand sucht genau das, was Du anbietest",
-        body: "Ein möglicher Kunde schildert einer KI sein Problem und fragt, wer es lösen kann: Deine Leistung, seine Region, sein Budget.",
-      },
-      {
-        step: "2",
-        title: "Die KI nennt drei Namen. Deiner fehlt.",
-        body: "Sie zeigt keine lange Liste, nur drei bis fünf Anbieter. Wer da nicht auftaucht, existiert für diesen Kunden schlicht nicht.",
-      },
-      {
-        step: "3",
-        title: "Du erfährst nie, dass es passiert ist",
-        body: "Kein Besuch, kein Klick, keine Zeile in Deiner Statistik. Der Auftrag geht an die Konkurrenz, und in Deinen Zahlen sieht der Tag aus wie jeder andere.",
-      },
-    ],
-    closing: "Was Du nicht siehst, kannst Du nicht gewinnen.",
-  },
 
-  shift: {
-    title: "KI empfiehlt nur, wen sie kennt.",
-    sub: "Und das verändert, wie Kunden Dich finden.",
-    stats: [
-      {
-        value: 45,
-        decimals: 0,
-        suffix: "%",
-        label: "der B2B-Einkäufer nutzen generative KI für ihre Recherche.",
-        source: "Gartner, B2B Buyer Survey 2026 (n=645)",
-      },
-      {
-        value: 42,
-        decimals: 0,
-        suffix: "%",
-        label: "der Kaufentscheide fallen bereits mit KI-Unterstützung.",
-        source: "NielsenIQ, Agentic Commerce Tracker 2026",
-      },
-      {
-        value: 3.8,
-        decimals: 1,
-        suffix: " Mio.",
-        label: "Menschen in der Schweiz nutzen KI-Tools. Tendenz steigend.",
-        source: "IGEM-Digimonitor 2025",
-      },
-    ],
-    sourceLabel: "Quelle",
-  },
 
   problem: {
     kicker: "Was sich verändert hat",
@@ -223,38 +168,6 @@ export const de = {
     badges: ["Eigens entwickelt", "ChatGPT · Perplexity · Google AI · Claude · Grok", "Analyse kostenlos"],
   },
 
-  /* What actually separates Leads Engine: not more visibility, but visibility
-     with the people who buy. Never named as a "USP" in the copy. */
-  audience: {
-    kicker: "Worauf wir optimieren",
-    /* "Überall sichtbar." dropped at the client's request — the sentence it
-       set up is the one that matters, and the half it replaced was the
-       generic half. */
-    title: "Sichtbar bei Deinen Kunden.",
-    lead: "Reichweite ist einfach. Die richtigen Menschen zu erreichen ist die Arbeit.",
-    body: "Es nützt Dir nichts, wenn eine KI Dich irgendwo nennt. Es nützt Dir etwas, wenn sie Dich bei genau der Frage nennt, die Dein nächster Kunde stellt: in Deiner Branche, in Deiner Region, kurz bevor er sich entscheidet. Nur auf diese Fragen optimieren wir uns.",
-    /* The four rings of the target, outermost first. The last one is the
-       bullseye and is the only one that earns the accent. */
-    rings: [
-      {
-        label: "Alle KI-Fragen",
-        note: "Millionen Fragen pro Tag. Die allermeisten haben mit Deinem Geschäft nichts zu tun.",
-      },
-      {
-        label: "Deine Branche",
-        note: "Fragen, in denen es überhaupt um das geht, was Du anbietest.",
-      },
-      {
-        label: "Deine Region",
-        note: "Gestellt von Menschen, die Dich tatsächlich beauftragen könnten.",
-      },
-      {
-        label: "Kurz vor dem Kauf",
-        note: "Jemand vergleicht und will einen Namen. Hier machen wir Dich sichtbar.",
-      },
-    ],
-    closing: "Zehn Nennungen bei den richtigen Menschen sind mehr wert als tausend bei den falschen.",
-  },
 
   /* The feature strip directly under the hero: six plain statements plus a
      continuously looping row of the platforms that get checked. */
@@ -351,36 +264,6 @@ export const de = {
     sources: "Quellen: Gartner B2B Buyer Survey 2026 (n=645) · NielsenIQ Agentic Commerce Tracker 2026 · IGEM-Digimonitor 2025",
   },
 
-  benefits: {
-    kicker: "Deine Vorteile",
-    title: "Mehr Sichtbarkeit, Anfragen und Umsatz.",
-    items: [
-      {
-        title: "Im Kaufmoment sichtbar",
-        body: "Sichtbar bei Fragen, die Kunden kurz vor dem Kauf stellen.",
-      },
-      {
-        title: "Messbar & transparent",
-        body: "Du siehst genau, wann, wo und warum Du genannt wirst.",
-      },
-      {
-        title: "Mehr als SEO",
-        body: "Über Google-Rankings hinaus, hinein in KI-Antworten.",
-      },
-      {
-        title: "Kontinuierlich besser",
-        body: "Jeden Monat neue Daten, neue Massnahmen, bessere Ergebnisse.",
-      },
-      {
-        title: "Aus der Schweiz",
-        body: "Entwickelt in Bern & Zürich. Deine Daten bleiben hier.",
-      },
-      {
-        title: "Ein fester Ansprechpartner",
-        body: "Kein Ticket-System. Eine Person, die Dein Geschäft kennt und erreichbar ist.",
-      },
-    ],
-  },
 
   testimonials: {
     kicker: "Stimmen",

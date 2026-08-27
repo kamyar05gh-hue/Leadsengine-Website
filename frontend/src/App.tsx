@@ -42,14 +42,10 @@ import Team from "@/sections/Team";
 const loaders = {
   VideoSection: () => import("@/sections/VideoSection"),
   PlatformStrip: () => import("@/sections/PlatformStrip"),
-  Pain: () => import("@/sections/Pain"),
-  MarketShift: () => import("@/sections/MarketShift"),
   Problem: () => import("@/sections/Problem"),
   WhatIs: () => import("@/sections/WhatIs"),
-  Audience: () => import("@/sections/Audience"),
   BuyerIntent: () => import("@/sections/BuyerIntent"),
   MarketData: () => import("@/sections/MarketData"),
-  Benefits: () => import("@/sections/Benefits"),
   Testimonials: () => import("@/sections/Testimonials"),
   Faq: () => import("@/sections/Faq"),
   FinalCta: () => import("@/sections/FinalCta"),
@@ -58,14 +54,10 @@ const loaders = {
 
 const VideoSection = lazy(loaders.VideoSection);
 const PlatformStrip = lazy(loaders.PlatformStrip);
-const Pain = lazy(loaders.Pain);
-const MarketShift = lazy(loaders.MarketShift);
 const Problem = lazy(loaders.Problem);
 const WhatIs = lazy(loaders.WhatIs);
-const Audience = lazy(loaders.Audience);
 const BuyerIntent = lazy(loaders.BuyerIntent);
 const MarketData = lazy(loaders.MarketData);
-const Benefits = lazy(loaders.Benefits);
 const Testimonials = lazy(loaders.Testimonials);
 const Faq = lazy(loaders.Faq);
 const FinalCta = lazy(loaders.FinalCta);
@@ -160,12 +152,13 @@ export default function App() {
         <S>
           <Problem />
         </S>
-        <S>
-          <Pain />
-        </S>
-        <S>
-          <MarketShift />
-        </S>
+        {/* FOUR SECTIONS WERE REMOVED HERE AND BELOW, BY INSTRUCTION:
+            "KI empfiehlt nur, wen sie kennt" (MarketShift), "Du verlierst
+            Kunden, ohne es zu merken" (Pain), "Sichtbar bei Deinen Kunden"
+            (Audience) and "Mehr Sichtbarkeit, Anfragen und Umsatz"
+            (Benefits). Their files, their dictionary entries and their two
+            header nav items went with them, so nothing is left pointing at a
+            section that no longer exists. */}
         {/* The platforms we check, full width. Right above "What is Leads
             Engine?" so a visitor meets the proof of what gets checked in the
             same breath as the explanation of why. */}
@@ -175,18 +168,11 @@ export default function App() {
         <S>
           <WhatIs />
         </S>
-        {/* What actually separates us: the right audience, not more reach. */}
-        <S>
-          <Audience />
-        </S>
         <S>
           <BuyerIntent />
         </S>
         <S>
           <MarketData />
-        </S>
-        <S>
-          <Benefits />
         </S>
         <S>
           <Testimonials />

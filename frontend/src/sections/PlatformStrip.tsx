@@ -64,7 +64,7 @@ export default function PlatformStrip() {
               them clearly dominant over the 15/17px label without that. */}
           <PlatformMark
             name={name}
-            className="h-6 w-6 shrink-0 text-hi sm:h-[26px] sm:w-[26px]"
+            className="h-5 w-5 shrink-0 text-hi sm:h-[22px] sm:w-[22px]"
           />
           <span className="whitespace-nowrap text-[15px] font-medium tracking-[-0.01em] text-ink-2 sm:text-[17px]">
             {name}
