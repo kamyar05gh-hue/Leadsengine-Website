@@ -26,6 +26,7 @@ import { useLang } from "@/i18n/LanguageContext";
 import { useInView } from "@/hooks/useInView";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { SITE } from "@/constants/site";
+import ScrollMarquee from "@/components/ScrollMarquee";
 
 /** Soft edges, so logos enter and leave the band instead of popping. */
 const EDGE_MASK = "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)";
@@ -214,12 +215,19 @@ export default function TrustedBy() {
         </p>
       </div>
 
-      {/* PHONE: static, wrapped, one copy. See the note at the top of this
-          file — the animated track is far too wide for an iOS compositor. */}
-      <div className="le-container md:hidden">
-        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6">
+      {/* PHONE: the loop is back, but SCROLLED rather than transformed — a
+          transform of this track asks iOS for a texture it cannot allocate,
+          which is the whole story in the note at the top of this file. A
+          scroller only paints what is on screen, so the cost is flat however
+          many logos are in the row. See ScrollMarquee.tsx. */}
+      <ScrollMarquee
+        className="md:hidden"
+        speed={48}
+        ariaLabel={t.trusted.label}
+      >
+        <ul className="flex shrink-0 items-center gap-10 pr-10">
           {items.map(({ name, slug, url }) => (
-            <li key={slug} className="flex items-center">
+            <li key={slug} className="flex shrink-0 items-center">
               {url ? (
                 <img
                   src={url}
@@ -227,10 +235,10 @@ export default function TrustedBy() {
                   title={name || undefined}
                   loading="lazy"
                   decoding="async"
-                  className="block object-contain opacity-80"
+                  className="block shrink-0 object-contain opacity-80"
                   style={{
-                    height: `${Math.round(box(slug).height * 0.8)}px`,
-                    width: `${Math.round(box(slug).width * 0.8)}px`,
+                    height: `${Math.round(box(slug).height * 0.85)}px`,
+                    width: `${Math.round(box(slug).width * 0.85)}px`,
                   }}
                 />
               ) : (
@@ -241,7 +249,7 @@ export default function TrustedBy() {
             </li>
           ))}
         </ul>
-      </div>
+      </ScrollMarquee>
 
       {/* md AND UP: the loop, unchanged. */}
       <div

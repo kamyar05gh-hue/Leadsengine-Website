@@ -153,7 +153,6 @@ export const en: Dict = {
   },
 
   intent: {
-    kicker: "Side by side",
     title: "We change the outcome, while other tools just measure.",
     body: "Most tools hand you a score and leave you with it. We show you why competitors rank ahead of you, close the gaps ourselves, and measure again afterwards. Eight points where that difference shows.",
     othersLabel: "Other tools",
@@ -183,7 +182,6 @@ export const en: Dict = {
   data: {
     kicker: "Results",
     title: "The market Leads Engine unlocks.",
-    sub: "How Swiss demand is shifting into AI answers.",
     adoption: {
       title: "AI adoption in Switzerland",
       meta: "Share of the population using AI tools",
@@ -287,9 +285,6 @@ export const en: Dict = {
     ],
     closing: "Now we bring that experience to where your customers will search tomorrow: the AI answer.",
     teamKicker: "The team",
-    teamTitle: "The people behind Leads Engine",
-    teamLead:
-      "Leads Engine is built in collaboration with Future Media, a marketing agency in Bern and Zurich. The same team that has worked with Swiss brands for seven years builds and runs the platform.",
     roles: {
       Elias: "CEO & Founder",
       Livia: "Marketing Manager",

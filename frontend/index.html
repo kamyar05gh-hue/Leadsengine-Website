@@ -89,11 +89,21 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="dns-prefetch" href="https://eu.i.posthog.com" />
+        <!-- DEFERRED, AND ACTIVATED FROM A REAL SCRIPT — see the note on the
+             activation block at the foot of <body>.
+
+             The `onload="this.media='all'"` attribute this used to carry was
+             silently doing nothing: a CSP `script-src` with hashes does NOT
+             cover inline EVENT HANDLERS, only inline <script> blocks, so the
+             handler was blocked on every load. The sheet stayed at
+             media="print" and Inter never applied — measured on the live
+             site, `document.fonts` held zero Inter faces and the whole page
+             was rendering in the system fallback. -->
         <link
+            id="le-font"
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
             media="print"
-            onload="this.media='all'"
         />
         <noscript>
             <link
@@ -247,6 +257,18 @@
         <div id="root">
             <div style="min-height:100vh;background:#05070D"></div>
         </div>
+        <script>
+            /* ACTIVATE THE FONT. One line, in a real <script> so the build's
+               CSP hash covers it — see the note on the <link> in <head>. It
+               runs at the end of body parse rather than in <head>, so the
+               sheet is applied without ever being render-blocking: it has
+               been downloading as print media since the head was parsed, so
+               there is nothing left to wait for. */
+            (function () {
+                var f = document.getElementById("le-font");
+                if (f) f.media = "all";
+            })();
+        </script>
         <script>
             !(function (t, e) {
                 var o, n, p, r;

@@ -3,6 +3,7 @@ import { useLang } from "@/i18n/LanguageContext";
 import { useInView } from "@/hooks/useInView";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { PlatformMark } from "@/components/ChatMockup";
+import ScrollMarquee from "@/components/ScrollMarquee";
 
 /** Soft edges, so names enter and leave the strip instead of popping. */
 const EDGE_MASK = "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)";
@@ -82,13 +83,12 @@ export default function PlatformStrip() {
       <div ref={ref}>
         <p className="le-kicker le-container mb-7 text-center">{t.features.marqueeLabel}</p>
 
-        {/* PHONE: static and wrapped. Same reason as the logo band — see the
-            note at the top of TrustedBy.tsx. Five platforms fit in two rows
-            at this width and read better standing still than sliding past. */}
-        <div className="le-container md:hidden">
-          <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4">
+        {/* PHONE: scrolled, not transformed. Same reason as the logo band —
+            see the note at the top of TrustedBy.tsx and ScrollMarquee.tsx. */}
+        <ScrollMarquee className="md:hidden" speed={40} ariaLabel={t.features.marqueeLabel}>
+          <ul className="flex shrink-0 items-center gap-12 pr-12">
             {platforms.map((name) => (
-              <li key={name} className="flex items-center gap-2.5">
+              <li key={name} className="flex shrink-0 items-center gap-3">
                 <PlatformMark name={name} className="h-5 w-5 shrink-0 text-hi" />
                 <span className="whitespace-nowrap text-[15px] font-medium tracking-[-0.01em] text-ink-2">
                   {name}
@@ -96,7 +96,7 @@ export default function PlatformStrip() {
               </li>
             ))}
           </ul>
-        </div>
+        </ScrollMarquee>
 
         {/* md AND UP: full-bleed, deliberately outside `le-container`. */}
         <div

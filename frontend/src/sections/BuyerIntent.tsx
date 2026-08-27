@@ -52,7 +52,7 @@ export default function BuyerIntent() {
           <Reveal dir="up">
             <div className="flex items-center gap-3">
               <span aria-hidden="true" className="h-px w-7 bg-accent-bright" />
-              <p className="le-kicker">{t.intent.kicker}</p>
+              {/* `intent.kicker` removed by instruction. */}
             </div>
           </Reveal>
 

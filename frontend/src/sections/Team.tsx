@@ -1,6 +1,5 @@
 import { useLang } from "@/i18n/LanguageContext";
 import Reveal from "@/components/Reveal";
-import RevealText from "@/components/RevealText";
 import TeamGrid from "@/components/TeamGrid";
 
 /**
@@ -21,7 +20,7 @@ export default function Team() {
   return (
     <section
       id="team"
-      aria-labelledby="team-title"
+      aria-labelledby="team-kicker"
       className="le-noise le-section relative scroll-mt-24 overflow-hidden bg-bg"
     >
       {/* One cool light source, mirrored from Benefits' warm one so the two
@@ -41,27 +40,18 @@ export default function Team() {
           <Reveal dir="up">
             <div className="flex items-center justify-center gap-3">
               <span aria-hidden="true" className="h-px w-7 bg-accent-bright" />
-              <p className="le-kicker">{t.about.teamKicker}</p>
+              <p id="team-kicker" className="le-kicker">
+                {t.about.teamKicker}
+              </p>
               <span aria-hidden="true" className="h-px w-7 bg-accent-bright" />
             </div>
           </Reveal>
 
-          <h2
-            id="team-title"
-            className="mt-6 text-[clamp(1.6rem,2.6vw,2.25rem)] font-semibold leading-[1.14] tracking-[-0.025em] text-ink"
-          >
-            <RevealText lines={[t.about.teamTitle]} delay={60} />
-          </h2>
-
-          {/* WHO ACTUALLY BUILDS THIS, stated before the faces rather than
-              left to be inferred from them. Six portraits with no sentence
-              above them read as a startup team photo; the sentence is what
-              turns them into seven years of agency work. */}
-          <Reveal dir="up" delay={140}>
-            <p className="mx-auto mt-5 max-w-[46ch] text-[14.5px] leading-[1.65] text-ink-2">
-              {t.about.teamLead}
-            </p>
-          </Reveal>
+          {/* THE HEADLINE AND THE LEAD PARAGRAPH WERE REMOVED, BY
+              INSTRUCTION. The kicker above now carries the section on its
+              own, and it is what labels the section for assistive tech —
+              see `aria-labelledby` on the <section>, which used to point at
+              the h2 that is no longer here. */}
         </div>
 
         <div className="mt-12 lg:mt-16">

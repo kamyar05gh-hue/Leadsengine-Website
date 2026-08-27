@@ -123,8 +123,10 @@ function aboutFallback(t, TEAM) {
   return [
     `<h1>${escapeHtml(page.heroTitle)}</h1>`,
     `<p>${escapeHtml(page.heroLead)}</p>`,
-    `<h2>${escapeHtml(t.about.teamTitle)}</h2>`,
-    `<p>${escapeHtml(t.about.teamLead)}</p>`,
+    /* `teamTitle` and `teamLead` were removed from the page and from the
+       dictionaries; the fallback must not resurrect them. The kicker is what
+       heads the section now. */
+    `<h2>${escapeHtml(t.about.teamKicker)}</h2>`,
     `<ul>\n${people}\n</ul>`,
   ].join("\n");
 }

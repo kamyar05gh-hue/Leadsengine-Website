@@ -148,12 +148,9 @@ export default function About() {
                   <span aria-hidden="true" className="h-px w-7 bg-accent-bright" />
                   <p className="le-kicker">{t.about.teamKicker}</p>
                 </div>
-                <h2 className="mt-5 text-[clamp(1.6rem,2.6vw,2.15rem)] font-semibold leading-[1.16] tracking-[-0.025em] text-ink">
-                  {t.about.teamTitle}
-                </h2>
-                <p className="mt-5 max-w-[52ch] text-[15px] leading-[1.7] text-ink-2">
-                  {t.about.teamLead}
-                </p>
+                {/* Headline and lead removed by instruction — the kicker
+                    carries the section. The dictionary entries stay so the
+                    crawler fallback and any future use still have them. */}
               </Reveal>
 
               <div className="mt-12 lg:mt-14">

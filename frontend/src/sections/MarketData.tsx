@@ -807,9 +807,9 @@ export default function MarketData() {
             <RevealText lines={toLines(d.title)} delay={60} stagger={130} />
           </h2>
 
-          <Reveal dir="up" delay={140}>
-            <p className="mt-6 max-w-xl text-[15px] leading-[1.65] text-ink-2">{d.sub}</p>
-          </Reveal>
+          {/* `d.sub` used to sit here in its own Reveal. Removed by
+              instruction; the wrapper went with it rather than being left
+              behind wrapping nothing. The dictionary key stays. */}
         </div>
 
         {/* The growth curve leads the section: it is the promise the rest of

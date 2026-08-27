@@ -177,7 +177,6 @@ export const de = {
   },
 
   intent: {
-    kicker: "Im Vergleich",
     title: "Wir verändern das Ergebnis, während andere Tools nur messen.",
     body: "Die meisten Werkzeuge geben Dir einen Wert und lassen Dich damit allein. Wir zeigen Dir, warum Wettbewerber vor Dir stehen, schliessen die Lücken selbst und messen danach erneut. Acht Punkte, an denen sich das entscheidet.",
     othersLabel: "Andere Tools",
@@ -208,7 +207,6 @@ export const de = {
   data: {
     kicker: "Ergebnisse",
     title: "Der Markt, den Leads Engine erschliesst.",
-    sub: "Wie sich die Schweizer Nachfrage in KI-Antworten verschiebt.",
     adoption: {
       title: "KI-Nutzung in der Schweiz",
       meta: "Anteil der Bevölkerung, die KI-Tools nutzt",
@@ -313,9 +311,6 @@ export const de = {
     ],
     closing: "Jetzt bringen wir diese Erfahrung dorthin, wo Deine Kunden morgen suchen: in die KI-Antwort.",
     teamKicker: "Das Team",
-    teamTitle: "Die Menschen hinter Leads Engine",
-    teamLead:
-      "Leads Engine entsteht in Zusammenarbeit mit Future Media, einer Marketing-Agentur aus Bern und Zürich. Dasselbe Team, das seit sieben Jahren für Schweizer Marken arbeitet, baut und betreibt die Plattform.",
     /* Per-language role overrides, keyed by first name. Names omitted here
        fall back to the English `role` in src/constants/team.ts. */
     roles: {

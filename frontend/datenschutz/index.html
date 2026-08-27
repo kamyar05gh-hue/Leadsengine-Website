@@ -33,11 +33,15 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
+            id="le-font"
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
             media="print"
-            onload="this.media='all'"
         />
+        <!-- Activated from a real <script> at the foot of <body>: a CSP
+             script-src with hashes does not cover inline event handlers, so
+             the `onload` this used to carry was blocked and Inter never
+             loaded. See frontend/index.html for the full note. -->
         <noscript>
             <link
                 rel="stylesheet"
@@ -48,5 +52,11 @@
     <body>
         <div id="root" data-doc="privacy"></div>
         <script type="module" src="/src/entries/legal.tsx"></script>
+            <script>
+            (function () {
+                var f = document.getElementById("le-font");
+                if (f) f.media = "all";
+            })();
+        </script>
     </body>
 </html>
