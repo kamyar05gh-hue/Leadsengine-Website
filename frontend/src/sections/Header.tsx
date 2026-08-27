@@ -135,8 +135,15 @@ export default function Header({
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-500 ease-out print:hidden ${
+        /* OPAQUE, NOT BLURRED. This bar is fixed and therefore on screen
+           for the entire scroll, so a `backdrop-filter` here is not a
+           one-off — it makes the browser re-sample and re-blur the strip of
+           page behind it on every frame the user scrolls, for the whole
+           document. At 95% opacity over a near-black ground the blur was
+           contributing about five percent of the pixels; going fully opaque
+           looks the same and costs nothing. */
         scrolled
-          ? "border-line bg-bg/95 backdrop-blur-md"
+          ? "border-line bg-bg"
           : "border-transparent bg-transparent"
       }`}
     >

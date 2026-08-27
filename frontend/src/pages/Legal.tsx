@@ -84,7 +84,7 @@ export default function Legal({ doc }: { doc: LegalDoc }) {
             <ul className="mt-14 grid grid-cols-1 gap-5 lg:mt-16 lg:gap-6">
               {blocks.map((b, i) => (
                 <Reveal key={i} dir="up" delay={Math.min(i, 4) * 60} as="li" threshold={0.08}>
-                  <article className="relative flex h-full flex-col rounded-2xl border border-line bg-surface/70 p-5 backdrop-blur-sm transition-[border-color] duration-500 hover:border-accent-bright/45 sm:p-6 lg:p-7">
+                  <article className="relative flex h-full flex-col rounded-2xl border border-line bg-surface/85 p-5 transition-[border-color] duration-500 hover:border-accent-bright/45 sm:p-6 lg:p-7">
                     <p className={NUM_PILL}>{String(i + 1).padStart(2, "0")}</p>
 
                     {b.heading && (

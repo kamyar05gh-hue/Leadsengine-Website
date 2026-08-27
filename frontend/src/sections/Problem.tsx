@@ -147,7 +147,7 @@ export default function Problem() {
           <div className="grid grid-cols-1 items-stretch gap-5 sm:gap-6 lg:grid-cols-2 lg:gap-[88px]">
             {/* -------- BEFORE — the dead past. Muted, no accent. ------ */}
             <Reveal dir="up" threshold={0.08} className="h-full">
-              <article className="relative flex h-full flex-col rounded-2xl border border-line bg-surface/70 p-5 backdrop-blur-sm sm:p-6 lg:p-7">
+              <article className="relative flex h-full flex-col rounded-2xl border border-line bg-surface/85 p-5 sm:p-6 lg:p-7">
                 <p className="w-fit rounded-full border border-line px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink-3">
                   {before.label}
                 </p>

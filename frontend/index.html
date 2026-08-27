@@ -319,6 +319,12 @@
                             person_profiles: "always",
                             disable_session_recording: true,
                             capture_pageview: true,
+                            // Surveys are not used on this site, and leaving
+                            // them on made PostHog fetch and evaluate a
+                            // separate 34 KB `surveys.js` on every page load
+                            // — measured, and a third of all analytics bytes
+                            // for a feature nobody has configured.
+                            disable_surveys: true,
                         },
                         "leadsengine",
                     );

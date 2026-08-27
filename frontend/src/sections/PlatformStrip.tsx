@@ -53,16 +53,18 @@ export default function PlatformStrip() {
     <ul
       key={key}
       aria-hidden={hidden ? "true" : undefined}
-      className="flex shrink-0 items-center gap-14 pr-14 sm:gap-[72px] sm:pr-[72px] lg:gap-24 lg:pr-24"
+      className="flex shrink-0 items-center gap-12 pr-12 sm:gap-16 sm:pr-16 lg:gap-20 lg:pr-20"
     >
       {platforms.map((name) => (
         <li key={name} className="flex shrink-0 items-center gap-3">
-          {/* Deliberately larger than the label beside them, by instruction —
-              the marks are the content of this strip and the words are the
-              caption, not the other way round. */}
+          {/* Larger than the label beside them, by instruction — the marks are
+              the content of this strip and the words are the caption. Taken
+              back down from 30/34 after review: at that size they crowded
+              the row and read as buttons rather than as marks. 24/26 keeps
+              them clearly dominant over the 15/17px label without that. */}
           <PlatformMark
             name={name}
-            className="h-[30px] w-[30px] shrink-0 text-hi sm:h-[34px] sm:w-[34px]"
+            className="h-6 w-6 shrink-0 text-hi sm:h-[26px] sm:w-[26px]"
           />
           <span className="whitespace-nowrap text-[15px] font-medium tracking-[-0.01em] text-ink-2 sm:text-[17px]">
             {name}

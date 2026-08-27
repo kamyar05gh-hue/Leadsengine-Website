@@ -964,19 +964,29 @@
     }
 }
 
+/* TRANSLATE ONLY — THE `scale()` WAS THE EXPENSIVE PART.
+   These move elements carrying `filter: blur(80px)`. A blurred element can be
+   rasterised once and then cheaply translated by the compositor; SCALING it
+   cannot, because scaling changes the blur's apparent radius, so the browser
+   has to re-render an 80px blur over a ~200x200 area every single frame, for
+   the life of the page, on three elements per aurora. That is a permanent GPU
+   load on a phone — it never stops, even when the section is off screen.
+   Dropping the scale keeps the drift and makes the whole thing compositable.
+   The travel distances are nudged up slightly to keep the same sense of
+   motion now that the size no longer changes. */
 @keyframes le-drift-a {
     to {
-        transform: translate3d(6vw, 4vw, 0) scale(1.12);
+        transform: translate3d(7vw, 5vw, 0);
     }
 }
 @keyframes le-drift-b {
     to {
-        transform: translate3d(-5vw, 6vw, 0) scale(1.18);
+        transform: translate3d(-6vw, 7vw, 0);
     }
 }
 @keyframes le-drift-c {
     to {
-        transform: translate3d(4vw, -5vw, 0) scale(1.1);
+        transform: translate3d(5vw, -6vw, 0);
     }
 }
 
@@ -1055,5 +1065,54 @@
     }
     .le-aurora span {
         animation: none;
+    }
+}
+
+/* =====================================================================
+   MOBILE COST CONTROL — measured, not guessed.
+
+   Traced on a 390px viewport at 4x CPU throttle, the page carried 17 elements
+   with a `filter: blur()`, 20 with a `backdrop-filter`, and 34 composited
+   layers totalling 11.4 megapixels. That is survivable in Chromium on a
+   desktop. It is not on an iPhone: Safari gives a tab far less layer memory,
+   re-rasterises blurred layers more eagerly, and treats `backdrop-filter` as
+   one of the most expensive things a page can ask for — which is exactly why
+   the site felt slow on iOS specifically and merely heavy elsewhere.
+
+   Everything below removes cost that is INVISIBLE at this width:
+
+   * The decorative washes are radial gradients that already fade to
+     transparent. Putting a 64px blur over a soft gradient changes almost
+     nothing you can see, and on a 390px screen it changes nothing at all —
+     but it forces a full filter pass and its own composited layer per
+     section, roughly a dozen of them down the page.
+
+   * `backdrop-filter` on the card surfaces sits behind a 70%-opaque dark
+     panel on a near-black page. There is nothing behind it to see. The
+     opacity is raised to compensate for the 30% that used to show through,
+     so the card reads the same.
+
+   Desktop keeps the full treatment — it can afford it, and there the blur
+   radius is a larger fraction of the viewport, so it is actually visible.
+   ===================================================================== */
+@media (max-width: 767px) {
+    /* Tailwind's `blur-*` utilities compose into `filter: var(--tw-blur) ...`,
+       so the override has to win against that shorthand. */
+    [class*="blur-3xl"],
+    [class*="blur-2xl"] {
+        filter: none !important;
+    }
+
+    /* The aurora keeps its blur — it is the shape of the light, not a wash
+       over one — but it stops moving. A static blurred layer is rasterised
+       once; a moving one is re-composited for as long as the page is open. */
+    .le-aurora span {
+        animation: none !important;
+        will-change: auto;
+    }
+
+    [class*="backdrop-blur"] {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
     }
 }

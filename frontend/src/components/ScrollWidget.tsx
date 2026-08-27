@@ -1,12 +1,7 @@
-import { useEffect, useState } from "react";
 import { SITE } from "@/constants/site";
 import { useLang } from "@/i18n/LanguageContext";
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { LogoMark } from "@/components/Logo";
 
-/** Where the widget appears, and where it stands down again. */
-const FROM = "problem";
-const TO = "analyse";
 
 /**
  * A small, permanent way back to the one thing this page asks for.
@@ -16,69 +11,38 @@ const TO = "analyse";
  * briefly lived in the mark's place is gone — it read as a loading spinner
  * rather than as a control.
  *
- * VISIBILITY is the window the client asked for: it fades in once "Was sich
- * verändert hat" has been reached and fades out again as "Der nächste Schritt"
- * arrives, so it never overlaps the hero and never sits on top of the closing
- * call to action it points at.
+ * ALWAYS ON, BY INSTRUCTION. It used to appear only between "Der blinde
+ * Fleck" and "Der nächste Schritt" — a window that kept it off the hero and
+ * off the closing CTA it pointed at. The client asked for it to be present
+ * for the whole scroll instead, so the window is gone along with the scroll
+ * listener that maintained it: this component now renders one static element
+ * and does no work at all while the page scrolls, which is strictly cheaper
+ * than what it replaced.
  *
- * One rAF-throttled passive scroll listener, and it sets a single boolean.
+ * It is `fixed`, so it never overlaps content in the layout sense — it sits
+ * above it. The hero's own CTA is on the left of the copy column and this is
+ * bottom-right, so on a phone the two do not collide.
  */
 export default function ScrollWidget() {
   const { t } = useLang();
-  const reduced = usePrefersReducedMotion();
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    let raf = 0;
-
-    const measure = () => {
-      raf = 0;
-      const from = document.getElementById(FROM);
-      const to = document.getElementById(TO);
-      const vh = window.innerHeight || 1;
-      const started = from ? from.getBoundingClientRect().top < vh * 0.5 : false;
-      const ended = to ? to.getBoundingClientRect().top < vh * 0.75 : false;
-      setShown(started && !ended);
-    };
-
-    const onScroll = () => {
-      if (!raf) raf = window.requestAnimationFrame(measure);
-    };
-
-    measure();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) window.cancelAnimationFrame(raf);
-    };
-  }, []);
 
   return (
-    <div
-      className="pointer-events-none fixed bottom-5 right-4 z-40 print:hidden sm:bottom-7 sm:right-6"
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? "none" : "translateY(12px)",
-        transition: reduced
-          ? undefined
-          : "opacity 380ms var(--le-ease-out), transform 380ms var(--le-ease-out)",
-        visibility: shown ? "visible" : "hidden",
-      }}
-    >
+    <div className="pointer-events-none fixed bottom-5 right-4 z-40 print:hidden sm:bottom-7 sm:right-6">
       {/* THE SAME DESTINATION AS EVERY OTHER CTA. This used to scroll to the
           `#analyse` section at the foot of the page; it now opens the funnel
-          directly, like the buttons do. `TO` is still the id this widget
-          WATCHES to decide when to stand down — the two were the same value
-          by coincidence, not by design, and only the link has changed. */}
+          directly, like the buttons do. */}
+      {/* SOLID GROUND, NOT `backdrop-blur-md`. A backdrop-filter forces the
+          browser to re-sample and re-blur whatever is behind the element on
+          every frame it moves over — and now that this pill is on screen for
+          the entire scroll rather than for one section, that is a per-frame
+          cost for the whole page, on the platform where backdrop-filter is
+          most expensive. Over this near-black ground the blur was never
+          visible anyway: `bg-bg` is the same colour the /90 was resolving to. */}
       <a
         href={SITE.ctaUrl}
         target="_blank"
         rel="noopener noreferrer"
-        tabIndex={shown ? undefined : -1}
-        aria-hidden={shown ? undefined : "true"}
-        className="pm-cta group pointer-events-auto flex items-center gap-3 rounded-full border bg-bg/90 py-3 pl-4 pr-5 backdrop-blur-md transition-[border-color,box-shadow] duration-500"
+        className="pm-cta group pointer-events-auto flex items-center gap-3 rounded-full border bg-bg py-3 pl-4 pr-5 transition-[border-color,box-shadow] duration-500"
         style={{
           borderColor: "rgb(var(--le-gold-bright-rgb) / 0.7)",
           boxShadow:

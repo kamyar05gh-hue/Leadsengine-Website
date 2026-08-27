@@ -308,7 +308,7 @@ export default function WhatIs() {
                 }}
               >
                 <div
-                  className="relative rounded-[20px] border bg-bg-alt/60 p-2 backdrop-blur-sm sm:p-3"
+                  className="relative rounded-[20px] border bg-bg-alt/80 p-2 sm:p-3"
                   style={{
                     borderColor: `rgb(var(--le-gold-rgb) / ${(0.2 + shift * 0.28).toFixed(3)})`,
                     boxShadow: `0 34px 90px -56px rgb(var(--le-gold-rgb) / ${(

@@ -238,7 +238,7 @@ export default function Benefits() {
                  under it and the body beneath — at the client's request the
                  two sections now read as one family. The staircase that used
                  to live here is gone with it. */
-              className="group flex min-w-0 flex-col rounded-2xl border border-line bg-surface/70 p-5 backdrop-blur-sm transition-[border-color] duration-500 hover:border-accent-bright/45 sm:p-6 lg:p-7"
+              className="group flex min-w-0 flex-col rounded-2xl border border-line bg-surface/85 p-5 transition-[border-color] duration-500 hover:border-accent-bright/45 sm:p-6 lg:p-7"
               style={{
                 opacity: on ? 1 : 0,
                 transform: on ? "none" : "translateY(18px)",

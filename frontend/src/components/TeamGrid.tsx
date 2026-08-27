@@ -43,7 +43,18 @@ function tintFor(slug: string): string {
  * The halo behind it is the tint at low alpha, so a missing photo degrades to
  * something that still looks placed rather than to a hole in the card.
  */
-function Avatar({ slug, name, size }: { slug: string; name: string; size: number }) {
+function Avatar({
+  slug,
+  name,
+  size,
+  load,
+}: {
+  slug: string;
+  name: string;
+  size: number;
+  /** False until the roster is near the viewport — see the note below. */
+  load: boolean;
+}) {
   const [broken, setBroken] = useState(false);
   const tone = tintFor(slug);
 
@@ -54,7 +65,17 @@ function Avatar({ slug, name, size }: { slug: string; name: string; size: number
     boxShadow: `0 0 0 5px rgb(${tone} / 0.09)`,
   } as const;
 
-  if (broken) {
+  /* NOT REQUESTED UNTIL THE SECTION IS NEAR THE VIEWPORT.
+     `loading="lazy"` alone did not defer these, and the measurement showed
+     why: every section below the video is code-split and renders `null`
+     until its chunk arrives, so for the first second the document is short
+     and this roster sits about one viewport down — well inside the browser's
+     lazy-load distance. Six portraits were therefore fetched during the
+     initial load and then pushed thousands of pixels down the page as the
+     real sections filled in. Gating on the observer the grid already runs
+     ties the request to where the section ACTUALLY ends up, not to where it
+     momentarily was. `loading="lazy"` stays as a second line of defence. */
+  if (broken || !load) {
     return (
       <span
         className="flex shrink-0 items-center justify-center rounded-full font-semibold text-ink"
@@ -140,7 +161,15 @@ export default function TeamGrid({ size = 112 }: { size?: number }) {
               : `opacity 620ms var(--le-ease-out) ${i * 90}ms, transform 620ms var(--le-ease-out) ${i * 90}ms`,
           }}
         >
-          <Avatar slug={member.slug} name={member.name} size={size} />
+          <Avatar
+            slug={member.slug}
+            name={member.name}
+            size={size}
+            /* `inView`, not `on`: under reduced motion `on` is true from the
+               first paint, which would defeat the deferral for exactly the
+               visitors most likely to be on a constrained device. */
+            load={inView}
+          />
 
           <h3 className="mt-5 break-words text-[15px] font-semibold leading-[1.3] tracking-[-0.015em] text-ink">
             {member.name}
