@@ -131,6 +131,26 @@ function aboutFallback(t, TEAM) {
   ].join("\n");
 }
 
+/**
+ * The crawler's view of /analyse/.
+ *
+ * It is a form, so there is no article to mirror — but an empty <noscript> on
+ * the page every CTA points at would leave the site's single most important
+ * URL with nothing for an engine that does not run JavaScript to read. What
+ * it emits instead is what the page actually promises: the offer, the three
+ * assurances, and what happens after you submit. No field labels: a crawler
+ * cannot fill the form in, and listing inputs it cannot use is noise.
+ */
+function analyseFallback(t) {
+  const a = t.analyse;
+  return [
+    `<h1>${escapeHtml(a.title)}</h1>`,
+    `<p>${escapeHtml(a.lead)}</p>`,
+    `<ul>\n${a.assurances.map((x) => `<li>${escapeHtml(x)}</li>`).join('\n')}\n</ul>`,
+    block(a.stepsTitle, a.steps.map((x) => `${x.title}: ${x.body}`)),
+  ].join('\n');
+}
+
 function legalFallback(t, doc) {
   const { title, body } = t.legal[doc];
   return `<h1>${escapeHtml(title)}</h1>\n${legalParagraphs(body)}`;
@@ -141,6 +161,17 @@ function legalFallback(t, doc) {
  * breadcrumb label, taken from the dictionary so it matches the visible nav.
  */
 const ROUTES = [
+  {
+    /* The conversion page. `WebPage` rather than `ContactPage`: it is not a
+       contact form, it is a request for a specific service, and the Service
+       node in the home page's graph is what describes that service. */
+    path: "analyse",
+    type: "WebPage",
+    crumb: (t) => t.analyse.kicker,
+    fallback: analyseFallback,
+    name: (t) => t.analyse.metaTitle,
+    description: (t) => t.analyse.metaDescription,
+  },
   {
     path: "ueber-uns",
     type: "AboutPage",
@@ -190,6 +221,7 @@ const { SITE } = content;
 function buildSitemap() {
   const urls = [
     { path: "", priority: "1.0", changefreq: "weekly" },
+    { path: "analyse/", priority: "0.9", changefreq: "monthly" },
     { path: "ueber-uns/", priority: "0.8", changefreq: "monthly" },
     { path: "impressum/", priority: "0.3", changefreq: "yearly" },
     { path: "datenschutz/", priority: "0.3", changefreq: "yearly" },

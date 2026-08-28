@@ -56,11 +56,17 @@ export default function PrimaryCta({
       ? "pm-cta le-cta-pill le-cta-pill--quiet"
       : "pm-cta pm-cta-btn le-cta-pill";
 
+  /* `target="_blank"` is right for a destination on someone else's domain
+     and wrong for one of ours: it strands the visitor with two tabs of the
+     same site and loses the back button. The CTA now points at /analyse/, so
+     the attributes follow the URL rather than being hard-coded. */
+  const external = /^https?:\/\//i.test(SITE.ctaUrl);
+
   return (
     <a
       href={SITE.ctaUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       className={`${skin} le-magnetic group rounded-full font-semibold tracking-[-0.005em] ${SIZING[size]} ${className}`}
     >
       <span>{label ?? t.cta.primary}</span>

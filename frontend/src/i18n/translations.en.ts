@@ -242,26 +242,89 @@ export const en: Dict = {
     title: "What clients say.",
     items: [
       {
-        quote: "We had no idea ChatGPT kept naming the same two competitors. Now we're in there too.",
+        quote: "We were not aware that ChatGPT consistently named the same two competitors on the questions that matter. We are now named as well.",
         name: "Nina Brunner",
         role: "CMO, fintech · Zurich",
       },
       {
-        quote: "I was sceptical, to be honest. The first report was a bit of a cold shower.",
+        quote: "I was sceptical at first. The first report showed very clearly where we actually stood in AI answers.",
         name: "Marc Wüthrich",
         role: "Head of Growth, SaaS · Basel",
       },
       {
-        quote: "The prices the AI was quoting for us were nowhere near right. Sorted within four weeks.",
+        quote: "The pricing the AI was quoting for us was inaccurate. It was corrected within four weeks.",
         name: "Sofia Keller",
         role: "Head of Marketing, logistics · Bern",
       },
       {
-        quote: "Our Google numbers looked fine and the phone still wasn't ringing. So that's where it was going.",
+        quote: "Our Google metrics held steady while enquiries fell. This is where that gap became visible.",
         name: "Daniel Aeschlimann",
         role: "Managing Director, manufacturing · Winterthur",
       },
     ],
+  },
+
+  analyse: {
+    metaTitle: "Request your free AI analysis – Leads Engine",
+    metaDescription:
+      "Request the free AI visibility analysis. We check whether ChatGPT, Perplexity, Google AI, Claude and Grok recommend your company — results within 48 hours.",
+    kicker: "Free AI analysis",
+    title: "Find out whether AI recommends you.",
+    lead: "We check your company across ChatGPT, Perplexity, Google AI, Claude and Grok, using real questions from your sector. You get the result within 48 hours, personally and with no obligation.",
+    assurances: [
+      "Result within 48 hours",
+      "Free and without obligation",
+      "No credit card, no subscription",
+    ],
+    formTitle: "Your details",
+    formLead: "Five fields. That is all we need to start the analysis.",
+    fields: {
+      name: "First and last name",
+      namePlaceholder: "Anna Muster",
+      email: "Email address",
+      emailPlaceholder: "anna@company.ch",
+      phone: "Phone",
+      phonePlaceholder: "+41 79 000 00 00",
+      role: "Your role in the company",
+      rolePlaceholder: "Managing director, marketing …",
+      website: "Website",
+      websitePlaceholder: "company.ch",
+    },
+    privacyBefore: "I have read the",
+    privacyLink: "privacy policy",
+    privacyAfter: "and agree to my details being processed in order to answer this enquiry.",
+    submit: "Request the free analysis",
+    submitting: "Sending …",
+    required: "Required",
+    errors: {
+      name: "Please enter your name.",
+      email: "Please enter your email address.",
+      emailInvalid: "That email address does not look valid.",
+      phone: "Please enter your phone number.",
+      role: "Please enter your role.",
+      website: "Please enter your website.",
+      consent: "Please confirm the privacy policy.",
+      failed: "That did not work. Please try again, or write to us directly at info@leadsengine.ch.",
+    },
+    successTitle: "Thank you — we have your request.",
+    successBody: "We are starting the analysis and will come back to you with the result within 48 hours. If anything comes up in the meantime, you can reach us at info@leadsengine.ch.",
+    successBack: "Back to the home page",
+    stepsTitle: "What happens next",
+    steps: [
+      {
+        title: "We gather the real questions",
+        body: "From your website and your market we derive the questions your customers actually ask before buying.",
+      },
+      {
+        title: "We put them to five AI systems",
+        body: "Every question goes to ChatGPT, Perplexity, Google AI, Claude and Grok. We record who gets named, and why.",
+      },
+      {
+        title: "You get the result",
+        body: "Within 48 hours, with the sources the systems rely on and the specific gaps.",
+      },
+    ],
+    trustTitle: "What clients say",
   },
 
   about: {

@@ -11,10 +11,18 @@ export const SITE = {
      resolves to this one URL, so the destination can be changed in exactly
      one place and no button can be left pointing at the old one.
 
-     It is a Heyflow funnel rather than a calendar booking: the previous
-     Calendly link asked for a slot before it asked anything about the
-     visitor, which is a large commitment for a first click. */
-  ctaUrl: "https://opinion-pickle-blushing.heyflow.site/leads_engine#kundengewinnung",
+     IT IS OUR OWN PAGE NOW. It was a Heyflow funnel on someone else's domain,
+     which cost three things: the visitor left leadsengine.ch mid-decision,
+     the analytics trail ended at the boundary, and the `#kundengewinnung`
+     anchor we were asked to link to did not exist in that flow, so every
+     click landed on its first screen regardless. /analyse/ collects the same
+     information in our own type and colour, in one page rather than five
+     steps, and posts it to our own endpoint.
+
+     A RELATIVE URL, DELIBERATELY. `PrimaryCta` opens external destinations in
+     a new tab; an internal one must stay in the same tab, and it keys off
+     exactly this. */
+  ctaUrl: "/analyse/",
   /* FUTURE MEDIA's own details. The Impressum is Future Media GmbH's legal
      notice, so these are the ones that belong there and in the JSON-LD. */
   email: "info@future-media.ch",

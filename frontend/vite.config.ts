@@ -30,6 +30,7 @@ export default defineConfig({
       input: {
         main: fileURLToPath(new URL("./index.html", import.meta.url)),
         about: fileURLToPath(new URL("./ueber-uns/index.html", import.meta.url)),
+        analyse: fileURLToPath(new URL("./analyse/index.html", import.meta.url)),
         imprint: fileURLToPath(new URL("./impressum/index.html", import.meta.url)),
         privacy: fileURLToPath(new URL("./datenschutz/index.html", import.meta.url)),
         terms: fileURLToPath(new URL("./agb/index.html", import.meta.url)),

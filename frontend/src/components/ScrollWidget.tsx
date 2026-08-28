@@ -31,10 +31,11 @@ export default function ScrollWidget() {
        empty space around the pill never swallows a tap on the page behind
        it — on a phone this corner overlaps real content. */
     <div className="pointer-events-none fixed bottom-5 right-4 z-40 print:hidden sm:bottom-7 sm:right-6">
+      {/* Same rule as PrimaryCta: only an off-site destination opens a tab. */}
       <a
         href={SITE.ctaUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={/^https?:\/\//i.test(SITE.ctaUrl) ? "_blank" : undefined}
+        rel={/^https?:\/\//i.test(SITE.ctaUrl) ? "noopener noreferrer" : undefined}
         className="le-gold-pill pm-cta group pointer-events-auto flex items-center gap-3 rounded-full border bg-bg py-3 pl-4 pr-5"
       >
         <LogoMark size={19} className="h-auto w-[26px] shrink-0" />

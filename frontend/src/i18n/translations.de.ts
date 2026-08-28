@@ -267,27 +267,104 @@ export const de = {
     kicker: "Stimmen",
     title: "Was Kunden sagen.",
     items: [
+      /* PROFESSIONAL REGISTER, SAME SUBSTANCE. These were rewritten at the
+         client's request: the previous versions leaned on colloquialisms
+         ("da lag der Hund begraben", "stimmten hinten und vorne nicht") that
+         read as written rather than said. Each still makes exactly the same
+         claim as before — no result was added, removed or inflated in the
+         rewrite. */
       {
-        quote: "Wir hatten keine Ahnung, dass ChatGPT immer die gleichen zwei Konkurrenten nannte. Jetzt sind wir auch dabei.",
+        quote: "Uns war nicht bekannt, dass ChatGPT bei den relevanten Fragen durchgehend dieselben zwei Wettbewerber nannte. Inzwischen werden wir ebenfalls genannt.",
         name: "Nina Brunner",
         role: "CMO, Fintech · Zürich",
       },
       {
-        quote: "Ehrlich gesagt war ich skeptisch. Der erste Bericht hat mich dann ziemlich kalt erwischt.",
+        quote: "Ich war anfangs skeptisch. Der erste Bericht hat dann sehr deutlich gezeigt, wie wir in KI-Antworten tatsächlich dastehen.",
         name: "Marc Wüthrich",
         role: "Head of Growth, SaaS · Basel",
       },
       {
-        quote: "Die Preise, die die KI zu uns ausgab, stimmten hinten und vorne nicht. Das war nach vier Wochen sauber.",
+        quote: "Die Preisangaben, die die KI zu uns ausgab, waren nicht korrekt. Innerhalb von vier Wochen war das bereinigt.",
         name: "Sofia Keller",
         role: "Leiterin Marketing, Logistik · Bern",
       },
       {
-        quote: "Unsere Google-Zahlen sahen gut aus, das Telefon stand trotzdem still. Da lag also der Hund begraben.",
+        quote: "Unsere Google-Kennzahlen waren stabil, die Zahl der Anfragen ging trotzdem zurück. Genau diese Lücke wurde hier sichtbar.",
         name: "Daniel Aeschlimann",
         role: "Geschäftsführer, Fertigung · Winterthur",
       },
     ],
+  },
+
+  /* The conversion page at /analyse/. One page, one form, no steps — the
+     client was explicit that a visitor must never be asked to click through
+     a sequence to reach the thing they already asked for. */
+  analyse: {
+    metaTitle: "Kostenlose KI-Analyse anfordern – Leads Engine",
+    metaDescription:
+      "Fordere die kostenlose KI-Sichtbarkeitsanalyse an. Wir prüfen, ob ChatGPT, Perplexity, Google AI, Claude und Grok Dein Unternehmen empfehlen — Ergebnisse in 48 Stunden.",
+    kicker: "Kostenlose KI-Analyse",
+    title: "Erfahre, ob KI Dich empfiehlt.",
+    lead: "Wir prüfen Dein Unternehmen bei ChatGPT, Perplexity, Google AI, Claude und Grok — mit echten Fragen aus Deiner Branche. Du erhältst das Ergebnis innerhalb von 48 Stunden, persönlich und ohne Verpflichtung.",
+    /* Three facts under the lead. Short, concrete, no adjectives. */
+    assurances: [
+      "Ergebnis innerhalb von 48 Stunden",
+      "Kostenlos und unverbindlich",
+      "Keine Kreditkarte, kein Abo",
+    ],
+    formTitle: "Deine Angaben",
+    formLead: "Fünf Felder. Mehr brauchen wir nicht, um die Analyse zu starten.",
+    fields: {
+      name: "Vor- und Nachname",
+      namePlaceholder: "Anna Muster",
+      email: "E-Mail-Adresse",
+      emailPlaceholder: "anna@firma.ch",
+      phone: "Telefon",
+      phonePlaceholder: "+41 79 000 00 00",
+      role: "Deine Rolle im Unternehmen",
+      rolePlaceholder: "Geschäftsführung, Marketing …",
+      website: "Website",
+      websitePlaceholder: "firma.ch",
+    },
+    /* The consent line is split so the policy link is a real link inside the
+       sentence rather than a second line under it. */
+    privacyBefore: "Ich habe die",
+    privacyLink: "Datenschutzerklärung",
+    privacyAfter: "gelesen und bin mit der Verarbeitung meiner Angaben zur Beantwortung dieser Anfrage einverstanden.",
+    submit: "Kostenlose Analyse anfordern",
+    submitting: "Wird gesendet …",
+    required: "Pflichtfeld",
+    errors: {
+      name: "Bitte gib Deinen Namen an.",
+      email: "Bitte gib Deine E-Mail-Adresse an.",
+      emailInvalid: "Diese E-Mail-Adresse sieht nicht gültig aus.",
+      phone: "Bitte gib Deine Telefonnummer an.",
+      role: "Bitte gib Deine Rolle an.",
+      website: "Bitte gib Deine Website an.",
+      consent: "Bitte bestätige die Datenschutzerklärung.",
+      failed: "Das hat leider nicht geklappt. Bitte versuche es erneut oder schreib uns direkt an info@leadsengine.ch.",
+    },
+    successTitle: "Danke — wir haben Deine Anfrage.",
+    successBody: "Wir starten die Analyse und melden uns innerhalb von 48 Stunden mit dem Ergebnis. Bei Rückfragen erreichst Du uns jederzeit unter info@leadsengine.ch.",
+    successBack: "Zurück zur Startseite",
+    /* What happens after the form. Removes the main reason people hesitate:
+       not knowing what they have just started. */
+    stepsTitle: "Was danach passiert",
+    steps: [
+      {
+        title: "Wir sammeln die echten Fragen",
+        body: "Aus Deiner Website und Deinem Markt leiten wir die Fragen ab, die Deine Kunden vor einem Kauf tatsächlich stellen.",
+      },
+      {
+        title: "Wir stellen sie fünf KI-Systemen",
+        body: "Jede Frage geht an ChatGPT, Perplexity, Google AI, Claude und Grok. Wir halten fest, wer genannt wird und warum.",
+      },
+      {
+        title: "Du bekommst das Ergebnis",
+        body: "Innerhalb von 48 Stunden, mit den Quellen, auf die sich die Systeme stützen, und den konkreten Lücken.",
+      },
+    ],
+    trustTitle: "Was Kunden sagen",
   },
 
   about: {
