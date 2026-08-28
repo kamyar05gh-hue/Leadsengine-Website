@@ -48,21 +48,58 @@
         />
         <meta name="twitter:image" content="https://leadsengine.ch/og-image.jpg" />
 
-        <!-- NO PRELOAD for the hero engine, deliberately.
-             It is the LCP element, so preloading it is the obvious move, and
-             three attempts at it all made phones download MORE, not less:
-               · bare href to the 948px plate — won the race before the <img>
-                 was parsed, so every phone pulled 333KB whatever srcset said
-               · imagesrcset/imagesizes — preload and <img> disagreed and the
-                 phone fetched the 480px AND the 948px plate (450KB)
-               · media-scoped hrefs — the preload scanner resolves media
-                 before layout, and a phone still pulled the 680px plate on
-                 top of the 480px one (measured on the wire)
-             A preload buys maybe 100-200ms of LCP; a second plate costs
-             192KB on the slowest connections. The <picture> below carries
-             fetchpriority="high", which keeps the request early and, unlike
-             a preload, cannot disagree with what is displayed: exactly one
-             plate is ever fetched. -->
+        <!-- PRELOAD THE HERO PLATE. It is the LCP element.
+
+             THE OLD NOTE HERE SAID NOT TO, on the grounds that
+             `fetchpriority="high"` on the <img> "keeps the request early".
+             Measured on the live site (390px, 4x CPU, 9Mbit): it does not,
+             and it cannot. The <img> lives inside a React component, so it
+             does not exist until the 239KB entry chunk has downloaded,
+             parsed and rendered — the plate was not requested until 751ms and
+             LCP landed at 1304ms. `fetchpriority` ranks a request once the
+             element is discovered; it cannot make it discoverable sooner.
+             Only a preload in the HTML can, because the preload scanner runs
+             while the document is still being parsed.
+
+             THE THREE EARLIER FAILURES WERE ALL THE SAME BUG — a preload that
+             did not exactly mirror the <picture> below, so the phone matched
+             two rules and fetched two plates:
+               · a bare href to the 948px plate matches every viewport
+               · imagesrcset/imagesizes re-runs density selection independently
+                 of the <picture>, and the two disagreed
+               · media-scoped hrefs whose conditions OVERLAPPED (a 680px rule
+                 with no lower bound matches a 390px phone as well as the
+                 480px rule)
+
+             The conditions below are copied verbatim from the <picture> in
+             HeroEngine.tsx and are mutually exclusive, so exactly one can
+             ever match. VERIFIED on the wire at 390px, 800px and 1440px:
+             one plate fetched at each, never two. If the <picture> changes,
+             change these in the same commit. -->
+        <link
+            rel="preload"
+            as="image"
+            href="/images/engine-body-480.webp"
+            type="image/webp"
+            media="(max-width: 640px)"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            as="image"
+            href="/images/engine-body-680.webp"
+            type="image/webp"
+            media="(min-width: 641px) and (max-width: 1023px)"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            as="image"
+            href="/images/engine-body.webp"
+            type="image/webp"
+            media="(min-width: 1024px)"
+            fetchpriority="high"
+        />
         <!-- ICON ORDER MATTERS, AND THE RASTER FILES ARE NOT OPTIONAL.
              `favicon.ico` is listed FIRST and left un-typed so that legacy
              crawlers and older browsers, which stop at the first icon link

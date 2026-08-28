@@ -614,6 +614,32 @@
             opacity 720ms var(--le-ease-out),
             transform 720ms var(--le-ease-out);
     }
+
+    /* ------------------------------------------------------------------
+       ABOVE THE FOLD, THE FADE IS THE PROBLEM.
+
+       `.reveal` starts at `opacity: 0`, and Chrome does not count a fully
+       transparent element as painted — so anything wrapped in one is invisible
+       to Largest Contentful Paint until the fade finishes. MEASURED on the
+       live site at 390px / 4x CPU: the hero sub-paragraph carries a 340ms
+       delay on top of a 720ms fade, so LCP landed at 2392ms on text that had
+       actually been laid out around a second earlier. The metric was
+       measuring the animation, not the page.
+
+       An `is-in` element is by definition on screen already, and everything
+       in the hero is on screen at load — its `.reveal` is an ENTRANCE, not a
+       scroll reveal. So `--eager` keeps the entrance and drops only the part
+       that hurts: it starts fully opaque and animates transform alone. The
+       element is painted from the first frame, LCP sees it immediately, and
+       the viewer still sees it slide into place.
+
+       Use it for anything in the first viewport. Everything below the fold
+       keeps the fade, where nothing is measuring it.
+       ------------------------------------------------------------------ */
+    .reveal--eager {
+        opacity: 1;
+        transition: transform 620ms var(--le-ease-out);
+    }
     .reveal[data-dir="up"] {
         transform: translateY(28px);
     }

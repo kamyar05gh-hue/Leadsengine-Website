@@ -111,11 +111,37 @@ function usePrefetchSections() {
         }
       }
     };
+    /* AFTER THE HERO IMAGE, NOT MERELY WHEN IDLE.
+       `requestIdleCallback` fired at ~720ms in the measured waterfall — which
+       is exactly when the LCP plate was downloading. Twelve section chunks
+       then competed with it for the same connection, and the plate did not
+       finish until 1277ms. "Idle" means the main thread is free; it says
+       nothing about the network being free, and on a phone the network is
+       the scarce resource.
+
+       So the prefetch now waits for the hero image to finish decoding, with
+       the idle callback only as a floor. `decode()` resolves once the plate
+       is actually painted, i.e. after LCP — which is the moment the bandwidth
+       genuinely becomes spare. The 4s timeout is a backstop for the case
+       where the image errors or never appears. */
+    const afterHero = () => {
+      const hero = document.querySelector<HTMLImageElement>(
+        'img[src*="engine-body"], picture img',
+      );
+      if (!hero) return load();
+      const go = () => window.setTimeout(load, 200);
+      if (hero.complete) return go();
+      hero.addEventListener("load", go, { once: true });
+      hero.addEventListener("error", go, { once: true });
+    };
+
     const ric = (window as Window & { requestIdleCallback?: (cb: () => void) => number })
       .requestIdleCallback;
-    const id = ric ? ric(load) : window.setTimeout(load, 1200);
+    const id = ric ? ric(afterHero) : window.setTimeout(afterHero, 1200);
+    const backstop = window.setTimeout(load, 4000);
     return () => {
       cancelled = true;
+      window.clearTimeout(backstop);
       if (!ric) window.clearTimeout(id as number);
     };
   }, []);

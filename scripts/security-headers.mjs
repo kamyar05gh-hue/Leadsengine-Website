@@ -315,6 +315,53 @@ ${apacheHeaders}
     RewriteRule ^en/?$              /?lang=en             [R=301,L]
 </IfModule>
 
+# ------------------------------------------------------------- compression
+# JAVASCRIPT WAS BEING SERVED UNCOMPRESSED. Measured against the live site:
+# HTML came back gzipped, CSS came back gzipped, and the 239KB entry chunk
+# came back with no Content-Encoding at all — 244,790 bytes on the wire where
+# gzip gives about 78KB. Across the entry chunk, the second bundle and the
+# dozen lazy sections that is roughly a quarter of a megabyte of pure waste on
+# every first visit, and it is the largest single item on the critical path.
+#
+# The cause is a MIME-type list, not a missing module: compression is
+# obviously enabled (HTML and CSS arrive gzipped), but the host's default
+# AddOutputFilterByType list predates text/javascript becoming the standard
+# type for scripts. Vite serves exactly that type, so the filter never
+# matched. Naming every modern type explicitly fixes it without touching the
+# host's own configuration.
+#
+# Images, video and fonts are deliberately absent: webp, mp4 and woff2 are
+# already compressed, and running deflate over them costs CPU to make the
+# file marginally bigger.
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE module/javascript
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/manifest+json
+    AddOutputFilterByType DEFLATE application/ld+json
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+</IfModule>
+
+# Brotli where the host has it — roughly another 15-20% over gzip on JS, and
+# harmless where the module is absent because the whole block is skipped.
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/javascript
+    AddOutputFilterByType BROTLI_COMPRESS application/javascript
+    AddOutputFilterByType BROTLI_COMPRESS text/css
+    AddOutputFilterByType BROTLI_COMPRESS text/html
+    AddOutputFilterByType BROTLI_COMPRESS application/json
+    AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+</IfModule>
+
 # ---------------------------------------------------------------- hygiene
 Options -Indexes
 ServerSignature Off

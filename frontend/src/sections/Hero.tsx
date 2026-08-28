@@ -100,7 +100,7 @@ export default function Hero() {
       <div className="le-container relative grid w-full items-center gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-10 xl:gap-14">
         {/* ---------------------------- copy ---------------------------- */}
         <div ref={copyRef} className="min-w-0 will-change-[opacity,transform]">
-          <Reveal dir="down">
+          <Reveal dir="down" eager>
             {/* Colour at rest, not on hover: the eyebrow carries a blue rule
                 and blue type from first paint. The Swiss flag sits immediately
                 before the label — provenance stated in the first line of the
@@ -127,13 +127,13 @@ export default function Hero() {
             />
           </h1>
 
-          <Reveal delay={340}>
+          <Reveal delay={90} eager>
             <p className="mt-5 max-w-md text-[15px] leading-[1.65] text-ink-2">{t.hero.sub}</p>
           </Reveal>
 
           {/* The three trust badges that used to sit here are gone at the
               client's request — the dictionary key went with them. */}
-          <Reveal delay={430}>
+          <Reveal delay={150} eager>
             <div className="mt-8">
               <PrimaryCta size="md" />
             </div>
@@ -145,7 +145,7 @@ export default function Hero() {
               so the strongest claim sits where the decision is made rather
               than after it. Small, quiet, and never competing with the CTA —
               it is a footnote to the button, not a second call to action. */}
-          <Reveal delay={520}>
+          <Reveal delay={210} eager>
             {/* Given real weight at the client's request: white rather than
                 the muted grey, a step up in size, semibold, and the mark set
                 in a ringed badge instead of floating loose beside the text.
@@ -177,7 +177,7 @@ export default function Hero() {
             Bigger than the artwork it replaces, and allowed to bleed past the
             column on wide screens — it is background, so it may run into the
             gutter the way it does in the client's render. */}
-        <Reveal dir="scale" delay={200} threshold={0} className="min-w-0">
+        <Reveal dir="scale" delay={120} threshold={0} eager className="min-w-0">
           {/* On laptops (lg/xl) the engine sits a little lower and runs a
               little larger: at those widths the headline column is tall and
               the engine was optically high against it, reading small and
