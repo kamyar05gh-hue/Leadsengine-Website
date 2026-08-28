@@ -96,8 +96,8 @@ const POSTHOG_ASSETS = "https://eu-assets.i.posthog.com";
 const csp = [
   "default-src 'self'",
   `script-src 'self' ${POSTHOG_ASSETS} ${hashes.join(" ")}`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
   "img-src 'self' data: blob:",
   "media-src 'self'",
   `connect-src 'self' ${POSTHOG_API} ${POSTHOG_ASSETS}`,

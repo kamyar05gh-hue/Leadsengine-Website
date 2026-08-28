@@ -123,8 +123,18 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- The one face a German page actually needs, started with the
+             stylesheet rather than after it. `crossorigin` is REQUIRED on a
+             font preload even same-origin: fonts are fetched in CORS mode, and
+             a preload without it is a second, separate request rather than a
+             head start. -->
+        <link
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="/fonts/inter-latin.woff2"
+            crossorigin
+        />
         <link rel="dns-prefetch" href="https://eu.i.posthog.com" />
         <!-- DEFERRED, AND ACTIVATED FROM A REAL SCRIPT — see the note on the
              activation block at the foot of <body>.
@@ -136,17 +146,7 @@
              media="print" and Inter never applied — measured on the live
              site, `document.fonts` held zero Inter faces and the whole page
              was rendering in the system fallback. -->
-        <link
-            id="le-font"
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500&display=swap"
-            media="print"
-        />
         <noscript>
-            <link
-                rel="stylesheet"
-                href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-            />
         </noscript>
 
         <script type="application/ld+json">
@@ -294,18 +294,6 @@
         <div id="root">
             <div style="min-height:100vh;background:#05070D"></div>
         </div>
-        <script>
-            /* ACTIVATE THE FONT. One line, in a real <script> so the build's
-               CSP hash covers it — see the note on the <link> in <head>. It
-               runs at the end of body parse rather than in <head>, so the
-               sheet is applied without ever being render-blocking: it has
-               been downloading as print media since the head was parsed, so
-               there is nothing left to wait for. */
-            (function () {
-                var f = document.getElementById("le-font");
-                if (f) f.media = "all";
-            })();
-        </script>
         <script>
             !(function (t, e) {
                 var o, n, p, r;

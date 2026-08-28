@@ -30,33 +30,27 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- The one face a German page actually needs, started with the
+             stylesheet rather than after it. `crossorigin` is REQUIRED on a
+             font preload even same-origin: fonts are fetched in CORS mode, and
+             a preload without it is a second, separate request rather than a
+             head start. -->
         <link
-            id="le-font"
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-            media="print"
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="/fonts/inter-latin.woff2"
+            crossorigin
         />
         <!-- Activated from a real <script> at the foot of <body>: a CSP
              script-src with hashes does not cover inline event handlers, so
              the `onload` this used to carry was blocked and Inter never
              loaded. See frontend/index.html for the full note. -->
         <noscript>
-            <link
-                rel="stylesheet"
-                href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-            />
         </noscript>
     </head>
     <body>
         <div id="root" data-doc="terms"></div>
         <script type="module" src="/src/entries/legal.tsx"></script>
-            <script>
-            (function () {
-                var f = document.getElementById("le-font");
-                if (f) f.media = "all";
-            })();
-        </script>
     </body>
 </html>

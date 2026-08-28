@@ -3,7 +3,6 @@ import { ArrowRight, Check } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { SITE } from "@/constants/site";
 import Header from "@/sections/Header";
-import Footer from "@/sections/Footer";
 import CursorGlow from "@/components/CursorGlow";
 import ScrollProgress from "@/components/ScrollProgress";
 import Reveal from "@/components/Reveal";
@@ -299,7 +298,30 @@ export default function Analyse() {
         </section>
       </main>
 
-      <Footer onSubpage />
+      {/* NO SITE FOOTER, BY INSTRUCTION — but not nothing.
+          The full footer carried a second contact form, the address block and
+          four link columns: on the one page whose entire job is a five-field
+          form, that is a second, competing form directly beneath the first.
+
+          What stays is the legal minimum, and it is a minimum rather than a
+          preference: this page collects a name, a phone number and an email
+          from Swiss visitors, so the Impressum and the Datenschutzerklärung
+          have to be reachable from it. Two links in the site's own quiet
+          register — which is also exactly what the reference funnel put at
+          the foot of its screens. */}
+      <footer className="relative bg-bg pb-10 text-center">
+        <nav aria-label={t.footer.columns.legal} className="le-container">
+          <a href="/impressum/" className="le-link text-[12.5px]">
+            {t.footer.links.imprint}
+          </a>
+          <span aria-hidden="true" className="mx-3 text-ink-3/50">
+            ·
+          </span>
+          <a href="/datenschutz/" className="le-link text-[12.5px]">
+            {t.footer.links.privacy}
+          </a>
+        </nav>
+      </footer>
     </>
   );
 }
