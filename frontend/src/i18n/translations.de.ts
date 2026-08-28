@@ -342,13 +342,18 @@ export const de = {
       consent: "Bitte bestätige die Datenschutzerklärung.",
       failed: "Das hat leider nicht geklappt. Bitte versuche es erneut oder schreib uns direkt an info@leadsengine.ch.",
     },
-    /* NO DASH. The em dash made the confirmation read as an aside rather
-       than a statement, and it was the first thing the client saw. Two short
-       sentences instead: what happened, and what happens next. */
+    /* CLIENT-SUPPLIED, VERBATIM. The tick belongs to the heading in their
+       copy, so the standalone badge that used to sit above it is gone — two
+       checkmarks on one card is one too many. It is drawn as an icon rather
+       than the U+2713 character, which has no glyph in Inter and would fall
+       back to whatever the system has. */
     successTitle: "Anfrage erhalten",
-    successBody: "Wir haben Deine Angaben erhalten und starten die Analyse.",
-    successDetail: "Das Ergebnis erhältst Du innerhalb von 48 Stunden per E-Mail.",
-    successContactLabel: "Fragen?",
+    successBody: "Vielen Dank – Deine Anfrage ist bei uns eingegangen.",
+    successDemand:
+      "Aufgrund der aktuell hohen Nachfrage kann die Erstellung Deiner persönlichen KI-Analyse bis zu 48 Stunden dauern.",
+    successFollowUp: "Sobald Deine Analyse fertig ist, melden wir uns persönlich bei Dir.",
+    successQuestion: "Du hast in der Zwischenzeit eine Frage?",
+    successWriteTo: "Schreib uns gerne an",
     successBack: "Zurück zur Startseite",
   },
 

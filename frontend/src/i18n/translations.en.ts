@@ -299,9 +299,12 @@ export const en: Dict = {
       failed: "That did not work. Please try again, or write to us directly at info@leadsengine.ch.",
     },
     successTitle: "Request received",
-    successBody: "We have your details and are starting the analysis.",
-    successDetail: "You will get the result by email within 48 hours.",
-    successContactLabel: "Questions?",
+    successBody: "Thank you – your request has reached us.",
+    successDemand:
+      "Because demand is high at the moment, preparing your personal AI analysis can take up to 48 hours.",
+    successFollowUp: "As soon as your analysis is ready, we will come back to you personally.",
+    successQuestion: "A question in the meantime?",
+    successWriteTo: "Write to us at",
     successBack: "Back to the home page",
   },
 

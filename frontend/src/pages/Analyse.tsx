@@ -119,33 +119,43 @@ export default function Analyse() {
             <div className="mx-auto w-full max-w-[27rem]">
               {state === "sent" ? (
               /* A CARD, NOT LOOSE TEXT ON A FIELD OF BLACK.
-                 The first version was a headline and a paragraph floating in
-                 the middle of an empty viewport, which read as an error page
-                 as readily as a confirmation. Giving it the same panel the
+                 An earlier version was a headline and a paragraph floating in
+                 the middle of an empty viewport, which reads as an error page
+                 about as readily as a confirmation. Giving it the panel the
                  form occupied means the page does not appear to fall apart at
-                 the moment it succeeds: the thing you were looking at is
-                 still there, and it now contains an answer. The hairline rule
-                 separates what happened from what happens next. */
-              <div className="rounded-2xl border border-line bg-surface/85 px-7 py-9 text-center sm:px-9 sm:py-11">
-                <span
-                  aria-hidden="true"
-                  className="mx-auto grid h-12 w-12 place-items-center rounded-full border border-gold-vivid/40 bg-gold-vivid/[0.10] text-gold-vivid"
-                >
-                  <Check className="h-6 w-6" strokeWidth={2.2} />
-                </span>
+                 the moment it succeeds.
 
-                <h1 className="mt-6 text-[clamp(1.45rem,2.6vw,1.8rem)] font-semibold leading-[1.2] tracking-[-0.025em] text-ink">
+                 THE COPY IS THE CLIENT'S, VERBATIM, and its shape is the
+                 reason for the rule across the middle: three statements about
+                 the request, then a separate offer of help. Running all five
+                 lines together would bury the one line a reader might act on. */
+              <div className="rounded-2xl border border-line bg-surface/85 px-7 py-9 text-center sm:px-9 sm:py-11">
+                <h1 className="flex items-center justify-center gap-2.5 text-[clamp(1.45rem,2.6vw,1.8rem)] font-semibold leading-[1.2] tracking-[-0.025em] text-ink">
                   {a.successTitle}
+                  {/* Drawn, not the U+2713 character — Inter has no glyph for
+                      it, so the text version falls back to whatever the system
+                      supplies and sits off the baseline. */}
+                  <Check
+                    aria-hidden="true"
+                    strokeWidth={3}
+                    className="h-[0.78em] w-[0.78em] shrink-0 text-gold-vivid"
+                  />
                 </h1>
 
-                <p className="mx-auto mt-3 max-w-[34ch] text-[14.5px] leading-[1.6] text-ink-2">
+                <p className="mx-auto mt-5 max-w-[38ch] text-[14.5px] leading-[1.65] text-ink-2">
                   {a.successBody}
                 </p>
+                <p className="mx-auto mt-3.5 max-w-[38ch] text-[14.5px] leading-[1.65] text-ink-2">
+                  {a.successDemand}
+                </p>
+                <p className="mx-auto mt-3.5 max-w-[38ch] text-[14.5px] leading-[1.65] text-ink-2">
+                  {a.successFollowUp}
+                </p>
 
-                <div className="mx-auto mt-7 max-w-[30ch] border-t border-line pt-6">
-                  <p className="text-[13.5px] leading-[1.6] text-ink-2">{a.successDetail}</p>
-                  <p className="mt-4 text-[12.5px] leading-[1.6] text-ink-3">
-                    {a.successContactLabel}{" "}
+                <div className="mx-auto mt-7 max-w-[34ch] border-t border-line pt-6">
+                  <p className="text-[13.5px] leading-[1.6] text-ink-3">{a.successQuestion}</p>
+                  <p className="mt-1.5 text-[13.5px] leading-[1.6] text-ink-2">
+                    {a.successWriteTo}{" "}
                     <a href={SITE.contact.emailHref} className="le-link">
                       {SITE.contact.email}
                     </a>
