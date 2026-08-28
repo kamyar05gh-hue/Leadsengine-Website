@@ -2,9 +2,19 @@
 /**
  * Free-analysis request handler.
  *
- * WHAT IT IS FOR. The page at /analyse/ collects five fields and a consent
- * tick. This turns that into an email to the two inboxes that act on it, and
- * — just as importantly — writes every submission to a file first.
+ * WHAT IT IS FOR. It handles BOTH forms on the site and turns either into an
+ * email to the two inboxes that act on them — and, just as importantly, writes
+ * every submission to a file first.
+ *
+ *   source=analyse   /analyse/       name, email, phone, role, website
+ *   source=footer    the site footer  name, email, phone, message
+ *
+ * THE FOOTER FORM USED TO BE A `mailto:` LINK. It set window.location to a
+ * pre-filled mailto and called that sent. It was not sent: it hands the
+ * visitor a draft in whatever mail client their device happens to have, and
+ * nothing arrives unless they then find that window and press send themselves.
+ * On a desktop with no mail client configured — which is most of them — the
+ * click did nothing at all, silently. Both forms now post here.
  *
  * WHY THE FILE COMES FIRST, AND WHY IT IS NOT OPTIONAL.
  * leadsengine.ch has its MX, SPF and DKIM at Migadu. Mail handed to PHP on
@@ -83,24 +93,43 @@ if (clean($body['company_website_url'] ?? '') !== '') {
     exit;
 }
 
+$source  = clean($body['source'] ?? 'analyse', 16);
+if (!in_array($source, ['analyse', 'footer'], true)) $source = 'analyse';
+
 $name    = clean($body['name'] ?? '', 120);
 $email   = clean($body['email'] ?? '', 160);
 $phone   = clean($body['phone'] ?? '', 60);
 $role    = clean($body['role'] ?? '', 120);
 $website = clean($body['website'] ?? '', 200);
+/* The footer form's free-text field. Kept multi-line, unlike everything else,
+   because collapsing a written message to one line destroys it — but capped,
+   and it never touches a header. */
+$message = is_string($body['message'] ?? null)
+    ? mb_substr(trim(str_replace(["\r\n", "\r"], "\n", $body['message'])), 0, 4000)
+    : '';
 $consent = !empty($body['consent']);
 $lang    = clean($body['lang'] ?? '', 8);
 
 /* Validated again here, not only in the browser. Client-side validation is a
    convenience for the visitor; it is not a check, because nothing stops a
    caller posting straight to this URL. */
+/* Each form has its own required set — the footer asks for a message and not
+   a role, /analyse/ the reverse. Validating one list for both would either
+   reject valid footer submissions or wave through incomplete analyse ones. */
+$required = $source === 'footer'
+    ? ['name' => $name, 'email' => $email, 'phone' => $phone, 'message' => $message]
+    : ['name' => $name, 'email' => $email, 'phone' => $phone, 'role' => $role, 'website' => $website];
+
 $missing = [];
-foreach (['name' => $name, 'email' => $email, 'phone' => $phone, 'role' => $role, 'website' => $website] as $k => $v) {
-    if ($v === '') $missing[] = $k;
+foreach ($required as $k => $v) {
+    if (trim($v) === '') $missing[] = $k;
 }
 if ($missing)                                    fail(422, 'Missing: ' . implode(', ', $missing));
 if (!filter_var($email, FILTER_VALIDATE_EMAIL))  fail(422, 'Invalid email');
-if (!$consent)                                   fail(422, 'Consent required');
+/* The footer form carries no consent tick — it is a direct message to a
+   published address, not a lead capture — so it is only required where the
+   form actually shows one. */
+if ($source !== 'footer' && !$consent)           fail(422, 'Consent required');
 
 /* Coarse per-IP rate limit. Not a defence against a determined attacker, just
    a ceiling so a loop cannot fill the mailbox or the disk in a minute. */
@@ -117,11 +146,13 @@ $hits[] = $now;
 /* ---------------------------------------------------------------- store */
 $record = [
     'at'      => gmdate('c'),
+    'source'  => $source,
     'name'    => $name,
     'email'   => $email,
     'phone'   => $phone,
     'role'    => $role,
     'website' => $website,
+    'message' => $message,
     'lang'    => $lang,
     'ip'      => $ip,
     'ua'      => clean($_SERVER['HTTP_USER_AGENT'] ?? '', 200),
@@ -140,21 +171,36 @@ if (!$stored) {
 }
 
 /* ----------------------------------------------------------------- mail */
-$subject = 'Neue KI-Analyse-Anfrage: ' . $name;
-$lines = [
-    'Neue Anfrage über leadsengine.ch/analyse/',
-    '',
-    'Name:     ' . $name,
-    'E-Mail:   ' . $email,
-    'Telefon:  ' . $phone,
-    'Rolle:    ' . $role,
-    'Website:  ' . $website,
-    '',
-    'Sprache:  ' . ($lang ?: 'de'),
-    'Zeit:     ' . gmdate('Y-m-d H:i:s') . ' UTC',
-    'Einwilligung Datenschutz: ja',
-];
-$message = implode("\r\n", $lines) . "\r\n";
+if ($source === 'footer') {
+    $subject = 'Neue Nachricht über das Kontaktformular: ' . $name;
+    $lines = [
+        'Neue Nachricht über das Kontaktformular auf leadsengine.ch',
+        '',
+        'Name:     ' . $name,
+        'E-Mail:   ' . $email,
+        'Telefon:  ' . $phone,
+        '',
+        'Nachricht:',
+        $message,
+    ];
+} else {
+    $subject = 'Neue KI-Analyse-Anfrage: ' . $name;
+    $lines = [
+        'Neue Anfrage über leadsengine.ch/analyse/',
+        '',
+        'Name:     ' . $name,
+        'E-Mail:   ' . $email,
+        'Telefon:  ' . $phone,
+        'Rolle:    ' . $role,
+        'Website:  ' . $website,
+        '',
+        'Einwilligung Datenschutz: ja',
+    ];
+}
+$lines[] = '';
+$lines[] = 'Sprache:  ' . ($lang ?: 'de');
+$lines[] = 'Zeit:     ' . gmdate('Y-m-d H:i:s') . ' UTC';
+$mailBody = implode("\r\n", str_replace("\n", "\r\n", $lines)) . "\r\n";
 
 $headers = implode("\r\n", [
     'From: ' . FROM,
@@ -171,7 +217,7 @@ foreach (RECIPIENTS as $to) {
     /* `-f` sets the envelope sender, which is what a receiving server checks
        for SPF — leaving it to the server default is the usual reason these
        land in spam. */
-    if (@mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', $message, $headers, '-finfo@leadsengine.ch')) {
+    if (@mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', $mailBody, $headers, '-finfo@leadsengine.ch')) {
         $sent++;
     } else {
         error_log('lead.php: mail() failed for ' . $to);

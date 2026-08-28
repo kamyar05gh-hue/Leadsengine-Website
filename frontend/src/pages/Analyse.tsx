@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
+import { SITE } from "@/constants/site";
 import Header from "@/sections/Header";
 import Footer from "@/sections/Footer";
 import CursorGlow from "@/components/CursorGlow";
@@ -118,25 +119,46 @@ export default function Analyse() {
                 sprawling. */}
             <div className="mx-auto w-full max-w-[27rem]">
               {state === "sent" ? (
-                <div className="text-center">
-                  <span
-                    aria-hidden="true"
-                    className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-gold-vivid/35 bg-gold-vivid/[0.10] text-gold-vivid"
-                  >
-                    <Check className="h-7 w-7" strokeWidth={2} />
-                  </span>
-                  <h1 className="mt-7 text-[clamp(1.6rem,3vw,2.1rem)] font-semibold leading-[1.16] tracking-[-0.025em] text-ink">
-                    {a.successTitle}
-                  </h1>
-                  <p className="mx-auto mt-4 max-w-[38ch] text-[14.5px] leading-[1.65] text-ink-2">
-                    {a.successBody}
-                  </p>
-                  <p className="mt-7">
-                    <a href="/" className="le-link text-[13.5px]">
-                      ← {a.successBack}
+              /* A CARD, NOT LOOSE TEXT ON A FIELD OF BLACK.
+                 The first version was a headline and a paragraph floating in
+                 the middle of an empty viewport, which read as an error page
+                 as readily as a confirmation. Giving it the same panel the
+                 form occupied means the page does not appear to fall apart at
+                 the moment it succeeds: the thing you were looking at is
+                 still there, and it now contains an answer. The hairline rule
+                 separates what happened from what happens next. */
+              <div className="rounded-2xl border border-line bg-surface/85 px-7 py-9 text-center sm:px-9 sm:py-11">
+                <span
+                  aria-hidden="true"
+                  className="mx-auto grid h-12 w-12 place-items-center rounded-full border border-gold-vivid/40 bg-gold-vivid/[0.10] text-gold-vivid"
+                >
+                  <Check className="h-6 w-6" strokeWidth={2.2} />
+                </span>
+
+                <h1 className="mt-6 text-[clamp(1.45rem,2.6vw,1.8rem)] font-semibold leading-[1.2] tracking-[-0.025em] text-ink">
+                  {a.successTitle}
+                </h1>
+
+                <p className="mx-auto mt-3 max-w-[34ch] text-[14.5px] leading-[1.6] text-ink-2">
+                  {a.successBody}
+                </p>
+
+                <div className="mx-auto mt-7 max-w-[30ch] border-t border-line pt-6">
+                  <p className="text-[13.5px] leading-[1.6] text-ink-2">{a.successDetail}</p>
+                  <p className="mt-4 text-[12.5px] leading-[1.6] text-ink-3">
+                    {a.successContactLabel}{" "}
+                    <a href={SITE.contact.emailHref} className="le-link">
+                      {SITE.contact.email}
                     </a>
                   </p>
                 </div>
+
+                <p className="mt-8">
+                  <a href="/" className="le-link text-[13px]">
+                    ← {a.successBack}
+                  </a>
+                </p>
+              </div>
               ) : (
                 <Reveal dir="up" eager>
                   <div className="text-center">

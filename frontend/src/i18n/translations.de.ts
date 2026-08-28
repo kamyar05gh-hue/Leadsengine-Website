@@ -342,8 +342,13 @@ export const de = {
       consent: "Bitte bestätige die Datenschutzerklärung.",
       failed: "Das hat leider nicht geklappt. Bitte versuche es erneut oder schreib uns direkt an info@leadsengine.ch.",
     },
-    successTitle: "Danke — wir haben Deine Anfrage.",
-    successBody: "Wir starten die Analyse und melden uns innerhalb von 48 Stunden mit dem Ergebnis. Bei Rückfragen erreichst Du uns jederzeit unter info@leadsengine.ch.",
+    /* NO DASH. The em dash made the confirmation read as an aside rather
+       than a statement, and it was the first thing the client saw. Two short
+       sentences instead: what happened, and what happens next. */
+    successTitle: "Anfrage erhalten",
+    successBody: "Wir haben Deine Angaben erhalten und starten die Analyse.",
+    successDetail: "Das Ergebnis erhältst Du innerhalb von 48 Stunden per E-Mail.",
+    successContactLabel: "Fragen?",
     successBack: "Zurück zur Startseite",
   },
 
@@ -565,7 +570,9 @@ export const de = {
       messagePlaceholder: "Worum geht es?",
       submit: "Einreichen",
       subject: "Anfrage über leadsengine.ch",
-      sent: "Mail-Programm geöffnet.",
+      sending: "Wird gesendet …",
+      failed: "Das hat leider nicht geklappt. Bitte versuche es erneut oder schreib uns an info@leadsengine.ch.",
+      sent: "Nachricht gesendet. Wir melden uns.",
       required: "Pflichtfeld",
       privacy:
         "Deine Angaben werden ausschliesslich zur Beantwortung Deiner Anfrage verwendet.",

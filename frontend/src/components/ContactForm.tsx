@@ -1,7 +1,6 @@
 import { useId, useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
-import { SITE } from "@/constants/site";
 
 /**
  * The footer contact form.
@@ -14,16 +13,19 @@ import { SITE } from "@/constants/site";
  * same focus ring as every other control, and the same CTA button. The
  * required marker is gold, tying it to the contact block beside it.
  *
- * HOW IT SUBMITS, AND WHY. There is no backend — this is a static build
- * served as files — so there is nothing to POST to. Rather than pretend (a
- * form that swallows the message and shows a thank-you is worse than no form
- * at all), submitting opens the visitor's mail client with the message
- * already written and addressed to the contact inbox. Nothing is lost and
- * nothing is faked: the visitor sees exactly what is sent, and it arrives
- * from their own address so a reply just works.
+ * HOW IT SUBMITS. It POSTs to `/api/lead.php`, the same endpoint the
+ * /analyse/ page uses, tagged `source: "footer"`.
  *
- * To move to a real endpoint later, replace the body of `submit` with a fetch
- * to it; the validation, the field state and the sent state all stay.
+ * IT USED TO BE A `mailto:` LINK, and that was a real bug rather than a
+ * pragmatic compromise. Setting `window.location` to a pre-filled mailto does
+ * not send anything: it hands the visitor a draft in whatever mail client
+ * their device has, and the message arrives only if they then find that
+ * window and press send. On a desktop with no mail client configured — most
+ * of them — clicking Submit did nothing at all, while the form showed its
+ * success state. Messages were being lost silently.
+ *
+ * The endpoint writes every submission to a file before it tries to mail, so
+ * a message cannot be lost even if delivery fails. See lead.php.
  *
  * VALIDATION is done here rather than left to the browser so the messages are
  * translated and styled with the rest of the page. `noValidate` turns off the
@@ -56,6 +58,8 @@ export default function ContactForm() {
   const [values, setValues] = useState({ name: "", email: "", phone: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   const f = t.footer.form;
   const set = (k: keyof typeof values) => (v: string) =>
@@ -73,17 +77,38 @@ export default function ContactForm() {
     return Object.keys(next).length === 0;
   };
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (sending) return;
     if (!validate()) return;
-    const subject = `${f.subject}: ${values.name.trim()}`;
-    const body =
-      `${values.message.trim()}\n\n${values.name.trim()}\n` +
-      `${values.email.trim()}\n${values.phone.trim()}`;
-    window.location.href =
-      `${SITE.contact.emailHref}?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    setSending(true);
+    setFailed(false);
+    try {
+      const res = await fetch("/api/lead.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          source: "footer",
+          name: values.name.trim(),
+          email: values.email.trim(),
+          phone: values.phone.trim(),
+          message: values.message.trim(),
+          company_website_url: "",
+          lang: t.meta.lang,
+        }),
+      });
+      /* A 200 is not a success: if PHP ever stops executing, the server
+         returns 200 with the source of lead.php and the visitor would be told
+         their message went through while it went nowhere. */
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data || data.ok !== true) throw new Error(String(res.status));
+      setValues({ name: "", email: "", phone: "", message: "" });
+      setSent(true);
+    } catch {
+      setFailed(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   /* Compact, at the client's request: the rows stay tight so the four read as
@@ -210,12 +235,18 @@ export default function ContactForm() {
           is, so the form does not end in a button the page uses nowhere
           else. */}
       <div className="pt-1.5">
-        <button type="submit" className="le-cta-pill group w-full px-6 py-3 text-[14.5px]">
-          {f.submit}
-          <ArrowRight
-            className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-            aria-hidden="true"
-          />
+        <button
+          type="submit"
+          disabled={sending}
+          className="le-cta-pill group w-full px-6 py-3 text-[14.5px] disabled:cursor-wait disabled:opacity-70"
+        >
+          {sending ? f.sending : f.submit}
+          {!sending && (
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
+          )}
         </button>
 
         {/* Announced politely so a screen reader hears it without the focus
@@ -232,6 +263,7 @@ export default function ContactForm() {
               {f.sent}
             </span>
           )}
+          {failed && <span className="text-[rgb(214,82,74)]">{f.failed}</span>}
         </p>
 
         <p className="mt-1 text-center text-[11px] leading-relaxed text-ink-3">{f.privacy}</p>

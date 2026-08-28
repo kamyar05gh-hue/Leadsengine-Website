@@ -298,8 +298,10 @@ export const en: Dict = {
       consent: "Please confirm the privacy policy.",
       failed: "That did not work. Please try again, or write to us directly at info@leadsengine.ch.",
     },
-    successTitle: "Thank you — we have your request.",
-    successBody: "We are starting the analysis and will come back to you with the result within 48 hours. If anything comes up in the meantime, you can reach us at info@leadsengine.ch.",
+    successTitle: "Request received",
+    successBody: "We have your details and are starting the analysis.",
+    successDetail: "You will get the result by email within 48 hours.",
+    successContactLabel: "Questions?",
     successBack: "Back to the home page",
   },
 
@@ -508,7 +510,9 @@ export const en: Dict = {
       messagePlaceholder: "What is it about?",
       submit: "Submit",
       subject: "Enquiry via leadsengine.ch",
-      sent: "Mail app opened.",
+      sending: "Sending …",
+      failed: "That did not work. Please try again, or write to us at info@leadsengine.ch.",
+      sent: "Message sent. We will be in touch.",
       required: "Required",
       privacy: "Your details are used only to answer your enquiry.",
       errors: {
