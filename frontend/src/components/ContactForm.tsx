@@ -111,19 +111,20 @@ export default function ContactForm() {
     }
   };
 
-  /* Compact, at the client's request: the rows stay tight so the four read as
-     one block rather than four stacked pairs. Nothing is removed — every
-     label, required marker and error message stays.
+  /* IDENTICAL TO /analyse/, BY INSTRUCTION — same padding, same type size,
+     same borders, same gold focus halo. The two forms are the only places on
+     the site where a visitor types, and they were reading as two different
+     products: this one had blue focus rings and small-caps captions over
+     every field, that one had gold and none.
 
-     The focus treatment is the point of the restyle: `ring-4` at 10% opacity
-     is a HALO, not an outline. A 1px hard ring on a dark form reads as a
-     validation error; a soft bloom reads as "this is where you are", and it
-     is the same gesture the CTA pill uses on hover. */
+     `ring-4` at 10% opacity is a HALO, not an outline. A 1px hard ring on a
+     dark form reads as a validation error; a soft bloom reads as "this is
+     where you are", and it is the same gesture the CTA pill uses on hover. */
   const fieldBase =
-    "w-full rounded-xl border px-3.5 py-2.5 text-[14px] text-ink " +
-    "placeholder:text-ink-3/70 transition-[border-color,background-color,box-shadow] " +
-    "duration-200 focus:outline-none focus:ring-4 focus:ring-accent-bright/10 " +
-    "focus:border-accent-bright/70";
+    "w-full rounded-xl border px-4 py-3 text-[14.5px] text-ink " +
+    "placeholder:text-ink-3/75 transition-[border-color,background-color,box-shadow] " +
+    "duration-200 focus:outline-none focus:ring-4 focus:ring-gold-vivid/10 " +
+    "focus:border-gold-vivid/70";
 
   /** One labelled field. Keeps the four rows identical rather than repeated. */
   const Field = ({
@@ -148,10 +149,10 @@ export default function ContactForm() {
     /* A bad field is TINTED, not merely outlined: at a glance the eye finds
        the offending row without reading the four messages under the form. */
     const cls =
-      `mt-2 ${fieldBase} ` +
+      `${fieldBase} ` +
       (bad
         ? "border-[rgb(214,82,74)]/70 bg-[rgb(214,82,74)]/[0.06]"
-        : "border-white/[0.09] bg-white/[0.025] hover:border-white/[0.16]");
+        : "border-white/[0.10] bg-white/[0.025] hover:border-white/[0.18]");
     const shared = {
       id,
       name: k,
@@ -164,14 +165,14 @@ export default function ContactForm() {
     };
     return (
       <div>
-        <label
-          className="block text-[10.5px] font-semibold uppercase tracking-[0.13em] text-ink-3"
-          htmlFor={id}
-        >
-          {label}{" "}
-          <span className="text-gold-vivid" title={f.required} aria-hidden="true">
-            *
-          </span>
+        {/* THE CAPTION IS THE PLACEHOLDER'S JOB, as on /analyse/. Four short,
+            self-evident fields do not each need a line of small caps above
+            them, and removing them is most of what made the two forms look
+            unrelated. The label stays in the DOM for assistive tech, so a
+            screen reader hears exactly what it did before — a placeholder
+            alone is not an accessible name. */}
+        <label htmlFor={id} className="sr-only">
+          {label}
         </label>
         {rows ? (
           <textarea {...shared} rows={rows} className={`${cls} resize-y`} />
@@ -194,12 +195,12 @@ export default function ContactForm() {
   };
 
   return (
-    /* All four fields in ONE grid, so every gap between them is the same
-       value. They used to be a two-column row plus two separately-spaced
-       full-width fields, which made the rhythm drift down the form. Phone and
-       message span both columns; the grid owns the spacing. */
-    <form onSubmit={submit} noValidate className="space-y-4">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    /* ONE STACKED COLUMN, like /analyse/. Name and email used to share a row
+       from `sm` up, which made this form four rows here and five stacked
+       there — the same fields in a different shape. One column also means the
+       gap between every pair is the same value, with nothing to drift. */
+    <form onSubmit={submit} noValidate className="space-y-3.5">
+      <div className="space-y-3.5">
         <Field k="name" label={f.name} placeholder={f.namePlaceholder} autoComplete="name" />
         <Field
           k="email"
@@ -209,7 +210,7 @@ export default function ContactForm() {
           inputMode="email"
           autoComplete="email"
         />
-        <div className="sm:col-span-2">
+        <div>
           <Field
             k="phone"
             label={f.phone}
@@ -219,7 +220,7 @@ export default function ContactForm() {
             autoComplete="tel"
           />
         </div>
-        <div className="sm:col-span-2">
+        <div>
           <Field k="message" label={f.message} placeholder={f.messagePlaceholder} rows={4} />
         </div>
       </div>
