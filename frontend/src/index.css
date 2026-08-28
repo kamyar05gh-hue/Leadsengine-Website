@@ -422,6 +422,81 @@
         transform: translateY(-2px);
     }
 
+    /* ------------------------------------------------------------------
+       THE CONSENT CHECKBOX.
+
+       A REAL <input type="checkbox">, not a div pretending to be one. It is
+       still the element the browser focuses, the label still toggles it, the
+       form still reads it, and a screen reader still announces "checkbox,
+       checked" — none of which survives a div with a click handler. What is
+       replaced is only the drawing: `appearance: none` removes the platform
+       control and leaves a box we own, which is why this can be gold on a
+       near-black ground instead of the grey-blue Chrome insists on.
+
+       The tick is a rotated rectangle with two borders — no SVG, no icon
+       font, nothing to load — and it scales in from nothing so checking the
+       box feels like an action rather than a state change.
+       ------------------------------------------------------------------ */
+    .le-check {
+        appearance: none;
+        -webkit-appearance: none;
+        position: relative;
+        flex: none;
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        border: 1.5px solid rgb(255 255 255 / 0.22);
+        border-radius: 6px;
+        background: rgb(255 255 255 / 0.04);
+        cursor: pointer;
+        transition:
+            border-color 180ms var(--le-ease),
+            background-color 180ms var(--le-ease),
+            box-shadow 180ms var(--le-ease);
+    }
+    .le-check:hover {
+        border-color: rgb(var(--le-gold-bright-rgb) / 0.55);
+    }
+    .le-check:checked {
+        border-color: rgb(var(--le-gold-bright-rgb));
+        background: rgb(var(--le-gold-vivid-rgb));
+    }
+    .le-check:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px rgb(var(--le-gold-vivid-rgb) / 0.22);
+    }
+    /* The tick itself. Drawn, not fetched. */
+    .le-check::after {
+        content: "";
+        position: absolute;
+        left: 6.5px;
+        top: 2.5px;
+        width: 5px;
+        height: 10px;
+        border: solid #0b0906;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg) scale(0.4);
+        opacity: 0;
+        transition:
+            transform 180ms var(--le-ease-out),
+            opacity 120ms linear;
+    }
+    .le-check:checked::after {
+        transform: rotate(45deg) scale(1);
+        opacity: 1;
+    }
+    /* An unanswered required box, once the visitor has tried to submit. */
+    .le-check[aria-invalid="true"] {
+        border-color: rgb(214 82 74 / 0.8);
+        background: rgb(214 82 74 / 0.08);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .le-check,
+        .le-check::after {
+            transition: none;
+        }
+    }
+
     /* Link underline grow */
     .le-link {
         position: relative;

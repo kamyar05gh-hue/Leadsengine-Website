@@ -270,14 +270,7 @@ export const en: Dict = {
       "Request the free AI visibility analysis. We check whether ChatGPT, Perplexity, Google AI, Claude and Grok recommend your company — results within 48 hours.",
     kicker: "Free AI analysis",
     title: "Find out whether AI recommends you.",
-    lead: "We check your company across ChatGPT, Perplexity, Google AI, Claude and Grok, using real questions from your sector. You get the result within 48 hours, personally and with no obligation.",
-    assurances: [
-      "Result within 48 hours",
-      "Free and without obligation",
-      "No credit card, no subscription",
-    ],
-    formTitle: "Your details",
-    formLead: "Five fields. That is all we need to start the analysis.",
+    lead: "In 48 hours you will know how you stand in ChatGPT & Co. Free, with no obligation.",
     fields: {
       name: "First and last name",
       namePlaceholder: "Anna Muster",
@@ -290,9 +283,8 @@ export const en: Dict = {
       website: "Website",
       websitePlaceholder: "company.ch",
     },
-    privacyBefore: "I have read the",
+    consentShort: "I agree to the",
     privacyLink: "privacy policy",
-    privacyAfter: "and agree to my details being processed in order to answer this enquiry.",
     submit: "Request the free analysis",
     submitting: "Sending …",
     required: "Required",
@@ -309,22 +301,6 @@ export const en: Dict = {
     successTitle: "Thank you — we have your request.",
     successBody: "We are starting the analysis and will come back to you with the result within 48 hours. If anything comes up in the meantime, you can reach us at info@leadsengine.ch.",
     successBack: "Back to the home page",
-    stepsTitle: "What happens next",
-    steps: [
-      {
-        title: "We gather the real questions",
-        body: "From your website and your market we derive the questions your customers actually ask before buying.",
-      },
-      {
-        title: "We put them to five AI systems",
-        body: "Every question goes to ChatGPT, Perplexity, Google AI, Claude and Grok. We record who gets named, and why.",
-      },
-      {
-        title: "You get the result",
-        body: "Within 48 hours, with the sources the systems rely on and the specific gaps.",
-      },
-    ],
-    trustTitle: "What clients say",
   },
 
   about: {

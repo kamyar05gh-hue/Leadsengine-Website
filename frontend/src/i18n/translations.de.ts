@@ -305,15 +305,11 @@ export const de = {
       "Fordere die kostenlose KI-Sichtbarkeitsanalyse an. Wir prüfen, ob ChatGPT, Perplexity, Google AI, Claude und Grok Dein Unternehmen empfehlen — Ergebnisse in 48 Stunden.",
     kicker: "Kostenlose KI-Analyse",
     title: "Erfahre, ob KI Dich empfiehlt.",
-    lead: "Wir prüfen Dein Unternehmen bei ChatGPT, Perplexity, Google AI, Claude und Grok — mit echten Fragen aus Deiner Branche. Du erhältst das Ergebnis innerhalb von 48 Stunden, persönlich und ohne Verpflichtung.",
-    /* Three facts under the lead. Short, concrete, no adjectives. */
-    assurances: [
-      "Ergebnis innerhalb von 48 Stunden",
-      "Kostenlos und unverbindlich",
-      "Keine Kreditkarte, kein Abo",
-    ],
-    formTitle: "Deine Angaben",
-    formLead: "Fünf Felder. Mehr brauchen wir nicht, um die Analyse zu starten.",
+    /* ONE LINE. The page carried three paragraphs, a numbered explainer and
+       three testimonial cards; the client asked for none of it. What a person
+       who has just clicked "Kostenlose Analyse" needs to read before typing is
+       when they hear back and what it costs. That is this sentence. */
+    lead: "In 48 Stunden weisst Du, wie Du in ChatGPT & Co. dastehst. Kostenlos und unverbindlich.",
     fields: {
       name: "Vor- und Nachname",
       namePlaceholder: "Anna Muster",
@@ -328,9 +324,11 @@ export const de = {
     },
     /* The consent line is split so the policy link is a real link inside the
        sentence rather than a second line under it. */
-    privacyBefore: "Ich habe die",
-    privacyLink: "Datenschutzerklärung",
-    privacyAfter: "gelesen und bin mit der Verarbeitung meiner Angaben zur Beantwortung dieser Anfrage einverstanden.",
+    /* One short sentence beside the box. The three-part version wrapped to
+       three lines and read like a contract; this is what a consent line is
+       for. `privacyBefore`/`privacyAfter` are gone with it. */
+    consentShort: "Ich stimme der",
+    privacyLink: "Datenschutzerklärung zu",
     submit: "Kostenlose Analyse anfordern",
     submitting: "Wird gesendet …",
     required: "Pflichtfeld",
@@ -347,24 +345,6 @@ export const de = {
     successTitle: "Danke — wir haben Deine Anfrage.",
     successBody: "Wir starten die Analyse und melden uns innerhalb von 48 Stunden mit dem Ergebnis. Bei Rückfragen erreichst Du uns jederzeit unter info@leadsengine.ch.",
     successBack: "Zurück zur Startseite",
-    /* What happens after the form. Removes the main reason people hesitate:
-       not knowing what they have just started. */
-    stepsTitle: "Was danach passiert",
-    steps: [
-      {
-        title: "Wir sammeln die echten Fragen",
-        body: "Aus Deiner Website und Deinem Markt leiten wir die Fragen ab, die Deine Kunden vor einem Kauf tatsächlich stellen.",
-      },
-      {
-        title: "Wir stellen sie fünf KI-Systemen",
-        body: "Jede Frage geht an ChatGPT, Perplexity, Google AI, Claude und Grok. Wir halten fest, wer genannt wird und warum.",
-      },
-      {
-        title: "Du bekommst das Ergebnis",
-        body: "Innerhalb von 48 Stunden, mit den Quellen, auf die sich die Systeme stützen, und den konkreten Lücken.",
-      },
-    ],
-    trustTitle: "Was Kunden sagen",
   },
 
   about: {

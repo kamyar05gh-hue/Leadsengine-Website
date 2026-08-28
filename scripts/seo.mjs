@@ -134,20 +134,24 @@ function aboutFallback(t, TEAM) {
 /**
  * The crawler's view of /analyse/.
  *
- * It is a form, so there is no article to mirror — but an empty <noscript> on
- * the page every CTA points at would leave the site's single most important
- * URL with nothing for an engine that does not run JavaScript to read. What
- * it emits instead is what the page actually promises: the offer, the three
- * assurances, and what happens after you submit. No field labels: a crawler
- * cannot fill the form in, and listing inputs it cannot use is noise.
+ * IT MIRRORS THE PAGE, WHICH IS NOW ALMOST NOTHING. The page was cut back to
+ * a heading, one line and the form; this was emitting the three assurances
+ * and the numbered explainer that went with them. Serving text no visitor
+ * sees is cloaking, and it is a particularly bad look on the one URL every
+ * call to action points at. So it says exactly what the page says, plus the
+ * fields — a crawler cannot fill a form in, but naming what is asked for is
+ * how it understands the page is a request rather than an article.
  */
 function analyseFallback(t) {
   const a = t.analyse;
+  const fields = ['name', 'email', 'phone', 'role', 'website']
+    .map((k) => `<li>${escapeHtml(a.fields[k])}</li>`)
+    .join('\n');
   return [
     `<h1>${escapeHtml(a.title)}</h1>`,
     `<p>${escapeHtml(a.lead)}</p>`,
-    `<ul>\n${a.assurances.map((x) => `<li>${escapeHtml(x)}</li>`).join('\n')}\n</ul>`,
-    block(a.stepsTitle, a.steps.map((x) => `${x.title}: ${x.body}`)),
+    `<ul>\n${fields}\n</ul>`,
+    `<p><a href="/datenschutz/">${escapeHtml(a.privacyLink)}</a></p>`,
   ].join('\n');
 }
 
