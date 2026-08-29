@@ -655,43 +655,31 @@
         overflow: hidden;
     }
     /* ------------------------------------------------------------------
-       THE ORIGINAL LOOK, WITHOUT THE FILTER THAT COST 33 FRAMES A SECOND.
+       THE ORIGINAL GLOW, WITHOUT THE FILTER THAT COST 33 FRAMES A SECOND.
+
+       GENERATED -- do not hand-edit. Run `python scripts/aurora-profile.py`,
+       which carries the full reasoning and the measurements.
 
        These were `radial-gradient(circle, rgb(C / A), transparent 65%)` under
-       `filter: blur(80px)`. The blur was the whole cost of the hero — six
-       full filter passes on 490-660px layers. Measured at 1440px, sitting
-       still, nothing else touched:
+       `filter: blur(80px)`. Measured at 1440px, sitting still:
 
            as shipped ................................ 27 fps
            aurora animation paused, still blurred .... 28 fps
            aurora removed entirely ................... 60 fps
 
        Pausing the drift changed nothing, so the cost was never the movement.
-       It was the existence of the blurred layers.
+       It was six filter passes existing at all.
 
-       A FIRST ATTEMPT AT REPLACING IT BY EYE WAS VISIBLY WRONG, and this is
-       why. CSS `blur(<len>)` is an feGaussianBlur with stdDeviation = the
-       length, so sigma is 80px, not 40 -- enormous next to a blob whose ink
-       stops at ~215px. Spreading that much ink that far drops the centre by
-       roughly half:
+       The stops below ARE the blurred image -- the source gradient convolved
+       with the real sigma-80 Gaussian -- drawn once instead of recomputed
+       every frame. Peak alpha falls by about half in the process
+       (0.242 / 0.120 / 0.104), because that is what spreading ink that far does.
 
-           blob 1: peak 0.45 -> 0.242   (-46%)
-           blob 2: peak 0.30 -> 0.120   (-60%)
-           blob 3: peak 0.22 -> 0.104   (-53%)
-
-       A hand-picked gradient kept the original peak, so the glow came out
-       about twice as bright and far too tight. The stops below are not
-       guessed: the gradient was convolved with a sigma-80 Gaussian
-       numerically and the result sampled at fourteen radii, so this IS the
-       blurred image, drawn directly instead of computed every frame.
-
-       Each blob is grown by the blur's spread and re-centred on the same
-       point, which is what the `calc()` offsets are doing -- the extra is in
-       px because the blur radius was in px while the size is in vw.
-
-       IF YOU CHANGE A COLOUR OR SIZE HERE, re-run the convolution rather
-       than editing a stop by hand. The script is in the commit that added
-       this comment.
+       They are spaced ADAPTIVELY, at 0.6 of one 8-bit level. An earlier
+       version used fourteen even stops and the client saw circles: CSS
+       interpolates linearly between stops, so sparse ones are straight
+       segments joined at kinks, and the eye turns a derivative break into a
+       ring. Below one level there is no step left to see.
        ------------------------------------------------------------------ */
     .le-aurora span {
         position: absolute;
@@ -701,73 +689,177 @@
         will-change: transform;
     }
     .le-aurora span:nth-child(1) {
-        width: calc(46vw + 62px);
-        height: calc(46vw + 62px);
-        top: calc(-14vw - 31px);
-        left: calc(-6vw - 31px);
+        width: calc(46vw + 152px);
+        height: calc(46vw + 152px);
+        top: calc(-14vw - 76px);
+        left: calc(-6vw - 76px);
         background: radial-gradient(
             circle,
-            rgb(var(--le-accent-bright-rgb) / 0.242) 0%,
-            rgb(var(--le-accent-bright-rgb) / 0.239) 6%,
-            rgb(var(--le-accent-bright-rgb) / 0.228) 12%,
-            rgb(var(--le-accent-bright-rgb) / 0.205) 20%,
-            rgb(var(--le-accent-bright-rgb) / 0.174) 28%,
-            rgb(var(--le-accent-bright-rgb) / 0.139) 36%,
-            rgb(var(--le-accent-bright-rgb) / 0.105) 44%,
-            rgb(var(--le-accent-bright-rgb) / 0.073) 52%,
-            rgb(var(--le-accent-bright-rgb) / 0.048) 60%,
-            rgb(var(--le-accent-bright-rgb) / 0.029) 68%,
-            rgb(var(--le-accent-bright-rgb) / 0.016) 76%,
-            rgb(var(--le-accent-bright-rgb) / 0.008) 84%,
-            rgb(var(--le-accent-bright-rgb) / 0.004) 92%,
+            rgb(var(--le-accent-bright-rgb) / 0.2419) 0.00%,
+            rgb(var(--le-accent-bright-rgb) / 0.2389) 4.91%,
+            rgb(var(--le-accent-bright-rgb) / 0.2355) 7.13%,
+            rgb(var(--le-accent-bright-rgb) / 0.2322) 8.85%,
+            rgb(var(--le-accent-bright-rgb) / 0.2287) 10.32%,
+            rgb(var(--le-accent-bright-rgb) / 0.2255) 11.55%,
+            rgb(var(--le-accent-bright-rgb) / 0.2220) 12.78%,
+            rgb(var(--le-accent-bright-rgb) / 0.2189) 13.76%,
+            rgb(var(--le-accent-bright-rgb) / 0.2157) 14.74%,
+            rgb(var(--le-accent-bright-rgb) / 0.2123) 15.72%,
+            rgb(var(--le-accent-bright-rgb) / 0.2087) 16.71%,
+            rgb(var(--le-accent-bright-rgb) / 0.2050) 17.69%,
+            rgb(var(--le-accent-bright-rgb) / 0.2011) 18.67%,
+            rgb(var(--le-accent-bright-rgb) / 0.1981) 19.41%,
+            rgb(var(--le-accent-bright-rgb) / 0.1950) 20.15%,
+            rgb(var(--le-accent-bright-rgb) / 0.1919) 20.88%,
+            rgb(var(--le-accent-bright-rgb) / 0.1887) 21.62%,
+            rgb(var(--le-accent-bright-rgb) / 0.1854) 22.36%,
+            rgb(var(--le-accent-bright-rgb) / 0.1821) 23.10%,
+            rgb(var(--le-accent-bright-rgb) / 0.1787) 23.83%,
+            rgb(var(--le-accent-bright-rgb) / 0.1753) 24.57%,
+            rgb(var(--le-accent-bright-rgb) / 0.1718) 25.31%,
+            rgb(var(--le-accent-bright-rgb) / 0.1683) 26.04%,
+            rgb(var(--le-accent-bright-rgb) / 0.1647) 26.78%,
+            rgb(var(--le-accent-bright-rgb) / 0.1612) 27.52%,
+            rgb(var(--le-accent-bright-rgb) / 0.1576) 28.26%,
+            rgb(var(--le-accent-bright-rgb) / 0.1539) 28.99%,
+            rgb(var(--le-accent-bright-rgb) / 0.1503) 29.73%,
+            rgb(var(--le-accent-bright-rgb) / 0.1467) 30.47%,
+            rgb(var(--le-accent-bright-rgb) / 0.1430) 31.20%,
+            rgb(var(--le-accent-bright-rgb) / 0.1393) 31.94%,
+            rgb(var(--le-accent-bright-rgb) / 0.1357) 32.68%,
+            rgb(var(--le-accent-bright-rgb) / 0.1320) 33.42%,
+            rgb(var(--le-accent-bright-rgb) / 0.1284) 34.15%,
+            rgb(var(--le-accent-bright-rgb) / 0.1248) 34.89%,
+            rgb(var(--le-accent-bright-rgb) / 0.1211) 35.63%,
+            rgb(var(--le-accent-bright-rgb) / 0.1175) 36.36%,
+            rgb(var(--le-accent-bright-rgb) / 0.1140) 37.10%,
+            rgb(var(--le-accent-bright-rgb) / 0.1104) 37.84%,
+            rgb(var(--le-accent-bright-rgb) / 0.1069) 38.57%,
+            rgb(var(--le-accent-bright-rgb) / 0.1035) 39.31%,
+            rgb(var(--le-accent-bright-rgb) / 0.1000) 40.05%,
+            rgb(var(--le-accent-bright-rgb) / 0.0966) 40.79%,
+            rgb(var(--le-accent-bright-rgb) / 0.0933) 41.52%,
+            rgb(var(--le-accent-bright-rgb) / 0.0900) 42.26%,
+            rgb(var(--le-accent-bright-rgb) / 0.0867) 43.00%,
+            rgb(var(--le-accent-bright-rgb) / 0.0836) 43.73%,
+            rgb(var(--le-accent-bright-rgb) / 0.0804) 44.47%,
+            rgb(var(--le-accent-bright-rgb) / 0.0773) 45.21%,
+            rgb(var(--le-accent-bright-rgb) / 0.0743) 45.95%,
+            rgb(var(--le-accent-bright-rgb) / 0.0713) 46.68%,
+            rgb(var(--le-accent-bright-rgb) / 0.0675) 47.67%,
+            rgb(var(--le-accent-bright-rgb) / 0.0637) 48.65%,
+            rgb(var(--le-accent-bright-rgb) / 0.0601) 49.63%,
+            rgb(var(--le-accent-bright-rgb) / 0.0566) 50.61%,
+            rgb(var(--le-accent-bright-rgb) / 0.0533) 51.60%,
+            rgb(var(--le-accent-bright-rgb) / 0.0500) 52.58%,
+            rgb(var(--le-accent-bright-rgb) / 0.0469) 53.56%,
+            rgb(var(--le-accent-bright-rgb) / 0.0439) 54.55%,
+            rgb(var(--le-accent-bright-rgb) / 0.0403) 55.77%,
+            rgb(var(--le-accent-bright-rgb) / 0.0370) 57.00%,
+            rgb(var(--le-accent-bright-rgb) / 0.0338) 58.23%,
+            rgb(var(--le-accent-bright-rgb) / 0.0308) 59.46%,
+            rgb(var(--le-accent-bright-rgb) / 0.0275) 60.93%,
+            rgb(var(--le-accent-bright-rgb) / 0.0244) 62.41%,
+            rgb(var(--le-accent-bright-rgb) / 0.0212) 64.13%,
+            rgb(var(--le-accent-bright-rgb) / 0.0179) 66.09%,
+            rgb(var(--le-accent-bright-rgb) / 0.0147) 68.30%,
+            rgb(var(--le-accent-bright-rgb) / 0.0116) 70.76%,
+            rgb(var(--le-accent-bright-rgb) / 0.0087) 73.71%,
+            rgb(var(--le-accent-bright-rgb) / 0.0057) 77.64%,
+            rgb(var(--le-accent-bright-rgb) / 0.0027) 84.03%,
             transparent 100%
         );
         animation: le-drift-a 24s var(--le-ease) infinite alternate;
     }
     .le-aurora span:nth-child(2) {
-        width: calc(34vw + 106px);
-        height: calc(34vw + 106px);
-        top: calc(6vw - 53px);
-        right: calc(-8vw - 53px);
+        width: calc(34vw + 200px);
+        height: calc(34vw + 200px);
+        top: calc(6vw - 100px);
+        right: calc(-8vw - 100px);
         background: radial-gradient(
             circle,
-            rgb(var(--le-accent-bright-rgb) / 0.120) 0%,
-            rgb(var(--le-accent-bright-rgb) / 0.118) 6%,
-            rgb(var(--le-accent-bright-rgb) / 0.113) 12%,
-            rgb(var(--le-accent-bright-rgb) / 0.102) 20%,
-            rgb(var(--le-accent-bright-rgb) / 0.087) 28%,
-            rgb(var(--le-accent-bright-rgb) / 0.071) 36%,
-            rgb(var(--le-accent-bright-rgb) / 0.054) 44%,
-            rgb(var(--le-accent-bright-rgb) / 0.040) 52%,
-            rgb(var(--le-accent-bright-rgb) / 0.027) 60%,
-            rgb(var(--le-accent-bright-rgb) / 0.017) 68%,
-            rgb(var(--le-accent-bright-rgb) / 0.010) 76%,
-            rgb(var(--le-accent-bright-rgb) / 0.006) 84%,
-            rgb(var(--le-accent-bright-rgb) / 0.003) 92%,
+            rgb(var(--le-accent-bright-rgb) / 0.1198) 0.00%,
+            rgb(var(--le-accent-bright-rgb) / 0.1167) 6.96%,
+            rgb(var(--le-accent-bright-rgb) / 0.1137) 9.86%,
+            rgb(var(--le-accent-bright-rgb) / 0.1106) 12.17%,
+            rgb(var(--le-accent-bright-rgb) / 0.1074) 14.20%,
+            rgb(var(--le-accent-bright-rgb) / 0.1044) 15.94%,
+            rgb(var(--le-accent-bright-rgb) / 0.1012) 17.68%,
+            rgb(var(--le-accent-bright-rgb) / 0.0977) 19.42%,
+            rgb(var(--le-accent-bright-rgb) / 0.0946) 20.87%,
+            rgb(var(--le-accent-bright-rgb) / 0.0914) 22.32%,
+            rgb(var(--le-accent-bright-rgb) / 0.0881) 23.77%,
+            rgb(var(--le-accent-bright-rgb) / 0.0848) 25.22%,
+            rgb(var(--le-accent-bright-rgb) / 0.0814) 26.67%,
+            rgb(var(--le-accent-bright-rgb) / 0.0779) 28.12%,
+            rgb(var(--le-accent-bright-rgb) / 0.0744) 29.57%,
+            rgb(var(--le-accent-bright-rgb) / 0.0708) 31.01%,
+            rgb(var(--le-accent-bright-rgb) / 0.0673) 32.46%,
+            rgb(var(--le-accent-bright-rgb) / 0.0638) 33.91%,
+            rgb(var(--le-accent-bright-rgb) / 0.0603) 35.36%,
+            rgb(var(--le-accent-bright-rgb) / 0.0569) 36.81%,
+            rgb(var(--le-accent-bright-rgb) / 0.0535) 38.26%,
+            rgb(var(--le-accent-bright-rgb) / 0.0503) 39.71%,
+            rgb(var(--le-accent-bright-rgb) / 0.0470) 41.16%,
+            rgb(var(--le-accent-bright-rgb) / 0.0439) 42.61%,
+            rgb(var(--le-accent-bright-rgb) / 0.0409) 44.06%,
+            rgb(var(--le-accent-bright-rgb) / 0.0374) 45.80%,
+            rgb(var(--le-accent-bright-rgb) / 0.0341) 47.54%,
+            rgb(var(--le-accent-bright-rgb) / 0.0310) 49.28%,
+            rgb(var(--le-accent-bright-rgb) / 0.0280) 51.01%,
+            rgb(var(--le-accent-bright-rgb) / 0.0248) 53.04%,
+            rgb(var(--le-accent-bright-rgb) / 0.0218) 55.07%,
+            rgb(var(--le-accent-bright-rgb) / 0.0187) 57.39%,
+            rgb(var(--le-accent-bright-rgb) / 0.0157) 60.00%,
+            rgb(var(--le-accent-bright-rgb) / 0.0127) 62.90%,
+            rgb(var(--le-accent-bright-rgb) / 0.0097) 66.38%,
+            rgb(var(--le-accent-bright-rgb) / 0.0066) 71.01%,
+            rgb(var(--le-accent-bright-rgb) / 0.0036) 77.68%,
+            rgb(var(--le-accent-bright-rgb) / 0.0006) 93.62%,
             transparent 100%
         );
         animation: le-drift-b 30s var(--le-ease) infinite alternate;
     }
     .le-aurora span:nth-child(3) {
-        width: calc(40vw + 50px);
-        height: calc(40vw + 50px);
-        bottom: calc(-18vw - 25px);
-        left: calc(28vw - 25px);
+        width: calc(40vw + 148px);
+        height: calc(40vw + 148px);
+        bottom: calc(-18vw - 74px);
+        left: calc(28vw - 74px);
         background: radial-gradient(
             circle,
-            rgb(var(--le-accent-bright-rgb) / 0.104) 0%,
-            rgb(var(--le-accent-bright-rgb) / 0.103) 6%,
-            rgb(var(--le-accent-bright-rgb) / 0.099) 12%,
-            rgb(var(--le-accent-bright-rgb) / 0.090) 20%,
-            rgb(var(--le-accent-bright-rgb) / 0.078) 28%,
-            rgb(var(--le-accent-bright-rgb) / 0.064) 36%,
-            rgb(var(--le-accent-bright-rgb) / 0.050) 44%,
-            rgb(var(--le-accent-bright-rgb) / 0.037) 52%,
-            rgb(var(--le-accent-bright-rgb) / 0.026) 60%,
-            rgb(var(--le-accent-bright-rgb) / 0.017) 68%,
-            rgb(var(--le-accent-bright-rgb) / 0.010) 76%,
-            rgb(var(--le-accent-bright-rgb) / 0.006) 84%,
-            rgb(var(--le-accent-bright-rgb) / 0.003) 92%,
+            rgb(var(--le-accent-bright-rgb) / 0.1044) 0.00%,
+            rgb(var(--le-accent-bright-rgb) / 0.1014) 7.73%,
+            rgb(var(--le-accent-bright-rgb) / 0.0983) 11.05%,
+            rgb(var(--le-accent-bright-rgb) / 0.0953) 13.54%,
+            rgb(var(--le-accent-bright-rgb) / 0.0923) 15.75%,
+            rgb(var(--le-accent-bright-rgb) / 0.0893) 17.68%,
+            rgb(var(--le-accent-bright-rgb) / 0.0861) 19.61%,
+            rgb(var(--le-accent-bright-rgb) / 0.0827) 21.55%,
+            rgb(var(--le-accent-bright-rgb) / 0.0797) 23.20%,
+            rgb(var(--le-accent-bright-rgb) / 0.0765) 24.86%,
+            rgb(var(--le-accent-bright-rgb) / 0.0733) 26.52%,
+            rgb(var(--le-accent-bright-rgb) / 0.0699) 28.18%,
+            rgb(var(--le-accent-bright-rgb) / 0.0666) 29.83%,
+            rgb(var(--le-accent-bright-rgb) / 0.0631) 31.49%,
+            rgb(var(--le-accent-bright-rgb) / 0.0597) 33.15%,
+            rgb(var(--le-accent-bright-rgb) / 0.0563) 34.81%,
+            rgb(var(--le-accent-bright-rgb) / 0.0529) 36.46%,
+            rgb(var(--le-accent-bright-rgb) / 0.0496) 38.12%,
+            rgb(var(--le-accent-bright-rgb) / 0.0463) 39.78%,
+            rgb(var(--le-accent-bright-rgb) / 0.0431) 41.44%,
+            rgb(var(--le-accent-bright-rgb) / 0.0400) 43.09%,
+            rgb(var(--le-accent-bright-rgb) / 0.0370) 44.75%,
+            rgb(var(--le-accent-bright-rgb) / 0.0336) 46.69%,
+            rgb(var(--le-accent-bright-rgb) / 0.0304) 48.62%,
+            rgb(var(--le-accent-bright-rgb) / 0.0274) 50.55%,
+            rgb(var(--le-accent-bright-rgb) / 0.0241) 52.76%,
+            rgb(var(--le-accent-bright-rgb) / 0.0211) 54.97%,
+            rgb(var(--le-accent-bright-rgb) / 0.0181) 57.46%,
+            rgb(var(--le-accent-bright-rgb) / 0.0150) 60.22%,
+            rgb(var(--le-accent-bright-rgb) / 0.0119) 63.54%,
+            rgb(var(--le-accent-bright-rgb) / 0.0089) 67.40%,
+            rgb(var(--le-accent-bright-rgb) / 0.0059) 72.38%,
+            rgb(var(--le-accent-bright-rgb) / 0.0029) 80.11%,
             transparent 100%
         );
         animation: le-drift-c 34s var(--le-ease) infinite alternate;
