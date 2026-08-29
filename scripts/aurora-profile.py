@@ -133,13 +133,20 @@ BLOCK = '''    /* --------------------------------------------------------------
        interpolates linearly between stops, so sparse ones are straight
        segments joined at kinks, and the eye turns a derivative break into a
        ring. Below one level there is no step left to see.
+
+       THE GLOW DOES NOT MOVE, at the client's request. It used to drift on
+       three `le-drift-*` loops. Those keyframes are deleted rather than
+       merely unreferenced, and `will-change: transform` goes with them —
+       with nothing to animate it only pinned three extra composited layers
+       in memory for no benefit. The reduced-motion and mobile overrides that
+       used to switch the drift off are deleted too: there is no longer an
+       animation for them to cancel.
        ------------------------------------------------------------------ */
     .le-aurora span {
         position: absolute;
         display: block;
         border-radius: 50%%;
         opacity: 0.85;
-        will-change: transform;
     }
     .le-aurora span:nth-child(1) {
         width: calc(46vw + %dpx);
@@ -147,7 +154,6 @@ BLOCK = '''    /* --------------------------------------------------------------
         top: calc(-14vw - %dpx);
         left: calc(-6vw - %dpx);
 %s
-        animation: le-drift-a 24s var(--le-ease) infinite alternate;
     }
     .le-aurora span:nth-child(2) {
         width: calc(34vw + %dpx);
@@ -155,7 +161,6 @@ BLOCK = '''    /* --------------------------------------------------------------
         top: calc(6vw - %dpx);
         right: calc(-8vw - %dpx);
 %s
-        animation: le-drift-b 30s var(--le-ease) infinite alternate;
     }
     .le-aurora span:nth-child(3) {
         width: calc(40vw + %dpx);
@@ -163,7 +168,6 @@ BLOCK = '''    /* --------------------------------------------------------------
         bottom: calc(-18vw - %dpx);
         left: calc(28vw - %dpx);
 %s
-        animation: le-drift-c 34s var(--le-ease) infinite alternate;
     }''' % (
     peak[0], peak[1], peak[2],
     round(grow[0]), round(grow[0]), round(grow[0] / 2), round(grow[0] / 2), g[0],
