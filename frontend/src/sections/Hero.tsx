@@ -59,10 +59,18 @@ export default function Hero() {
     if (!copy || !engine) return;
 
     let raf = 0;
+    /* Once past 600px the hero is off screen and `p` is pinned at 1, so every
+       further frame was writing three identical style values — each one a
+       style invalidation on an element nobody can see, for the whole rest of
+       the page. Skipping the repeat means the hero costs nothing below the
+       fold, which is most of the scroll. */
+    let last = -1;
     const apply = () => {
       raf = 0;
       const y = Math.max(window.scrollY, 0);
       const p = Math.min(y / 600, 1);
+      if (p === last) return;
+      last = p;
       engine.style.transform = `scale(${(1 - p * 0.06).toFixed(4)})`;
       copy.style.opacity = (1 - p * 0.4).toFixed(3);
       copy.style.transform = `translate3d(0, ${(p * -14).toFixed(2)}px, 0)`;

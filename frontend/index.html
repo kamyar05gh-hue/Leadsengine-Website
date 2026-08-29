@@ -372,6 +372,28 @@
                             // — measured, and a third of all analytics bytes
                             // for a feature nobody has configured.
                             disable_surveys: true,
+                            // SCROLL DEPTH IS NOT WORTH WHAT IT COSTS.
+                            //
+                            // PostHog's scroll manager binds its own scroll
+                            // listener and, on every frame, reads
+                            // `documentElement.scrollHeight` TWICE. That
+                            // property is a forced synchronous layout: the
+                            // browser has to flush styles and lay out every
+                            // box on the page before it can answer.
+                            //
+                            // MEASURED on the live site at 390px, one scroll
+                            // to the bottom and back with real wheel events:
+                            // 594 reads of that property, of which 548 were
+                            // PostHog and 6 were our own code. It was by far
+                            // the largest single source of main-thread work
+                            // during a scroll, and it is worst on the way
+                            // back up, when every reveal below has fired and
+                            // the layout it flushes is the whole page.
+                            //
+                            // What this gives up is the `$prev_pageview_*`
+                            // scroll properties. Pageviews, autocapture,
+                            // clicks and conversions are untouched.
+                            disable_scroll_properties: true,
                         },
                         "leadsengine",
                     );

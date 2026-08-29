@@ -39,10 +39,28 @@ function useScrollProgress(
     let raf = 0;
     let last = -1;
 
+    /* MEASURES ONLY WHILE THE SECTION IS ANYWHERE NEAR THE SCREEN.
+
+       `getBoundingClientRect()` forces a synchronous layout, and this handler
+       was bound to `scroll` unconditionally — so scrolling ANY part of the
+       page, including parts thousands of pixels away from this section, paid
+       for a layout flush per frame to compute a number that could not have
+       changed the render. The observer makes the cost proportional to what is
+       actually on screen: away from this section the scroll handler returns
+       on a boolean and touches no layout at all.
+
+       The margin is a full viewport on each side, so the progress is already
+       correct by the time the section edges into view — gating on strict
+       intersection would let it enter mid-animation with a stale value. */
+    let near = false;
+
+    /* Cached for the same reason the rect is not: `innerHeight` is stable
+       between resizes, and it is read on every measure. */
+    let vh = window.innerHeight || 1;
+
     const measure = () => {
       raf = 0;
       const box = el.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
       const span = box.height + vh;
       const raw = span > 0 ? (vh - box.top) / span : 0;
       const next = Math.round(clamp01(raw) * steps) / steps;
@@ -53,17 +71,31 @@ function useScrollProgress(
     };
 
     const onScroll = () => {
-      if (!raf) raf = window.requestAnimationFrame(measure);
+      if (near && !raf) raf = window.requestAnimationFrame(measure);
     };
 
-    measure();
+    const onResize = () => {
+      vh = window.innerHeight || 1;
+      onScroll();
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        near = entry.isIntersecting;
+        if (near) onScroll();
+      },
+      { rootMargin: "100% 0px" },
+    );
+    io.observe(el);
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
 
     return () => {
+      io.disconnect();
       if (raf) window.cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, [ref, enabled, steps]);
 

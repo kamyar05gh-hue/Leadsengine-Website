@@ -333,8 +333,30 @@ export default function VideoPlayer({
      the gear, and the menu the visitor just opened would vanish.
 
      `touchRevealed` is the touch equivalent of hover — see `onVideoClick`. */
-  const controlsVisible =
-    !playing || pointerInside || focusInside || ended || menuOpen || touchRevealed;
+  /* The big centre button is up in exactly two states: before the first
+     play, and after the video ends. */
+  const centreUp = !started || ended;
+
+  /* THE BAR STANDS DOWN WHILE THE CENTRE BUTTON IS UP.
+
+     This is what lets the circle sit at the TRUE centre of the frame. It used
+     to be pushed 86px up on a phone to dodge the control bar underneath it,
+     because the bar was shown whenever the video was not playing — which
+     includes the whole time the poster is on screen. So the one moment the
+     button matters most, it was also the one moment it was off-centre.
+
+     Standing the bar down costs nothing, because at those two moments it has
+     nothing to offer: before the first play the timeline reads 0:00 / 0:00
+     over a poster, and at the end the single useful action is replay, which
+     is what the centre button is. Anything the bar could do, the centre
+     button or a second tap gets you to.
+
+     Hover and focus still bring it back, so a mouse user can scrub the
+     poster and a keyboard user can always reach a control they have tabbed
+     to — neither of which can happen on the touch viewport this is for. */
+  const controlsVisible = centreUp
+    ? pointerInside || focusInside || menuOpen
+    : !playing || pointerInside || focusInside || menuOpen || touchRevealed;
 
   /* 44px on touch — the fingertip minimum — and 40px from `sm` up, nudged
      from 36 at the client's request so the row reads as a control surface
@@ -454,7 +476,7 @@ export default function VideoPlayer({
       {/* Centre play / replay. Only before the first play and after the end —
           during playback the bar is the control surface and a target this
           large over the picture would be in the way. */}
-      {(!started || ended) && (
+      {centreUp && (
         <button
           type="button"
           onPointerDown={notePointerType}
@@ -467,27 +489,24 @@ export default function VideoPlayer({
             if (isCoarse.current) revealControls();
           }}
           aria-label={ended ? v.replay : v.play}
-          /* CENTRED IN THE PICTURE, NOT IN THE ELEMENT.
-             `inset-0` + `place-items-center` puts the circle in the middle of
-             the whole frame — which on a phone is the middle of the CONTROL
-             BAR. Measured at 390px: the video is 196px tall and the bar
-             occupies its bottom ~122px, so a 64px circle centred at y=98 sat
-             directly on the timeline and the buttons. The bottom padding
-             lifts it clear of the bar, so it centres in the visible picture;
-             from `sm` up the frame is tall enough that no correction is
-             needed and there is none. */
-          className="absolute inset-0 grid place-items-center bg-black/25 pb-[86px] transition-colors duration-300 hover:bg-black/15 focus-visible:outline-none sm:pb-0"
+          /* DEAD CENTRE, AT EVERY WIDTH. `inset-0` + `place-items-center`
+             and nothing else — no bottom padding correcting for the control
+             bar, because `controlsVisible` above keeps the bar down for as
+             long as this button is up. The offset that used to live here was
+             treating the symptom. */
+          className="absolute inset-0 grid place-items-center bg-black/25 transition-colors duration-300 hover:bg-black/15 focus-visible:outline-none"
         >
-          {/* Smaller on a phone too: at 64px it filled more than a third of
-              a 196px-tall frame. */}
-          <span className="grid h-14 w-14 place-items-center rounded-full border border-accent-bright/40 bg-bg/70 transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20">
+          {/* 44px on a phone — the fingertip minimum, and no larger. The
+              frame is only 196px tall at 390px, so anything above this starts
+              covering the picture it is inviting you to watch. */}
+          <span className="grid h-11 w-11 place-items-center rounded-full border border-accent-bright/40 bg-bg/70 transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20">
             {ended ? (
-              <RotateCcw className="h-6 w-6 text-ink sm:h-7 sm:w-7" />
+              <RotateCcw className="h-[18px] w-[18px] text-ink sm:h-7 sm:w-7" />
             ) : (
               /* Nudged right by a hair: a triangle's optical centre sits left
                  of its bounding box, so a centred play glyph reads off-centre
                  inside a circle. */
-              <Play className="ml-0.5 h-6 w-6 fill-ink text-ink sm:h-7 sm:w-7" />
+              <Play className="ml-0.5 h-[18px] w-[18px] fill-ink text-ink sm:h-7 sm:w-7" />
             )}
           </span>
         </button>
