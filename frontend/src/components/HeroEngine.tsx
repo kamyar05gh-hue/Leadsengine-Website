@@ -477,14 +477,39 @@ export default function HeroEngine({ className = "" }: { className?: string }) {
                   the warm glow at the bottom of the disc never travels. The
                   hub's rim, the core and the monogram sit inside the mask's
                   inner edge and are untouched plate pixels. */}
+              {/* MEDIA-SCOPED, FOR EXACTLY THE REASON THE BODY PLATE ABOVE IS.
+
+                  This one was left on srcset+sizes and caught the same
+                  disease, which MEASURING the live page finally made
+                  obvious. `sizes="(max-width: 1023px) 60vw"` is 234 CSS px on
+                  a 390px phone, but that phone has devicePixelRatio 3, so the
+                  browser needs 702 device px and dutifully picks the 948w
+                  file. A phone downloaded 43.9KB where 16.3KB covers it.
+
+                  Worse, this is the LCP ELEMENT. Traced on 4G with a 4x CPU
+                  throttle, it was not even DISCOVERED until 1758ms — the
+                  parser has to reach this tag, which is inside a React tree
+                  that has to boot first — and it finished painting at 3832ms.
+                  Meanwhile all nineteen logo plates began downloading at
+                  1856ms and competed with it for a 1.6Mbps pipe.
+
+                  So: explicit media conditions (deterministic, one file per
+                  viewport) plus a preload in index.html so the fetch starts
+                  with the document instead of after the bundle. The
+                  conditions here MUST stay in step with those preloads, or
+                  the page fetches one plate and displays another. */}
+              <picture>
+                <source
+                  media="(max-width: 640px)"
+                  srcSet="/images/engine-blades-480.webp"
+                />
               <img
                 src="/images/engine-blades.webp"
-                srcSet="/images/engine-blades-480.webp 480w, /images/engine-blades.webp 948w"
-                sizes="(max-width: 1023px) 60vw, 456px"
                 alt=""
                 aria-hidden="true"
                 width={948}
                 height={948}
+                fetchPriority="high"
                 decoding="async"
                 className="absolute inset-0 h-full w-full select-none"
                 style={{
@@ -502,6 +527,7 @@ export default function HeroEngine({ className = "" }: { className?: string }) {
                       }),
                 }}
               />
+              </picture>
 
 
               {/* The hub's glowing ring — the clip's core is edged with one,

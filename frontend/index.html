@@ -128,6 +128,32 @@
              font preload even same-origin: fonts are fetched in CORS mode, and
              a preload without it is a second, separate request rather than a
              head start. -->
+        <!-- THE BLADES PLATE IS THE LCP ELEMENT, and without these it was
+             not discovered until 1758ms: it lives inside the React tree, so
+             nothing fetches it until the bundle has parsed and rendered.
+             Measured on 4G / 4x CPU, LCP landed at 3832ms on an image the
+             network could have started with the document.
+
+             The media conditions MIRROR the <picture> in HeroEngine.tsx
+             exactly. They have to: overlapping or mismatched conditions make
+             the browser fetch one plate and paint another, which is how this
+             page once downloaded two plates instead of one. -->
+        <link
+            rel="preload"
+            as="image"
+            href="/images/engine-blades-480.webp"
+            type="image/webp"
+            media="(max-width: 640px)"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            as="image"
+            href="/images/engine-blades.webp"
+            type="image/webp"
+            media="(min-width: 641px)"
+            fetchpriority="high"
+        />
         <link
             rel="preload"
             as="font"

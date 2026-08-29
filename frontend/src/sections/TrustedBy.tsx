@@ -219,6 +219,8 @@ export default function TrustedBy() {
               alt={name || t.trusted.clientLogo}
               title={name || undefined}
               loading="lazy"
+              /* See the note on the mobile copy above. */
+              fetchPriority="low"
               decoding="async"
               className="block shrink-0 object-contain opacity-80 transition-opacity duration-300 hover:opacity-100"
               style={{
@@ -268,6 +270,17 @@ export default function TrustedBy() {
                   alt={name || t.trusted.clientLogo}
                   title={name || undefined}
                   loading="lazy"
+                  /* LOW, BECAUSE THIS BAND RACES THE HERO AND WINS.
+                     `loading="lazy"` is not enough: the trust band sits
+                     directly under the hero, so on a 390px viewport it is
+                     inside the lazy-load threshold and all nineteen plates
+                     start at once. Traced on 4G they began at 1856ms —
+                     exactly while the LCP image was still downloading — and
+                     took 155KB of a 1.6Mbps pipe with them. Low priority
+                     puts them behind the hero instead of alongside it;
+                     nothing is removed and the band still fills in well
+                     before it is scrolled to. */
+                  fetchPriority="low"
                   decoding="async"
                   className="block shrink-0 object-contain opacity-80"
                   style={{
