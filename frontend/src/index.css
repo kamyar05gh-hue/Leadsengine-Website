@@ -655,30 +655,43 @@
         overflow: hidden;
     }
     /* ------------------------------------------------------------------
-       NO `filter: blur()` HERE, AND THAT IS THE WHOLE POINT.
+       THE ORIGINAL LOOK, WITHOUT THE FILTER THAT COST 33 FRAMES A SECOND.
 
-       These blobs are ALREADY radial gradients that fade to transparent.
-       Putting a 80px Gaussian blur over a soft gradient is close to a no-op
-       visually — it only rounds an edge that was never hard — but it forces
-       a full filter pass on a 490-660px layer, six of them on the home page.
-
-       MEASURED at 1440px, sitting still at the top of the page with nothing
-       else touched:
+       These were `radial-gradient(circle, rgb(C / A), transparent 65%)` under
+       `filter: blur(80px)`. The blur was the whole cost of the hero — six
+       full filter passes on 490-660px layers. Measured at 1440px, sitting
+       still, nothing else touched:
 
            as shipped ................................ 27 fps
            aurora animation paused, still blurred .... 28 fps
-           aurora REMOVED ............................ 60 fps
+           aurora removed entirely ................... 60 fps
 
-       Note the middle row: pausing the drift changed nothing, so the cost
-       was never the movement — it was the existence of six blurred layers.
-       That is why the page ran at 60 fps in the middle and fell to 27 the
-       moment the hero came back on screen, which is exactly what "it lags
-       when I scroll back up" describes.
+       Pausing the drift changed nothing, so the cost was never the movement.
+       It was the existence of the blurred layers.
 
-       The blur is replaced by a gentler falloff in each gradient below, and
-       each blob is grown by roughly the blur radius so the light covers the
-       same area. `will-change: transform` stays: with no filter to re-run,
-       the layer is painted once and the drift rides the compositor.
+       A FIRST ATTEMPT AT REPLACING IT BY EYE WAS VISIBLY WRONG, and this is
+       why. CSS `blur(<len>)` is an feGaussianBlur with stdDeviation = the
+       length, so sigma is 80px, not 40 -- enormous next to a blob whose ink
+       stops at ~215px. Spreading that much ink that far drops the centre by
+       roughly half:
+
+           blob 1: peak 0.45 -> 0.242   (-46%)
+           blob 2: peak 0.30 -> 0.120   (-60%)
+           blob 3: peak 0.22 -> 0.104   (-53%)
+
+       A hand-picked gradient kept the original peak, so the glow came out
+       about twice as bright and far too tight. The stops below are not
+       guessed: the gradient was convolved with a sigma-80 Gaussian
+       numerically and the result sampled at fourteen radii, so this IS the
+       blurred image, drawn directly instead of computed every frame.
+
+       Each blob is grown by the blur's spread and re-centred on the same
+       point, which is what the `calc()` offsets are doing -- the extra is in
+       px because the blur radius was in px while the size is in vw.
+
+       IF YOU CHANGE A COLOUR OR SIZE HERE, re-run the convolution rather
+       than editing a stop by hand. The script is in the commit that added
+       this comment.
        ------------------------------------------------------------------ */
     .le-aurora span {
         position: absolute;
@@ -688,47 +701,74 @@
         will-change: transform;
     }
     .le-aurora span:nth-child(1) {
-        width: 58vw;
-        height: 58vw;
-        top: -20vw;
-        left: -12vw;
-        /* Four stops rather than two. A blurred disc has a bell-shaped
-           profile, and two stops give a cone — the extra stops are what keep
-           this reading as light rather than as a drawn circle. */
+        width: calc(46vw + 62px);
+        height: calc(46vw + 62px);
+        top: calc(-14vw - 31px);
+        left: calc(-6vw - 31px);
         background: radial-gradient(
             circle,
-            rgb(var(--le-accent-bright-rgb) / 0.42) 0%,
-            rgb(var(--le-accent-bright-rgb) / 0.26) 30%,
-            rgb(var(--le-accent-bright-rgb) / 0.08) 58%,
-            transparent 78%
+            rgb(var(--le-accent-bright-rgb) / 0.242) 0%,
+            rgb(var(--le-accent-bright-rgb) / 0.239) 6%,
+            rgb(var(--le-accent-bright-rgb) / 0.228) 12%,
+            rgb(var(--le-accent-bright-rgb) / 0.205) 20%,
+            rgb(var(--le-accent-bright-rgb) / 0.174) 28%,
+            rgb(var(--le-accent-bright-rgb) / 0.139) 36%,
+            rgb(var(--le-accent-bright-rgb) / 0.105) 44%,
+            rgb(var(--le-accent-bright-rgb) / 0.073) 52%,
+            rgb(var(--le-accent-bright-rgb) / 0.048) 60%,
+            rgb(var(--le-accent-bright-rgb) / 0.029) 68%,
+            rgb(var(--le-accent-bright-rgb) / 0.016) 76%,
+            rgb(var(--le-accent-bright-rgb) / 0.008) 84%,
+            rgb(var(--le-accent-bright-rgb) / 0.004) 92%,
+            transparent 100%
         );
         animation: le-drift-a 24s var(--le-ease) infinite alternate;
     }
     .le-aurora span:nth-child(2) {
-        width: 45vw;
-        height: 45vw;
-        top: 0vw;
-        right: -14vw;
+        width: calc(34vw + 106px);
+        height: calc(34vw + 106px);
+        top: calc(6vw - 53px);
+        right: calc(-8vw - 53px);
         background: radial-gradient(
             circle,
-            rgb(var(--le-accent-bright-rgb) / 0.28) 0%,
-            rgb(var(--le-accent-bright-rgb) / 0.17) 30%,
-            rgb(var(--le-accent-bright-rgb) / 0.05) 58%,
-            transparent 78%
+            rgb(var(--le-accent-bright-rgb) / 0.120) 0%,
+            rgb(var(--le-accent-bright-rgb) / 0.118) 6%,
+            rgb(var(--le-accent-bright-rgb) / 0.113) 12%,
+            rgb(var(--le-accent-bright-rgb) / 0.102) 20%,
+            rgb(var(--le-accent-bright-rgb) / 0.087) 28%,
+            rgb(var(--le-accent-bright-rgb) / 0.071) 36%,
+            rgb(var(--le-accent-bright-rgb) / 0.054) 44%,
+            rgb(var(--le-accent-bright-rgb) / 0.040) 52%,
+            rgb(var(--le-accent-bright-rgb) / 0.027) 60%,
+            rgb(var(--le-accent-bright-rgb) / 0.017) 68%,
+            rgb(var(--le-accent-bright-rgb) / 0.010) 76%,
+            rgb(var(--le-accent-bright-rgb) / 0.006) 84%,
+            rgb(var(--le-accent-bright-rgb) / 0.003) 92%,
+            transparent 100%
         );
         animation: le-drift-b 30s var(--le-ease) infinite alternate;
     }
     .le-aurora span:nth-child(3) {
-        width: 52vw;
-        height: 52vw;
-        bottom: -25vw;
-        left: 22vw;
+        width: calc(40vw + 50px);
+        height: calc(40vw + 50px);
+        bottom: calc(-18vw - 25px);
+        left: calc(28vw - 25px);
         background: radial-gradient(
             circle,
-            rgb(var(--le-accent-bright-rgb) / 0.21) 0%,
-            rgb(var(--le-accent-bright-rgb) / 0.13) 30%,
-            rgb(var(--le-accent-bright-rgb) / 0.04) 58%,
-            transparent 78%
+            rgb(var(--le-accent-bright-rgb) / 0.104) 0%,
+            rgb(var(--le-accent-bright-rgb) / 0.103) 6%,
+            rgb(var(--le-accent-bright-rgb) / 0.099) 12%,
+            rgb(var(--le-accent-bright-rgb) / 0.090) 20%,
+            rgb(var(--le-accent-bright-rgb) / 0.078) 28%,
+            rgb(var(--le-accent-bright-rgb) / 0.064) 36%,
+            rgb(var(--le-accent-bright-rgb) / 0.050) 44%,
+            rgb(var(--le-accent-bright-rgb) / 0.037) 52%,
+            rgb(var(--le-accent-bright-rgb) / 0.026) 60%,
+            rgb(var(--le-accent-bright-rgb) / 0.017) 68%,
+            rgb(var(--le-accent-bright-rgb) / 0.010) 76%,
+            rgb(var(--le-accent-bright-rgb) / 0.006) 84%,
+            rgb(var(--le-accent-bright-rgb) / 0.003) 92%,
+            transparent 100%
         );
         animation: le-drift-c 34s var(--le-ease) infinite alternate;
     }
