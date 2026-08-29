@@ -17,11 +17,17 @@ export type LegalDoc = "imprint" | "privacy" | "terms";
  * undifferentiated body copy, which is most of why these pages read as a wall
  * of text next to the rest of the site. The length bound keeps it from firing
  * on a sentence that merely happens to contain a colon.
+ *
+ * THE BOUND IS 60, NOT 44. Future Media's AGB is numbered, and its longest
+ * heading — "5. An- und Abmeldungen, Zahlung des Kursgeldes" — is 46
+ * characters. At 44 that one section, alone among thirteen, silently lost
+ * its heading and ran on as body text. 60 still comfortably excludes a real
+ * sentence, which is what the bound is actually for.
  */
 function parseBlocks(body: string): Array<{ heading?: string; text: string }> {
   return body.split(/\n{2,}/).map((block) => {
     const text = block.trim();
-    const m = /^([^:\n]{3,44}):\s+([\s\S]+)$/.exec(text);
+    const m = /^([^:\n]{3,60}):\s+([\s\S]+)$/.exec(text);
     return m ? { heading: m[1], text: m[2] } : { text };
   });
 }

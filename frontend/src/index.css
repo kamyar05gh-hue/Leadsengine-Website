@@ -654,47 +654,81 @@
         pointer-events: none;
         overflow: hidden;
     }
+    /* ------------------------------------------------------------------
+       NO `filter: blur()` HERE, AND THAT IS THE WHOLE POINT.
+
+       These blobs are ALREADY radial gradients that fade to transparent.
+       Putting a 80px Gaussian blur over a soft gradient is close to a no-op
+       visually — it only rounds an edge that was never hard — but it forces
+       a full filter pass on a 490-660px layer, six of them on the home page.
+
+       MEASURED at 1440px, sitting still at the top of the page with nothing
+       else touched:
+
+           as shipped ................................ 27 fps
+           aurora animation paused, still blurred .... 28 fps
+           aurora REMOVED ............................ 60 fps
+
+       Note the middle row: pausing the drift changed nothing, so the cost
+       was never the movement — it was the existence of six blurred layers.
+       That is why the page ran at 60 fps in the middle and fell to 27 the
+       moment the hero came back on screen, which is exactly what "it lags
+       when I scroll back up" describes.
+
+       The blur is replaced by a gentler falloff in each gradient below, and
+       each blob is grown by roughly the blur radius so the light covers the
+       same area. `will-change: transform` stays: with no filter to re-run,
+       the layer is painted once and the drift rides the compositor.
+       ------------------------------------------------------------------ */
     .le-aurora span {
         position: absolute;
         display: block;
         border-radius: 50%;
-        filter: blur(80px);
         opacity: 0.85;
         will-change: transform;
     }
     .le-aurora span:nth-child(1) {
-        width: 46vw;
-        height: 46vw;
-        top: -14vw;
-        left: -6vw;
+        width: 58vw;
+        height: 58vw;
+        top: -20vw;
+        left: -12vw;
+        /* Four stops rather than two. A blurred disc has a bell-shaped
+           profile, and two stops give a cone — the extra stops are what keep
+           this reading as light rather than as a drawn circle. */
         background: radial-gradient(
             circle,
-            rgb(var(--le-accent-bright-rgb) / 0.45),
-            transparent 65%
+            rgb(var(--le-accent-bright-rgb) / 0.42) 0%,
+            rgb(var(--le-accent-bright-rgb) / 0.26) 30%,
+            rgb(var(--le-accent-bright-rgb) / 0.08) 58%,
+            transparent 78%
         );
         animation: le-drift-a 24s var(--le-ease) infinite alternate;
     }
     .le-aurora span:nth-child(2) {
-        width: 34vw;
-        height: 34vw;
-        top: 6vw;
-        right: -8vw;
+        width: 45vw;
+        height: 45vw;
+        top: 0vw;
+        right: -14vw;
         background: radial-gradient(
             circle,
-            rgb(var(--le-accent-bright-rgb) / 0.3),
-            transparent 65%
+            rgb(var(--le-accent-bright-rgb) / 0.28) 0%,
+            rgb(var(--le-accent-bright-rgb) / 0.17) 30%,
+            rgb(var(--le-accent-bright-rgb) / 0.05) 58%,
+            transparent 78%
         );
         animation: le-drift-b 30s var(--le-ease) infinite alternate;
     }
     .le-aurora span:nth-child(3) {
-        width: 40vw;
-        height: 40vw;
-        bottom: -18vw;
-        left: 28vw;
+        width: 52vw;
+        height: 52vw;
+        bottom: -25vw;
+        left: 22vw;
         background: radial-gradient(
             circle,
-            rgb(var(--le-accent-bright-rgb) / 0.22),
-            transparent 65%
+            rgb(var(--le-accent-bright-rgb) / 0.21) 0%,
+            rgb(var(--le-accent-bright-rgb) / 0.13) 30%,
+            rgb(var(--le-accent-bright-rgb) / 0.04) 58%,
+            transparent 78%
         );
         animation: le-drift-c 34s var(--le-ease) infinite alternate;
     }
@@ -1405,9 +1439,10 @@
         filter: none !important;
     }
 
-    /* The aurora keeps its blur — it is the shape of the light, not a wash
-       over one — but it stops moving. A static blurred layer is rasterised
-       once; a moving one is re-composited for as long as the page is open. */
+    /* The aurora no longer HAS a blur to keep — it is plain radial
+       gradients now, for the reason measured at the top of this file. It
+       still stops moving here: a static gradient layer is rasterised once,
+       and on a phone the compositor memory is better spent elsewhere. */
     .le-aurora span {
         animation: none !important;
         will-change: auto;

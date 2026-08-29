@@ -46,6 +46,40 @@ const FILES = import.meta.glob("@/assets/logos/*.{svg,png,webp,jpg,jpeg}", {
   import: "default",
 }) as Record<string, string>;
 
+/* ---------------------------------------------------------------------
+   THE ORDER IS A MARKETING DECISION, NOT AN ALPHABETICAL ONE.
+
+   The row used to be sorted by filename, which is arbitrary with respect to
+   how much a Swiss visitor recognises a mark. MEASURED at 1440px on the live
+   site, the logos actually on screen at load were: an unnamed circular mark,
+   GnussBistro, Bildung Bern, Böhler AG, b(wd and HÄUBI. Victorinox, the
+   Universität Bern, Transsicura and the Spitex sat at x = 2172-3000px — off
+   screen, and roughly half a minute into a 104-second loop before they came
+   round. The strongest names on the wall were the ones nobody saw.
+
+   So the five the client named lead the row, with ONE logo in front of them:
+   at a normal desktop width about seven marks are visible, so one before and
+   one after puts those five across the middle of the band at load. Everything
+   else keeps its alphabetical order behind them.
+
+   A slug that is not in this list is not an error — it simply sorts after,
+   which is what makes the list safe to edit and safe to leave alone when a
+   new file is dropped into the folder.
+   --------------------------------------------------------------------- */
+const FEATURED = [
+  "nau-ch",
+  "transsicura",
+  "victorinox",
+  "arte-cucina",
+  "universitaet-bern",
+  "spitex-region-lueg",
+];
+
+const rank = (slug: string) => {
+  const i = FEATURED.indexOf(slug);
+  return i === -1 ? FEATURED.length : i;
+};
+
 const DROPPED = Object.entries(FILES)
   .map(([path, url]) => {
     const file = path.split("/").pop() ?? "";
@@ -64,7 +98,7 @@ const DROPPED = Object.entries(FILES)
       : "";
     return { slug, name, url };
   })
-  .sort((a, b) => a.slug.localeCompare(b.slug));
+  .sort((a, b) => rank(a.slug) - rank(b.slug) || a.slug.localeCompare(b.slug));
 
 /**
  * The trust band — directly under the hero.
