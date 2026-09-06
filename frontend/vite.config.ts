@@ -34,10 +34,11 @@ export default defineConfig({
         imprint: fileURLToPath(new URL("./impressum/index.html", import.meta.url)),
         privacy: fileURLToPath(new URL("./datenschutz/index.html", import.meta.url)),
         terms: fileURLToPath(new URL("./agb/index.html", import.meta.url)),
-        wissen: fileURLToPath(new URL("./wissen/index.html", import.meta.url)),
-        wissenWasIstGeo: fileURLToPath(
-          new URL("./wissen/was-ist-geo/index.html", import.meta.url),
-        ),
+        /* wissen / wissenWasIstGeo — pulled from the build for now, at the
+           client's request. The source pages, translations, entries and
+           scripts/seo.mjs routes are all still in the repo untouched; adding
+           these two lines back is the entire re-enable. See the note in
+           scripts/seo.mjs's ROUTES array for the matching half of this. */
       },
     },
   },
