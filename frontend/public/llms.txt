@@ -35,6 +35,13 @@ recherchieren: vom lokalen Dienstleister bis zum B2B-Anbieter.
 - Leads Engine ist ein Produkt der Future Media GmbH, Bern & Zürich.
 - Referenzen von Future Media: Victorinox, Mazda, Spitex, Transsicura, Nau.ch, WESCO (Kunden von Future Media, nicht von Leads Engine).
 
+## Wissen
+- „Was ist GEO? Generative Engine Optimization einfach erklärt" – https://leadsengine.ch/wissen/was-ist-geo/
+  Erklärt GEO/AEO, den Unterschied zu klassischem SEO, und was laut einer
+  Studie von Princeton/Georgia Tech/Allen Institute for AI/IIT Delhi (KDD
+  2024, arXiv:2311.09735) die Zitierhäufigkeit einer Seite in KI-Antworten
+  nachweislich erhöht.
+
 ## Kontakt
 - Website: https://leadsengine.ch/
 - Kostenlose KI-Analyse / Erstberatung: https://leadsengine.ch/analyse/

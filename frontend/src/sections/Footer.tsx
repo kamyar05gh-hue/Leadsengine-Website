@@ -75,7 +75,10 @@ export default function Footer(_props: { onSubpage?: boolean } = {}) {
      is one anchor away in the header nav and sits on the page this footer
      is attached to. What is left is the one link that leads somewhere the
      header does not repeat. */
-  const companyLinks = [{ href: "/ueber-uns/", label: t.nav.about }];
+  const companyLinks = [
+    { href: "/wissen/", label: t.nav.wissen },
+    { href: "/ueber-uns/", label: t.nav.about },
+  ];
 
   /* Real pages, not a modal. They are generated at build time by
      `scripts/legal-pages.mjs` from these same dictionary entries, so they are

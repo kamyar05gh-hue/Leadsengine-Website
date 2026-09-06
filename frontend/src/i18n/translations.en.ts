@@ -11,6 +11,7 @@ export const en: Dict = {
     voices: "Voices",
     faq: "FAQ",
     about: "About us",
+    wissen: "Insights",
     menu: "Open menu",
     close: "Close menu",
   },
@@ -549,6 +550,92 @@ export const en: Dict = {
     quality: "Quality",
     replay: "Replay",
     unsupported: "Your browser cannot play this video.",
+  },
+
+  wissen: {
+    index: {
+      kicker: "Insights",
+      title: "AI visibility, explained.",
+      lead: "What Generative Engine Optimization is, how AI answers really work, and what Swiss companies can concretely do about it.",
+      metaTitle: "Insights – GEO & AI Buyer Visibility | Leads Engine",
+      metaDescription: "GEO and AEO basics: how ChatGPT, Perplexity and Google AI decide which companies to mention – and what that means for Swiss SMEs.",
+      readMore: "Read the article",
+    },
+    posts: {
+      wasIstGeo: {
+        slug: "was-ist-geo",
+        kicker: "Basics",
+        title: "What is GEO? Generative Engine Optimization, explained simply",
+        dek: "How ChatGPT, Perplexity and Google AI decide which companies to name in their answers – and what you can concretely do about it this week.",
+        metaTitle: "What is GEO? Generative Engine Optimization explained | Leads Engine",
+        metaDescription: "GEO stands for Generative Engine Optimization: optimizing content for AI answers instead of Google rankings. How it works – and what Swiss companies can do now.",
+        date: "2026-09-06",
+        dateLabel: "September 6, 2026",
+        readingTime: "6 min read",
+        intro: "GEO stands for Generative Engine Optimization. It means shaping a website so that ChatGPT, Perplexity, Google AI and similar systems name and cite it in their answers – rather than just appearing among the blue links of a classic search. The difference is not cosmetic: an AI answer typically names three to five providers and has no page two. A company missing from that list simply does not exist for that customer.",
+        sections: [
+          {
+            heading: "What exactly is Generative Engine Optimization (GEO)?",
+            paragraphs: [
+              "GEO is the practice of shaping content so that generative AI systems select it as a source for an answer. Instead of optimizing for a position in a results list, GEO optimizes for being named inside an already-synthesized answer text.",
+              "The term comes from a 2024 study presented at the KDD conference by researchers from Princeton University, Georgia Tech, the Allen Institute for AI, and IIT Delhi. They defined GEO as its own discipline because generative search systems select and weigh content differently than classic search engines do.",
+            ],
+          },
+          {
+            heading: "How is GEO different from classic SEO?",
+            paragraphs: [
+              "SEO optimizes for a position in a list of links that people browse themselves. GEO optimizes for being selected and named inside an already-generated, summarized answer text – one people read without clicking through at all.",
+              "That changes what counts. Sitting on page two of Google is weak but still visible – someone searching can still click through. In an AI answer naming three to five providers, that middle ground does not exist: a source either becomes part of the answer, or it simply does not appear in it.",
+            ],
+          },
+          {
+            heading: "Why isn't a good Google ranking enough any more?",
+            paragraphs: [
+              "Because a growing share of purchase research no longer runs through classic search at all. According to Gartner (B2B Buyer Survey 2026), 45% of B2B buyers already use generative AI for their research, and according to NielsenIQ (Agentic Commerce Tracker 2026), 42% of purchase decisions already involve AI assistance. In Switzerland, roughly 3.8 million people use AI tools, per IGEM-Digimonitor 2025.",
+              "A top Google position is just one of several signals a generative system takes into account – it does not guarantee a mention in the summarized answer. Both systems run in parallel, and both have to be served separately.",
+            ],
+          },
+          {
+            heading: "How does an AI decide which companies to name?",
+            paragraphs: [
+              "The KDD 2024 study tested this systematically. With their own benchmark, GEO-bench, the researchers ran roughly 10,000 queries across nine datasets and tested nine different optimization tactics.",
+              "The strongest effects came from three tactics: adding citations, adding quotations, and adding statistics. Each raised how often a page was cited in a generated answer by roughly 30 to 40 percent in the study. Fluent language and an authoritative tone strengthened the effect further.",
+              "The practical takeaway: content that itself contains verifiable facts, figures and sources is preferred by generative systems as a trustworthy basis for an answer.",
+            ],
+          },
+          {
+            heading: "What can you concretely do this week?",
+            paragraphs: [
+              "Three steps that don't require a big project. First: ask ChatGPT, Perplexity and Google AI directly what they know about your company and who they recommend instead – that shows the gap before you close it. Second: make sure your website states the facts a customer wants to know clearly and with real specifics (what you offer, where, for whom) – a system can only cite what is actually written down. Third: add structured data (JSON-LD), so machines don't have to guess those facts out of plain running text.",
+              "Leads Engine measures exactly this automatically – as Mention, Citation and Share of Voice across ChatGPT, Perplexity, Google AI, Claude and Grok – and shows where the gap is in a free AI analysis within 48 hours.",
+            ],
+          },
+        ],
+        faq: [
+          {
+            q: "What does GEO stand for?",
+            a: "Generative Engine Optimization. There is no established German equivalent term – the English term GEO is used essentially everywhere, including in German-speaking markets.",
+          },
+          {
+            q: "Is GEO the same as AEO?",
+            a: "In practice the two terms are often used interchangeably. AEO (Answer Engine Optimization) tends to emphasize direct-answer surfaces like AI overviews in search, GEO tends to emphasize generative chat answers – the underlying techniques overlap heavily.",
+          },
+          {
+            q: "Can I do SEO and GEO at the same time?",
+            a: "Yes, and most fundamentals overlap: real, current content, clear structure, verifiable facts. GEO adds signals that specifically matter to generative systems, such as citable sourcing and structured data.",
+          },
+          {
+            q: "How long does it take for an AI to cite a new page?",
+            a: "That depends on the crawling and indexing of the underlying search systems many AI answers draw on. Realistically, days to weeks, not hours – and it assumes the page gets indexed at all.",
+          },
+          {
+            q: "Does it count if ChatGPT names my company but doesn't link to the site?",
+            a: "Yes. That counts as a mention and is already a visibility signal. A citation with a direct link to the source is the stronger signal, but both are measurable and relevant to visibility.",
+          },
+        ],
+        sourcesNote: "Sources: Aggarwal et al., “GEO: Generative Engine Optimization”, Princeton University / Georgia Tech / Allen Institute for AI / IIT Delhi, KDD 2024 (arXiv:2311.09735) – Gartner, B2B Buyer Survey 2026 – NielsenIQ, Agentic Commerce Tracker 2026 – IGEM-Digimonitor 2025.",
+      },
+    },
   },
 
   legal: {

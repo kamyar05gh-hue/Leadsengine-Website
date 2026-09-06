@@ -14,6 +14,7 @@ export const de = {
     voices: "Stimmen",
     faq: "FAQ",
     about: "Über uns",
+    wissen: "Wissen",
     menu: "Menü öffnen",
     close: "Menü schliessen",
   },
@@ -615,6 +616,102 @@ export const de = {
     quality: "Qualität",
     replay: "Erneut abspielen",
     unsupported: "Dein Browser kann dieses Video nicht abspielen.",
+  },
+
+  /* ---------------------------------------------------------------------
+     WISSEN — the Leads Engine desk's own blog. First post: the GEO/AEO
+     fundamentals pillar (see the Two-Desk Playbook, Stage 0). Every claim
+     below traces to a real, checkable source — either the KDD 2024 GEO
+     paper (Aggarwal et al., Princeton/Georgia Tech/Allen Institute for
+     AI/IIT Delhi, arXiv:2311.09735) or the same Gartner/NielsenIQ/IGEM
+     figures already vetted and published in this site's own llms.txt. No
+     number here is invented — this is a GEO article; citing sources badly
+     would be the one mistake it cannot afford.
+     --------------------------------------------------------------------- */
+  wissen: {
+    index: {
+      kicker: "Wissen",
+      title: "KI-Sichtbarkeit, erklärt.",
+      lead: "Was Generative Engine Optimization ist, wie KI-Antworten wirklich funktionieren, und was Schweizer Unternehmen konkret tun können.",
+      metaTitle: "Wissen – GEO & AI Buyer Visibility | Leads Engine",
+      metaDescription: "Grundlagen zu GEO und AEO: wie ChatGPT, Perplexity und Google AI entscheiden, welche Unternehmen sie nennen – und was das für Schweizer KMU bedeutet.",
+      readMore: "Artikel lesen",
+    },
+    posts: {
+      wasIstGeo: {
+        slug: "was-ist-geo",
+        kicker: "Grundlagen",
+        title: "Was ist GEO? Generative Engine Optimization einfach erklärt",
+        dek: "Wie ChatGPT, Perplexity und Google AI entscheiden, welche Unternehmen sie in ihren Antworten nennen – und was Du diese Woche konkret tun kannst.",
+        metaTitle: "Was ist GEO? Generative Engine Optimization erklärt | Leads Engine",
+        metaDescription: "GEO steht für Generative Engine Optimization: Inhalte werden für KI-Antworten optimiert statt für Google-Rankings. So funktioniert es – und was Schweizer Unternehmen jetzt tun können.",
+        date: "2026-09-06",
+        dateLabel: "6. September 2026",
+        readingTime: "6 Min. Lesezeit",
+        intro: "GEO steht für Generative Engine Optimization. Gemeint ist die Optimierung einer Website dafür, in den Antworten von ChatGPT, Perplexity, Google AI und ähnlichen Systemen genannt und zitiert zu werden – statt nur in den blauen Links einer klassischen Suche zu erscheinen. Der Unterschied ist nicht kosmetisch: Eine KI-Antwort nennt in der Regel drei bis fünf Anbieter und hat keine zweite Seite. Wer dort fehlt, existiert für diese Kunden schlicht nicht.",
+        sections: [
+          {
+            heading: "Was ist Generative Engine Optimization (GEO) genau?",
+            paragraphs: [
+              "GEO ist die Praxis, Inhalte so zu gestalten, dass generative KI-Systeme sie als Quelle für eine Antwort auswählen. Statt für eine Position in einer Ergebnisliste zu optimieren, optimiert GEO dafür, in einem zusammengefassten, synthetisierten Antworttext genannt zu werden.",
+              "Der Begriff stammt aus einer 2024 an der KDD-Konferenz veröffentlichten Studie von Forschenden der Princeton University, Georgia Tech, des Allen Institute for AI und des IIT Delhi. Sie definierten GEO als eigenständige Disziplin, weil generative Suchsysteme Inhalte anders auswählen und gewichten als klassische Suchmaschinen.",
+            ],
+          },
+          {
+            heading: "Wie unterscheidet sich GEO von klassischem SEO?",
+            paragraphs: [
+              "SEO optimiert für eine Position in einer Liste von Links, die Nutzende selbst durchsuchen. GEO optimiert dafür, in einem bereits generierten, zusammengefassten Antworttext ausgewählt und genannt zu werden – einem Text, den Nutzende lesen, ohne selbst weiterzuklicken.",
+              "Das verändert, was zählt. Auf Seite 2 von Google zu stehen, ist schwach, aber sichtbar – wer sucht, kann trotzdem hinklicken. In einer KI-Antwort mit drei bis fünf genannten Anbietern gibt es diese Stufe nicht: Entweder eine Quelle wird Teil der Antwort, oder sie kommt in der Antwort schlicht nicht vor.",
+            ],
+          },
+          {
+            heading: "Warum reicht eine gute Google-Position nicht mehr?",
+            paragraphs: [
+              "Weil ein wachsender Teil der Kaufrecherche gar nicht mehr über eine klassische Suche läuft. 45% der B2B-Einkäufer nutzen laut Gartner (B2B Buyer Survey 2026) bereits generative KI für ihre Recherche, und laut NielsenIQ (Agentic Commerce Tracker 2026) fallen 42% der Kaufentscheide bereits mit KI-Unterstützung. In der Schweiz nutzen laut IGEM-Digimonitor 2025 rund 3,8 Millionen Menschen KI-Tools.",
+              "Eine Top-Position bei Google ist dabei nur eines von mehreren Signalen, die ein generatives System einbezieht – sie garantiert keine Nennung in der zusammengefassten Antwort. Beide Systeme laufen nebeneinander, und beide müssen einzeln bedient werden.",
+            ],
+          },
+          {
+            heading: "Wie entscheidet eine KI, wen sie nennt?",
+            paragraphs: [
+              "Die KDD-2024-Studie hat das systematisch getestet: Mit dem selbst entwickelten Testverfahren GEO-bench prüften die Forschenden rund 10'000 Suchanfragen über neun Datensätze und testeten neun verschiedene Optimierungsstrategien.",
+              "Die stärksten Effekte zeigten sich bei drei Taktiken: Quellenangaben einbauen, Zitate ergänzen und Statistiken einbauen. Jede davon steigerte die Häufigkeit, mit der eine Seite in einer generierten Antwort zitiert wurde, in der Studie um rund 30 bis 40 Prozent. Flüssigkeit der Sprache und ein autoritativer Ton verstärkten den Effekt zusätzlich.",
+              "Der praktische Punkt dahinter: Inhalte, die selbst belegbare Fakten, Zahlen und Quellen enthalten, werden von generativen Systemen bevorzugt als vertrauenswürdige Grundlage für eine Antwort verwendet.",
+            ],
+          },
+          {
+            heading: "Was kannst Du diese Woche konkret tun?",
+            paragraphs: [
+              "Drei Schritte, die sich ohne grosses Projekt umsetzen lassen. Erstens: Frag ChatGPT, Perplexity und Google AI direkt, was sie über Dein Unternehmen wissen und wen sie stattdessen empfehlen – das zeigt die Lücke, bevor Du sie schliesst. Zweitens: Stelle sicher, dass Deine Website die Fakten, die ein Kunde wissen will, klar und mit echten Angaben benennt (Angebot, Standort, Zielgruppe) – ein System kann nur zitieren, was tatsächlich dasteht. Drittens: Ergänze strukturierte Daten (JSON-LD), damit Maschinen diese Fakten nicht erst aus Fliesstext erraten müssen.",
+              "Leads Engine misst genau das automatisiert – als Mention, Zitation und Share of Voice über ChatGPT, Perplexity, Google AI, Claude und Grok – und zeigt in einer kostenlosen KI-Analyse innerhalb von 48 Stunden, wo die eigene Lücke liegt.",
+            ],
+          },
+        ],
+        faq: [
+          {
+            q: "Was bedeutet GEO auf Deutsch?",
+            a: "Generative-Engine-Optimierung – eine eingedeutschte Fachbezeichnung hat sich bisher nicht durchgesetzt, im deutschsprachigen Raum wird praktisch durchgehend der englische Begriff GEO verwendet.",
+          },
+          {
+            q: "Ist GEO das Gleiche wie AEO?",
+            a: "In der Praxis werden beide Begriffe oft synonym verwendet. AEO (Answer Engine Optimization) betont eher direkte Antwortflächen wie KI-Übersichten in der Suche, GEO eher generative Chat-Antworten – die zugrunde liegenden Techniken überschneiden sich stark.",
+          },
+          {
+            q: "Kann ich SEO und GEO gleichzeitig machen?",
+            a: "Ja, und die meisten Grundlagen überschneiden sich: echte, aktuelle Inhalte, klare Struktur, nachvollziehbare Fakten. GEO ergänzt SEO um zusätzliche, für generative Systeme relevante Signale wie zitierfähige Quellenangaben und strukturierte Daten.",
+          },
+          {
+            q: "Wie lange dauert es, bis eine KI eine neue Seite zitiert?",
+            a: "Das hängt vom Crawling und der Indexierung der zugrunde liegenden Suchsysteme ab, auf die viele KI-Antworten zugreifen. Realistisch sind Tage bis Wochen, nicht Stunden – und es setzt voraus, dass die Seite überhaupt indexiert wird.",
+          },
+          {
+            q: "Zählt es, wenn ChatGPT meine Firma nennt, aber die Website nicht verlinkt?",
+            a: "Ja. Das zählt als Mention und ist bereits ein Sichtbarkeitssignal. Eine Zitation mit direktem Link zur Quelle ist das stärkere Signal, aber beide sind messbar und für die eigene Sichtbarkeit relevant.",
+          },
+        ],
+        sourcesNote: "Quellen: Aggarwal et al., „GEO: Generative Engine Optimization“, Princeton University / Georgia Tech / Allen Institute for AI / IIT Delhi, KDD 2024 (arXiv:2311.09735) – Gartner, B2B Buyer Survey 2026 – NielsenIQ, Agentic Commerce Tracker 2026 – IGEM-Digimonitor 2025.",
+      },
+    },
   },
 
   legal: {
