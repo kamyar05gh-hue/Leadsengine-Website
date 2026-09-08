@@ -31,11 +31,22 @@ cd dashboard && npm run dev   # dashboard       → http://localhost:5173/dashbo
 
 ```bash
 npm run build:all   # at repo root: builds both apps (tsc --noEmit + vite build),
-                    # then copies dashboard/dist → frontend/build/dashboard
+                    # prerenders every route, then copies
+                    # dashboard/dist → frontend/build/dashboard
+npm run crawlable   # what a crawler reads on each page of that build
+npm run deploy      # ship frontend/build to Hostpoint, then ping IndexNow
 ```
 
-Deploy the **`frontend/build`** directory to the static host. The dashboard is
-served under `/dashboard/` (already `Disallow`ed in `robots.txt`).
+`npm run deploy` uploads the **`frontend/build`** directory to
+`hostpoint:~/www/leadsengine.ch/` (the alias is a `Host` block in
+`~/.ssh/config`) and then submits the URL list to IndexNow. It refuses to run
+if the build is not prerendered. `--dry-run` prints the command without
+sending; `--no-ping` skips the IndexNow submission.
+
+**A `git push` does not update the live site.** Deploy is this separate step.
+
+The dashboard is served under `/dashboard/` (already `Disallow`ed in
+`robots.txt`).
 
 Host configuration checklist:
 
