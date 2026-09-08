@@ -21,7 +21,8 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
 const ROUTES = ["/", "/analyse/", "/ueber-uns/", "/impressum/",
-                "/datenschutz/", "/agb/", "/wissen/"];
+                "/datenschutz/", "/agb/", "/wissen/",
+                "/wissen/was-ist-geo/"];
 const TARGET_HOME = 6000;   // what the homepage must clear once prerendered
 const TARGET_PAGE = 1500;   // what every other page must clear
 

@@ -236,15 +236,66 @@ const ROUTES = [
     name: (t) => t.legal[doc].title,
     description: (t) => t.legal[doc].body.replace(/\s+/g, " ").slice(0, 155).trim(),
   })),
-  /* wissen / wissen-was-ist-geo ROUTES entries — pulled for now, at the
-     client's request, alongside the vite.config.ts input entries. The
-     removed block (CollectionPage index route + the WebPage/BlogPosting/
-     FAQPage post route) is in git history on this commit's parent; restoring
-     /wissen/ is: put those two vite.config.ts entries back, restore this
-     block, and restore the two sitemap urls[] lines below. The
-     wissenIndexFallback/wissenPostFallback functions above are untouched and
-     ready to be referenced again. */
-];;
+  {
+    /* `CollectionPage` — this is a listing of articles, not an article
+       itself. It gets no `extraGraph`: an index with one post today does not
+       need its own FAQPage or BlogPosting node, and adding one that merely
+       duplicates the post's would be exactly the kind of drift this file
+       exists to avoid. */
+    path: "wissen",
+    type: "CollectionPage",
+    crumb: (t) => t.nav.wissen,
+    fallback: (t) => wissenIndexFallback(t),
+    name: (t) => t.wissen.index.metaTitle,
+    description: (t) => t.wissen.index.metaDescription,
+  },
+  {
+    /* The base node stays `WebPage`, matching every other route in this
+       file — `extraGraph` below is what adds the real `BlogPosting` and
+       `FAQPage` nodes a crawler actually wants from an article. Keeping the
+       base node generic means a future post only has to supply `extraGraph`
+       and nothing about the surrounding loop has to change. */
+    path: "wissen/was-ist-geo",
+    type: "WebPage",
+    crumb: (t) => t.wissen.posts.wasIstGeo.title,
+    fallback: (t) => wissenPostFallback(t.wissen.posts.wasIstGeo),
+    name: (t) => t.wissen.posts.wasIstGeo.metaTitle,
+    description: (t) => t.wissen.posts.wasIstGeo.metaDescription,
+    extraGraph: (t, url) => {
+      const post = t.wissen.posts.wasIstGeo;
+      return [
+        {
+          "@type": "BlogPosting",
+          "@id": `${url}#article`,
+          headline: post.title,
+          description: post.metaDescription,
+          datePublished: post.date,
+          dateModified: post.date,
+          inLanguage: "de-CH",
+          author: { "@id": `${ORIGIN}/#organization` },
+          publisher: { "@id": `${ORIGIN}/#organization` },
+          mainEntityOfPage: { "@id": `${url}#webpage` },
+          articleSection: post.kicker,
+          isPartOf: { "@id": `${ORIGIN}/wissen/#collection` },
+        },
+        {
+          /* THE FAQ TEXT AND THIS MARKUP MUST NEVER DIVERGE. Both the
+             visible <dl> in WissenPost.tsx and `wissenPostFallback` above
+             read `post.faq` directly rather than a separate copy, so this
+             is the one further place that data flows to — never a fourth,
+             hand-typed one. */
+          "@type": "FAQPage",
+          "@id": `${url}#faq`,
+          mainEntity: post.faq.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        },
+      ];
+    },
+  },
+];
 
 const content = await loadContent();
 const t = content.de; // German is the primary language and the default render.
@@ -278,6 +329,8 @@ function buildSitemap() {
     { path: "impressum/", priority: "0.3", changefreq: "yearly" },
     { path: "datenschutz/", priority: "0.3", changefreq: "yearly" },
     { path: "agb/", priority: "0.3", changefreq: "yearly" },
+    { path: "wissen/", priority: "0.7", changefreq: "weekly" },
+    { path: "wissen/was-ist-geo/", priority: "0.6", changefreq: "monthly" },
     /* llms.txt, at the client's request. It is not an HTML page, so it needs
        the `file` override below — there is no index.html to stat. Listing it
        is unusual and deliberate: the sitemap is the one file every crawler

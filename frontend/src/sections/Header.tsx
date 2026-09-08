@@ -23,6 +23,9 @@ type SectionId = (typeof SECTION_IDS)[number];
 
 /** The one About URL. Language is a query param on this site, never a path. */
 const ABOUT_HREF = "/ueber-uns/";
+/** The Wissen index — a real page, exactly like About, added at the client's
+    request once the desk's first article existed to link to. */
+const WISSEN_HREF = "/wissen/";
 
 
 /**
@@ -78,6 +81,7 @@ export default function Header({
        "Für wen" and "Vorteile" are gone for a different reason: the sections
        they pointed at were deleted. */
     { id: "faq", label: t.nav.faq },
+    { href: WISSEN_HREF, label: t.nav.wissen },
     { href: ABOUT_HREF, label: t.nav.about },
   ];
 

@@ -40,6 +40,8 @@ const URLS = [
   "",
   "analyse/",
   "ueber-uns/",
+  "wissen/",
+  "wissen/was-ist-geo/",
   "impressum/",
   "datenschutz/",
   "agb/",
