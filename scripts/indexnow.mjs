@@ -47,6 +47,45 @@ const URLS = [
   "agb/",
 ].map((path) => `https://${HOST}/${path}`);
 
+/**
+ * ONLY SUBMIT URLS THAT ARE ACTUALLY LIVE.
+ *
+ * This list and the deploy can disagree, and did: `/wissen/` was re-enabled
+ * in the repo while the build holding it was deliberately not shipped, so
+ * this script was one `npm run deploy` away from telling Bing to fetch two
+ * URLs that answer 404. That is worse than not pinging at all — IndexNow is
+ * a trust-weighted channel, submissions are scored against what the crawler
+ * finds, and a host that announces dead URLs gets its later submissions
+ * taken less seriously. The one thing this script exists to buy is exactly
+ * that credibility.
+ *
+ * So each URL is fetched first. HEAD would be cheaper, but shared hosts
+ * routinely answer it differently from GET, and a wrong answer here silently
+ * drops a real page from the submission — so it is a GET, discarded.
+ */
+const checks = await Promise.all(
+  URLS.map(async (url) => {
+    try {
+      const r = await fetch(url, { redirect: "manual" });
+      return { url, status: r.status, live: r.status === 200 };
+    } catch (err) {
+      return { url, status: `unreachable (${err.message})`, live: false };
+    }
+  }),
+);
+
+const live = checks.filter((c) => c.live).map((c) => c.url);
+const dead = checks.filter((c) => !c.live);
+
+for (const d of dead) {
+  console.warn(`IndexNow: skipping ${d.url} — ${d.status}`);
+}
+
+if (live.length === 0) {
+  console.error("IndexNow: no live URLs to submit. Nothing sent.");
+  process.exit(1);
+}
+
 const res = await fetch("https://api.indexnow.org/indexnow", {
   method: "POST",
   headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -54,13 +93,16 @@ const res = await fetch("https://api.indexnow.org/indexnow", {
     host: HOST,
     key: KEY,
     keyLocation: KEY_LOCATION,
-    urlList: URLS,
+    urlList: live,
   }),
 });
 
 /* IndexNow returns 200 or 202 on success, with an empty body either way —
    there is no confirmation payload to parse, only the status code. */
-console.log(`IndexNow: HTTP ${res.status} for ${URLS.length} URLs`);
+console.log(
+  `IndexNow: HTTP ${res.status} for ${live.length} live URL(s)` +
+    (dead.length ? `, ${dead.length} skipped` : ""),
+);
 if (res.status !== 200 && res.status !== 202) {
   const body = await res.text().catch(() => "");
   console.error("IndexNow submission did not succeed:", body.slice(0, 300));
