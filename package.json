@@ -7,7 +7,9 @@
     "build:frontend": "npm --prefix frontend run build",
     "build:dashboard": "npm --prefix dashboard run build",
     "assemble": "node scripts/assemble.mjs",
-    "build:all": "npm run build:frontend && npm run seo && npm run build:dashboard && npm run assemble && npm run security",
+    "build:all": "npm run build:frontend && npm run prerender && npm run seo && npm run build:dashboard && npm run assemble && npm run security",
+    "prerender": "node scripts/prerender.mjs",
+    "crawlable": "node scripts/crawlable-text.mjs frontend/build",
     "lint": "npm --prefix frontend run lint && npm --prefix dashboard run lint",
     "seo": "node scripts/seo.mjs",
     "security": "node scripts/security-headers.mjs"

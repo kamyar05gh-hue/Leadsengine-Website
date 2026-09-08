@@ -20,6 +20,13 @@ type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: Dict };
 const LanguageContext = createContext<Ctx | null>(null);
 
 function initialLang(): Lang {
+  /* PRERENDER RUNS THIS IN NODE, where there is no window at all. Without
+     this guard `scripts/prerender.mjs` throws before a single character of
+     markup is produced. German is the right server answer regardless: it is
+     the default below, it is what a crawler should be served, and `?lang=en`
+     is a client-side choice that the client re-renders for anyway. */
+  if (typeof window === "undefined") return "de";
+
   const url = new URLSearchParams(window.location.search).get("lang");
   if (url === "de" || url === "en") return url;
   const stored = window.localStorage.getItem(STORAGE_KEY);
