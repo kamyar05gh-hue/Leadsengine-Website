@@ -64,11 +64,61 @@ if (!is_string($sql) || $sql === '') {
     fail(400, 'Expected {"query":{"kind":"HogQLQuery","query":"..."}}');
 }
 
+/* ---------------------------------------------------------------- cache
+ * WHY THERE IS A CACHE HERE.
+ *
+ * Measured on the live dashboard: the Overview tab alone fires SEVEN HogQL
+ * queries in parallel, and the app re-fires every visible tab's queries on a
+ * 30-second timer. Two of those queries are genuinely heavy — 2.7 s and 4.5 s
+ * when the project is idle. Put six tabs and a couple of open browsers on
+ * that schedule and the requests queue upstream; one was measured at
+ * 30,031 ms, which is exactly the cURL timeout below. On timeout this file
+ * returned 502, the dashboard turned that into a PosthogError, and the panel
+ * that owned the query rendered nothing. That is the "tabs not fully
+ * loading" symptom: not an auth problem and not a broken query, just the
+ * slowest one of seven losing a race against a 30-second ceiling.
+ *
+ * The dashboard cannot show anything fresher than its own 30-second refresh,
+ * so a cache entry that lives 45 seconds costs the reader nothing and takes
+ * almost every one of those queries off the upstream entirely.
+ *
+ * STALE IS BETTER THAN EMPTY. If the upstream does fail or time out, a stale
+ * entry is served instead of the 502, with a header saying so. A panel
+ * showing figures from four minutes ago is honest and useful; a panel
+ * showing nothing tells the reader their dashboard is broken.
+ *
+ * The cache directory sits OUTSIDE the web root, next to the config, because
+ * the responses contain analytics data for the whole project. Entries are
+ * keyed by a hash of the SQL, so two different queries can never collide.
+ */
+const CACHE_TTL   = 45;     // seconds an entry is served without asking upstream
+const CACHE_STALE = 900;    // seconds an entry may still be served on failure
+
+$cacheDir = dirname(__DIR__, 3) . '/private/posthog-cache';
+$cacheKey = hash('sha256', $sql);
+$cacheFile = $cacheDir . '/' . $cacheKey . '.json';
+
+$cachedAt = is_readable($cacheFile) ? (int) filemtime($cacheFile) : 0;
+$age = $cachedAt ? time() - $cachedAt : PHP_INT_MAX;
+
+if ($age <= CACHE_TTL) {
+    header('X-Proxy-Cache: hit');
+    header('X-Proxy-Age: ' . $age);
+    readfile($cacheFile);
+    exit;
+}
+
 $ch = curl_init("{$host}/api/projects/{$conf['project_id']}/query/");
 curl_setopt_array($ch, [
     CURLOPT_POST           => true,
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT        => 30,
+    /* 30 s was the ceiling every timed-out query hit. The queries that
+       matter finish in under five; the ones that do not are queued upstream,
+       and giving them another 20 s is what turns a dead panel into a slow
+       one. CONNECTTIMEOUT stays short so a genuinely unreachable host fails
+       fast instead of burning the whole budget on the handshake. */
+    CURLOPT_TIMEOUT        => 50,
+    CURLOPT_CONNECTTIMEOUT => 8,
     CURLOPT_HTTPHEADER     => [
         'Content-Type: application/json',
         'Authorization: Bearer ' . $conf['personal_key'],
@@ -83,9 +133,45 @@ $status   = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
 $err      = curl_error($ch);
 curl_close($ch);
 
+/** Last good answer for this exact query, if it is not too old to be honest. */
+function serveStale(string $file, int $age, string $why): bool {
+    if ($age > CACHE_STALE || !is_readable($file)) {
+        return false;
+    }
+    error_log('posthog proxy: serving stale (' . $age . 's) after ' . $why);
+    header('X-Proxy-Cache: stale');
+    header('X-Proxy-Age: ' . $age);
+    readfile($file);
+    return true;
+}
+
 if ($response === false) {
     error_log('posthog proxy: curl failed: ' . $err);
-    fail(502, 'Upstream request failed');
+    if (serveStale($cacheFile, $age, 'curl error: ' . $err)) {
+        exit;
+    }
+    fail(504, 'Upstream request timed out');
+}
+
+if ($status === 200) {
+    /* Written via a temp file and renamed, so a second request can never
+       read a half-written entry. Failure to cache is not failure to answer. */
+    if (is_dir($cacheDir) || @mkdir($cacheDir, 0700, true)) {
+        $tmp = $cacheFile . '.' . getmypid() . '.tmp';
+        if (@file_put_contents($tmp, $response) !== false) {
+            @rename($tmp, $cacheFile);
+        }
+    }
+    header('X-Proxy-Cache: miss');
+    echo $response;
+    exit;
+}
+
+/* Upstream answered, but not with success — rate limiting, most often. The
+   last good answer beats handing the dashboard an error it can only render
+   as an empty panel. */
+if (serveStale($cacheFile, $age, 'upstream HTTP ' . $status)) {
+    exit;
 }
 
 http_response_code($status ?: 502);
