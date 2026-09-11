@@ -183,42 +183,43 @@ export const en: Dict = {
   data: {
     kicker: "Results",
     title: "The market Leads Engine unlocks.",
+    /* Verified figures; sources and exact values are recorded on the German
+       dictionary's `data` block. Keep the two in step. */
     adoption: {
       title: "AI adoption in Switzerland",
-      meta: "Share of the population using AI tools",
-      years: ["2022", "2023", "2024", "2025", "2026"],
-      values: [11, 24, 38, 47, 54],
+      meta: "Share of adults using AI tools such as ChatGPT",
+      years: ["2024", "2025", "2026"],
+      values: [50, 62, 76],
       unit: "%",
-      note: "3.8M people, and rising",
+      note: "Three in four adults, as of March 2026",
     },
     split: {
-      title: "Where B2B research starts today",
-      meta: "First stop before a purchase decision",
+      title: "How B2B buyers use AI today",
+      meta: "Gartner survey of 645 B2B buyers, Aug–Sep 2025",
       items: [
-        { label: "AI assistant", share: 45 },
-        { label: "Google search", share: 31 },
-        { label: "Referral", share: 14 },
-        { label: "Direct / known", share: 10 },
+        { label: "Used GenAI in their latest purchase", share: 45 },
+        { label: "Prefer to check AI insights with a sales rep", share: 69 },
+        { label: "Find AI more misleading than sales reps", share: 51 },
       ],
     },
     engines: {
-      title: "Which engines Swiss users ask",
-      meta: "Share of queries per platform",
+      title: "Which AI services send visitors in Switzerland",
+      meta: "Share of website visits from AI chatbots, August 2026",
       items: [
-        { label: "ChatGPT", share: 62 },
-        { label: "Google AI", share: 18 },
-        { label: "Perplexity", share: 11 },
-        { label: "Claude", share: 6 },
-        { label: "Grok", share: 3 },
+        { label: "ChatGPT", share: 77 },
+        { label: "Google Gemini", share: 11 },
+        { label: "Perplexity", share: 5 },
+        { label: "Claude", share: 4 },
+        { label: "Microsoft Copilot", share: 3 },
       ],
     },
     shortlist: {
-      title: "Providers per AI answer",
-      meta: "How many names one answer gives",
-      value: 3.4,
+      title: "Brands per AI answer",
+      meta: "How many brands ChatGPT names in one answer",
+      value: 5.8,
       unit: "on average",
       note: "An AI answer has no page 2. Whoever is missing does not exist.",
-      scale: ["Google: 10 results per page", "AI: 3 to 5 providers, then it stops"],
+      scale: ["Google: 10 results per page", "ChatGPT: almost 6 brands, Perplexity just over 4"],
     },
     growth: {
       title: "What six months can look like",
@@ -232,7 +233,7 @@ export const en: Dict = {
       deltaLabel: "Difference after 6 months",
       note: "A modelled trajectory based on previous projects. Not a guaranteed result: your starting point sets the curve.",
     },
-    sources: "Sources: Gartner B2B Buyer Survey 2026 (n=645) · NielsenIQ Agentic Commerce Tracker 2026 · IGEM-Digimonitor 2025",
+    sources: "Sources: comparis survey (Innofact, n=1,035, March 2026) · Gartner survey of 645 B2B buyers (Aug–Sep 2025) · StatCounter Global Stats, Switzerland, August 2026 · BrightEdge, e-commerce queries, October 2025. The growth curve is a modelled trajectory, not a measurement.",
   },
 
 
@@ -591,7 +592,7 @@ export const en: Dict = {
           {
             heading: "Why isn't a good Google ranking enough any more?",
             paragraphs: [
-              "Because a growing share of purchase research no longer runs through classic search at all. According to Gartner (B2B Buyer Survey 2026), 45% of B2B buyers already use generative AI for their research, and according to NielsenIQ (Agentic Commerce Tracker 2026), 42% of purchase decisions already involve AI assistance. In Switzerland, roughly 3.8 million people use AI tools, per IGEM-Digimonitor 2025.",
+              "Because a growing share of purchase research no longer runs through classic search at all. According to a Gartner survey of 645 B2B buyers (2025), 45% used generative AI in their latest purchase, mainly to gather information on vendors and products. In Switzerland, three in four adults now use AI tools such as ChatGPT, according to comparis (March 2026); in 2024 it was half.",
               "A top Google position is just one of several signals a generative system takes into account – it does not guarantee a mention in the summarized answer. Both systems run in parallel, and both have to be served separately.",
             ],
           },
@@ -633,7 +634,7 @@ export const en: Dict = {
             a: "Yes. That counts as a mention and is already a visibility signal. A citation with a direct link to the source is the stronger signal, but both are measurable and relevant to visibility.",
           },
         ],
-        sourcesNote: "Sources: Aggarwal et al., “GEO: Generative Engine Optimization”, Princeton University / Georgia Tech / Allen Institute for AI / IIT Delhi, KDD 2024 (arXiv:2311.09735) – Gartner, B2B Buyer Survey 2026 – NielsenIQ, Agentic Commerce Tracker 2026 – IGEM-Digimonitor 2025.",
+        sourcesNote: "Sources: Aggarwal et al., “GEO: Generative Engine Optimization”, Princeton University / Georgia Tech / Allen Institute for AI / IIT Delhi, KDD 2024 (arXiv:2311.09735) – Gartner survey of 645 B2B buyers (Aug–Sep 2025) – comparis/Innofact AI survey (n=1,035, March 2026).",
       },
     },
   },

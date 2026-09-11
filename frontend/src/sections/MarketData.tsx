@@ -187,7 +187,12 @@ function AdoptionChart({
 
         {/* Value + year sit on the same 5-track grid as the columns, so the
             readout stays crisp type at every card width. */}
-        <div className="mt-3 grid grid-cols-5 gap-1">
+        {/* One label column per data column. This was a fixed five, which
+            only lined up while the series happened to have five years. */}
+        <div
+          className="mt-3 grid gap-1"
+          style={{ gridTemplateColumns: `repeat(${years.length}, minmax(0, 1fr))` }}
+        >
           {years.map((y, i) => {
             const last = i === years.length - 1;
             return (
@@ -237,7 +242,10 @@ function SplitChart({ items }: { items: readonly Slice[] }) {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.25 });
   const on = reduced || inView;
 
-  const total = items.reduce((sum, it) => sum + it.share, 0) || 1;
+  /* Each bar is a share of RESPONDENTS, measured out of 100. They used to be
+     scaled against the sum of all bars, which only worked while the items
+     were slices of one whole; independent findings (45% do X, 69% do Y)
+     would have been drawn at the wrong length. */
   const label = items.map((it) => `${it.label}: ${it.share}%`).join(", ");
 
   const THICK = 9;
@@ -252,7 +260,7 @@ function SplitChart({ items }: { items: readonly Slice[] }) {
       className="mt-6 flex flex-1 flex-col justify-center gap-5"
     >
       {items.map((it, i) => {
-        const width = (it.share / total) * track;
+        const width = (Math.min(it.share, 100) / 100) * track;
         return (
           <div key={it.label}>
             <div className="flex items-baseline justify-between gap-3">

@@ -17,9 +17,9 @@ Schweizer Unternehmen – CEO, Marketing, Vertrieb – deren Kunden vor dem Kauf
 recherchieren: vom lokalen Dienstleister bis zum B2B-Anbieter.
 
 ## Warum es das gibt
-- 45% der B2B-Einkäufer nutzen generative KI für ihre Recherche (Gartner, B2B Buyer Survey 2026, n=645).
-- 42% der Kaufentscheide fallen bereits mit KI-Unterstützung (NielsenIQ, Agentic Commerce Tracker 2026).
-- 3.8 Mio. Menschen in der Schweiz nutzen KI-Tools (IGEM-Digimonitor 2025).
+- 45% der B2B-Einkäufer haben bei ihrem letzten Kauf generative KI genutzt (Gartner, Befragung von 645 B2B-Einkäufern, Aug.–Sept. 2025).
+- 76% der Erwachsenen in der Schweiz nutzen KI-Tools wie ChatGPT, 2024 waren es 50% (comparis/Innofact, n=1'035, März 2026).
+- ChatGPT bringt 77% der Website-Besuche aus KI-Chatbots in der Schweiz, Gemini 11%, Perplexity 5% (StatCounter, August 2026).
 - Eine KI-Antwort nennt drei bis fünf Anbieter und hat keine Seite 2. Wer dort fehlt, existiert für diese Kunden nicht.
 
 ## Ablauf

@@ -208,42 +208,60 @@ export const de = {
   data: {
     kicker: "Ergebnisse",
     title: "Der Markt, den Leads Engine erschliesst.",
+    /* EVERY FIGURE BELOW IS CHECKED AGAINST ITS PRIMARY SOURCE (Sept 2026).
+       The previous set was not: a five-year adoption series no survey
+       publishes, a four-way "where research starts" split of which only the
+       45% existed, per-engine shares with no source at all (including Grok,
+       which does not appear in the traffic data), and a "3.4 providers per
+       answer" that matched no study. Replace a number here only with one that
+       has a named source, a date and a sample, and update `sources` with it.
+
+       adoption   comparis / Innofact, n=1'035 adults, March 2026:
+                  49.7% (2024), 62.4% (2025), 76.1% (2026) use AI tools
+       split      Gartner survey of 645 B2B buyers, Aug-Sep 2025 (pub. May
+                  2026): 45% used GenAI in a recent purchase, 69% prefer to
+                  validate AI insights with a sales rep, 51% expect more
+                  misleading information from GenAI than from a rep
+       engines    StatCounter Global Stats, Switzerland, August 2026 -- share
+                  of website visits referred by AI chatbots: ChatGPT 76.87,
+                  Gemini 11.43, Perplexity 4.93, Claude 3.83, Copilot 2.9
+       shortlist  BrightEdge, Oct 2025, e-commerce prompts: ChatGPT 5.84
+                  brands per answer, Google AI Mode 5.44, Perplexity 4.37 */
     adoption: {
       title: "KI-Nutzung in der Schweiz",
-      meta: "Anteil der Bevölkerung, die KI-Tools nutzt",
-      years: ["2022", "2023", "2024", "2025", "2026"],
-      values: [11, 24, 38, 47, 54],
+      meta: "Anteil der Erwachsenen, die KI-Tools wie ChatGPT nutzen",
+      years: ["2024", "2025", "2026"],
+      values: [50, 62, 76],
       unit: "%",
-      note: "3.8 Mio. Menschen, Tendenz steigend",
+      note: "Drei von vier Erwachsenen, Stand März 2026",
     },
     split: {
-      title: "Wo B2B-Recherche heute startet",
-      meta: "Erste Anlaufstelle vor einer Kaufentscheidung",
+      title: "Wie B2B-Einkäufer KI heute nutzen",
+      meta: "Gartner-Befragung von 645 B2B-Einkäufern, Aug.–Sept. 2025",
       items: [
-        { label: "KI-Assistent", share: 45 },
-        { label: "Google-Suche", share: 31 },
-        { label: "Empfehlung", share: 14 },
-        { label: "Direkt / Bekannt", share: 10 },
+        { label: "Nutzten GenAI bei ihrem letzten Kauf", share: 45 },
+        { label: "Prüfen KI-Infos lieber beim Verkäufer nach", share: 69 },
+        { label: "Halten KI eher für irreführend als Verkäufer", share: 51 },
       ],
     },
     engines: {
-      title: "Welche Engines Schweizer Nutzer fragen",
-      meta: "Anteil der Anfragen je Plattform",
+      title: "Welche KI-Dienste in der Schweiz Besucher bringen",
+      meta: "Anteil der Website-Besuche aus KI-Chatbots, August 2026",
       items: [
-        { label: "ChatGPT", share: 62 },
-        { label: "Google AI", share: 18 },
-        { label: "Perplexity", share: 11 },
-        { label: "Claude", share: 6 },
-        { label: "Grok", share: 3 },
+        { label: "ChatGPT", share: 77 },
+        { label: "Google Gemini", share: 11 },
+        { label: "Perplexity", share: 5 },
+        { label: "Claude", share: 4 },
+        { label: "Microsoft Copilot", share: 3 },
       ],
     },
     shortlist: {
-      title: "Anbieter pro KI-Antwort",
-      meta: "Wie viele Namen eine Antwort nennt",
-      value: 3.4,
+      title: "Marken pro KI-Antwort",
+      meta: "Wie viele Marken ChatGPT in einer Antwort nennt",
+      value: 5.8,
       unit: "im Schnitt",
       note: "Eine KI-Antwort hat keine Seite 2. Wer fehlt, existiert nicht.",
-      scale: ["Google: 10 Ergebnisse pro Seite", "KI: 3 bis 5 Anbieter, dann Schluss"],
+      scale: ["Google: 10 Ergebnisse pro Seite", "ChatGPT: knapp 6 Marken, Perplexity gut 4"],
     },
     /* The growth curve. `note` is not optional garnish: these figures are a
        modelled trajectory, not an audited result, and the section must say so
@@ -260,7 +278,7 @@ export const de = {
       deltaLabel: "Unterschied nach 6 Monaten",
       note: "Modellierter Verlauf auf Basis bisheriger Projekte. Kein garantiertes Ergebnis: Deine Ausgangslage bestimmt die Kurve.",
     },
-    sources: "Quellen: Gartner B2B Buyer Survey 2026 (n=645) · NielsenIQ Agentic Commerce Tracker 2026 · IGEM-Digimonitor 2025",
+    sources: "Quellen: comparis-Umfrage (Innofact, n=1'035, März 2026) · Gartner, Befragung von 645 B2B-Einkäufern (Aug.–Sept. 2025) · StatCounter Global Stats, Schweiz, August 2026 · BrightEdge, E-Commerce-Anfragen, Oktober 2025. Die Wachstumskurve ist ein modellierter Verlauf, keine Messung.",
   },
 
 
@@ -667,7 +685,7 @@ export const de = {
           {
             heading: "Warum reicht eine gute Google-Position nicht mehr?",
             paragraphs: [
-              "Weil ein wachsender Teil der Kaufrecherche gar nicht mehr über eine klassische Suche läuft. 45% der B2B-Einkäufer nutzen laut Gartner (B2B Buyer Survey 2026) bereits generative KI für ihre Recherche, und laut NielsenIQ (Agentic Commerce Tracker 2026) fallen 42% der Kaufentscheide bereits mit KI-Unterstützung. In der Schweiz nutzen laut IGEM-Digimonitor 2025 rund 3,8 Millionen Menschen KI-Tools.",
+              "Weil ein wachsender Teil der Kaufrecherche gar nicht mehr über eine klassische Suche läuft. 45% der B2B-Einkäufer haben laut einer Gartner-Befragung von 645 Einkäufern (2025) bei ihrem letzten Kauf generative KI genutzt, vor allem um sich über Anbieter und Produkte zu informieren. In der Schweiz nutzen laut comparis inzwischen drei von vier Erwachsenen KI-Tools wie ChatGPT (März 2026); 2024 war es noch die Hälfte.",
               "Eine Top-Position bei Google ist dabei nur eines von mehreren Signalen, die ein generatives System einbezieht – sie garantiert keine Nennung in der zusammengefassten Antwort. Beide Systeme laufen nebeneinander, und beide müssen einzeln bedient werden.",
             ],
           },
@@ -709,7 +727,7 @@ export const de = {
             a: "Ja. Das zählt als Mention und ist bereits ein Sichtbarkeitssignal. Eine Zitation mit direktem Link zur Quelle ist das stärkere Signal, aber beide sind messbar und für die eigene Sichtbarkeit relevant.",
           },
         ],
-        sourcesNote: "Quellen: Aggarwal et al., „GEO: Generative Engine Optimization“, Princeton University / Georgia Tech / Allen Institute for AI / IIT Delhi, KDD 2024 (arXiv:2311.09735) – Gartner, B2B Buyer Survey 2026 – NielsenIQ, Agentic Commerce Tracker 2026 – IGEM-Digimonitor 2025.",
+        sourcesNote: "Quellen: Aggarwal et al., „GEO: Generative Engine Optimization“, Princeton University / Georgia Tech / Allen Institute for AI / IIT Delhi, KDD 2024 (arXiv:2311.09735) – Gartner, Befragung von 645 B2B-Einkäufern (Aug.–Sept. 2025) – comparis/Innofact, KI-Umfrage (n=1'035, März 2026).",
       },
     },
   },

@@ -149,6 +149,26 @@ function clean(quote: string): string {
   return quote.replace(EDGE_QUOTES, "").trim();
 }
 
+/* THE DRUM FADES OUT, IT IS NOT PAINTED OVER.
+
+   The edges used to be four gradient overlays that painted the page colour
+   (--le-bg) over the drum. That only matches the ground where the ground IS
+   that flat colour. This section has a gold-and-blue glow behind it and the
+   noise texture on top, and on a phone the glow is wider than the screen, so
+   inside the overlays the glow and the grain were painted out while right
+   beside them they showed through. The result was a darker rectangle with
+   visible edges — a second section sitting inside this one.
+
+   A mask makes the drum itself transparent toward its edges, so whatever is
+   behind it (glow, grain, flat ground) shows through evenly and there is no
+   edge to see. The stops reproduce the old overlays' depths: 16% at each
+   side, 20% at the top under the headline, 38% at the bottom. Two layers,
+   intersected, so a corner fades by both. */
+const DRUM_MASK = [
+  "linear-gradient(to right, transparent 0%, rgba(0,0,0,.45) 8%, #000 16%, #000 84%, rgba(0,0,0,.45) 92%, transparent 100%)",
+  "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.2) 9%, #000 20%, #000 62%, rgba(0,0,0,.14) 84%, transparent 100%)",
+].join(", ");
+
 export default function Testimonials() {
   const { t } = useLang();
   const reduced = usePrefersReducedMotion();
@@ -374,7 +394,14 @@ export default function Testimonials() {
                   never has to share a containing block with it. */}
               <div
                 className="absolute inset-0"
-                style={{ perspective: `${geo.perspective}px`, perspectiveOrigin: "50% 50%" }}
+                style={{
+                  perspective: `${geo.perspective}px`,
+                  perspectiveOrigin: "50% 50%",
+                  WebkitMaskImage: DRUM_MASK,
+                  maskImage: DRUM_MASK,
+                  WebkitMaskComposite: "source-in",
+                  maskComposite: "intersect",
+                }}
               >
                 <div
                   ref={drumRef}
@@ -431,43 +458,8 @@ export default function Testimonials() {
                 </div>
               </div>
 
-              {/* Vignette. Static gradients, never animated.
-                  All FOUR edges fade now: with only top and bottom the drum
-                  read as a separate panel dropped into the section. Fading the
-                  sides as well makes it dissolve into the ground on every
-                  edge, so it belongs to the section it sits in. */}
-              <div
-                className="pointer-events-none absolute inset-y-0 left-0 w-[16%]"
-                style={{
-                  background:
-                    "linear-gradient(to right, var(--le-bg) 0%, rgb(var(--le-bg-rgb) / 0.55) 52%, transparent 100%)",
-                }}
-              />
-              <div
-                className="pointer-events-none absolute inset-y-0 right-0 w-[16%]"
-                style={{
-                  background:
-                    "linear-gradient(to left, var(--le-bg) 0%, rgb(var(--le-bg-rgb) / 0.55) 52%, transparent 100%)",
-                }}
-              />
-              {/* The TOP fade is shallower than the bottom one (was 32%).
-                  It sits directly under the headline, so every percent of it
-                  reads as empty space between the two; the bottom fade has no
-                  such neighbour and keeps its depth. */}
-              <div
-                className="pointer-events-none absolute inset-x-0 top-0 h-[20%]"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, var(--le-bg) 0%, rgb(var(--le-bg-rgb) / 0.8) 46%, transparent 100%)",
-                }}
-              />
-              <div
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%]"
-                style={{
-                  background:
-                    "linear-gradient(to top, var(--le-bg) 0%, rgb(var(--le-bg-rgb) / 0.86) 42%, transparent 100%)",
-                }}
-              />
+              {/* No painted vignette. The edges fade through DRUM_MASK on the
+                  element above instead — see the note on it. */}
 
               {/* The reading line — two short gold ticks marking the one row
                   that is at full size and full brightness. */}
