@@ -38,7 +38,7 @@
  *   --dry-run   run every check and print the command, send nothing
  *   --no-ping   upload without the IndexNow submission
  */
-import { execFileSync, execSync } from "node:child_process";
+import { execFileSync, spawn } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -111,21 +111,40 @@ try {
 /* tar over the pipe rather than scp/rsync: it is one round trip, it preserves
    the directory tree exactly, and it needs nothing installed on the far end
    that a shared host does not already have. */
-/* Forward slashes even on Windows: this string is handed to a POSIX shell
-   (Git Bash here, /bin/sh on a Mac), and a backslash is an escape character
-   there, not a separator. */
-const cmd =
-  `tar -czf - -C "${BUILD.split("\\").join("/")}" . | ` +
-  `ssh ${SSH_ALIAS} 'mkdir -p ${REMOTE} && tar -xzf - -C ${REMOTE}'`;
+/* No local shell: node runs both ends and joins the pipe itself. Handing the
+   pipeline to `/bin/sh` failed on Windows, where there is no /bin/sh for node
+   to find. tar and ssh both ship with Windows 10+, macOS and Linux. Forward
+   slashes, because both Git Bash's GNU tar and Windows' bsdtar accept C:/...,
+   and a backslash means something else to tools from the POSIX side. The
+   remote half is one ssh argument, run by the far end's own shell, which is
+   what expands the ~. */
+const local = BUILD.split("\\").join("/");
+const remoteCmd = `mkdir -p ${REMOTE} && tar -xzf - -C ${REMOTE}`;
 
 console.log(`deploy: ${BUILD}\n     -> ${SSH_ALIAS}:${REMOTE}`);
 
 if (dryRun) {
-  console.log(`\n--dry-run, nothing sent. The command would be:\n  ${cmd}`);
+  console.log(
+    `\n--dry-run, nothing sent. The upload would be:\n` +
+    `  tar -czf - -C "${local}" . | ssh ${SSH_ALIAS} '${remoteCmd}'`,
+  );
   process.exit(0);
 }
 
-execSync(cmd, { stdio: "inherit", shell: "/bin/sh" });
+/* Both exit codes count: a tar that dies halfway still leaves ssh to exit 0
+   on a truncated archive, and that must not read as a successful deploy. */
+const exited = (child) =>
+  new Promise((ok) => {
+    child.on("error", (e) => ok(`failed to start (${e.message})`));
+    child.on("close", (code) => ok(code));
+  });
+const pack = spawn("tar", ["-czf", "-", "-C", local, "."], { stdio: ["ignore", "pipe", "inherit"] });
+const send = spawn("ssh", [SSH_ALIAS, remoteCmd], { stdio: ["pipe", "inherit", "inherit"] });
+pack.stdout.pipe(send.stdin);
+const [tarCode, sshCode] = await Promise.all([exited(pack), exited(send)]);
+if (tarCode !== 0 || sshCode !== 0) {
+  die(`upload failed: local tar ${tarCode}, ssh ${sshCode}. Nothing was announced to IndexNow.`);
+}
 console.log("deploy: uploaded.");
 
 /* ---- tell the engines -------------------------------------------------- */
