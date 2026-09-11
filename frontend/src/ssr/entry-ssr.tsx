@@ -23,8 +23,6 @@ import App from "@/App";
 import About from "@/pages/About";
 import Analyse from "@/pages/Analyse";
 import Legal, { type LegalDoc } from "@/pages/Legal";
-import Wissen from "@/pages/Wissen";
-import WissenPost from "@/pages/WissenPost";
 
 /** Keyed by the built file's directory, exactly as `prerender.mjs` walks it. */
 export const ROUTES: Record<string, () => ReactElement> = {
@@ -34,13 +32,6 @@ export const ROUTES: Record<string, () => ReactElement> = {
   "impressum/index.html": () => <Legal doc={"imprint" as LegalDoc} />,
   "datenschutz/index.html": () => <Legal doc={"privacy" as LegalDoc} />,
   "agb/index.html": () => <Legal doc={"terms" as LegalDoc} />,
-  /* The Wissen desk. The index and every article are prerendered like any
-     other page — an article that a retrieval engine cannot read is the one
-     kind of page this desk exists to not publish. A new article needs a
-     line here, next to its Rollup input in `vite.config.ts` and its entry
-     in `scripts/seo.mjs`. */
-  "wissen/index.html": () => <Wissen />,
-  "wissen/was-ist-geo/index.html": () => <WissenPost slug="wasIstGeo" />,
 };
 
 /**
